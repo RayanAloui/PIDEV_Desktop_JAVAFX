@@ -78,7 +78,6 @@ public class Tuteur {
         this.adresseT = adresseT;
     }
 
-    // Méthode toString pour afficher les informations d'un tuteur
     @Override
     public String toString() {
         return "Tuteur{" +
@@ -91,7 +90,6 @@ public class Tuteur {
                 '}';
     }
 
-    // Méthode equals pour comparer deux tuteurs
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,7 +97,6 @@ public class Tuteur {
         Tuteur tuteur = (Tuteur) o;
         return idT == tuteur.idT && Objects.equals(cinT, tuteur.cinT);
     }
-
 
     // Méthode hashCode pour générer un code unique basé sur les attributs
     @Override

@@ -8,7 +8,6 @@ import main.databaseconnection;
 
 public class ServiceTuteur implements ITuteurService {
 
-    // Implémentation de la méthode ajouter
     @Override
     public void ajouter(Tuteur t) throws SQLException {
         Connection conn = null;
@@ -39,7 +38,6 @@ public class ServiceTuteur implements ITuteurService {
         }
     }
 
-    // Implémentation de la méthode updateTuteur
     @Override
     public void updateTuteur(Tuteur t) throws SQLException {
         Connection conn = null;
@@ -71,7 +69,6 @@ public class ServiceTuteur implements ITuteurService {
         }
     }
 
-    // Implémentation de la méthode delete
     @Override
     public void delete(int id) throws SQLException {
         Connection conn = null;
@@ -98,7 +95,6 @@ public class ServiceTuteur implements ITuteurService {
         }
     }
 
-    // Implémentation de la méthode afficherAll
     @Override
     public ArrayList<Tuteur> afficherAll() throws SQLException {
         ArrayList<Tuteur> tuteurs = new ArrayList<>();
