@@ -29,68 +29,70 @@ public class VisiteursService implements Iservices<visiteurs> {
 
     @Override
     public void ajouter(visiteurs visiteur) {
-
-
-        if (visiteur.getNom() == null || !visiteur.getNom().matches("[A-Za-z]+") ||
-                visiteur.getPrenom() == null || !visiteur.getPrenom().matches("[A-Za-z]+") ||
-                visiteur.getEmail() == null || !visiteur.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") ||
-                String.valueOf(visiteur.getTel()).length() != 8 ||
-                visiteur.getAdresse() == null || visiteur.getAdresse().trim().isEmpty()) {
-
-            System.out.println("Erreur : Données invalides pour le visiteur.");
-            return;
-        }
-
-        String req = "INSERT INTO visiteurs (nom, prenom, email, tel, adresse) VALUES (?, ?, ?, ?, ?)";
-
-        try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
-            stm.setString(1, visiteur.getNom());
-            stm.setString(2, visiteur.getPrenom());
-            stm.setString(3, visiteur.getEmail());
-            stm.setInt(4, visiteur.getTel());
-            stm.setString(5, visiteur.getAdresse());
-            stm.executeUpdate();
-
-            // Récupérer l'ID généré
-            try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    visiteur.setId(generatedKeys.getInt(1));  // Met à jour l'id du visiteur avec l'ID généré
-                    System.out.println("Visiteur ajouté : " + visiteur);
-                }
+        try {
+            if (visiteur.getNom() == null || !visiteur.getNom().matches("[A-Za-z]+") ||
+                    visiteur.getPrenom() == null || !visiteur.getPrenom().matches("[A-Za-z]+") ||
+                    visiteur.getEmail() == null || !visiteur.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") ||
+                    String.valueOf(visiteur.getTel()).length() != 8 ||
+                    visiteur.getAdresse() == null || visiteur.getAdresse().trim().isEmpty()) {
+                throw new IllegalArgumentException("Erreur : Données invalides pour le visiteur.");
             }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de l'ajout du visiteur : " + e.getMessage());
+
+            String req = "INSERT INTO visiteurs (nom, prenom, email, tel, adresse) VALUES (?, ?, ?, ?, ?)";
+
+            try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
+                stm.setString(1, visiteur.getNom());
+                stm.setString(2, visiteur.getPrenom());
+                stm.setString(3, visiteur.getEmail());
+                stm.setInt(4, visiteur.getTel());
+                stm.setString(5, visiteur.getAdresse());
+                stm.executeUpdate();
+
+                // Récupérer l'ID généré
+                try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        visiteur.setId(generatedKeys.getInt(1));  // Met à jour l'id du visiteur avec l'ID généré
+                        System.out.println("Visiteur ajouté : " + visiteur);
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de l'ajout du visiteur : " + e.getMessage());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public void modifier(visiteurs visiteur) {
+        try {
+            if (visiteur.getNom() == null || !visiteur.getNom().matches("[A-Za-z]+") ||
+                    visiteur.getPrenom() == null || !visiteur.getPrenom().matches("[A-Za-z]+") ||
+                    visiteur.getEmail() == null || !visiteur.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") ||
+                    String.valueOf(visiteur.getTel()).length() != 8 ||
+                    visiteur.getAdresse() == null || visiteur.getAdresse().trim().isEmpty()) {
+                throw new IllegalArgumentException("Erreur : Données invalides pour le visiteur.");
+            }
 
-        if (visiteur.getNom() == null || !visiteur.getNom().matches("[A-Za-z]+") ||
-                visiteur.getPrenom() == null || !visiteur.getPrenom().matches("[A-Za-z]+") ||
-                visiteur.getEmail() == null || !visiteur.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") ||
-                String.valueOf(visiteur.getTel()).length() !=8 ||
-                visiteur.getAdresse() == null || visiteur.getAdresse().trim().isEmpty()) {
+            String req = "UPDATE visiteurs SET nom = ?, prenom = ?, email = ?, tel = ?, adresse = ? WHERE id = ?";
 
-            System.out.println("Erreur : Données invalides pour le visiteur.");
-            return;
-        }
-
-        String req = "UPDATE visiteurs SET nom = ?, prenom = ?, email = ?, tel = ?, adresse = ? WHERE id = ?";
-
-        try (PreparedStatement stm = cnx.prepareStatement(req)) {
-            stm.setString(1, visiteur.getNom());
-            stm.setString(2, visiteur.getPrenom());
-            stm.setString(3, visiteur.getEmail());
-            stm.setInt(4, visiteur.getTel());
-            stm.setString(5, visiteur.getAdresse());
-            stm.setInt(6, visiteur.getId());
-            stm.executeUpdate();
-            System.out.println("Visiteur modifié : " + visiteur);
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour du visiteur : " + e.getMessage());
+            try (PreparedStatement stm = cnx.prepareStatement(req)) {
+                stm.setString(1, visiteur.getNom());
+                stm.setString(2, visiteur.getPrenom());
+                stm.setString(3, visiteur.getEmail());
+                stm.setInt(4, visiteur.getTel());
+                stm.setString(5, visiteur.getAdresse());
+                stm.setInt(6, visiteur.getId());
+                stm.executeUpdate();
+                System.out.println("Visiteur modifié : " + visiteur);
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de la mise à jour du visiteur : " + e.getMessage());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
+
 
     @Override
     public void supprimer(int id) {

@@ -28,84 +28,86 @@ public class VisitesService implements Iservices<visites> {
 
     @Override
     public void ajouter(visites visite) {
-
-        if (visite.getDate() == null ||
-                visite.getHeure() == null ||
-                visite.getMotif() == null || visite.getMotif().trim().length() < 15 ||
-                visite.getStatut() == null || (!visite.getStatut().equals("confirme") &&
-                !visite.getStatut().equals("annule") && !visite.getStatut().equals("en attente")) ||
-                visite.getId_visiteur() <= 0) {
-
-            System.out.println("Erreur : Données invalides pour la visite.");
-            return;
-        }
-
-        // Vérifier que l'id_visiteur existe dans la table visiteurs
-        String checkVisitorQuery = "SELECT COUNT(*) FROM visiteurs WHERE id = ?";
-
-        try (PreparedStatement stmCheckVisitor = cnx.prepareStatement(checkVisitorQuery)) {
-            stmCheckVisitor.setInt(1, visite.getId_visiteur());
-            try (ResultSet rs = stmCheckVisitor.executeQuery()) {
-                if (rs.next() && rs.getInt(1) > 0) { // Si le visiteur existe
-                    String req = "INSERT INTO visites (id_visiteur, date, heure, motif, statut) VALUES (?, ?, ?, ?, ?)";
-
-                    try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
-                        stm.setInt(1, visite.getId_visiteur());
-                        stm.setDate(2, java.sql.Date.valueOf(visite.getDate()));
-                        stm.setTime(3, java.sql.Time.valueOf(visite.getHeure()));
-                        stm.setString(4, visite.getMotif());
-                        stm.setString(5, visite.getStatut());
-                        stm.executeUpdate();
-
-                        // Récupérer l'ID généré
-                        try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
-                            if (generatedKeys.next()) {
-                                visite.setId(generatedKeys.getInt(1));  // Met à jour l'id de la visite avec l'ID généré
-                                System.out.println("Visite ajoutée : " + visite);
-                            }
-                        }
-                    } catch (SQLException e) {
-                        System.err.println("Erreur lors de l'ajout de la visite : " + e.getMessage());
-                    }
-                } else {
-                    System.out.println("Erreur : Le visiteur avec l'ID " + visite.getId_visiteur() + " n'existe pas.");
-                }
+        try {
+            if (visite.getDate() == null ||
+                    visite.getHeure() == null ||
+                    visite.getMotif() == null || visite.getMotif().trim().length() <3 ||
+                    visite.getStatut() == null || (!visite.getStatut().equals("confirme") &&
+                    !visite.getStatut().equals("annule") && !visite.getStatut().equals("attente")) ||
+                    visite.getId_visiteur() <= 0) {
+                throw new IllegalArgumentException("Erreur : Données invalides pour la visite.");
             }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la vérification du visiteur : " + e.getMessage());
+
+            // Vérifier que l'id_visiteur existe dans la table visiteurs
+            String checkVisitorQuery = "SELECT COUNT(*) FROM visiteurs WHERE id = ?";
+
+            try (PreparedStatement stmCheckVisitor = cnx.prepareStatement(checkVisitorQuery)) {
+                stmCheckVisitor.setInt(1, visite.getId_visiteur());
+                try (ResultSet rs = stmCheckVisitor.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) { // Si le visiteur existe
+                        String req = "INSERT INTO visites (id_visiteur, date, heure, motif, statut) VALUES (?, ?, ?, ?, ?)";
+
+                        try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
+                            stm.setInt(1, visite.getId_visiteur());
+                            stm.setDate(2, java.sql.Date.valueOf(visite.getDate()));
+                            stm.setTime(3, java.sql.Time.valueOf(visite.getHeure()));
+                            stm.setString(4, visite.getMotif());
+                            stm.setString(5, visite.getStatut());
+                            stm.executeUpdate();
+
+                            // Récupérer l'ID généré
+                            try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
+                                if (generatedKeys.next()) {
+                                    visite.setId(generatedKeys.getInt(1));  // Met à jour l'id de la visite avec l'ID généré
+                                    System.out.println("Visite ajoutée : " + visite);
+                                }
+                            }
+                        } catch (SQLException e) {
+                            System.err.println("Erreur lors de l'ajout de la visite : " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("Erreur : Le visiteur avec l'ID " + visite.getId_visiteur() + " n'existe pas.");
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de la vérification du visiteur : " + e.getMessage());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
-
 
     @Override
     public void modifier(visites visite) {
+        try {
+            if (visite.getDate() == null ||
+                    visite.getHeure() == null ||
+                    visite.getMotif() == null || visite.getMotif().trim().length() < 3 ||
+                    visite.getStatut() == null || (!visite.getStatut().equals("confirme") &&
+                    !visite.getStatut().equals("annule") && !visite.getStatut().equals("attente")) ||
+                    visite.getId_visiteur() <= 0) {
+                throw new IllegalArgumentException("Erreur : Données invalides pour la visite.");
+            }
 
-        if (visite.getDate() == null ||
-                visite.getHeure() == null ||
-                visite.getMotif() == null || visite.getMotif().trim().length() < 15 ||
-                visite.getStatut() == null || (!visite.getStatut().equals("confirme") &&
-                !visite.getStatut().equals("annulee") && !visite.getStatut().equals("attente")) ||
-                visite.getId_visiteur() <= 0) {
+            String req = "UPDATE visites SET id_visiteur = ?, date = ?, heure = ?, motif = ?, statut = ? WHERE id = ?";
 
-            System.out.println("Erreur : Données invalides pour la visite.");
-            return;
-        }
-
-        String req = "UPDATE visites SET id_visiteur = ?, date = ?, heure = ?, motif = ?, statut = ? WHERE id = ?";
-
-        try (PreparedStatement stm = cnx.prepareStatement(req)) {
-            stm.setInt(1, visite.getId_visiteur());
-            stm.setDate(2, java.sql.Date.valueOf(visite.getDate()));
-            stm.setTime(3, java.sql.Time.valueOf(visite.getHeure()));
-            stm.setString(4, visite.getMotif());
-            stm.setString(5, visite.getStatut());
-            stm.setInt(6, visite.getId());
-            stm.executeUpdate();
-            System.out.println("Visite modifiée : " + visite);
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour de la visite : " + e.getMessage());
+            try (PreparedStatement stm = cnx.prepareStatement(req)) {
+                stm.setInt(1, visite.getId_visiteur());
+                stm.setDate(2, java.sql.Date.valueOf(visite.getDate()));
+                stm.setTime(3, java.sql.Time.valueOf(visite.getHeure()));
+                stm.setString(4, visite.getMotif());
+                stm.setString(5, visite.getStatut());
+                stm.setInt(6, visite.getId());
+                stm.executeUpdate();
+                System.out.println("Visite modifiée : " + visite);
+            } catch (SQLException e) {
+                System.err.println("Erreur lors de la mise à jour de la visite : " + e.getMessage());
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
+
 
     @Override
     public void supprimer(int id) {
