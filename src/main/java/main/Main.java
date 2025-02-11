@@ -17,6 +17,7 @@ import entities.Tuteur;
 import entities.Orphelin;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /*public class main {
     public static void main(String[] args) {
@@ -173,46 +174,82 @@ public class Main {
 
         try {
             serviceOrphelin.ajouter(orphelin);
-            System.out.println("✅ Orphelin ajouté avec succès !");
+            //System.out.println("✅ Orphelin ajouté avec succès !");
         } catch (SQLException e) {
-            System.out.println("❌ Erreur lors de l'ajout de l'orphelin.");
+            //System.out.println("❌ Erreur lors de l'ajout de l'orphelin.");
             e.printStackTrace();
         }
     }
 
     private static void modifierOrphelin(ServiceOrphelin serviceOrphelin, Scanner scanner) {
-        System.out.print("🔄 Entrez l'ID d'orphelin à modifier : ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("📄 Saisissez le nom : ");
-        String nom = scanner.nextLine();
-
-        System.out.print("📄 Saisissez le prénom : ");
-        String prenom = scanner.nextLine();
-
-        System.out.print("📄 Saisissez la date de naissance (YYYY-MM-DD) : ");
-        String dateNaissance = scanner.nextLine();
-
-        System.out.print("📄 Saisissez le sexe (M/F) : ");
-        String sexe = scanner.nextLine();
-
-        System.out.print("📄 Saisissez la situation scolaire : ");
-        String situationScolaire = scanner.nextLine();
-
-        System.out.print("📄 Saisissez l'ID du tuteur : ");
-        int idTuteur = scanner.nextInt();
-
-        Orphelin orphelin = new Orphelin(id,nom, prenom,dateNaissance,sexe,situationScolaire,idTuteur);
-
         try {
+            System.out.print("Entrez l'ID de l'orphelin à modifier : ");
+
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Erreur : L'ID doit être un nombre entier !");
+                scanner.nextLine();
+                return;
+            }
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            // Vérifier si l'orphelin existe
+            Orphelin existingOrphelin = serviceOrphelin.getOrphelinById(id);
+            if (existingOrphelin == null) {
+                System.out.println("Aucun orphelin trouvé avec l'ID " + id);
+                return;
+            }
+
+            // Afficher les informations actuelles
+            System.out.println("📋 Informations actuelles de l'orphelin :");
+            System.out.println("🔹 Nom : " + existingOrphelin.getNomO());
+            System.out.println("🔹 Prénom : " + existingOrphelin.getPrenomO());
+            System.out.println("🔹 Date de naissance : " + existingOrphelin.getDateNaissance());
+            System.out.println("🔹 Sexe : " + existingOrphelin.getSexe());
+            System.out.println("🔹 Situation scolaire : " + existingOrphelin.getSituationScolaire());
+            System.out.println("🔹 ID du tuteur : " + existingOrphelin.getIdTuteur());
+
+
+            System.out.print("📄 Nouveau nom (laissez vide pour garder l'ancien) : ");
+            String nom = scanner.nextLine();
+            if (nom.isEmpty()) nom = existingOrphelin.getNomO();
+
+            System.out.print("📄 Nouveau prénom (laissez vide pour garder l'ancien) : ");
+            String prenom = scanner.nextLine();
+            if (prenom.isEmpty()) prenom = existingOrphelin.getPrenomO();
+
+            System.out.print("📄 Nouvelle date de naissance (YYYY-MM-DD, laissez vide pour garder l'ancienne) : ");
+            String dateNaissance = scanner.nextLine();
+            if (dateNaissance.isEmpty()) dateNaissance = existingOrphelin.getDateNaissance();
+
+            System.out.print("📄 Nouveau sexe (M/F, laissez vide pour garder l'ancien) : ");
+            String sexe = scanner.nextLine();
+            if (sexe.isEmpty()) sexe = existingOrphelin.getSexe();
+
+            System.out.print("📄 Nouvelle situation scolaire (laissez vide pour garder l'ancienne) : ");
+            String situationScolaire = scanner.nextLine();
+            if (situationScolaire.isEmpty()) situationScolaire = existingOrphelin.getSituationScolaire();
+
+            System.out.print("📄 Nouvel ID du tuteur (0 pour garder l'ancien) : ");
+            int idTuteur = scanner.nextInt();
+            scanner.nextLine(); // Consommer le retour à la ligne
+            if (idTuteur == 0) idTuteur = existingOrphelin.getIdTuteur();
+
+            Orphelin orphelin = new Orphelin(id, nom, prenom, dateNaissance, sexe, situationScolaire, idTuteur);
+
             serviceOrphelin.updateOrphelin(orphelin);
-            System.out.println("✅ Orphelin modifié avec succès !");
+            //System.out.println("Orphelin modifié avec succès !");
+
         } catch (SQLException e) {
-            System.out.println("❌ Erreur lors de la modification d'orphelin.");
+            //System.out.println("Erreur lors de la modification de l'orphelin.");
             e.printStackTrace();
+        } catch (InputMismatchException e) {
+            System.out.println("Erreur : Veuillez entrer des valeurs valides !");
+            scanner.nextLine(); // Nettoyer le scanner pour éviter une boucle infinie
         }
     }
+
 
     private static void supprimerOrphelin(ServiceOrphelin serviceOrphelin, Scanner scanner) {
         System.out.print("🗑️ Entrez l'ID d'orphelin à supprimer : ");
@@ -220,9 +257,9 @@ public class Main {
 
         try {
             serviceOrphelin.delete(id);
-            System.out.println("✅ Orphelin supprimé avec succès !");
+            //System.out.println("✅ Orphelin supprimé avec succès !");
         } catch (SQLException e) {
-            System.out.println("❌ Erreur lors de la suppression d'orphelin.");
+            //System.out.println("❌ Erreur lors de la suppression d'orphelin.");
             e.printStackTrace();
         }
     }
@@ -262,43 +299,78 @@ public class Main {
 
         try {
             serviceTuteur.ajouter(tuteur);
-            System.out.println("✅ Tuteur ajouté avec succès !");
+            //System.out.println("✅ Tuteur ajouté avec succès !");
         } catch (SQLException e) {
-            System.out.println("❌ Erreur lors de l'ajout du tuteur.");
+            //System.out.println("❌ Erreur lors de l'ajout du tuteur.");
             e.printStackTrace();
         }
     }
 
     private static void modifierTuteur(ServiceTuteur serviceTuteur, Scanner scanner) {
-        System.out.print("🔄 Entrez l'ID du tuteur à modifier : ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("📄 Nouveau cin : ");
-        String cin = scanner.nextLine();
-
-        System.out.print("📄 Nouveau nom : ");
-        String nom = scanner.nextLine();
-
-        System.out.print("📄 Nouveau prénom : ");
-        String prenom = scanner.nextLine();
-
-        System.out.print("📄 Nouveau téléphone : ");
-        String telephone = scanner.nextLine();
-
-        System.out.print("📄 Nouvelle adresse : ");
-        String adresse = scanner.nextLine();
-
-        Tuteur tuteur = new Tuteur(id, cin , nom, prenom, telephone, adresse);
-
         try {
+            System.out.print("Entrez l'ID du tuteur à modifier : ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Erreur : L'ID doit être un nombre entier !");
+                scanner.nextLine();
+                return;
+            }
+
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            // Vérifier si le tuteur existe
+            Tuteur existingTuteur = serviceTuteur.getTuteurById(id);
+            if (existingTuteur == null) {
+                System.out.println("Aucun tuteur trouvé avec l'ID " + id);
+                return;
+            }
+
+            // Afficher les informations actuelles du tuteur
+            System.out.println("📋 Informations actuelles du tuteur :");
+            System.out.println("🔹 CIN : " + existingTuteur.getCinT());
+            System.out.println("🔹 Nom : " + existingTuteur.getNomT());
+            System.out.println("🔹 Prénom : " + existingTuteur.getPrenomT());
+            System.out.println("🔹 Téléphone : " + existingTuteur.getTelephoneT());
+            System.out.println("🔹 Adresse : " + existingTuteur.getAdresseT());
+
+
+            System.out.print("📄 Nouveau CIN (laissez vide pour garder l'ancien) : ");
+            String cin = scanner.nextLine();
+            if (cin.isEmpty()) cin = existingTuteur.getCinT();
+
+            System.out.print("📄 Nouveau nom (laissez vide pour garder l'ancien) : ");
+            String nom = scanner.nextLine();
+            if (nom.isEmpty()) nom = existingTuteur.getNomT();
+
+            System.out.print("📄 Nouveau prénom (laissez vide pour garder l'ancien) : ");
+            String prenom = scanner.nextLine();
+            if (prenom.isEmpty()) prenom = existingTuteur.getPrenomT();
+
+            System.out.print("📄 Nouveau téléphone (laissez vide pour garder l'ancien) : ");
+            String telephone = scanner.nextLine();
+            if (telephone.isEmpty()) telephone = existingTuteur.getTelephoneT();
+
+            System.out.print("📄 Nouvelle adresse (laissez vide pour garder l'ancienne) : ");
+            String adresse = scanner.nextLine();
+            if (adresse.isEmpty()) adresse = existingTuteur.getAdresseT();
+
+            // Créer un objet Tuteur avec les nouvelles valeurs
+            Tuteur tuteur = new Tuteur(id, cin, nom, prenom, telephone, adresse);
+
+            // Mettre à jour le tuteur
             serviceTuteur.updateTuteur(tuteur);
-            System.out.println("✅ Tuteur modifié avec succès !");
+            //System.out.println("Tuteur modifié avec succès !");
+
         } catch (SQLException e) {
-            System.out.println("❌ Erreur lors de la modification du tuteur.");
+            //System.out.println("Erreur lors de la modification du tuteur.");
             e.printStackTrace();
+        } catch (InputMismatchException e) {
+            System.out.println("Erreur : Veuillez entrer des valeurs valides !");
+            scanner.nextLine(); // Nettoyer le scanner pour éviter une boucle infinie
         }
     }
+
 
     private static void supprimerTuteur(ServiceTuteur serviceTuteur, Scanner scanner) {
         System.out.print("🗑️ Entrez l'ID du tuteur à supprimer : ");
@@ -306,9 +378,9 @@ public class Main {
 
         try {
             serviceTuteur.delete(id);
-            System.out.println("✅ Tuteur supprimé avec succès !");
+            //System.out.println("✅ Tuteur supprimé avec succès !");
         } catch (SQLException e) {
-            System.out.println("❌ Erreur lors de la suppression du tuteur.");
+            //System.out.println("❌ Erreur lors de la suppression du tuteur.");
             e.printStackTrace();
         }
     }
