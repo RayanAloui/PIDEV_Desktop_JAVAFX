@@ -10,14 +10,14 @@ public class User {
     private String email;
     private String password;
     private String role;
-    private boolean isBlocked;
-    private boolean isConfirmed;
+    private int isBlocked;
+    private int isConfirmed;
     private int numberVerification;
     private int token;
 
     public User() {}
 
-    public User(String name, String surname, String telephone, String email, String password, String role, boolean isBlocked, boolean isConfirmed, int numberVerification,int token) {
+    public User(String name, String surname, String telephone, String email, String password, String role, int isBlocked, int isConfirmed, int numberVerification,int token) {
         this.name = name;
         this.surname = surname;
         this.telephone = telephone;
@@ -30,7 +30,7 @@ public class User {
         this.token=token;
     }
 
-    public User(int id, String name, String surname, String telephone, String email, String password, String role, boolean isBlocked, boolean isConfirmed, int numberVerification,int token) {
+    public User(int id, String name, String surname, String telephone, String email, String password, String role, int isBlocked, int isConfirmed, int numberVerification,int token) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -66,17 +66,24 @@ public class User {
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
-    public boolean isBlocked() { return isBlocked; }
-    public void setBlocked(boolean blocked) { isBlocked = blocked; }
+    public int isBlocked() { return isBlocked; }
+    public void setBlocked(int blocked) { isBlocked = blocked; }
 
-    public boolean isConfirmed() { return isConfirmed; }
-    public void setConfirmed(boolean confirmed) { isConfirmed = confirmed; }
+    public int isConfirmed() { return isConfirmed; }
+    public void setConfirmed(int confirmed) { isConfirmed = confirmed; }
 
     public int getNumberVerification() { return numberVerification; }
     public void setNumberVerification(int numberVerification) { this.numberVerification = numberVerification; }
 
     public int getToken() { return token; }
     public void setToken(int token) { this.token = token; }
+
+    public int getIsBlocked() { return isBlocked; }
+    public void setIsBlocked(int isBlocked) { this.isBlocked = isBlocked; }
+
+    public int getIsConfirmed() { return isConfirmed; }
+    public void setIsConfirmed(int isConfirmed) { this.isConfirmed = isConfirmed; }
+
 
 
     @Override

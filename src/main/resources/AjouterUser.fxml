@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -6,21 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.addUserController"
-            style="-fx-background-color: #faefe0;">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #faefe0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.addUserController">
     <children>
-        <VBox layoutX="150.0" layoutY="50.0" spacing="10">
+        <VBox layoutX="225.0" layoutY="56.0" spacing="10">
             <children>
-                <Label text="User Registration" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="User Registration" />
                 <TextField fx:id="name" promptText="Name" />
                 <TextField fx:id="surname" promptText="Surname" />
                 <TextField fx:id="telephone" promptText="Phone Number" />
                 <TextField fx:id="email" promptText="Email" />
                 <PasswordField fx:id="password" promptText="Password" />
-                <Button text="Add User" onAction="#adduser" prefHeight="40.0" prefWidth="150.0"
-                        style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-weight: bold;
-                               -fx-border-radius: 5px; -fx-background-radius: 5px;" />
+                <Button onAction="#adduser" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-weight: bold;                                -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Add User" />
             </children>
         </VBox>
     </children>

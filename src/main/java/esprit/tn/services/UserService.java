@@ -26,8 +26,8 @@ public class UserService implements Iservice<User> {
             stm.setString(4, user.getEmail());
             stm.setString(5, user.getPassword());
             stm.setString(6, user.getRole());
-            stm.setBoolean(7, user.isBlocked());
-            stm.setBoolean(8, user.isConfirmed());
+            stm.setInt(7, user.isBlocked());
+            stm.setInt(8, user.isConfirmed());
             stm.setInt(9, user.getNumberVerification());
             stm.setInt(10, user.getToken());
 
@@ -53,8 +53,8 @@ public class UserService implements Iservice<User> {
             stm.setString(4, user.getEmail());
             stm.setString(5, user.getPassword());
             stm.setString(6, user.getRole());
-            stm.setBoolean(7, user.isBlocked());
-            stm.setBoolean(8, user.isConfirmed());
+            stm.setInt(7, user.isBlocked());
+            stm.setInt(8, user.isConfirmed());
             stm.setInt(9, user.getNumberVerification());
 
             // Set the id for the WHERE clause
@@ -99,8 +99,8 @@ public class UserService implements Iservice<User> {
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getString("role"),
-                        rs.getBoolean("isBlocked"),
-                        rs.getBoolean("isConfirmed"),
+                        rs.getInt("isBlocked"),
+                        rs.getInt("isConfirmed"),
                         rs.getInt("numberVerification"),
                         rs.getInt("token")
                 );
@@ -132,8 +132,8 @@ public class UserService implements Iservice<User> {
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getString("role"),
-                        rs.getBoolean("isBlocked"),
-                        rs.getBoolean("isConfirmed"),
+                        rs.getInt("isBlocked"),
+                        rs.getInt("isConfirmed"),
                         rs.getInt("numberVerification"),
                         rs.getInt("token")
                 );
@@ -165,8 +165,8 @@ public class UserService implements Iservice<User> {
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getString("role"),
-                        rs.getBoolean("isBlocked"),
-                        rs.getBoolean("isConfirmed"),
+                        rs.getInt("isBlocked"),
+                        rs.getInt("isConfirmed"),
                         rs.getInt("numberVerification"),
                         rs.getInt("token")
                 );
