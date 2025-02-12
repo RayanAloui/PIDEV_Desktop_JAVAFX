@@ -20,5 +20,6 @@
                 <Button onAction="#adduser" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-weight: bold;                                -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Add User" />
             </children>
         </VBox>
+      <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherUser" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-weight: bold;                                -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Back" />
     </children>
 </AnchorPane>

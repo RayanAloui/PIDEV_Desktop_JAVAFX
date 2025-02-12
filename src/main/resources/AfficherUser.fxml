@@ -28,10 +28,12 @@
             <Font name="Lucida Console" size="41.0" />
          </font>
       </Label>
-      <Button alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="RIGHT" layoutX="45.0" layoutY="36.0" mnemonicParsing="false" text="+" textFill="#000000fc" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="418.2" AnchorPane.rightAnchor="770.4" AnchorPane.topAnchor="36.0">
+      <Button alignment="TOP_LEFT" blendMode="DARKEN" contentDisplay="RIGHT" layoutX="45.0" layoutY="36.0" mnemonicParsing="false" onAction="#GoToAddUser" text="+" textFill="#000000fc" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="418.2" AnchorPane.rightAnchor="770.4" AnchorPane.topAnchor="36.0">
          <font>
             <Font name="Consolas Bold" size="22.0" />
          </font>
       </Button>
+      <Button layoutX="751.0" layoutY="407.0" mnemonicParsing="false" onAction="#DeleteUser" text="DELETE" />
+      <Button layoutX="677.0" layoutY="407.0" mnemonicParsing="false" onAction="#GoToUpdateUser" text="UPDATE" />
     </children>
 </AnchorPane>

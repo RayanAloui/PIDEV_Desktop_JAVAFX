@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UpdateUserController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #faefe0;">
+         <children>
+            <VBox layoutX="225.0" layoutY="56.0" spacing="10">
+               <children>
+                  <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="User Update" />
+                  <TextField fx:id="name" promptText="Name" />
+                  <TextField fx:id="surname" promptText="Surname" />
+                  <TextField fx:id="telephone" promptText="Phone Number" />
+                  <TextField fx:id="email" promptText="Email" />
+                  <PasswordField fx:id="password" promptText="Password" />
+                  <Button onAction="#Updateuser" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-weight: bold;                                -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Update User" />
+               </children>
+            </VBox>
+            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherUser" prefHeight="40.0" prefWidth="106.0" style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-weight: bold;                                -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Back" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

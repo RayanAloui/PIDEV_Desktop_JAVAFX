@@ -4,10 +4,16 @@ import esprit.tn.entities.User;
 import esprit.tn.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class addUserController {
@@ -60,6 +66,52 @@ public class addUserController {
         alert.setHeaderText("User added");
 
         alert.showAndWait();
+
+
+
+
+        try {
+            // Load the afficheruser.fxml page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherUser.fxml")); // Replace with actual path
+            Parent root = loader.load();
+
+            // Get the current stage and set the new scene
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Show an error message if the page cannot be loaded
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Failed to load the user list page");
+            errorAlert.showAndWait();
+        }
     }
 
+    @FXML
+    public void GoToAfficherUser(ActionEvent actionEvent) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherUser.fxml"));
+            Parent root = loader.load();
+
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load the users page");
+            alert.setContentText("An error occurred while trying to navigate back to the user list.");
+            alert.showAndWait();
+        }
+    }
 }
