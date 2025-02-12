@@ -1,0 +1,18 @@
+git init
+
+git remote add origin https://github.com/RayanAloui/PIDEV_Desktop_JAVAFX
+
+git checkout -b Gestion-des-visites
+
+git add .
+
+git commit -m "MESSAGE"
+
+git push -u origin Gestion-des-visites
+
+----------------------------------------
+
+Si ca ne marche pas alors:
+
+git push -f origin Gestion-des-visites
+

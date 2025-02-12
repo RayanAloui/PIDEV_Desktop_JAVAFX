@@ -27,18 +27,8 @@ public class VisitesService implements Iservices<visites> {
     }
 
     @Override
-    public void ajouter(visites visite) {
-        try {
-            if (visite.getDate() == null ||
-                    visite.getHeure() == null ||
-                    visite.getMotif() == null || visite.getMotif().trim().length() <3 ||
-                    visite.getStatut() == null || (!visite.getStatut().equals("confirme") &&
-                    !visite.getStatut().equals("annule") && !visite.getStatut().equals("attente")) ||
-                    visite.getId_visiteur() <= 0) {
-                throw new IllegalArgumentException("Erreur : Données invalides pour la visite.");
-            }
+    public void ajouter(visites visite) throws SQLException {
 
-            // Vérifier que l'id_visiteur existe dans la table visiteurs
             String checkVisitorQuery = "SELECT COUNT(*) FROM visiteurs WHERE id = ?";
 
             try (PreparedStatement stmCheckVisitor = cnx.prepareStatement(checkVisitorQuery)) {
@@ -72,9 +62,6 @@ public class VisitesService implements Iservices<visites> {
             } catch (SQLException e) {
                 System.err.println("Erreur lors de la vérification du visiteur : " + e.getMessage());
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     @Override

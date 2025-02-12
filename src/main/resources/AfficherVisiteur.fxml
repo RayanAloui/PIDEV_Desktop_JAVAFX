@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visites.controllers.AfficherVisiteur">
+   <children>
+      <TableView fx:id="TableView" layoutY="57.0" prefHeight="350.0" prefWidth="609.0">
+        <columns>
+          <TableColumn fx:id="nom" prefWidth="106.4000244140625" text="Nom" />
+          <TableColumn fx:id="prenom" prefWidth="102.39996337890625" text="Prenom" />
+            <TableColumn fx:id="email" prefWidth="114.4000244140625" text="Email" />
+            <TableColumn fx:id="tel" prefWidth="139.20001220703125" text="N° de Téléphone" />
+            <TableColumn fx:id="adresse" prefWidth="140.00006103515625" text="Adresse" />
+        </columns>
+      </TableView>
+      <Label layoutX="204.0" layoutY="14.0" text="Afficher les visiteurs">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

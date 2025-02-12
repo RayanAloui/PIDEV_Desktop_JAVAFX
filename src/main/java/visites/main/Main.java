@@ -17,7 +17,7 @@ public class Main {
 
         // 1. Ajouter un visiteur
         visiteurs visiteur = new visiteurs("Sami", "BZN", "sami.benabdelkader@gmail.Com", 12345678, "rue du chinois");
-        visiteursService.ajouter(visiteur);
+
         System.out.println("Visiteur ajouté : " + visiteur);
 
         // 2. Récupérer et afficher tous les visiteurs
@@ -32,7 +32,7 @@ public class Main {
         LocalTime heureVisite = LocalTime.of(14, 30);
         visites visite = new visites(dateVisite, heureVisite, "Consultation", "confirme");
         visite.setId_visiteur(visiteur.getId());
-        visitesService.ajouter(visite);
+
         System.out.println("\nVisite ajoutée : " + visite);
 
         // 4. Récupérer et afficher toutes les visites

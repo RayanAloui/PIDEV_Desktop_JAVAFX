@@ -28,15 +28,7 @@ public class VisiteursService implements Iservices<visiteurs> {
     }
 
     @Override
-    public void ajouter(visiteurs visiteur) {
-        try {
-            if (visiteur.getNom() == null || !visiteur.getNom().matches("[A-Za-z]+") ||
-                    visiteur.getPrenom() == null || !visiteur.getPrenom().matches("[A-Za-z]+") ||
-                    visiteur.getEmail() == null || !visiteur.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$") ||
-                    String.valueOf(visiteur.getTel()).length() != 8 ||
-                    visiteur.getAdresse() == null || visiteur.getAdresse().trim().isEmpty()) {
-                throw new IllegalArgumentException("Erreur : Données invalides pour le visiteur.");
-            }
+    public void ajouter(visiteurs visiteur)throws SQLException {
 
             String req = "INSERT INTO visiteurs (nom, prenom, email, tel, adresse) VALUES (?, ?, ?, ?, ?)";
 
@@ -58,9 +50,7 @@ public class VisiteursService implements Iservices<visiteurs> {
             } catch (SQLException e) {
                 System.err.println("Erreur lors de l'ajout du visiteur : " + e.getMessage());
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     @Override
