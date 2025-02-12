@@ -49,7 +49,7 @@ public class Main {
             Dons s3 = new Dons(2, 400, dateDon, "materiel", "je fait ce don pour des orphelins", "en attente");
             //dn.ajouter(s1);
             //dn.ajouter(s2);
-            dn.ajouter(s3);
+            //dn.ajouter(s3);
             //dn.supprimer(3);
             //dn.supprimer(4);
             dn.getall();
@@ -61,8 +61,12 @@ public class Main {
 
 
 
-
-
-
     }
+
+
+
+
+
+
+
 }

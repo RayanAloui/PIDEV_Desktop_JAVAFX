@@ -15,7 +15,7 @@ public class DonateurService implements Iservice<donateur> {
 
     public DonateurService(){
 
-        cnx= DatabaseConnection.instance.getCnx();
+        cnx= DatabaseConnection.getInstance().getCnx();
     }
     @Override
     public void ajouter(donateur donateur) {
