@@ -8,14 +8,31 @@ public class Main {
     public static void main(String[] args) {
 
         DatabaseConnection.getInstance();
-
-
         UserService userService = new UserService();
 
 
 
+    }
+}
 
-        User user = new User("user1", "user1", "99888777", "user1@gmail.com", "0000", "VISITEUR", false, false, 102030,0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*        User user = new User("user1", "user1", "99888777", "user1@gmail.com", "0000", "VISITEUR", false, false, 102030,0);
         String userEmail =user.getEmail();
 
 
@@ -42,8 +59,4 @@ public class Main {
         for (User u : userService.getall()) {
             System.out.println(u);
         }
-        System.out.println("************************************************************* ");
-
-
-    }
-}
+        System.out.println("************************************************************* ");*/
