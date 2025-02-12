@@ -176,7 +176,7 @@ public class ServiceOrphelin implements IOrphelinService {
 
             while (rs.next()) {
                 Orphelin orphelin = new Orphelin(
-                        rs.getInt("idO"),
+                        //rs.getInt("idO"),
                         rs.getString("nomO"),
                         rs.getString("prenomO"),
                         rs.getString("dateNaissance"),

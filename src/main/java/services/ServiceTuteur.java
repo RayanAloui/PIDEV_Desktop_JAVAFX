@@ -149,14 +149,14 @@ public class ServiceTuteur implements ITuteurService {
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                int id = rs.getInt("idT");  // Récupération de l'ID
+                //int id = rs.getInt("idT");
                 String cin = rs.getString("cinT");
                 String nom = rs.getString("nomT");
                 String prenom = rs.getString("prenomT");
                 String telephone = rs.getString("telephoneT");
                 String adresse = rs.getString("adresseT");
 
-                Tuteur tuteur = new Tuteur(id, cin, nom, prenom, telephone, adresse);
+                Tuteur tuteur = new Tuteur(cin, nom, prenom, telephone, adresse);
                 tuteurs.add(tuteur);
             }
         } catch (SQLException e) {
