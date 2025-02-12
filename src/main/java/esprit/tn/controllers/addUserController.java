@@ -71,17 +71,17 @@ public class addUserController {
 
 
         try {
-            // Load the afficheruser.fxml page
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherUser.fxml")); // Replace with actual path
             Parent root = loader.load();
 
-            // Get the current stage and set the new scene
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Show an error message if the page cannot be loaded
+
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");
             errorAlert.setHeaderText("Failed to load the user list page");

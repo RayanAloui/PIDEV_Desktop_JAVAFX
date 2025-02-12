@@ -39,14 +39,14 @@ public class UserService implements Iservice<User> {
 
     @Override
     public void modifier(User user, int id) {
-        // SQL query to update the user based on the given id
+
         String req = "UPDATE user SET name=?, surname=?, telephone=?, email=?, password=?, role=?, isBlocked=?, isConfirmed=?, numberVerification=? , token=? WHERE id=?";
 
         try {
-            // Prepare the statement
+
             PreparedStatement stm = cnx.prepareStatement(req);
 
-            // Set the values from the user object to the prepared statement
+
             stm.setString(1, user.getName());
             stm.setString(2, user.getSurname());
             stm.setString(3, user.getTelephone());
@@ -57,11 +57,11 @@ public class UserService implements Iservice<User> {
             stm.setInt(8, user.isConfirmed());
             stm.setInt(9, user.getNumberVerification());
 
-            // Set the id for the WHERE clause
+
             stm.setInt(10, user.getToken());
             stm.setInt(11, id);
 
-            // Execute the update
+          
             stm.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
