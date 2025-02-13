@@ -9,14 +9,16 @@
    <children>
       <TableView fx:id="tableTuteurs" layoutX="32.0" layoutY="40.0" prefHeight="287.0" prefWidth="534.0">
         <columns>
-          <TableColumn fx:id="colCin" prefWidth="96.800048828125" text="CIN" />
-          <TableColumn fx:id="colNom" prefWidth="107.20001220703125" text="nom" />
-            <TableColumn fx:id="colPrenom" prefWidth="108.7999267578125" text="prenom" />
-            <TableColumn fx:id="colTelephone" minWidth="6.4000244140625" prefWidth="108.0" text="telephone" />
-            <TableColumn fx:id="colAdresse" minWidth="0.0" prefWidth="111.20001220703125" text="adresse" />
+            <TableColumn fx:id="colId" minWidth="0.0" prefWidth="0.0" text="ID" />
+          <TableColumn fx:id="colCin" prefWidth="91.20001220703125" text="CIN" />
+          <TableColumn fx:id="colNom" prefWidth="102.39996337890625" text="nom" />
+            <TableColumn fx:id="colPrenom" prefWidth="103.20001220703125" text="prenom" />
+            <TableColumn fx:id="colTelephone" minWidth="6.4000244140625" prefWidth="108.00006103515625" text="telephone" />
+            <TableColumn fx:id="colAdresse" minWidth="0.0" prefWidth="128.79998779296875" text="adresse" />
         </columns>
       </TableView>
-      <Button layoutX="317.0" layoutY="346.0" mnemonicParsing="false" onAction="#ajouterTuteur" text="Ajouter Tuteur" />
-      <Button layoutX="422.0" layoutY="346.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
+      <Button layoutX="32.0" layoutY="346.0" mnemonicParsing="false" onAction="#ajouterTuteur" text="Ajouter Tuteur" />
+      <Button layoutX="480.0" layoutY="346.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
+      <Button layoutX="273.0" layoutY="346.0" mnemonicParsing="false" onAction="#deleteT" text="Supprimer" />
    </children>
 </AnchorPane>

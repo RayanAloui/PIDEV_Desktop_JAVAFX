@@ -106,8 +106,15 @@ public class AjouterTuteurController {
             adresseId.clear();
 
             // Affichage d'un message de succès
-            errorAdresse.setText("Tuteur ajouté avec succès !");
-            errorAdresse.setStyle("-fx-text-fill: green;");
+            /*errorAdresse.setText("Tuteur ajouté avec succès !");
+            errorAdresse.setStyle("-fx-text-fill: green;");*/
+
+            // Afficher une alerte de confirmation
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ajout réussi");
+            alert.setHeaderText(null);
+            alert.setContentText("Le tuteur a été ajouté avec succès !");
+            alert.showAndWait();
 
         } catch (SQLException e) {
             errorAdresse.setText("Erreur lors de l'ajout du tuteur !");

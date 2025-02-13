@@ -8,9 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.sql.SQLException;
 import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +28,9 @@ public class AfficherTuteurController {
 
     @FXML
     private TableView<Tuteur> tableTuteurs;
+
+    @FXML
+    private TableColumn<Tuteur, String> colId;
 
     @FXML
     private TableColumn<Tuteur, String> colCin;
@@ -57,6 +63,7 @@ public class AfficherTuteurController {
         ObservableList<Tuteur> observableList = FXCollections.observableArrayList(tuteurs);
 
         // Associer les colonnes aux attributs de l'entité Tuteur
+        colId.setCellValueFactory(new PropertyValueFactory<>("idT"));
         colCin.setCellValueFactory(new PropertyValueFactory<>("cinT"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nomT"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenomT"));
@@ -111,6 +118,55 @@ public class AfficherTuteurController {
             System.out.println("⚠️ Aucun tuteur sélectionné !");
         }
     }
+
+    @FXML
+    void deleteT(ActionEvent event) {
+        // Vérifier si un tuteur est sélectionné
+        Tuteur selectedTuteur = tableTuteurs.getSelectionModel().getSelectedItem();
+
+        if (selectedTuteur == null) {
+            // Afficher une alerte si aucun tuteur n'est sélectionné
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un tuteur à supprimer.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Boîte de dialogue de confirmation
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirmation de suppression");
+        confirmation.setHeaderText(null);
+        confirmation.setContentText("Êtes-vous sûr de vouloir supprimer ce tuteur ?");
+
+        // Attendre la réponse de l'utilisateur
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                // Supprimer le tuteur de la base de données
+                serviceTuteur.delete(selectedTuteur.getIdT());
+
+                // Supprimer le tuteur de la TableView
+                tableTuteurs.getItems().remove(selectedTuteur);
+
+                // Afficher un message de succès
+                Alert success = new Alert(Alert.AlertType.INFORMATION);
+                success.setTitle("Suppression réussie");
+                success.setHeaderText(null);
+                success.setContentText("Le tuteur a été supprimé avec succès !");
+                success.showAndWait();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Erreur");
+                error.setHeaderText(null);
+                error.setContentText("Erreur lors de la suppression du tuteur.");
+                error.showAndWait();
+            }
+        }
+    }
+
 
 
 

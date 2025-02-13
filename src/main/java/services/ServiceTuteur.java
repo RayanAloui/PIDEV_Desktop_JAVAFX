@@ -247,6 +247,7 @@ public class ServiceTuteur implements ITuteurService {
 
         while (rs.next()) {
             Tuteur tuteur = new Tuteur(
+                    rs.getInt("idT"),
                     rs.getString("cinT"),
                     rs.getString("nomT"),
                     rs.getString("prenomT"),

@@ -11,9 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import entities.Tuteur;
 import services.ServiceTuteur;
-
 import java.io.IOException;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
+
 
 public class UpdateTuteurController {
 
@@ -88,6 +89,14 @@ public class UpdateTuteurController {
 
                 serviceTuteur.updateTuteur(currentTuteur);
 
+                // Afficher une alerte de confirmation
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Mise à jour réussie");
+                alert.setHeaderText(null);
+                alert.setContentText("Le tuteur a été mis à jour avec succès !");
+                alert.showAndWait();
+
+
                 // Redirection vers AfficherTuteur.fxml
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherTuteur.fxml"));
                 Parent root = loader.load();
@@ -95,6 +104,7 @@ public class UpdateTuteurController {
                 stage.setScene(new Scene(root));
                 stage.setTitle("Liste des Tuteurs");
                 stage.show();
+
 
             } catch (SQLException | IOException e) {
                 e.printStackTrace();
