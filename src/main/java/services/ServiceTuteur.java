@@ -5,8 +5,15 @@ import entities.Tuteur;
 import java.sql.*;
 import java.util.ArrayList;
 import main.databaseconnection;
+import java.util.List;
 
 public class ServiceTuteur implements ITuteurService {
+
+    private Connection connection;
+
+    public ServiceTuteur() {
+        connection = databaseconnection.getConnection();
+    }
 
     @Override
     public void ajouter(Tuteur t) throws SQLException {
@@ -232,6 +239,25 @@ public class ServiceTuteur implements ITuteurService {
         return tuteur;
     }
 
+    public List<Tuteur> getAllTuteurs() throws SQLException {
+        List<Tuteur> tuteurs = new ArrayList<>();
+        String query = "SELECT * FROM tuteurs";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(query);
+
+        while (rs.next()) {
+            Tuteur tuteur = new Tuteur(
+                    rs.getString("cinT"),
+                    rs.getString("nomT"),
+                    rs.getString("prenomT"),
+                    rs.getString("telephoneT"),
+                    rs.getString("adresseT")
+            );
+            tuteurs.add(tuteur);
+        }
+
+        return tuteurs;
+    }
 
 }
 

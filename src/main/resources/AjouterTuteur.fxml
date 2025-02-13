@@ -13,10 +13,11 @@
       <TextField fx:id="prenomId" layoutX="228.0" layoutY="160.0" promptText="prénom" />
       <TextField fx:id="telephoneId" layoutX="228.0" layoutY="206.0" promptText="téléphone" />
       <TextField fx:id="adresseId" layoutX="229.0" layoutY="250.0" promptText="adresse" />
-      <Label fx:id="errorCin" layoutX="227.0" layoutY="93.0" prefHeight="18.0" prefWidth="150.0" textFill="RED"  />
-      <Label fx:id="errorNom" layoutX="227.0" layoutY="140.0" prefHeight="18.0" prefWidth="150.0" textFill="RED"  />
-      <Label fx:id="errorPrenom" layoutX="229.0" layoutY="186.0" prefHeight="18.0" prefWidth="150.0" textFill="RED" />
-      <Label fx:id="errorTelephone" layoutX="229.0" layoutY="232.0" prefHeight="18.0" prefWidth="150.0" textFill="RED" />
-      <Label fx:id="errorAdresse" layoutX="229.0" layoutY="276.0" prefHeight="18.0" prefWidth="150.0" textFill="RED" />
+      <Label fx:id="errorCin" layoutX="137.0" layoutY="93.0" prefHeight="18.0" prefWidth="326.0" />
+      <Label fx:id="errorNom" layoutX="139.0" layoutY="140.0" prefHeight="18.0" prefWidth="338.0" />
+      <Label fx:id="errorPrenom" layoutX="149.0" layoutY="186.0" prefHeight="18.0" prefWidth="338.0" />
+      <Label fx:id="errorTelephone" layoutX="141.0" layoutY="232.0" prefHeight="18.0" prefWidth="338.0" />
+      <Label fx:id="errorAdresse" layoutX="137.0" layoutY="276.0" prefHeight="18.0" prefWidth="362.0" />
+      <Button layoutX="477.0" layoutY="360.0" mnemonicParsing="false" onAction="#afficherTuteur" text="Afficher Tuteurs" />
    </children>
 </AnchorPane>
