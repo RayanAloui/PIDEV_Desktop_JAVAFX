@@ -8,7 +8,6 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AfficherUserController">
     <children>
-        <!-- TableView -->
         <TableView fx:id="tableViewUsers" layoutX="54.0" layoutY="200.0" prefHeight="300.0" prefWidth="810.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
@@ -24,16 +23,12 @@
             </columns>
         </TableView>
 
-        <!-- Title Label -->
         <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Users Table" textAlignment="CENTER" />
 
-        <!-- Add User Button -->
         <Button layoutX="64.0" layoutY="141.0" mnemonicParsing="false" onAction="#GoToAddUser" styleClass="button add-button" text="+" />
 
-        <!-- Delete Button -->
         <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#DeleteUser" styleClass="button" text="DELETE" />
 
-        <!-- Update Button -->
         <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdateUser" styleClass="button" text="UPDATE" />
     </children>
 </AnchorPane>

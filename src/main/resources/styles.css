@@ -270,3 +270,8 @@
 .button:pressed {
     -fx-background-color: #3a2e28;
 }
+.error {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+}

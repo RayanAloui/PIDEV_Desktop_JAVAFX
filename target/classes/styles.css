@@ -1,36 +1,36 @@
-/* Root style for the AnchorPane */
+
 .root {
-    -fx-background-color: #faefe0; /* Light beige background */
+    -fx-background-color: #faefe0;
     -fx-font-family: 'Arial';
 }
 
-/* Style for the VBox containing the form */
+
 .vbox {
     -fx-spacing: 10;
     -fx-padding: 20;
     -fx-alignment: center;
 }
 
-/* Style for labels */
+
 .label {
     -fx-font-size: 14px;
-    -fx-text-fill: #333333; /* Dark gray text */
+    -fx-text-fill: #333333;
     -fx-font-weight: bold;
 }
 
-/* Style for the title label */
+
 .label.title {
     -fx-font-size: 24px;
-    -fx-text-fill: #5a4a42; /* Dark brown text */
+    -fx-text-fill: #5a4a42;
     -fx-font-weight: bold;
 }
 
-/* Style for text fields and password fields */
+
 .text-field, .password-field {
     -fx-pref-width: 250px;
     -fx-pref-height: 35px;
-    -fx-background-color: #ffffff; /* White background */
-    -fx-border-color: #9b877e; /* Light brown border */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-font-size: 14px;
@@ -38,46 +38,46 @@
 }
 
 .text-field:focused, .password-field:focused {
-    -fx-border-color: #5a4a42; /* Dark brown border when focused */
+    -fx-border-color: #5a4a42;
 }
 
-/* Style for error labels */
+
 .label.error {
-    -fx-text-fill: #ff0000; /* Red text for errors */
+    -fx-text-fill: #ff0000;
     -fx-font-size: 12px;
     -fx-font-weight: normal;
 }
 
-/* Style for the ChoiceBox */
+
 .choice-box {
     -fx-pref-width: 250px;
     -fx-pref-height: 35px;
-    -fx-background-color: #ffffff; /* White background */
-    -fx-border-color: #9b877e; /* Light brown border */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-font-size: 14px;
 }
 
 .choice-box .context-menu {
-    -fx-background-color: #ffffff; /* White background for dropdown */
-    -fx-border-color: #9b877e; /* Light brown border for dropdown */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
 }
 
 .choice-box .menu-item:focused {
-    -fx-background-color: #9b877e; /* Light brown background for focused item */
+    -fx-background-color: #9b877e;
 }
 
 .choice-box .menu-item:focused .label {
-    -fx-text-fill: #ffffff; /* White text for focused item */
+    -fx-text-fill: #ffffff;
 }
 
-/* Style for buttons */
+
 .button {
     -fx-pref-width: 120px;
     -fx-pref-height: 40px;
-    -fx-background-color: #9b877e; /* Light brown background */
-    -fx-text-fill: #ffffff; /* White text */
+    -fx-background-color: #9b877e;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
@@ -86,69 +86,69 @@
 }
 
 .button:hover {
-    -fx-background-color: #5a4a42; /* Dark brown background on hover */
+    -fx-background-color: #5a4a42;
 }
 
 .button:pressed {
-    -fx-background-color: #3a2e28; /* Darker brown background when pressed */
+    -fx-background-color: #3a2e28;
 }
 
-/* Root style for the AnchorPane */
+
 .root {
-    -fx-background-color: #faefe0; /* Light beige background */
+    -fx-background-color: #faefe0;
     -fx-font-family: 'Arial';
 }
 
-/* Style for the TableView */
+
 .table-view {
-    -fx-background-color: #ffffff; /* White background */
-    -fx-border-color: #9b877e; /* Light brown border */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-padding: 10px;
 }
 
-/* Style for TableColumn headers */
+
 .table-view .column-header {
-    -fx-background-color: #9b877e; /* Light brown background */
-    -fx-text-fill: white; /* White text */
+    -fx-background-color: #9b877e;
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-alignment: center;
 }
 
-/* Style for TableView rows */
+
 .table-row-cell {
-    -fx-background-color: #ffffff; /* White background */
-    -fx-text-fill: #333333; /* Dark gray text */
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
     -fx-font-size: 13px;
 }
 
-/* Alternate row color for better readability */
+
 .table-row-cell:odd {
-    -fx-background-color: #f5f5f5; /* Light gray background */
+    -fx-background-color: #f5f5f5;
 }
 
-/* Style for selected rows */
+
 .table-row-cell:selected {
-    -fx-background-color: #9b877e; /* Light brown background */
-    -fx-text-fill: white; /* White text */
+    -fx-background-color: #9b877e;
+    -fx-text-fill: white;
 }
 
-/* Style for the title label */
+
 .label.title {
     -fx-font-size: 36px;
-    -fx-text-fill: #5a4a42; /* Dark brown text */
+    -fx-text-fill: #5a4a42;
     -fx-font-weight: bold;
     -fx-alignment: center;
     -fx-underline: true;
 }
 
-/* Style for buttons */
+
 .button {
-    -fx-background-color: #9b877e; /* Light brown background */
-    -fx-text-fill: white; /* White text */
+    -fx-background-color: #9b877e;
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
@@ -158,64 +158,64 @@
 }
 
 .button:hover {
-    -fx-background-color: #5a4a42; /* Dark brown background on hover */
+    -fx-background-color: #5a4a42;
 }
 
 .button:pressed {
-    -fx-background-color: #3a2e28; /* Darker brown background when pressed */
+    -fx-background-color: #3a2e28;
 }
 
-/* Style for the "+" button */
+
 .button.add-button {
     -fx-font-size: 22px;
-    -fx-text-fill: #000000; /* Black text */
-    -fx-background-color: transparent; /* Transparent background */
-    -fx-border-color: #9b877e; /* Light brown border */
+    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+    -fx-border-color: #9b877e;
     -fx-border-width: 2px;
-    -fx-border-radius: 50%; /* Circular button */
+    -fx-border-radius: 50%;
     -fx-background-radius: 50%;
 }
 
 .button.add-button:hover {
-    -fx-background-color: #9b877e; /* Light brown background on hover */
-    -fx-text-fill: white; /* White text on hover */
+    -fx-background-color: #9b877e;
+    -fx-text-fill: white;
 }
 
 
 
-/* Root style for the AnchorPane */
+
 .root {
-    -fx-background-color: #faefe0; /* Light beige background */
+    -fx-background-color: #faefe0;
     -fx-font-family: 'Arial';
 }
 
-/* Style for the VBox containing the form */
+
 .vbox {
     -fx-spacing: 10;
     -fx-padding: 20;
     -fx-alignment: center-left;
 }
 
-/* Style for labels */
+
 .label {
     -fx-font-size: 14px;
-    -fx-text-fill: #333333; /* Dark gray text */
+    -fx-text-fill: #333333;
     -fx-font-weight: bold;
 }
 
-/* Style for the title label */
+
 .label.title {
     -fx-font-size: 24px;
-    -fx-text-fill: #5a4a42; /* Dark brown text */
+    -fx-text-fill: #5a4a42;
     -fx-font-weight: bold;
 }
 
-/* Style for text fields and password fields */
+
 .text-field, .password-field {
     -fx-pref-width: 250px;
     -fx-pref-height: 35px;
-    -fx-background-color: #ffffff; /* White background */
-    -fx-border-color: #9b877e; /* Light brown border */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-font-size: 14px;
@@ -223,39 +223,39 @@
 }
 
 .text-field:focused, .password-field:focused {
-    -fx-border-color: #5a4a42; /* Dark brown border when focused */
+    -fx-border-color: #5a4a42;
 }
 
-/* Style for the ChoiceBox */
+
 .choice-box {
     -fx-pref-width: 250px;
     -fx-pref-height: 35px;
-    -fx-background-color: #ffffff; /* White background */
-    -fx-border-color: #9b877e; /* Light brown border */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-font-size: 14px;
 }
 
 .choice-box .context-menu {
-    -fx-background-color: #ffffff; /* White background for dropdown */
-    -fx-border-color: #9b877e; /* Light brown border for dropdown */
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
 }
 
 .choice-box .menu-item:focused {
-    -fx-background-color: #9b877e; /* Light brown background for focused item */
+    -fx-background-color: #9b877e;
 }
 
 .choice-box .menu-item:focused .label {
-    -fx-text-fill: #ffffff; /* White text for focused item */
+    -fx-text-fill: #ffffff;
 }
 
 /* Style for buttons */
 .button {
     -fx-pref-width: 120px;
     -fx-pref-height: 40px;
-    -fx-background-color: #9b877e; /* Light brown background */
-    -fx-text-fill: #ffffff; /* White text */
+    -fx-background-color: #9b877e;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
@@ -264,9 +264,14 @@
 }
 
 .button:hover {
-    -fx-background-color: #5a4a42; /* Dark brown background on hover */
+    -fx-background-color: #5a4a42;
 }
 
 .button:pressed {
-    -fx-background-color: #3a2e28; /* Darker brown background when pressed */
+    -fx-background-color: #3a2e28;
+}
+.error {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
 }

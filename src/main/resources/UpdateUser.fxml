@@ -10,44 +10,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UpdateUserController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UpdateUserController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
          <children>
 
+            <!-- Left VBox for Name, Surname, Phone, Email, Password -->
             <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
                <children>
                   <Label styleClass="title" text="User Update" />
 
-
+                  <!-- Name -->
                   <Label text="Name" />
                   <TextField fx:id="name" promptText="Enter Name" styleClass="text-field" />
+                  <Label fx:id="nameError" styleClass="error" text="Name is required" visible="false" />
 
-
+                  <!-- Surname -->
                   <Label text="Surname" />
                   <TextField fx:id="surname" promptText="Enter Surname" styleClass="text-field" />
+                  <Label fx:id="surnameError" styleClass="error" text="Surname is required" visible="false" />
 
-
+                  <!-- Phone Number -->
                   <Label text="Phone Number" />
                   <TextField fx:id="telephone" promptText="Enter Phone Number" styleClass="text-field" />
+                  <Label fx:id="telephoneError" styleClass="error" text="Phone number must be 8 digits" visible="false" />
 
-
+                  <!-- Email -->
                   <Label text="Email" />
                   <TextField fx:id="email" promptText="Enter Email" styleClass="text-field" />
+                  <Label fx:id="emailError" styleClass="error" text="Email must be in the format: exemple@exemple.com" visible="false" />
 
-
+                  <!-- Password -->
                   <Label text="Password" />
                   <PasswordField fx:id="password" promptText="Enter Password" styleClass="password-field" />
+                  <Label fx:id="passwordError" styleClass="error" text="Password must be at least 5 characters" visible="false" />
                </children>
             </VBox>
 
-
+            <!-- Back Button -->
             <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherUser" styleClass="button" text="Back" />
 
-
+            <!-- Right VBox for Role, Is Blocked, Is Confirmed, Number Verification, Token -->
             <VBox layoutX="470.0" layoutY="135.0" prefHeight="390.0" prefWidth="262.0" spacing="10" styleClass="vbox">
                <children>
-
+                  <!-- Role -->
                   <Label text="Role" />
                   <ChoiceBox fx:id="role" styleClass="choice-box">
                      <items>
@@ -59,27 +65,32 @@
                         </FXCollections>
                      </items>
                   </ChoiceBox>
+                  <Label fx:id="roleError" styleClass="error" text="Role is required" visible="false" />
 
-
+                  <!-- Is Blocked -->
                   <Label text="Is Blocked (0 or 1)" />
                   <TextField fx:id="isBlocked" promptText="Enter 0 or 1" styleClass="text-field" />
+                  <Label fx:id="isBlockedError" styleClass="error" text="Is Blocked must be 0 or 1" visible="false" />
 
-
+                  <!-- Is Confirmed -->
                   <Label text="Is Confirmed (0 or 1)" />
                   <TextField fx:id="isConfirmed" promptText="Enter 0 or 1" styleClass="text-field" />
+                  <Label fx:id="isConfirmedError" styleClass="error" text="Is Confirmed must be 0 or 1" visible="false" />
 
-
+                  <!-- Number Verification -->
                   <Label text="Number Verification" />
                   <TextField fx:id="numberVerification" promptText="Enter Number Verification" styleClass="text-field" />
+                  <Label fx:id="numberVerificationError" styleClass="error" text="Number Verification must be a number" visible="false" />
 
-
+                  <!-- Token -->
                   <Label text="Token" />
                   <TextField fx:id="token" promptText="Enter Token" styleClass="text-field" />
+                  <Label fx:id="tokenError" styleClass="error" text="Token must be a number" visible="false" />
                </children>
             </VBox>
 
-
-            <Button layoutX="749.0" layoutY="18.0" onAction="#Updateuser" prefWidth="150.0" styleClass="button" text="Update " />
+            <!-- Update Button -->
+            <Button layoutX="749.0" layoutY="18.0" onAction="#Updateuser" prefWidth="150.0" styleClass="button" text="Update" />
          </children>
       </AnchorPane>
    </children>
