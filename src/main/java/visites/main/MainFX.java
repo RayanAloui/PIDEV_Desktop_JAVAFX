@@ -8,7 +8,7 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage)throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/AjouterVisiteur.fxml"));
+        Parent root= FXMLLoader.load(getClass().getResource("/visiteur/AjouterVisiteur.fxml"));
         Scene scene=new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Ajouter Visiteur");

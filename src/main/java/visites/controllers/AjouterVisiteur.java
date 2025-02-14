@@ -1,12 +1,16 @@
 package visites.controllers;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import visites.entities.visiteurs;
 import visites.services.VisiteursService;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class AjouterVisiteur {
@@ -95,6 +99,20 @@ public class AjouterVisiteur {
         alert.show();
 
     }
+
+    @FXML
+    void retour(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/visiteur/AfficherVisiteur.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) nom.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
