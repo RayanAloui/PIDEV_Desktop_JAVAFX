@@ -14,40 +14,40 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
          <children>
-
+            <!-- Left VBox for Name, Surname, Phone, Email, Password -->
             <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
                <children>
                   <Label styleClass="title" text="User Update" />
 
-
+                  <!-- Name -->
                   <Label text="Name" />
                   <TextField fx:id="name" promptText="Enter Name" styleClass="text-field" />
 
-
+                  <!-- Surname -->
                   <Label text="Surname" />
                   <TextField fx:id="surname" promptText="Enter Surname" styleClass="text-field" />
 
-
+                  <!-- Phone Number -->
                   <Label text="Phone Number" />
                   <TextField fx:id="telephone" promptText="Enter Phone Number" styleClass="text-field" />
 
-
+                  <!-- Email -->
                   <Label text="Email" />
                   <TextField fx:id="email" promptText="Enter Email" styleClass="text-field" />
 
-
+                  <!-- Password -->
                   <Label text="Password" />
                   <PasswordField fx:id="password" promptText="Enter Password" styleClass="password-field" />
                </children>
             </VBox>
 
-
+            <!-- Back Button -->
             <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherUser" styleClass="button" text="Back" />
 
-
+            <!-- Right VBox for Role, Is Blocked, Is Confirmed, Number Verification, Token -->
             <VBox layoutX="470.0" layoutY="135.0" prefHeight="390.0" prefWidth="262.0" spacing="10" styleClass="vbox">
                <children>
-
+                  <!-- Role -->
                   <Label text="Role" />
                   <ChoiceBox fx:id="role" styleClass="choice-box">
                      <items>
@@ -60,25 +60,25 @@
                      </items>
                   </ChoiceBox>
 
-
+                  <!-- Is Blocked -->
                   <Label text="Is Blocked (0 or 1)" />
                   <TextField fx:id="isBlocked" promptText="Enter 0 or 1" styleClass="text-field" />
 
-
+                  <!-- Is Confirmed -->
                   <Label text="Is Confirmed (0 or 1)" />
                   <TextField fx:id="isConfirmed" promptText="Enter 0 or 1" styleClass="text-field" />
 
-
+                  <!-- Number Verification -->
                   <Label text="Number Verification" />
                   <TextField fx:id="numberVerification" promptText="Enter Number Verification" styleClass="text-field" />
 
-
+                  <!-- Token -->
                   <Label text="Token" />
                   <TextField fx:id="token" promptText="Enter Token" styleClass="text-field" />
                </children>
             </VBox>
 
-
+            <!-- Update Button -->
             <Button layoutX="749.0" layoutY="18.0" onAction="#Updateuser" prefWidth="150.0" styleClass="button" text="Update " />
          </children>
       </AnchorPane>

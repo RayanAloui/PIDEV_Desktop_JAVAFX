@@ -14,25 +14,33 @@
     <children>
         <VBox layoutX="305.0" layoutY="90.0" spacing="10" styleClass="vbox">
             <children>
+                <!-- Title Label -->
                 <Label styleClass="title" text="User Registration" />
 
+                <!-- Name -->
                 <TextField fx:id="name" promptText="Name" styleClass="text-field" />
                 <Label fx:id="nameError" styleClass="error" text="Name is required" visible="false" />
 
+                <!-- Surname -->
                 <TextField fx:id="surname" promptText="Surname" styleClass="text-field" />
                 <Label fx:id="surnameError" styleClass="error" text="Surname is required" visible="false" />
 
+                <!-- Phone Number -->
                 <TextField fx:id="telephone" promptText="Phone Number" styleClass="text-field" />
                 <Label fx:id="telephoneError" styleClass="error" text="Phone number is required" visible="false" />
 
+                <!-- Email -->
                 <TextField fx:id="email" promptText="Email" styleClass="text-field" />
                 <Label fx:id="emailError" styleClass="error" text="Email is required" visible="false" />
 
+                <!-- Password -->
                 <PasswordField fx:id="password" promptText="Password" styleClass="password-field" />
                 <Label fx:id="passwordError" styleClass="error" text="Password is required" visible="false" />
 
+                <!-- Role Label -->
                 <Label styleClass="label" text="Role:" />
 
+                <!-- Role ChoiceBox -->
                 <ChoiceBox fx:id="role" styleClass="choice-box">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -44,12 +52,15 @@
                     </items>
                 </ChoiceBox>
 
+                <!-- Role Error Label -->
                 <Label fx:id="roleError" styleClass="error" text="Role is required" visible="false" />
             </children>
         </VBox>
 
+        <!-- Back Button -->
         <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherUser" styleClass="button" text="Back" />
 
+        <!-- Add User Button -->
         <Button layoutX="766.0" layoutY="14.0" onAction="#adduser" styleClass="button" text="Add User" />
     </children>
 </AnchorPane>
