@@ -70,8 +70,8 @@ public class VisitesService implements Iservices<visites> {
             if (visite.getDate() == null ||
                     visite.getHeure() == null ||
                     visite.getMotif() == null || visite.getMotif().trim().length() < 3 ||
-                    visite.getStatut() == null || (!visite.getStatut().equals("confirme") &&
-                    !visite.getStatut().equals("annule") && !visite.getStatut().equals("attente")) ||
+                    visite.getStatut() == null || (!visite.getStatut().equals("Accepté") &&
+                    !visite.getStatut().equals("Refusé") && !visite.getStatut().equals("En attente")) ||
                     visite.getId_visiteur() <= 0) {
                 throw new IllegalArgumentException("Erreur : Données invalides pour la visite.");
             }
