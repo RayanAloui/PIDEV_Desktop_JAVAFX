@@ -11,7 +11,7 @@ import java.util.Objects;
 public class MainFX extends Application {
     @Override
     public void start(Stage PrimaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterDonateur.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AfficherDonateur.fxml")));
         Scene scene = new Scene(root);
         PrimaryStage.setScene(scene);
         PrimaryStage.setTitle("Ajouter donateur");
@@ -21,4 +21,5 @@ public class MainFX extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

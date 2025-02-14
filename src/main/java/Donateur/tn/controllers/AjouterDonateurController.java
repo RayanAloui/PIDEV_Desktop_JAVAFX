@@ -4,10 +4,13 @@ import Donateur.tn.entities.donateur;
 import Donateur.tn.services.DonateurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
-
+import java.io.IOException;
+import java.util.Objects;
 
 
 public class AjouterDonateurController {
@@ -48,7 +51,6 @@ public class AjouterDonateurController {
             showAlert("Erreur de saisie", "Le champ 'Adresse' est obligatoire.");
             return;
         }
-
         try {
         donateur dt = new donateur();
         dt.setNom(nomD.getText());
@@ -83,5 +85,14 @@ public class AjouterDonateurController {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    @FXML
+    void backList(ActionEvent event)  {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AfficherDonateur.fxml")));
+            nomD.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

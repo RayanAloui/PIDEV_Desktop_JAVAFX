@@ -12,11 +12,20 @@ import java.util.List;
 public class DonateurService implements Iservice<donateur> {
 
     private Connection cnx;
+    private static DonateurService instance;
 
     public DonateurService(){
 
         cnx= DatabaseConnection.getInstance().getCnx();
     }
+    public static DonateurService getInstance() {
+        if (instance == null) {
+            // Si l'instance n'existe pas, on la crée
+            instance = new DonateurService();
+        }
+        return instance;
+    }
+
     @Override
     public void ajouter(donateur donateur) {
         if (donateur.getNom() == null || donateur.getNom().trim().isEmpty()) {
@@ -77,7 +86,7 @@ public class DonateurService implements Iservice<donateur> {
         if (String.valueOf(donateur.getTelephone()).length() != 8) {
             throw new IllegalArgumentException("Le numéro de téléphone doit contenir exactement 8 chiffres.");
         }
-        String sql = "UPDATE donateur SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ? ";
+        String sql = "UPDATE donateur SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ? WHERE id = ? ";
 
         try (PreparedStatement stm = cnx.prepareStatement(sql)) {
             stm.setString(1, donateur.getNom());
@@ -85,6 +94,7 @@ public class DonateurService implements Iservice<donateur> {
             stm.setString(3, donateur.getAdresse());
             stm.setString(4, donateur.getEmail());
             stm.setInt(5, donateur.getTelephone());
+            stm.setInt(6, donateur.getId());
 
             stm.executeUpdate();
             System.out.println("Donateur modifié avec succès !");
@@ -124,7 +134,11 @@ public class DonateurService implements Iservice<donateur> {
                 donateur d=new donateur();
                 d.setId( rs.getInt("Id"));
                 d.setNom(  rs.getString("Nom"));
-                d.setPrenom(rs.getString("Prenom"));
+                d.setPrenom( rs.getString("Prenom"));
+                d.setEmail(rs.getString("Email"));
+                d.setTelephone(rs.getInt("Telephone"));
+                d.setAdresse(rs.getString("Adresse"));
+
                 dt.add(d);
             }
 
