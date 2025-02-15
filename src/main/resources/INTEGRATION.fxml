@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #faefe0;"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="esprit.tn.controllers.INTEGRATION">
+
+    <!-- Title -->
+    <Text fill="#9b877e" layoutX="233.0" layoutY="69.0" text="OrphanCare">
+        <font>
+            <Font name="Arial" size="24" />
+        </font>
+    </Text>
+
+    <!-- Buttons Container -->
+    <VBox layoutX="174.0" layoutY="117.0" prefHeight="165.0" prefWidth="250.0" spacing="10">
+        <!-- Row 1 -->
+        <HBox spacing="10">
+            <Button fx:id="userButton" onAction="#GotoUserPage" prefHeight="40" prefWidth="150.0"
+                    style="-fx-background-color: #9b877e; -fx-text-fill: #faefe0; -fx-font-size: 14;" text="USER" />
+            <Button fx:id="orphelinButton" onAction="#GotoOrphelinPage" prefHeight="40" prefWidth="150.0"
+                    style="-fx-background-color: #9b877e; -fx-text-fill: #faefe0; -fx-font-size: 14;" text="ORPHELIN" />
+        </HBox>
+
+        <!-- Row 2 -->
+        <HBox spacing="10">
+            <Button fx:id="donButton" onAction="#GotoDonPage" prefHeight="40" prefWidth="150.0"
+                    style="-fx-background-color: #9b877e; -fx-text-fill: #faefe0; -fx-font-size: 14;" text="DON" />
+            <Button fx:id="visitButton" onAction="#GotoVisitPage" prefHeight="40" prefWidth="150.0"
+                    style="-fx-background-color: #9b877e; -fx-text-fill: #faefe0; -fx-font-size: 14;" text="VISIT" />
+        </HBox>
+
+        <!-- Row 3 -->
+        <HBox spacing="10">
+            <Button fx:id="reclamationButton" onAction="#GotoReclamationPage" prefHeight="40" prefWidth="150.0"
+                    style="-fx-background-color: #9b877e; -fx-text-fill: #faefe0; -fx-font-size: 14;" text="RECLAMATION" />
+            <Button fx:id="activiteButton" onAction="#GotoActivitePage" prefHeight="40" prefWidth="150.0"
+                    style="-fx-background-color: #9b877e; -fx-text-fill: #faefe0; -fx-font-size: 14;" text="ACTIVITE" />
+        </HBox>
+    </VBox>
+
+</AnchorPane>
