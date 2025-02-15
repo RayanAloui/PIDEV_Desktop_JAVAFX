@@ -16,7 +16,7 @@ public class MainFX extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/AfficherTuteur.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajouter Tuteur");
+        primaryStage.setTitle("Ajouter Orphelin");
         primaryStage.show();
 
     }

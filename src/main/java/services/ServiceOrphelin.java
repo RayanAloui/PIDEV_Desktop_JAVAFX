@@ -1,37 +1,31 @@
 package services;
 
 import entities.Orphelin;
-
 import java.sql.*;
 import java.util.ArrayList;
-import main.databaseconnection;
+import java.util.List;
 import java.util.regex.Pattern;
+import main.databaseconnection;
 
 public class ServiceOrphelin implements IOrphelinService {
 
     @Override
     public void ajouter(Orphelin orphelin) throws SQLException {
-
         if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getNomO())) {
             throw new IllegalArgumentException("Le nom ne doit contenir que des lettres et des espaces.");
         }
-
         if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getPrenomO())) {
             throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres et des espaces.");
         }
-
         if (!Pattern.matches("^\\d{4}-\\d{2}-\\d{2}$", orphelin.getDateNaissance())) {
             throw new IllegalArgumentException("La date de naissance doit être au format YYYY-MM-DD.");
         }
-
         if (!orphelin.getSexe().equalsIgnoreCase("M") && !orphelin.getSexe().equalsIgnoreCase("F")) {
             throw new IllegalArgumentException("Le sexe doit être 'M' ou 'F'.");
         }
-
         if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getSituationScolaire())) {
             throw new IllegalArgumentException("La situation scolaire ne doit contenir que des lettres et des espaces.");
         }
-
         if (orphelin.getIdTuteur() <= 0 || !tuteurExiste(orphelin.getIdTuteur())) {
             throw new IllegalArgumentException("L'ID du tuteur doit être un entier positif existant dans la base.");
         }
@@ -56,11 +50,9 @@ public class ServiceOrphelin implements IOrphelinService {
             } else {
                 System.out.println("L'ajout d'orphelin a échoué.");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Erreur lors de l'ajout d'orphelin.");
-
         } finally {
             if (pst != null) pst.close();
             if (conn != null) conn.close();
@@ -73,33 +65,26 @@ public class ServiceOrphelin implements IOrphelinService {
         PreparedStatement pst = null;
 
         try {
-
             // Vérifications des nouvelles valeurs AVANT de les appliquer
             if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getNomO())) {
                 throw new IllegalArgumentException("Le nom ne doit contenir que des lettres et des espaces.");
             }
-
             if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getPrenomO())) {
                 throw new IllegalArgumentException("Le prénom ne doit contenir que des lettres et des espaces.");
             }
-
             if (!Pattern.matches("^\\d{4}-\\d{2}-\\d{2}$", orphelin.getDateNaissance())) {
                 throw new IllegalArgumentException("La date de naissance doit être au format YYYY-MM-DD.");
             }
-
             if (!orphelin.getSexe().equalsIgnoreCase("M") && !orphelin.getSexe().equalsIgnoreCase("F")) {
                 throw new IllegalArgumentException("Le sexe doit être 'M' ou 'F'.");
             }
-
             if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getSituationScolaire())) {
                 throw new IllegalArgumentException("La situation scolaire ne doit contenir que des lettres et des espaces.");
             }
-
             if (orphelin.getIdTuteur() <= 0 || !tuteurExiste(orphelin.getIdTuteur())) {
                 throw new IllegalArgumentException("L'ID du tuteur doit être un entier positif existant dans la base.");
             }
 
-            // Connexion et mise à jour
             conn = databaseconnection.getConnection();
             String query = "UPDATE orphelins SET nomO = ?, prenomO = ?, dateNaissance = ?, sexe = ?, situationScolaire = ?, idTuteur = ? WHERE idO = ?";
             pst = conn.prepareStatement(query);
@@ -117,21 +102,17 @@ public class ServiceOrphelin implements IOrphelinService {
             } else {
                 System.out.println("La mise à jour a échoué.");
             }
-
         } finally {
             if (pst != null) pst.close();
             if (conn != null) conn.close();
         }
     }
 
-
     @Override
     public void delete(int id) throws SQLException {
-
         if (id <= 0) {
             throw new IllegalArgumentException("L'ID doit être un entier positif.");
         }
-
         if (!orphelinExiste(id)) {
             throw new IllegalArgumentException("L'ID donné ne correspond à aucun orphelin existant.");
         }
@@ -151,7 +132,6 @@ public class ServiceOrphelin implements IOrphelinService {
             } else {
                 System.out.println("La suppression de l'orphelin a échoué.");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Erreur lors de la suppression de l'orphelin.");
@@ -176,7 +156,6 @@ public class ServiceOrphelin implements IOrphelinService {
 
             while (rs.next()) {
                 Orphelin orphelin = new Orphelin(
-                        //rs.getInt("idO"),
                         rs.getString("nomO"),
                         rs.getString("prenomO"),
                         rs.getString("dateNaissance"),
@@ -198,7 +177,7 @@ public class ServiceOrphelin implements IOrphelinService {
         return orphelins;
     }
 
-    private boolean tuteurExiste(int idTuteur) throws SQLException {
+    public boolean tuteurExiste(int idTuteur) throws SQLException {
         Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -206,7 +185,7 @@ public class ServiceOrphelin implements IOrphelinService {
 
         try {
             conn = databaseconnection.getConnection();
-            String query = "SELECT COUNT(*) FROM tuteurs WHERE idT= ?";
+            String query = "SELECT COUNT(*) FROM tuteurs WHERE idT = ?";
             pst = conn.prepareStatement(query);
             pst.setInt(1, idTuteur);
             rs = pst.executeQuery();
@@ -278,5 +257,22 @@ public class ServiceOrphelin implements IOrphelinService {
         }
     }
 
+    public List<String> getTuteurs() throws SQLException {
+        List<String> tuteurs = new ArrayList<>();
+        String query = "SELECT idT FROM tuteurs";
+
+        try (Connection conn = databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                tuteurs.add(String.valueOf(rs.getInt("idT")));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du chargement des tuteurs : " + e.getMessage());
+            throw e;
+        }
+        return tuteurs;
+    }
 }
+
 

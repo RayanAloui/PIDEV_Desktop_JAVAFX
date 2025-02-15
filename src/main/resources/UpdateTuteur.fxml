@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateTuteurController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateTuteurController">
     <children>
-        <TextField fx:id="cinID" layoutX="227.0" layoutY="67.0" promptText="CIN"/>
-        <Label fx:id="errorCIN" layoutX="227.0" layoutY="92.0" textFill="RED"/>
+        <TextField fx:id="cinID" layoutX="323.0" layoutY="155.0" promptText="CIN" />
+        <Label fx:id="errorCIN" layoutX="227.0" layoutY="92.0" textFill="RED" />
 
-        <TextField fx:id="nomID" layoutX="227.0" layoutY="114.0" promptText="Nom" />
-        <Label fx:id="errorNOM" layoutX="227.0" layoutY="139.0" textFill="RED"/>
+        <TextField fx:id="nomID" layoutX="323.0" layoutY="221.0" promptText="Nom" />
+        <Label fx:id="errorNOM" layoutX="227.0" layoutY="139.0" textFill="RED" />
 
-        <TextField fx:id="prenomID" layoutX="228.0" layoutY="160.0" promptText="Prénom" />
-        <Label fx:id="errorPRENOM" layoutX="228.0" layoutY="185.0" textFill="RED"/>
+        <TextField fx:id="prenomID" layoutX="323.0" layoutY="291.0" promptText="Prénom" />
+        <Label fx:id="errorPRENOM" layoutX="228.0" layoutY="185.0" textFill="RED" />
 
-        <TextField fx:id="telephoneID" layoutX="228.0" layoutY="206.0" promptText="Téléphone" />
-        <Label fx:id="errorTELEPHONE" layoutX="228.0" layoutY="231.0" textFill="RED"/>
+        <TextField fx:id="telephoneID" layoutX="324.0" layoutY="360.0" promptText="Téléphone" />
+        <Label fx:id="errorTELEPHONE" layoutX="228.0" layoutY="231.0" textFill="RED" />
 
-        <TextField fx:id="adresseID" layoutX="229.0" layoutY="250.0" promptText="Adresse" />
-        <Label fx:id="errorADRESSE" layoutX="229.0" layoutY="275.0" textFill="RED"/>
+        <TextField fx:id="adresseID" layoutX="324.0" layoutY="427.0" promptText="Adresse" />
+        <Label fx:id="errorADRESSE" layoutX="229.0" layoutY="275.0" textFill="RED" />
 
-        <Button layoutX="250.0" layoutY="320.0" text="Sauvegarder" onAction="#sauvegarderTuteur"/>
+        <Button layoutX="390.0" layoutY="542.0" onAction="#sauvegarderTuteur" text="Sauvegarder" />
     </children>
 </AnchorPane>
-

@@ -5,20 +5,20 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherTuteurController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherTuteurController">
    <children>
-      <TableView fx:id="tableTuteurs" layoutX="32.0" layoutY="40.0" prefHeight="287.0" prefWidth="534.0">
+      <TableView fx:id="tableTuteurs" layoutX="32.0" layoutY="40.0" prefHeight="542.0" prefWidth="836.0">
         <columns>
             <TableColumn fx:id="colId" minWidth="0.0" prefWidth="0.0" text="ID" />
-          <TableColumn fx:id="colCin" prefWidth="91.20001220703125" text="CIN" />
-          <TableColumn fx:id="colNom" prefWidth="102.39996337890625" text="nom" />
-            <TableColumn fx:id="colPrenom" prefWidth="103.20001220703125" text="prenom" />
-            <TableColumn fx:id="colTelephone" minWidth="6.4000244140625" prefWidth="108.00006103515625" text="telephone" />
-            <TableColumn fx:id="colAdresse" minWidth="0.0" prefWidth="128.79998779296875" text="adresse" />
+          <TableColumn fx:id="colCin" prefWidth="131.1999740600586" text="CIN" />
+          <TableColumn fx:id="colNom" prefWidth="156.800048828125" text="nom" />
+            <TableColumn fx:id="colPrenom" prefWidth="164.79998779296875" text="prenom" />
+            <TableColumn fx:id="colTelephone" minWidth="6.4000244140625" prefWidth="184.80001831054688" text="telephone" />
+            <TableColumn fx:id="colAdresse" minWidth="0.0" prefWidth="177.5999755859375" text="adresse" />
         </columns>
       </TableView>
-      <Button layoutX="32.0" layoutY="346.0" mnemonicParsing="false" onAction="#ajouterTuteur" text="Ajouter Tuteur" />
-      <Button layoutX="480.0" layoutY="346.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
-      <Button layoutX="273.0" layoutY="346.0" mnemonicParsing="false" onAction="#deleteT" text="Supprimer" />
+      <Button layoutX="32.0" layoutY="620.0" mnemonicParsing="false" onAction="#ajouterTuteur" prefWidth="169.0" text="Ajouter Tuteur" />
+      <Button layoutX="748.0" layoutY="620.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
+      <Button layoutX="390.0" layoutY="620.0" mnemonicParsing="false" onAction="#deleteT" text="Supprimer" />
    </children>
 </AnchorPane>
