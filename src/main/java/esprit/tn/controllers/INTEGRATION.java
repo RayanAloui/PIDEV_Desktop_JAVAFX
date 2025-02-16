@@ -25,7 +25,7 @@ public class INTEGRATION {
 
     @FXML
     private void GotoOrphelinPage() {
-        loadPage("/AfficherOrphelin.fxml");
+        loadPage("/AfficherTuteur.fxml");
     }
 
     @FXML

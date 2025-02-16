@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UpdateTuteurController">
+    <children>
+
+        <Label layoutX="300.0" layoutY="50.0" text="Mettre à Jour un Tuteur" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <Label layoutX="200.0" layoutY="160.0" text="CIN :"/>
+        <Label layoutX="200.0" layoutY="226.0" text="Nom :"/>
+        <Label layoutX="200.0" layoutY="296.0" text="Prénom :"/>
+        <Label layoutX="200.0" layoutY="365.0" text="Téléphone :"/>
+        <Label layoutX="200.0" layoutY="432.0" text="Adresse :"/>
+
+        <TextField fx:id="cinID" layoutX="323.0" layoutY="155.0" promptText="Entrez le CIN"/>
+        <TextField fx:id="nomID" layoutX="323.0" layoutY="221.0" promptText="Entrez le nom"/>
+        <TextField fx:id="prenomID" layoutX="323.0" layoutY="291.0" promptText="Entrez le prénom"/>
+        <TextField fx:id="telephoneID" layoutX="323.0" layoutY="360.0" promptText="Entrez le téléphone"/>
+        <TextField fx:id="adresseID" layoutX="323.0" layoutY="427.0" promptText="Entrez l'adresse"/>
+
+        <Label fx:id="errorCIN" layoutX="323.0" layoutY="190.0" textFill="RED"/>
+        <Label fx:id="errorNOM" layoutX="323.0" layoutY="256.0" textFill="RED"/>
+        <Label fx:id="errorPRENOM" layoutX="323.0" layoutY="326.0" textFill="RED"/>
+        <Label fx:id="errorTELEPHONE" layoutX="323.0" layoutY="395.0" textFill="RED"/>
+        <Label fx:id="errorADRESSE" layoutX="323.0" layoutY="462.0" textFill="RED"/>
+
+        <Button layoutX="390.0" layoutY="520.0" onAction="#sauvegarderTuteur" text="Sauvegarder" style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+    </children>
+</AnchorPane>
+

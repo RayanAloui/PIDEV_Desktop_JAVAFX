@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AjouterTuteurController">
+   <children>
+
+      <Label layoutX="300.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Ajouter un Tuteur" />
+
+
+      <Label layoutX="200.0" layoutY="70.0" text="CIN :" />
+      <Label layoutX="200.0" layoutY="150.0" text="Nom :" />
+      <Label layoutX="200.0" layoutY="235.0" text="Prénom :" />
+      <Label layoutX="200.0" layoutY="320.0" text="Téléphone :" />
+      <Label layoutX="200.0" layoutY="405.0" text="Adresse :" />
+
+
+      <TextField fx:id="cinId" layoutX="300.0" layoutY="63.0" promptText="Entrez le CIN" />
+      <TextField fx:id="nomId" layoutX="300.0" layoutY="144.0" promptText="Entrez le nom" />
+      <TextField fx:id="prenomId" layoutX="300.0" layoutY="230.0" promptText="Entrez le prénom" />
+      <TextField fx:id="telephoneId" layoutX="300.0" layoutY="314.0" promptText="Entrez le téléphone" />
+      <TextField fx:id="adresseId" layoutX="300.0" layoutY="401.0" promptText="Entrez l'adresse" />
+
+
+      <Label fx:id="errorCin" layoutX="300.0" layoutY="100.0" textFill="RED" />
+      <Label fx:id="errorNom" layoutX="300.0" layoutY="180.0" textFill="RED" />
+      <Label fx:id="errorPrenom" layoutX="300.0" layoutY="265.0" textFill="RED" />
+      <Label fx:id="errorTelephone" layoutX="300.0" layoutY="350.0" textFill="RED" />
+      <Label fx:id="errorAdresse" layoutX="300.0" layoutY="435.0" textFill="RED" />
+
+
+      <Button layoutX="365.0" layoutY="500.0" onAction="#AjouterT" style="-fx-text-fill: white; -fx-font-size: 10px;" text="Ajouter" />
+
+
+      <Button layoutX="737.0" layoutY="624.0" onAction="#afficherTuteur" style="-fx-text-fill: white; -fx-font-size: 10px;" text="Afficher Tuteurs" />
+   </children>
+</AnchorPane>
