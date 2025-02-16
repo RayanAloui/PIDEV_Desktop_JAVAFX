@@ -177,4 +177,26 @@ public class DonateurService implements Iservice<donateur> {
 
         return dt;
     }
+
+
+
+        public List<Integer> getAllIds() {
+            List<Integer> ids = new ArrayList<>();
+            String query = "SELECT id FROM donateur";
+
+            try (Connection conn = DatabaseConnection.getInstance().getCnx();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(query)) {
+
+                while (rs.next()) {
+                    ids.add(rs.getInt("id"));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return ids;
+
+}
 }

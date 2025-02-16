@@ -7,24 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Donateur.tn.controllers.AfficherDonateurController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../../../../../Downloads/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Donateur.tn.controllers.AfficherDonateurController">
    <children>
-      <TableView fx:id="TableDonateur" layoutX="38.0" layoutY="82.0" prefHeight="272.0" prefWidth="523.0">
+      <TableView fx:id="TableDonateur" layoutX="55.0" layoutY="104.0" prefHeight="492.0" prefWidth="790.0" stylesheets="@../../../../../Downloads/styles.css">
         <columns>
-          <TableColumn fx:id="nom" prefWidth="73.5999755859375" text="Nom" />
-            <TableColumn fx:id="prenom" prefWidth="88.79998779296875" text="Prenom" />
-            <TableColumn fx:id="email" prefWidth="161.5999755859375" text="E-Mail" />
-            <TableColumn fx:id="telephone" prefWidth="79.20001220703125" text="Téléphone" />
-            <TableColumn fx:id="adresse" prefWidth="122.39996337890625" text="Adresse" />
+          <TableColumn fx:id="nom" prefWidth="143.20003509521484" text="Nom" />
+            <TableColumn fx:id="prenom" prefWidth="156.0" text="Prenom" />
+            <TableColumn fx:id="email" prefWidth="179.19998168945312" text="E-Mail" />
+            <TableColumn fx:id="telephone" prefWidth="136.800048828125" text="Téléphone" />
+            <TableColumn fx:id="adresse" prefWidth="178.4000244140625" text="Adresse" />
         </columns>
       </TableView>
-      <Label layoutX="151.0" layoutY="27.0" text="TABLE DES DONATEURS" underline="true">
+      <Label layoutX="302.0" layoutY="39.0" text="TABLE DES DONATEURS" underline="true">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Button layoutX="499.0" layoutY="391.0" mnemonicParsing="false" onAction="#AjouterDt" prefHeight="38.0" prefWidth="61.0" text="Ajouter" />
-      <Button layoutX="423.0" layoutY="391.0" mnemonicParsing="false" onAction="#ModifierDt" prefHeight="38.0" prefWidth="62.0" text="Modifier" />
-      <Button layoutX="334.0" layoutY="392.0" mnemonicParsing="false" onAction="#supprimerDt" prefHeight="38.0" prefWidth="73.0" text="Supprimer" />
+      <Button layoutX="22.0" layoutY="27.0" mnemonicParsing="false" onAction="#AjouterDt" prefHeight="38.0" prefWidth="51.0" text="✚" />
+      <Button layoutX="599.0" layoutY="626.0" mnemonicParsing="false" onAction="#ModifierDt" prefHeight="38.0" prefWidth="74.0" text="Modifier" />
+      <Button layoutX="771.0" layoutY="626.0" mnemonicParsing="false" onAction="#supprimerDt" prefHeight="38.0" prefWidth="73.0" text="Supprimer" />
+      <Button layoutX="728.0" layoutY="42.0" mnemonicParsing="false" onAction="#faireUnDon" prefHeight="46.0" prefWidth="101.0" text="Faire Don">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

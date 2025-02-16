@@ -1,5 +1,6 @@
 package Donateur.tn.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,14 +8,14 @@ public class Dons {
     private int id;
     private int donateur_id;
     private double montant;
-    private Date date_don;
+    private LocalDate date_don;
     private String type_don;
     private String description;
     private String statut;
 
     public Dons(){};
 
-    public Dons(int id, int donateur_id, double montant, Date date_don, String type_don, String description, String statut) {
+    public Dons(int id, int donateur_id, double montant, LocalDate date_don, String type_don, String description, String statut) {
         this.id = id;
         this.donateur_id = donateur_id;
         this.montant = montant;
@@ -24,7 +25,7 @@ public class Dons {
         this.statut = statut;
     }
 
-    public Dons(int donateur_id, double montant, Date date_don, String type_don, String description, String statut){
+    public Dons(int donateur_id, double montant, LocalDate date_don, String type_don, String description, String statut){
         this.donateur_id = donateur_id;
         this.montant = montant;
         this.date_don = date_don;
@@ -57,11 +58,11 @@ public class Dons {
         this.montant = montant;
     }
 
-    public Date getDateDon() {
+    public LocalDate getDateDon() {
         return date_don;
     }
 
-    public void setDateDon(Date dateDon) {
+    public void setDateDon(LocalDate dateDon) {
         this.date_don = dateDon;
     }
 

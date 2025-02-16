@@ -8,42 +8,42 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Donateur.tn.controllers.ModifierDonateurController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="461.0" prefWidth="600.0">
+      <AnchorPane layoutX="5.0" layoutY="14.0" prefHeight="700.0" prefWidth="900.0">
          <children>
-            <TextField fx:id="nomD" layoutX="206.0" layoutY="105.0" prefHeight="26.0" prefWidth="186.0" promptText="Nom" />
-            <TextField fx:id="prenomD" layoutX="205.0" layoutY="160.0" prefHeight="26.0" prefWidth="186.0" promptText="Prenom" />
-            <TextField fx:id="emailD" layoutX="206.0" layoutY="212.0" prefHeight="26.0" prefWidth="185.0" promptText="E-mail" />
-            <TextField fx:id="telD" layoutX="205.0" layoutY="269.0" prefHeight="26.0" prefWidth="186.0" promptText="Téléphone" />
-            <TextField fx:id="adresseD" layoutX="205.0" layoutY="318.0" prefHeight="26.0" prefWidth="186.0" promptText="Adresse" />
-            <Button layoutX="206.0" layoutY="395.0" mnemonicParsing="false" onAction="#ModifierDonateur" prefHeight="38.0" prefWidth="70.0" text="Valider" />
-            <Button layoutX="322.0" layoutY="395.0" mnemonicParsing="false" onAction="#AnnulerSaisie" prefHeight="38.0" prefWidth="70.0" text="Annuler" />
-            <Button layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#backList" prefHeight="26.0" prefWidth="59.0" text="⬅ Back" />
-            <Label layoutX="180.0" layoutY="32.0" text="Modifier Donateur" underline="true">
+            <TextField fx:id="nomD" layoutX="348.0" layoutY="166.0" prefHeight="26.0" prefWidth="186.0" promptText="Nom" />
+            <TextField fx:id="prenomD" layoutX="348.0" layoutY="237.0" prefHeight="26.0" prefWidth="186.0" promptText="Prenom" />
+            <TextField fx:id="emailD" layoutX="348.0" layoutY="311.0" prefHeight="26.0" prefWidth="185.0" promptText="E-mail" />
+            <TextField fx:id="telD" layoutX="347.0" layoutY="388.0" prefHeight="26.0" prefWidth="186.0" promptText="Téléphone" />
+            <TextField fx:id="adresseD" layoutX="348.0" layoutY="457.0" prefHeight="26.0" prefWidth="186.0" promptText="Adresse" />
+            <Button layoutX="312.0" layoutY="555.0" mnemonicParsing="false" onAction="#ModifierDonateur" prefHeight="38.0" prefWidth="70.0" text="Valider" />
+            <Button layoutX="498.0" layoutY="556.0" mnemonicParsing="false" onAction="#AnnulerSaisie" prefHeight="38.0" prefWidth="70.0" text="Annuler" />
+            <Button layoutX="14.0" layoutY="645.0" mnemonicParsing="false" onAction="#backList" prefHeight="26.0" prefWidth="59.0" text="⬅ Back" />
+            <Label layoutX="283.0" layoutY="38.0" text="Modifier Donateur" underline="true">
                <font>
-                  <Font name="System Bold" size="29.0" />
+                  <Font name="System Bold" size="38.0" />
                </font>
             </Label>
-            <Label layoutX="207.0" layoutY="88.0" text="Nom : ">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="207.0" layoutY="142.0" text="Prenom : ">
+            <Label layoutX="348.0" layoutY="133.0" text="Nom : ">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="207.0" layoutY="194.0" text="E-Mail :">
+            <Label layoutX="346.0" layoutY="208.0" text="Prenom : ">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="207.0" layoutY="251.0" text="Téléphone :">
+            <Label layoutX="345.0" layoutY="279.0" text="E-Mail :">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="207.0" layoutY="301.0" text="Adresse :">
+            <Label layoutX="340.0" layoutY="350.0" text="Téléphone :">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="340.0" layoutY="428.0" text="Adresse :">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

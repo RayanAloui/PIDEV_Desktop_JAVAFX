@@ -7,19 +7,33 @@ import Donateur.tn.main.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
+//import static Donateur.tn.main.DatabaseConnection.instance;
+
 
 public class DonsService implements Iservice<Dons> {
 
     private Connection cnx;
+    private static DonsService instance;
 
     public DonsService() {
-
-        cnx = DatabaseConnection.instance.getCnx();
+        try {
+            if (cnx == null || cnx.isClosed()) {
+                cnx = DatabaseConnection.getInstance().getCnx();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la connexion à la base de données : " + e.getMessage());
+        }
+    }
+    public static DonsService getInstance() {
+        if (instance == null) {
+            // Si l'instance n'existe pas, on la crée
+            instance = new DonsService();
+        }
+        return instance;
     }
 
     @Override
     public void ajouter(Dons dons) {
-
         if (dons == null) {
             throw new IllegalArgumentException("Le don ne peut pas être null.");
         }
@@ -29,7 +43,6 @@ public class DonsService implements Iservice<Dons> {
         if (dons.getMontant() <= 0) {
             throw new IllegalArgumentException("Le montant doit être supérieur à 0.");
         }
-
         if (dons.getTypeDon() == null || dons.getTypeDon().trim().isEmpty()) {
             throw new IllegalArgumentException("Le type de don ne peut pas être vide.");
         }
@@ -45,7 +58,7 @@ public class DonsService implements Iservice<Dons> {
         try (PreparedStatement stm = cnx.prepareStatement(sql)) {
             stm.setInt(1, dons.getDonateurId());
             stm.setDouble(2, dons.getMontant());
-            stm.setDate(3, new java.sql.Date(dons.getDateDon().getTime()));
+            stm.setDate(3, java.sql.Date.valueOf(dons.getDateDon()));
             stm.setString(4, dons.getTypeDon());
             stm.setString(5, dons.getDescription());
             stm.setString(6, dons.getStatut());
@@ -54,7 +67,6 @@ public class DonsService implements Iservice<Dons> {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de l'ajout du don : " + e.getMessage());
         }
-
     }
 
     @Override
@@ -71,7 +83,6 @@ public class DonsService implements Iservice<Dons> {
         if (dons.getMontant() <= 0) {
             throw new IllegalArgumentException("Le montant doit être supérieur à 0.");
         }
-
         if (dons.getTypeDon() == null || dons.getTypeDon().trim().isEmpty()) {
             throw new IllegalArgumentException("Le type de don ne peut pas être vide.");
         }
@@ -82,23 +93,26 @@ public class DonsService implements Iservice<Dons> {
             throw new IllegalArgumentException("Le statut ne peut pas être vide.");
         }
 
-        String sql = "UPDATE dons SET donateur_id = ?, montant = ?, date_don = ?, type_don = ?, description = ?, statut = ?";
+        String sql = "UPDATE dons SET donateur_id = ?, montant = ?, date_don = ?, type_don = ?, description = ?, statut = ? WHERE id = ?";
 
         try (PreparedStatement stm = cnx.prepareStatement(sql)) {
             stm.setInt(1, dons.getDonateurId());
             stm.setDouble(2, dons.getMontant());
-            stm.setDate(3, new java.sql.Date(dons.getDateDon().getTime()));
+            stm.setDate(3, java.sql.Date.valueOf(dons.getDateDon()));
             stm.setString(4, dons.getTypeDon());
             stm.setString(5, dons.getDescription());
             stm.setString(6, dons.getStatut());
+            stm.setInt(7, dons.getId());
             int rowsUpdated = stm.executeUpdate();
 
-            stm.executeUpdate();
-            System.out.println("Don modifié avec succès !");
+            if (rowsUpdated > 0) {
+                System.out.println("Don modifié avec succès !");
+            } else {
+                System.out.println("Aucun don trouvé avec l'ID spécifié.");
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erreur lors de la modification du don : " + e.getMessage());
         }
-
     }
 
     @Override
@@ -117,7 +131,6 @@ public class DonsService implements Iservice<Dons> {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la suppression du don : " + e.getMessage());
         }
-
     }
 
     @Override
@@ -133,16 +146,15 @@ public class DonsService implements Iservice<Dons> {
                 dons.setId(rs.getInt("id"));
                 dons.setDonateurId(rs.getInt("donateur_id"));
                 dons.setMontant(rs.getDouble("montant"));
-                dons.setDateDon(rs.getDate("date_don"));
+                dons.setDateDon(rs.getDate("date_don").toLocalDate());
                 dons.setTypeDon(rs.getString("type_don"));
                 dons.setDescription(rs.getString("description"));
                 dons.setStatut(rs.getString("statut"));
 
                 donsList.add(dons);
             }
-            System.out.println(donsList);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erreur lors de la récupération des dons : " + e.getMessage());
         }
 
         return donsList;
@@ -161,7 +173,7 @@ public class DonsService implements Iservice<Dons> {
                 dons.setId(rs.getInt("id"));
                 dons.setDonateurId(rs.getInt("donateur_id"));
                 dons.setMontant(rs.getDouble("montant"));
-                dons.setDateDon(rs.getDate("date_don"));
+                dons.setDateDon(rs.getDate("date_don").toLocalDate());
                 dons.setTypeDon(rs.getString("type_don"));
                 dons.setDescription(rs.getString("description"));
                 dons.setStatut(rs.getString("statut"));

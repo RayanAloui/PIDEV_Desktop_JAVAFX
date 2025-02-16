@@ -51,6 +51,11 @@ public class ModifierDonateurController {
     }
     @FXML
     void AnnulerSaisie(ActionEvent event) {
+        nomD.clear();
+        prenomD.clear();
+        emailD.clear();
+        telD.clear();
+        adresseD.clear();
 
     }
 

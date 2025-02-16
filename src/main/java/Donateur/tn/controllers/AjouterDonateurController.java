@@ -6,8 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -62,6 +64,17 @@ public class AjouterDonateurController {
         DonateurService ds = new DonateurService();
         ds.ajouter(dt);
 
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherDonateur.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) nomD.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             showAlert("Ajout Donateur", "Donateur ajouté avec succès !");
         } catch (NumberFormatException e) {
             showAlert("Erreur", "Le numéro de téléphone est invalide.");
@@ -95,4 +108,6 @@ public class AjouterDonateurController {
             throw new RuntimeException(e);
         }
     }
+
+
 }

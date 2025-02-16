@@ -20,7 +20,7 @@ public class Main {
 
         DonateurService dt=new DonateurService();
         DonsService dn=new DonsService();
-        donateur d1 = new donateur("yassine", "ben ali", "ahmed@gmail.com", 28488428,"06 Rue esprit");
+        donateur d1 = new donateur("zineabidine", "ben ali", "ahmed@gmail.com", 28488428,"06 Rue esprit");
         donateur d2 = new donateur("benlahssan", "trabelsi", "belahssan@gmail.com", 28488428,"06 Rue marsa");
         donateur d3 = new donateur("imed", "trabelsi", "imed@gmail.com", 28488428,"06 Rue marsa");
         donateur d4 = new donateur("leila", "trabelsi", "leila@gmail.com", 28488428,"06 Rue marsa");
@@ -34,9 +34,9 @@ public class Main {
         //dt.ajouter(d6);
         //dt.getall();
         //dt.getone(2);
-        //dt.modifier(d1);
+        dt.modifier(d1);
         //dt.supprimer(7);
-        //dt.getall();
+        dt.getall();
 
         try {
             // Conversion de la date
@@ -44,17 +44,17 @@ public class Main {
             Date dateDon = dateFormat.parse("01/02/2025");
 
             // Création de l'objet Dons
-            Dons s1 = new Dons(1, 200, dateDon, "materiel", "je fait ce don pour des orphelins", "en attente");
-            Dons s2 = new Dons(2, 300, dateDon, "argent", "je fait ce don pour des orphelins", "effectué");
-            Dons s3 = new Dons(2, 400, dateDon, "materiel", "je fait ce don pour des orphelins", "en attente");
+            //Dons s1 = new Dons(1, 200, dateDon, "materiel", "je fait ce don pour des orphelins", "en attente");
+            //Dons s2 = new Dons(2, 300, dateDon, "argent", "je fait ce don pour des orphelins", "effectué");
+            //Dons s3 = new Dons(2, 400, dateDon, "materiel", "je fait ce don pour des orphelins", "en attente");
             //dn.ajouter(s1);
             //dn.ajouter(s2);
             //dn.ajouter(s3);
             //dn.supprimer(3);
             //dn.supprimer(4);
-            dn.getall();
+            //dn.getall();
 
-            System.out.println("Don créé avec succès : " + s1);
+           // System.out.println("Don créé avec succès : " + s1);
         } catch (ParseException e) {
             System.out.println("Erreur lors de la conversion de la date : " + e.getMessage());
         }

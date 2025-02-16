@@ -1,5 +1,6 @@
 package Donateur.tn.controllers;
 
+import Donateur.tn.entities.Dons;
 import Donateur.tn.entities.donateur;
 import Donateur.tn.services.DonateurService;
 import javafx.collections.FXCollections;
@@ -29,6 +30,8 @@ public class AfficherDonateurController {
 
     @FXML
     private TableView<donateur> TableDonateur;
+    private TableView<Dons> TableDons;
+
 
     @FXML
     private TableColumn<donateur, String> adresse;
@@ -141,6 +144,19 @@ public class AfficherDonateurController {
             success.showAndWait();
         }
     }
+
+    @FXML
+    void faireUnDon(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterDon.fxml")));
+            TableDonateur.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 
 
 
