@@ -57,7 +57,7 @@ public class ModifierDonController {
     public void initDataDon(Dons don) {
         this.donSelectionne = don;
 
-        // Pré-remplir les champs avec les données existantes
+        // Pré-remplir les champs avec les données existant
         Donateur_id.setValue(don.getDonateurId());
         date_don.setValue(don.getDateDon());
         description.setText(don.getDescription());
