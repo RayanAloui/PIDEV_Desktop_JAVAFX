@@ -9,32 +9,40 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterOrphelinController">
     <children>
+
         <Label layoutX="365.0" layoutY="89.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Ajouter un Orphelin" />
 
-        <Label layoutX="280.0" layoutY="168.0" text="Nom:" />
-        <TextField fx:id="nomField" layoutX="333.0" layoutY="158.0" />
-        <Label fx:id="errorNom" layoutX="150" layoutY="100" textFill="red" />
 
-        <Label layoutX="259.0" layoutY="232.0" text="Prénom:" />
-        <TextField fx:id="prenomField" layoutX="333.0" layoutY="222.0" />
-        <Label fx:id="errorPrenom" layoutX="150" layoutY="150" textFill="red" />
+        <Label layoutX="280.0" layoutY="140.0" text="Nom:" />
+        <TextField fx:id="nomField" layoutX="333.0" layoutY="130.0" />
+        <Label fx:id="errorNom" layoutX="333.0" layoutY="165.0" textFill="red" />
 
-        <Label layoutX="192.0" layoutY="292.0" text="Date de naissance:" />
-        <DatePicker fx:id="dateNaissancePicker" layoutX="333.0" layoutY="282.0" />
-        <Label fx:id="errorDateNaissance" layoutX="150" layoutY="200" textFill="red" />
 
-        <Label layoutX="283.0" layoutY="350.0" prefHeight="16.0" prefWidth="49.0" text="Sexe:" />
-        <ComboBox fx:id="sexeComboBox" layoutX="424.0" layoutY="346.0" />
-        <Label fx:id="errorSexe" layoutX="150" layoutY="250" textFill="red" />
+        <Label layoutX="259.0" layoutY="200.0" text="Prénom:" />
+        <TextField fx:id="prenomField" layoutX="333.0" layoutY="190.0" />
+        <Label fx:id="errorPrenom" layoutX="333.0" layoutY="225.0" textFill="red" />
 
-        <Label layoutX="198.0" layoutY="397.0" text="Situation scolaire:" />
-        <TextField fx:id="situationScolaireField" layoutX="333.0" layoutY="387.0" />
-        <Label fx:id="errorSituationScolaire" layoutX="150" layoutY="300" textFill="red" />
 
-        <Label layoutX="364.0" layoutY="448.0" text="Tuteur:" />
-        <ComboBox fx:id="tuteurComboBox" layoutX="424.0" layoutY="444.0" />
-        <Label fx:id="errorTuteur" layoutX="150" layoutY="350" textFill="red" />
+        <Label layoutX="192.0" layoutY="260.0" text="Date de naissance:" />
+        <DatePicker fx:id="dateNaissancePicker" layoutX="333.0" layoutY="250.0" />
+        <Label fx:id="errorDateNaissance" layoutX="333.0" layoutY="285.0" textFill="red" />
 
-        <Button layoutX="398.0" layoutY="527.0" onAction="#AjouterO" text="Ajouter" />
+
+        <Label layoutX="283.0" layoutY="320.0" text="Sexe:" />
+        <ComboBox fx:id="sexeComboBox" layoutX="424.0" layoutY="315.0" />
+        <Label fx:id="errorSexe" layoutX="424.0" layoutY="350.0" textFill="red" />
+
+
+        <Label layoutX="198.0" layoutY="380.0" text="Situation scolaire:" />
+        <TextField fx:id="situationScolaireField" layoutX="333.0" layoutY="370.0" />
+        <Label fx:id="errorSituationScolaire" layoutX="333.0" layoutY="405.0" textFill="red" />
+
+
+        <Label layoutX="364.0" layoutY="430.0" text="Tuteur:" />
+        <ComboBox fx:id="tuteurComboBox" layoutX="424.0" layoutY="425.0" />
+        <Label fx:id="errorTuteur" layoutX="424.0" layoutY="460.0" textFill="red" />
+
+        <Button layoutX="398.0" layoutY="500.0" onAction="#AjouterO" text="Ajouter" />
+        <Button layoutX="739.0" layoutY="629.0" mnemonicParsing="false" onAction="#afficherOrphelin" text="AfficherOrphelin" />
     </children>
 </AnchorPane>

@@ -273,6 +273,33 @@ public class ServiceOrphelin implements IOrphelinService {
         }
         return tuteurs;
     }
+
+    public List<Orphelin> getAllOrphelins() throws SQLException {
+        List<Orphelin> listeOrphelins = new ArrayList<>();
+        String query = "SELECT * FROM orphelins";
+
+        try (Connection conn = databaseconnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                Orphelin orphelin = new Orphelin(
+                        rs.getInt("idO"),
+                        rs.getString("nomO"),
+                        rs.getString("prenomO"),
+                        rs.getString("dateNaissance"),
+                        rs.getString("sexe"),
+                        rs.getString("situationScolaire"),
+                        rs.getInt("idTuteur")
+                );
+                listeOrphelins.add(orphelin);
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Erreur lors de la récupération des orphelins.", e);
+        }
+        return listeOrphelins;
+    }
+
 }
 
 

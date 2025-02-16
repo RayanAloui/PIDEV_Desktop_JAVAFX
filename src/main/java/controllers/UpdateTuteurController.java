@@ -107,7 +107,11 @@ public class UpdateTuteurController {
 
 
             } catch (SQLException | IOException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de mise à jour");
+                alert.setHeaderText("Impossible de modifier le tuteur !");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
             }
         }
     }

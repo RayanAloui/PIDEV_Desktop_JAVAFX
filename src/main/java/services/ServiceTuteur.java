@@ -36,6 +36,13 @@ public class ServiceTuteur implements ITuteurService {
             throw new IllegalArgumentException("Adresse invalide : elle ne doit pas être vide.");
         }
 
+        if (cinExiste(t.getCinT())) {
+            throw new SQLException("Ce numéro de CIN est déjà utilisé !");
+        }
+        if (telephoneExiste(t.getTelephoneT())) {
+            throw new SQLException("Ce numéro de téléphone est déjà utilisé !");
+        }
+
         try {
             conn = databaseconnection.getConnection();
             String query = "INSERT INTO tuteurs (cinT, nomT, prenomT, telephoneT, adresseT) VALUES (?, ?, ?, ?, ?)";
@@ -63,9 +70,6 @@ public class ServiceTuteur implements ITuteurService {
 
     @Override
     public void updateTuteur(Tuteur t) throws SQLException {
-        Connection conn = null;
-        PreparedStatement pst = null;
-
         if (!t.getCinT().matches("\\d{8}")) {
             throw new IllegalArgumentException("CIN invalide : doit contenir exactement 8 chiffres.");
         }
@@ -82,10 +86,40 @@ public class ServiceTuteur implements ITuteurService {
             throw new IllegalArgumentException("Adresse invalide : elle ne doit pas être vide.");
         }
 
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
         try {
             conn = databaseconnection.getConnection();
-            String query = "UPDATE tuteurs SET cinT = ?, nomT = ?, prenomT = ?, telephoneT = ?, adresseT = ? WHERE idT = ?";
-            pst = conn.prepareStatement(query);
+
+            // Vérifier si le CIN est déjà utilisé par un autre tuteur
+            String checkCINQuery = "SELECT idT FROM tuteurs WHERE cinT = ? AND idT != ?";
+            try (PreparedStatement checkCINStmt = conn.prepareStatement(checkCINQuery)) {
+                checkCINStmt.setString(1, t.getCinT());
+                checkCINStmt.setInt(2, t.getIdT());
+
+                rs = checkCINStmt.executeQuery();
+                if (rs.next()) {
+                    throw new SQLException("Le CIN " + t.getCinT() + " est déjà utilisé par un autre tuteur !");
+                }
+            }
+
+            // Vérifier si le numéro de téléphone est déjà utilisé par un autre tuteur
+            String checkTelQuery = "SELECT idT FROM tuteurs WHERE telephoneT = ? AND idT != ?";
+            try (PreparedStatement checkTelStmt = conn.prepareStatement(checkTelQuery)) {
+                checkTelStmt.setString(1, t.getTelephoneT());
+                checkTelStmt.setInt(2, t.getIdT());
+
+                rs = checkTelStmt.executeQuery();
+                if (rs.next()) {
+                    throw new SQLException("Le numéro de téléphone " + t.getTelephoneT() + " est déjà utilisé par un autre tuteur !");
+                }
+            }
+
+            // Mise à jour du tuteur
+            String updateQuery = "UPDATE tuteurs SET cinT = ?, nomT = ?, prenomT = ?, telephoneT = ?, adresseT = ? WHERE idT = ?";
+            pst = conn.prepareStatement(updateQuery);
             pst.setString(1, t.getCinT());
             pst.setString(2, t.getNomT());
             pst.setString(3, t.getPrenomT());
@@ -97,16 +131,20 @@ public class ServiceTuteur implements ITuteurService {
             if (rowsAffected > 0) {
                 System.out.println("Tuteur mis à jour avec succès.");
             } else {
-                System.out.println("La mise à jour du tuteur a échoué. ID introuvable.");
+                throw new SQLException("La mise à jour a échoué. ID introuvable.");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Erreur lors de la mise à jour du tuteur.");
+            throw new SQLException("Erreur lors de la mise à jour du tuteur : " + e.getMessage());
         } finally {
+            if (rs != null) rs.close();
             if (pst != null) pst.close();
             if (conn != null) conn.close();
         }
     }
+
+
 
     @Override
     public void delete(int id) throws SQLException {
@@ -259,6 +297,43 @@ public class ServiceTuteur implements ITuteurService {
 
         return tuteurs;
     }
+
+    public List<Integer> getAllTuteurIds() throws SQLException {
+        List<Integer> tuteurIds = new ArrayList<>();
+        String query = "SELECT idT FROM tuteurs";
+        ResultSet rs = databaseconnection.getConnection().createStatement().executeQuery(query);
+
+        while (rs.next()) {
+            tuteurIds.add(rs.getInt("idT"));
+        }
+        return tuteurIds;
+    }
+
+    public boolean cinExiste(String cin) throws SQLException {
+        String query = "SELECT COUNT(*) FROM tuteurs WHERE cinT = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, cin);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
+
+    public boolean telephoneExiste(String telephone) throws SQLException {
+        String query = "SELECT COUNT(*) FROM tuteurs WHERE telephoneT = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, telephone);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
+
+
 
 }
 

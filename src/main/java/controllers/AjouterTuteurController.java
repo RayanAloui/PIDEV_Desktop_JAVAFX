@@ -117,9 +117,11 @@ public class AjouterTuteurController {
             alert.showAndWait();
 
         } catch (SQLException e) {
-            errorAdresse.setText("Erreur lors de l'ajout du tuteur !");
-            errorAdresse.setStyle("-fx-text-fill: red;");
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur d'ajout");
+            alert.setHeaderText("Impossible d'ajouter le tuteur !");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherOrphelinController">
+
+    <children>
+        <Label layoutX="370.0" layoutY="68.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Liste des Orphelins" />
+
+        <TableView fx:id="tableOrphelins" layoutX="37.0" layoutY="121.0" prefHeight="408.0" prefWidth="825.0">
+            <columns>
+                <TableColumn fx:id="colNom" prefWidth="100" text="Nom" />
+                <TableColumn fx:id="colPrenom" prefWidth="120.80001831054688" text="Prénom" />
+                <TableColumn fx:id="colDateNaissance" prefWidth="148.79998779296875" text="Date Naissance" />
+                <TableColumn fx:id="colSexe" prefWidth="134.39999389648438" text="Sexe" />
+                <TableColumn fx:id="colSituation" prefWidth="160.79998779296875" text="Situation Scolaire" />
+                <TableColumn fx:id="colTuteur" prefWidth="142.400146484375" text="Tuteur" />
+            </columns>
+        </TableView>
+      <Button layoutX="37.0" layoutY="601.0" mnemonicParsing="false" onAction="#ajouterOrphelin" text="Ajouter Orphelin" />
+      <Button layoutX="743.0" layoutY="601.0" mnemonicParsing="false" onAction="#afficherTut" text="Afficher Tuteurs" />
+      <Button layoutX="494.0" layoutY="601.0" mnemonicParsing="false" onAction="#updateO" text="Mettre à jour" />
+      <Button layoutX="256.0" layoutY="601.0" mnemonicParsing="false" onAction="#deleteO" text="Supprimer" />
+    </children>
+</AnchorPane>
