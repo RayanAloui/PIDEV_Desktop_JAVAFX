@@ -7,32 +7,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visites.controllers.AfficherVisite">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visites.controllers.AfficherVisite">
     <children>
-        <TableView fx:id="TableView" layoutY="57.0" prefHeight="306.0" prefWidth="610.0">
+        <TableView fx:id="TableView" layoutX="14.0" layoutY="70.0" prefHeight="542.0" prefWidth="882.0">
             <columns>
-                <TableColumn fx:id="date" prefWidth="138.40003049373627" text="Date" />
-                <TableColumn fx:id="heure" prefWidth="153.5999755859375" text="Heure" />
-                <TableColumn fx:id="motif" prefWidth="155.20001220703125" text="Motif" />
-                <TableColumn fx:id="statut" prefWidth="162.40005493164062" text="Statut" />
+                <TableColumn fx:id="date" prefWidth="221.60000038146973" text="Date" />
+                <TableColumn fx:id="heure" prefWidth="220.0" text="Heure" />
+                <TableColumn fx:id="motif" prefWidth="226.40005493164062" text="Motif" />
+                <TableColumn fx:id="statut" prefWidth="214.39996337890625" text="Statut" />
             </columns>
         </TableView>
-        <Label layoutX="204.0" layoutY="14.0" text="Afficher les visites">
+        <Label layoutX="390.0" layoutY="14.0" text="Afficher les visites">
             <font>
                 <Font size="22.0" />
             </font>
         </Label>
-        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajout" text="Ajouter une visite" />
-        <Button layoutX="450.0" layoutY="363.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="32.0" prefWidth="155.0" text="Supprimer la visite" textFill="RED">
+        <Button layoutX="1.0" layoutY="4.0" mnemonicParsing="false" onAction="#ajout" text="Ajouter une visite" />
+        <Button layoutX="738.0" layoutY="654.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="32.0" prefWidth="155.0" text="Supprimer la visite" textFill="RED">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="4.0" layoutY="363.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="133.0" text="Modifier la visite" textFill="#1eff00">
+        <Button layoutX="1.0" layoutY="654.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="133.0" text="Modifier la visite" textFill="#1eff00">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="482.0" layoutY="17.0" mnemonicParsing="false" onAction="#visiteurs" text="Afficher les visiteurs" />
+        <Button layoutX="771.0" layoutY="4.0" mnemonicParsing="false" onAction="#visiteurs" text="Afficher les visiteurs" />
     </children>
 </AnchorPane>
