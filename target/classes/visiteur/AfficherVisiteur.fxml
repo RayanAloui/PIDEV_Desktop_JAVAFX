@@ -23,17 +23,17 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajout" text="Ajouter un visiteur" />
-      <Button layoutX="766.0" layoutY="631.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="32.0" prefWidth="155.0" text="Supprimer l'utilisateur" textFill="RED">
+      <Button layoutX="134.0" layoutY="129.0" mnemonicParsing="false" onAction="#ajout" text="Ajouter un visiteur" />
+      <Button layoutX="635.0" layoutY="521.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="32.0" prefWidth="155.0" text="Supprimer l'utilisateur" textFill="RED">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="631.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="133.0" text="Modifier l'utilisateur" textFill="#1eff00">
+      <Button layoutX="134.0" layoutY="521.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="133.0" text="Modifier l'utilisateur" textFill="#1eff00">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="755.0" layoutY="14.0" mnemonicParsing="false" onAction="#visites" text="Afficher les visites" />
+      <Button layoutX="635.0" layoutY="137.0" mnemonicParsing="false" onAction="#visites" text="Afficher les visites" />
    </children>
 </AnchorPane>

@@ -30,7 +30,7 @@ public class INTEGRATION {
 
     @FXML
     private void GotoDonPage() {
-        loadPage("/AfficherDon.fxml");
+        loadPage("/AfficherDonateur.fxml");
     }
 
     @FXML
