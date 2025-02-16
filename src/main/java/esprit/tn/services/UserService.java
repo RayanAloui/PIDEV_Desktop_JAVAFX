@@ -5,6 +5,7 @@ import esprit.tn.main.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserService implements Iservice<User> {
@@ -80,11 +81,21 @@ public class UserService implements Iservice<User> {
             throw new RuntimeException(e);
         }
     }
-
     @Override
-    public List<User> getall() {
+    public List<User> getall(String filter) {
         List<User> users = new ArrayList<>();
-        String req = "SELECT * FROM user";
+        String req;
+
+        // List of valid roles
+        List<String> roles = Arrays.asList("admin", "client", "visiteur", "tuteur", "donateur");
+
+        if (filter == null) {
+            req = "SELECT * FROM user";
+        } else if (roles.contains(filter)) {
+            req = "SELECT * FROM user WHERE role = '" + filter + "'";
+        } else {
+            req = "SELECT * FROM user WHERE name = '" + filter + "' OR email = '" + filter + "' OR surname = '" + filter + "'";
+        }
 
         try {
             Statement stm = cnx.createStatement();
@@ -112,6 +123,7 @@ public class UserService implements Iservice<User> {
 
         return users;
     }
+
 
     @Override
     public User getone(int id) {

@@ -10,7 +10,7 @@ public class Main {
         DatabaseConnection.getInstance();
         UserService userService = new UserService();
         System.out.println("************************************************************* ");
-        for (User u : userService.getall()) {
+        for (User u : userService.getall(null)) {
             System.out.println(u);
         }
 

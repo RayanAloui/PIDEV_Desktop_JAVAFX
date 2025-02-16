@@ -9,7 +9,7 @@ public interface Iservice <T>{
 
     public void supprimer(int id);
 
-    public List<T> getall();
+    public List<T> getall( String s);
 
     public T getone(int id);
 

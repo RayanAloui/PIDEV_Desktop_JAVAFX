@@ -1,10 +1,21 @@
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\addUserController.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\AfficherUserController.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\INTEGRATION.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\UpdateUserController.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\entities\User.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\main\DatabaseConnection.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\main\Main.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\main\MainFX.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\services\Iservice.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\services\UserService.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\addUserController.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\AfficherUserController.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\AfficherVisite.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\AfficherVisiteur.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\AjouterVisite.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\AjouterVisiteur.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\INTEGRATION.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\ModifierVisite.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\ModifierVisiteur.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\controllers\UpdateUserController.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\entities\User.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\entities\visites.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\entities\visiteurs.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\main\DatabaseConnection.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\main\Main.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\main\MainFX.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\services\Iservice.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\services\Iservices.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\services\UserService.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\services\VisitesService.java
+C:\Users\ADMIN\Desktop\jdbca23 - Copie\src\main\java\esprit\tn\services\VisiteursService.java

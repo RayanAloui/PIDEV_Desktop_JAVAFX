@@ -1,3 +1,14 @@
-esprit\tn\controllers\UpdateUserController.class
-esprit\tn\controllers\AfficherUserController.class
+esprit\tn\entities\visites.class
+esprit\tn\services\Iservices.class
+esprit\tn\controllers\AfficherVisiteur.class
+esprit\tn\controllers\ModifierVisite.class
+esprit\tn\controllers\ModifierVisiteur.class
 esprit\tn\controllers\INTEGRATION.class
+esprit\tn\controllers\AjouterVisiteur.class
+esprit\tn\controllers\UpdateUserController.class
+esprit\tn\services\VisiteursService.class
+esprit\tn\entities\visiteurs.class
+esprit\tn\controllers\AfficherUserController.class
+esprit\tn\controllers\AjouterVisite.class
+esprit\tn\controllers\AfficherVisite.class
+esprit\tn\services\VisitesService.class

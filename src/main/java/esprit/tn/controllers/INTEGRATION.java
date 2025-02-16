@@ -35,7 +35,7 @@ public class INTEGRATION {
 
     @FXML
     private void GotoVisitPage() {
-        loadPage("/AfficherVisit.fxml");
+        loadPage("/visiteur/AfficherVisiteur.fxml");
     }
 
     @FXML
