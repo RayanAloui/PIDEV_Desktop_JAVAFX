@@ -1,29 +1,30 @@
 package reclamations.main;
 
-import reclamations.entities.reclamations;
-import reclamations.entities.reponses;
-import reclamations.services.reclamationsService;
-import reclamations.services.reponsesService;
+
+import reclamations.entities.Reclamation;
+import reclamations.entities.Reponse;
+import reclamations.services.ReclamationService;
+import reclamations.services.ReponseService;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        //  Initialisation correcte des services
-        reclamationsService reclamationsService = reclamationsService.getInstance();  // Corrected
-        reponsesService reponsesService = reponsesService.getInstance();
+        // Corrected initialization of services
+        ReclamationService reclamationService = ReclamationService.getInstance();
+        ReponseService reponseService = ReponseService.getInstance();
 
         // Ajouter une réclamation
-        reclamations reclamation = new reclamations(
+        Reclamation reclamation = new Reclamation(
                 "user@example.com",
                 "Issue with product delivery",
                 Date.valueOf(LocalDate.now()),
                 "Pending"
         );
-        reclamationsService.ajouter(reclamation);
+        reclamationService.ajouter(reclamation);
 
-        //  Vérifier si l'ID de la réclamation a bien été généré
+        // Vérifier si l'ID de la réclamation a bien été généré
         int reclamationId = reclamation.getId();
         if (reclamationId == 0) {
             System.err.println("Erreur : Impossible de récupérer l'ID de la réclamation.");
@@ -31,24 +32,24 @@ public class Main {
         }
         System.out.println("Réclamation ajoutée avec ID: " + reclamationId);
 
-        //  Ajouter une réponse
-        reponses reponse = new reponses(
+        // Ajouter une réponse
+        Reponse reponse = new Reponse(
                 "We are looking into your issue.",
                 Date.valueOf(LocalDate.now()),
                 "Pending"
         );
 
-        // ⚠ Ajouter l'ID de la réclamation à la réponse (si `setId_reclamation` existe)
+        // ⚠ Ajouter l'ID de la réclamation à la réponse (si setId_reclamation existe)
         // reponse.setId_reclamation(reclamationId);
 
-        reponsesService.ajouter(reponse);
+        reponseService.ajouter(reponse);
 
-        //  Afficher toutes les réclamations
+        // Afficher toutes les réclamations
         System.out.println("\nToutes les réclamations :");
-        reclamationsService.getall().forEach(System.out::println);
+        reclamationService.getall().forEach(System.out::println);
 
         // Afficher toutes les réponses
         System.out.println("\nToutes les réponses :");
-        reponsesService.getall().forEach(System.out::println);
+        reponseService.getall().forEach(System.out::println);
     }
 }

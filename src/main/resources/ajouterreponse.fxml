@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.AddReponseController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" stylesheets="@../../../../../Downloads/PIDEV_Desktop_JAVAFX-user/PIDEV_Desktop_JAVAFX-user/src/main/resources/styles.css">
+         <children>
+            <VBox id="date" layoutX="303.0" layoutY="110.0" spacing="10" styleClass="vbox" stylesheets="@../../../../../Downloads/PIDEV_Desktop_JAVAFX-user/PIDEV_Desktop_JAVAFX-user/src/main/resources/styles.css">
+               <children>
+                  <Label styleClass="title" text="reponse" />
+                  <TextArea id="description" prefHeight="200.0" prefWidth="200.0" promptText="description" />
+                  <Label id="descreptionError" fx:id="descriptionError" styleClass="error" text="descreption is required" visible="false" />
+                  <DatePicker />
+                  <Label id="dateError" fx:id="dateError" styleClass="error" text="date is required" visible="false" />
+                  <Label styleClass="label" text="statut:" />
+                  <ChoiceBox id="statut" fx:id="statut" styleClass="choice-box">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="traitee" />
+                           <String fx:value="non traitee" />
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label id="statutError" fx:id="statutError" styleClass="error" text="statut is required" visible="false" />
+               </children>
+            </VBox>
+            <Button layoutX="10.0" layoutY="10.0" onAction="#goToAfficherReponses" styleClass="button" text="Back" />
+            <Button layoutX="754.0" layoutY="14.0" onAction="#addReponse" prefWidth="225.0" styleClass="button" text="Add reponse " />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
