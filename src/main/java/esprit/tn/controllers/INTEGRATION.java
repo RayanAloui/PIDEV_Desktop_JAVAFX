@@ -40,7 +40,7 @@ public class INTEGRATION {
 
     @FXML
     private void GotoReclamationPage() {
-        loadPage("/AfficherReclamation.fxml");
+        loadPage("/afficherreclamtions.fxml");
     }
 
     @FXML

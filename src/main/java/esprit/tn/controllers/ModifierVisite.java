@@ -41,11 +41,16 @@ public class ModifierVisite {
     // Méthode pour initialiser les champs avec les données de la visite
     public void setVisite(visites visite) {
         this.visite = visite;
+        String XX = String.valueOf(visite.getId_visiteur());
+
         date.setValue(visite.getDate()); // Initialisation de la date
         date1.setText(String.valueOf(visite.getHeure().getHour())); // Heure
         date2.setText(String.valueOf(visite.getHeure().getMinute())); // Minute
         motif.setText(visite.getMotif());
         statut.setText(visite.getStatut());
+        visiteur.setText(XX);
+
+
     }
 
     @FXML
