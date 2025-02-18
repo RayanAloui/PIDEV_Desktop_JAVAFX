@@ -38,8 +38,8 @@
         <Label fx:id="errorSituationScolaire" layoutX="333.0" layoutY="405.0" textFill="red" />
 
 
-        <Label layoutX="364.0" layoutY="430.0" text="Tuteur:" />
-        <ComboBox fx:id="tuteurComboBox" layoutX="424.0" layoutY="425.0" />
+        <Label layoutX="274.0" layoutY="440.0" text="Tuteur:" />
+        <ComboBox fx:id="tuteurComboBox" layoutX="365.0" layoutY="436.0" prefHeight="23.0" prefWidth="170.0" />
         <Label fx:id="errorTuteur" layoutX="424.0" layoutY="460.0" textFill="red" />
 
         <Button layoutX="398.0" layoutY="500.0" onAction="#AjouterO" text="Ajouter" />

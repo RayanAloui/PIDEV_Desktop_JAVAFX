@@ -5,7 +5,10 @@ import entities.Tuteur;
 import java.sql.*;
 import java.util.ArrayList;
 import main.databaseconnection;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceTuteur implements ITuteurService {
 
@@ -277,7 +280,7 @@ public class ServiceTuteur implements ITuteurService {
         return tuteur;
     }
 
-    public List<Tuteur> getAllTuteurs() throws SQLException {
+    public List<Tuteur> getAllTuteurss() throws SQLException {
         List<Tuteur> tuteurs = new ArrayList<>();
         String query = "SELECT * FROM tuteurs";
         Statement statement = connection.createStatement();
@@ -297,6 +300,26 @@ public class ServiceTuteur implements ITuteurService {
 
         return tuteurs;
     }
+
+    public Map<Integer, String> getAllTuteurs() throws SQLException {
+        Map<Integer, String> tuteurs = new HashMap<>();
+        String query = "SELECT idT, nomT, prenomT FROM tuteurs"; // Récupération ID, Nom et Prénom
+
+        try (Connection conn = databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("idT");
+                String nomPrenom = rs.getString("nomT") + " " + rs.getString("prenomT");
+                tuteurs.put(id, nomPrenom);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du chargement des tuteurs : " + e.getMessage());
+            throw e;
+        }
+        return tuteurs;
+    }
+
 
     public List<Integer> getAllTuteurIds() throws SQLException {
         List<Integer> tuteurIds = new ArrayList<>();

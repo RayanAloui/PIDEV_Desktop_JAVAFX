@@ -257,7 +257,7 @@ public class ServiceOrphelin implements IOrphelinService {
         }
     }
 
-    public List<String> getTuteurs() throws SQLException {
+    /*public List<String> getTuteurs() throws SQLException {
         List<String> tuteurs = new ArrayList<>();
         String query = "SELECT idT FROM tuteurs";
 
@@ -272,7 +272,26 @@ public class ServiceOrphelin implements IOrphelinService {
             throw e;
         }
         return tuteurs;
+    }*/
+
+    public List<String> getTuteurs() throws SQLException {
+        List<String> tuteurs = new ArrayList<>();
+        String query = "SELECT nomT, prenomT FROM tuteurs"; // Récupère Nom et Prénom
+
+        try (Connection conn = databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String nomPrenom = rs.getString("nomT") + " " + rs.getString("prenomT"); // Concatenation Nom + Prénom
+                tuteurs.add(nomPrenom);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors du chargement des tuteurs : " + e.getMessage());
+            throw e;
+        }
+        return tuteurs;
     }
+
 
     public List<Orphelin> getAllOrphelins() throws SQLException {
         List<Orphelin> listeOrphelins = new ArrayList<>();

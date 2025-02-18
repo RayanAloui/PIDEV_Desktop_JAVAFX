@@ -59,7 +59,7 @@ public class AfficherTuteurController {
     }
 
     private void loadTuteurs() throws SQLException {
-        List<Tuteur> tuteurs = serviceTuteur.getAllTuteurs();
+        List<Tuteur> tuteurs = serviceTuteur.getAllTuteurss();
         ObservableList<Tuteur> observableList = FXCollections.observableArrayList(tuteurs);
 
         // Associer les colonnes aux attributs de l'entité Tuteur
