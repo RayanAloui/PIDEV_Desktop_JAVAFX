@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.ChangePWD">
+
+    <!-- Title -->
+    <Label layoutX="20" layoutY="20" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Change Password" />
+
+    <!-- Form -->
+    <VBox layoutX="20" layoutY="70" spacing="15">
+        <!-- Current Password -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Current Password:" />
+        <PasswordField fx:id="currentPasswordField" promptText="Enter current password" style="-fx-pref-width: 300px;" />
+
+        <!-- New Password -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="New Password:" />
+        <PasswordField fx:id="newPasswordField" promptText="Enter new password" style="-fx-pref-width: 300px;" />
+
+        <!-- Confirm New Password -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Confirm New Password:" />
+        <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" style="-fx-pref-width: 300px;" />
+    </VBox>
+
+    <!-- Buttons -->
+    <HBox alignment="CENTER" layoutX="47.0" layoutY="384.0" spacing="10">
+        <Button onAction="#updatePWD" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="update" />
+        <Button onAction="#handleCancelButtonClick" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Cancel" />
+    </HBox>
+
+</AnchorPane>

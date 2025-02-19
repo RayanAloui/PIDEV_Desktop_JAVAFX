@@ -275,3 +275,48 @@
     -fx-font-size: 12px;
     -fx-font-weight: normal;
 }
+
+/* Style for ComboBox */
+.combo-box {
+    -fx-pref-width: 250px;
+    -fx-pref-height: 35px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b877e;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* When ComboBox is focused */
+.combo-box:focused {
+    -fx-border-color: #5a4a42;
+}
+
+/* Style for the drop-down list */
+.combo-box .list-cell {
+    -fx-text-fill: #333333;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Style for selected item */
+.combo-box .list-cell:selected {
+    -fx-background-color: #9b877e;
+    -fx-text-fill: white;
+}
+
+/* Style for hovered item */
+.combo-box .list-cell:hover {
+    -fx-background-color: #d4c2b5;
+}
+
+/* Style for the arrow button */
+.combo-box .arrow-button {
+    -fx-background-color: #9b877e;
+    -fx-background-radius: 5px;
+}
+
+/* Change arrow icon color */
+.combo-box .arrow-button .arrow {
+    -fx-background-color: white;
+}

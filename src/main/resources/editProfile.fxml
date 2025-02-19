@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #f4f4f4; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.EditProfile">
+
+    <!-- Title -->
+    <Label layoutX="20" layoutY="20" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Edit Profile" />
+
+    <!-- Form -->
+    <VBox layoutX="20" layoutY="70" spacing="10">
+        <!-- Name -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Name:" />
+        <TextField fx:id="nameField" promptText="Enter your name" style="-fx-pref-width: 300px;" />
+
+        <!-- Surname -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Surname:" />
+        <TextField fx:id="surnameField" promptText="Enter your surname" style="-fx-pref-width: 300px;" />
+
+        <!-- Telephone -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Telephone:" />
+        <TextField fx:id="telephoneField" promptText="Enter your telephone" style="-fx-pref-width: 300px;" />
+
+        <!-- Email -->
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Email:" />
+        <TextField fx:id="emailField" editable="false" promptText="Enter your email" style="-fx-pref-width: 300px;" />
+    </VBox>
+
+    <!-- Buttons -->
+    <HBox spacing="10" layoutX="20" layoutY="550">
+        <Button onAction="#handleSaveButtonClick" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Save" />
+        <Button onAction="#handleCancelButtonClick" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Cancel" />
+    </HBox>
+
+    <!-- Change Password Link -->
+    <HBox layoutX="20" layoutY="600" spacing="10">
+        <Hyperlink style="-fx-font-size: 14px; -fx-text-fill: #0078D7;" text="Change Password" onAction="#handleChangePasswordLinkClick" />
+    </HBox>
+
+</AnchorPane>

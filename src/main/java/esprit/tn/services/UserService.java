@@ -5,6 +5,7 @@ import esprit.tn.main.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserService implements Iservice<User> {
@@ -80,11 +81,21 @@ public class UserService implements Iservice<User> {
             throw new RuntimeException(e);
         }
     }
-
     @Override
-    public List<User> getall() {
+    public List<User> getall(String filter) {
         List<User> users = new ArrayList<>();
-        String req = "SELECT * FROM user";
+        String req;
+
+        // List of valid roles
+        List<String> roles = Arrays.asList("admin", "client", "visiteur", "tuteur", "donateur");
+
+        if (filter == null) {
+            req = "SELECT * FROM user";
+        } else if (roles.contains(filter)) {
+            req = "SELECT * FROM user WHERE role = '" + filter + "'";
+        } else {
+            req = "SELECT * FROM user WHERE name = '" + filter + "' OR email = '" + filter + "' OR surname = '" + filter + "'";
+        }
 
         try {
             Statement stm = cnx.createStatement();
@@ -112,6 +123,7 @@ public class UserService implements Iservice<User> {
 
         return users;
     }
+
 
     @Override
     public User getone(int id) {
@@ -177,6 +189,49 @@ public class UserService implements Iservice<User> {
 
         return user;
     }
+
+    public boolean updatePassword(int userId, String newPassword) {
+        // Assuming you have a DatabaseConnection class to interact with the database
+        String query = "UPDATE user SET password = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getInstance().getCnx();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+            // Set the new password and user ID
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, userId);
+
+            // Execute the update query
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // If rows were affected, the update was successful
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // If an error occurs, return false
+        }
+    }
+
+
+    public boolean emailExists(String email) {
+        String query = "SELECT id FROM user WHERE email = ?"; // Fetching the ID instead of COUNT(*)
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(query)) { // Use cnx instead of creating a new connection
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("id"); // Retrieve the ID of the found user
+                return getone(userId) != null; // Check if the user exists using getone method
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log error properly in a real application
+        }
+        return false; // Return false if no user is found or an error occurs
+    }
+
+
 
 
 }

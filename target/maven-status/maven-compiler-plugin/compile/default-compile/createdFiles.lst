@@ -1,3 +1,10 @@
+esprit\tn\entities\Session.class
+esprit\tn\controllers\Register.class
+esprit\tn\controllers\INTEGRATION.class
+esprit\tn\controllers\Dashboard.class
+esprit\tn\controllers\ChangePWD.class
 esprit\tn\controllers\UpdateUserController.class
 esprit\tn\controllers\AfficherUserController.class
-esprit\tn\controllers\INTEGRATION.class
+esprit\tn\controllers\EditProfile.class
+esprit\tn\controllers\Login.class
+esprit\tn\controllers\Home.class

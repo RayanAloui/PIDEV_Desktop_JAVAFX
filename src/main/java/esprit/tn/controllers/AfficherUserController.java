@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -46,6 +47,10 @@ public class AfficherUserController {
     private TableColumn<User, Integer> columnNumberVerification;
     @FXML
     private TableColumn<User, String> columnToken;
+    @FXML
+    private ComboBox<String> comboBoxRole;
+
+
 
 
 
@@ -55,7 +60,8 @@ public class AfficherUserController {
     public void initialize() {
          UserService userService = new UserService();
 
-        ObservableList<User> users = FXCollections.observableArrayList(userService.getall());
+
+        ObservableList<User> users = FXCollections.observableArrayList(userService.getall(null));
         tableViewUsers.setItems(users);
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -67,6 +73,7 @@ public class AfficherUserController {
         columnIsConfirmed.setCellValueFactory(new PropertyValueFactory<>("isConfirmed"));
         columnNumberVerification.setCellValueFactory(new PropertyValueFactory<>("numberVerification"));
         columnToken.setCellValueFactory(new PropertyValueFactory<>("token"));
+
 
 
 
@@ -173,4 +180,16 @@ public class AfficherUserController {
         }
     }
 
+    @FXML
+    public void filterUsersByRole() {
+        String selectedRole = comboBoxRole.getValue();
+
+        if (selectedRole == null || selectedRole.isEmpty()) {
+            selectedRole = null;
+        }
+        UserService userService = new UserService();
+        List<User> users = userService.getall(selectedRole);
+        ObservableList<User> userList = FXCollections.observableArrayList(users);
+        tableViewUsers.setItems(userList);
+    }
 }

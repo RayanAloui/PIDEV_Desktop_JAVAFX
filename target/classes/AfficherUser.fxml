@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -30,5 +33,20 @@
         <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#DeleteUser" styleClass="button" text="DELETE" />
 
         <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdateUser" styleClass="button" text="UPDATE" />
+
+        <ComboBox fx:id="comboBoxRole" layoutX="613.0" layoutY="143.0" onAction="#filterUsersByRole" prefWidth="150.0" promptText="Role">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="" />
+                    <String fx:value="admin" />
+                    <String fx:value="client" />
+                    <String fx:value="visiteur" />
+                    <String fx:value="tuteur" />
+                    <String fx:value="donateur" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+      <Label layoutX="613.0" layoutY="125.0" text="ROLE :" />
+
     </children>
 </AnchorPane>

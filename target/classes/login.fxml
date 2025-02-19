@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Login">
+
+    <!-- Background Image -->
+    <children>
+        <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@login.jpg" />
+            </image>
+        </ImageView>
+
+        <!-- Centered VBox for Login Form -->
+        <VBox alignment="CENTER" layoutX="275.0" layoutY="150.0" prefWidth="350.0" spacing="15.0" style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-background-radius: 15; -fx-padding: 20;">
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Login" />
+            <TextField fx:id="email" promptText="Email" style="-fx-font-size: 14px; -fx-background-radius: 8;" />
+            <PasswordField fx:id="password" promptText="Password" style="-fx-font-size: 14px; -fx-background-radius: 8;" />
+
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+                <CheckBox fx:id="rememberMeCheckBox" text="Remember Me" />
+            </HBox>
+
+            <Button fx:id="loginButton" onAction="#login" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 8; -fx-padding: 8;" text="Login" />
+
+            <HBox alignment="CENTER" spacing="10.0">
+                <Hyperlink fx:id="signUpLink" onAction="#GoToRegister" style="-fx-font-size: 14px;" text="Sign Up" />
+                <Hyperlink fx:id="forgotPasswordLink" onAction="#GoToForgetPWD" style="-fx-font-size: 14px;" text="Forgot Password?" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>
