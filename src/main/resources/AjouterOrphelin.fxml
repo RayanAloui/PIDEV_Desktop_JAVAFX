@@ -34,12 +34,12 @@
 
 
         <Label layoutX="198.0" layoutY="380.0" text="Situation scolaire:" />
-        <TextField fx:id="situationScolaireField" layoutX="333.0" layoutY="370.0" />
+        <ComboBox fx:id="comboSituationScolaire" layoutX="359.0" layoutY="376.0" promptText="Sélectionner une situation" />
         <Label fx:id="errorSituationScolaire" layoutX="333.0" layoutY="405.0" textFill="red" />
 
 
         <Label layoutX="274.0" layoutY="440.0" text="Tuteur:" />
-        <ComboBox fx:id="tuteurComboBox" layoutX="365.0" layoutY="436.0" prefHeight="23.0" prefWidth="170.0" />
+        <ComboBox fx:id="tuteurComboBox" layoutX="358.0" layoutY="436.0" prefHeight="23.0" prefWidth="181.0" />
         <Label fx:id="errorTuteur" layoutX="424.0" layoutY="460.0" textFill="red" />
 
         <Button layoutX="398.0" layoutY="500.0" onAction="#AjouterO" text="Ajouter" />

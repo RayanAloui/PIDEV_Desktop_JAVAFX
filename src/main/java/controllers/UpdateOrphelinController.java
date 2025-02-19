@@ -30,7 +30,7 @@ public class UpdateOrphelinController {
     @FXML
     private ComboBox<String> comboSexe;
     @FXML
-    private TextField txtSituation;
+    private ComboBox<String> comboSituationScolaire;
     @FXML
     private ComboBox<String> comboTuteur;
     @FXML
@@ -59,6 +59,7 @@ public class UpdateOrphelinController {
     public void initialize() {
         // Initialisation du ComboBox Sexe
         comboSexe.getItems().addAll("M", "F");
+        comboSituationScolaire.getItems().addAll("Primaire", "Collège", "Lycée", "Université", "Aucune");
 
         try {
             // Charger les tuteurs dans un Map (Nom Prénom -> ID)
@@ -87,7 +88,7 @@ public class UpdateOrphelinController {
         txtPrenom.setText(orphelin.getPrenomO());
         txtDateNaissance.setValue(LocalDate.parse(orphelin.getDateNaissance()));
         comboSexe.setValue(orphelin.getSexe());
-        txtSituation.setText(orphelin.getSituationScolaire());
+        comboSituationScolaire.setValue(orphelin.getSituationScolaire());
 
         try {
             // Préparer les tuteurs
@@ -116,7 +117,7 @@ public class UpdateOrphelinController {
             orphelin.setPrenomO(txtPrenom.getText().trim());
             orphelin.setDateNaissance(txtDateNaissance.getValue().toString());
             orphelin.setSexe(comboSexe.getValue());
-            orphelin.setSituationScolaire(txtSituation.getText().trim());
+            orphelin.setSituationScolaire(comboSituationScolaire.getValue());
             orphelin.setIdTuteur(selectedTuteurId);
 
             serviceOrphelin.updateOrphelin(orphelin);
@@ -173,10 +174,6 @@ public class UpdateOrphelinController {
         }
         if (txtPrenom.getText().matches(".*\\d.*")) {
             errorPrenom.setText("Le prénom ne doit pas contenir de chiffres.");
-            valid = false;
-        }
-        if (txtSituation.getText().matches(".*\\d.*")) {
-            errorSituation.setText("La situation scolaire ne doit pas contenir de chiffres.");
             valid = false;
         }
 

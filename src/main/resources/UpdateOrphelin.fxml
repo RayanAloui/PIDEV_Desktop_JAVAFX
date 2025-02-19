@@ -2,16 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.DatePicker?>
 <AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateOrphelinController">
     <children>
 
-        <Label layoutX="346.0" layoutY="62.0" style="-fx-font-size:18px; -fx-font-weight:bold;"
-               text="Mise à jour de l'orphelin" />
+        <Label layoutX="346.0" layoutY="62.0" style="-fx-font-size:18px; -fx-font-weight:bold;" text="Mise à jour de l'orphelin" />
 
 
         <Label layoutX="269.0" layoutY="139.0" text="Nom :" />
@@ -19,14 +18,13 @@
         <Label fx:id="errorNom" layoutX="324.0" layoutY="160.0" textFill="red" />
 
 
-        <Label layoutX="245.0" layoutY="204.0" text="Prénom :"
-               prefHeight="16.0" prefWidth="64.0"/>
+        <Label layoutX="245.0" layoutY="204.0" prefHeight="16.0" prefWidth="64.0" text="Prénom :" />
         <TextField fx:id="txtPrenom" layoutX="324.0" layoutY="194.0" promptText="Entrez le prénom" />
         <Label fx:id="errorPrenom" layoutX="324.0" layoutY="224.0" textFill="red" />
 
 
         <Label layoutX="180.0" layoutY="272.0" text="Date de naissance :" />
-        <DatePicker fx:id="txtDateNaissance" layoutX="325.0" layoutY="262.0"/>
+        <DatePicker fx:id="txtDateNaissance" layoutX="325.0" layoutY="262.0" />
         <Label fx:id="errorDateNaissance" layoutX="325.0" layoutY="292.0" textFill="red" />
 
 
@@ -36,7 +34,7 @@
 
 
         <Label layoutX="187.0" layoutY="408.0" text="Situation scolaire :" />
-        <TextField fx:id="txtSituation" layoutX="325.0" layoutY="398.0" promptText="Ex: Primaire, Collège" />
+        <ComboBox fx:id="comboSituationScolaire" layoutX="350.0" layoutY="404.0" prefHeight="23.0" prefWidth="200.0" promptText="Sélectionner une situation" />
         <Label fx:id="errorSituation" layoutX="325.0" layoutY="428.0" textFill="red" />
 
 
@@ -45,7 +43,6 @@
         <Label fx:id="errorTuteur" layoutX="350.0" layoutY="496.0" textFill="red" />
 
 
-        <Button fx:id="btnEnregistrer" layoutX="390.0" layoutY="555.0"
-                onAction="#enregistrerModifications" text="Enregistrer" />
+        <Button fx:id="btnEnregistrer" layoutX="390.0" layoutY="555.0" onAction="#enregistrerModifications" text="Enregistrer" />
     </children>
 </AnchorPane>

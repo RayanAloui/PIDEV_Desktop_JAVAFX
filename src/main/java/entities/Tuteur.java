@@ -12,6 +12,12 @@ public class Tuteur {
 
     public Tuteur() {}
 
+    public Tuteur(int idT, String nomT, String prenomT) {
+        this.idT = idT;
+        this.nomT = nomT;
+        this.prenomT = prenomT;
+    }
+
     public Tuteur(int idT, String cinT, String nomT, String prenomT, String telephoneT, String adresseT) {
         this.idT = idT;
         this.cinT = cinT;

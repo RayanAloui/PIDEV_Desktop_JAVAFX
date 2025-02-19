@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Tuteur;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import entities.Orphelin;
 import javafx.stage.Stage;
 import services.ServiceOrphelin;
+import services.ServiceTuteur;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,6 +43,7 @@ public class AfficherOrphelinController {
     private TableColumn<Orphelin, String> colTuteur;
 
     private final ServiceOrphelin serviceOrphelin = new ServiceOrphelin();
+    private final ServiceTuteur serviceTuteur = new ServiceTuteur();
 
     @FXML
     public void initialize() {
@@ -61,10 +64,22 @@ public class AfficherOrphelinController {
         colDateNaissance.setCellValueFactory(new PropertyValueFactory<>("dateNaissance"));
         colSexe.setCellValueFactory(new PropertyValueFactory<>("sexe"));
         colSituation.setCellValueFactory(new PropertyValueFactory<>("situationScolaire"));
-        colTuteur.setCellValueFactory(new PropertyValueFactory<>("idTuteur"));
+
+        // Utilisation d'une CellValueFactory personnalisée pour récupérer nom/prénom du tuteur
+        colTuteur.setCellValueFactory(cellData -> {
+            int idTuteur = cellData.getValue().getIdTuteur();
+            try {
+                Tuteur tuteur = serviceTuteur.getTuteurByID(idTuteur);
+                return new SimpleStringProperty(tuteur.getNomT() + " " + tuteur.getPrenomT());
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return new SimpleStringProperty("Inconnu");
+            }
+        });
 
         tableOrphelins.setItems(observableList);
     }
+
 
     @FXML
     void ajouterOrphelin(ActionEvent event) {

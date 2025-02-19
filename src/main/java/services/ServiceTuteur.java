@@ -320,6 +320,31 @@ public class ServiceTuteur implements ITuteurService {
         return tuteurs;
     }
 
+    public List<Tuteur> getAllTuteursss() throws SQLException {
+        List<Tuteur> tuteurs = new ArrayList<>();
+        String query = "SELECT * FROM tuteurs";
+
+        try (Connection conn = databaseconnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                Tuteur tuteur = new Tuteur(
+                        rs.getInt("idT"),
+                        rs.getString("nomT"),
+                        rs.getString("prenomT")
+                );
+                tuteurs.add(tuteur);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des tuteurs : " + e.getMessage());
+            throw e;
+        }
+
+        return tuteurs;
+    }
+
+
 
     public List<Integer> getAllTuteurIds() throws SQLException {
         List<Integer> tuteurIds = new ArrayList<>();
@@ -356,7 +381,21 @@ public class ServiceTuteur implements ITuteurService {
         return false;
     }
 
+    public Tuteur getTuteurByID(int idTuteur) throws SQLException {
+        String query = "SELECT * FROM tuteurs WHERE idT = ?";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setInt(1, idTuteur);
+        ResultSet rs = stmt.executeQuery();
 
+        if (rs.next()) {
+            return new Tuteur(
+                    rs.getInt("idT"),
+                    rs.getString("nomT"),
+                    rs.getString("prenomT")
+            );
+        }
+        return new Tuteur(0, "Inconnu", "");
+    }
 
 }
 

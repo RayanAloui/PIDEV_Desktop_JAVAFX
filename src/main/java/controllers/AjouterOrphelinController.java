@@ -18,29 +18,47 @@ import services.ServiceTuteur;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class AjouterOrphelinController {
 
     @FXML
-    private TextField nomField, prenomField, situationScolaireField;
+    private TextField nomField, prenomField;
 
     @FXML
     private DatePicker dateNaissancePicker;
 
     @FXML
-    private ComboBox<String> sexeComboBox, tuteurComboBox;
+    private ComboBox<String> sexeComboBox, comboSituationScolaire ,tuteurComboBox;
 
     @FXML
     private Label errorNom, errorPrenom, errorDateNaissance, errorSexe, errorSituationScolaire, errorTuteur;
 
+
+    private Map<String, Integer> tuteursMap = new HashMap<>(); // Associe "Nom Prénom" à idTuteur
+
     private final ServiceOrphelin serviceOrphelin = new ServiceOrphelin(); // Service pour la gestion SQL
+    private final ServiceTuteur serviceTuteur = new ServiceTuteur();
 
     @FXML
     public void initialize() {
         // Initialisation des valeurs du ComboBox
         sexeComboBox.setItems(FXCollections.observableArrayList("M", "F"));
+        comboSituationScolaire.getItems().addAll("Primaire", "Collège", "Lycée", "Université", "Aucune");
+
+        try {
+            List<Tuteur> tuteurs = serviceTuteur.getAllTuteursss();
+            for (Tuteur t : tuteurs) {
+                String nomPrenom = t.getNomT() + " " + t.getPrenomT();
+                tuteurComboBox.getItems().add(nomPrenom);
+                tuteursMap.put(nomPrenom, t.getIdT());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // Charger les tuteurs depuis la base de données
         chargerTuteurs();
@@ -64,7 +82,7 @@ public class AjouterOrphelinController {
         String prenom = prenomField.getText().trim();
         LocalDate dateNaissance = dateNaissancePicker.getValue();
         String sexe = sexeComboBox.getValue();
-        String situationScolaire = situationScolaireField.getText().trim();
+        String situationScolaire = comboSituationScolaire.getValue();
         String tuteur = tuteurComboBox.getValue();
 
         boolean isValid = true;
@@ -94,26 +112,28 @@ public class AjouterOrphelinController {
             isValid = false;
         }
 
+        // Vérification de la date de naissance (ne doit pas être future)
+        if (dateNaissancePicker.getValue().isAfter(LocalDate.now())) {
+            errorDateNaissance.setText("La date de naissance ne peut pas être dans le futur.");
+            isValid = false;
+        }
+
         if (sexe == null || (!sexe.equalsIgnoreCase("M") && !sexe.equalsIgnoreCase("F"))) {
             errorSexe.setText("Le sexe doit être 'M' ou 'F'.");
             isValid = false;
         }
 
-        if (tuteur == null || !tuteur.matches("\\d+")) {
+        if (tuteur == null || !tuteursMap.containsKey(tuteur)) {
             errorTuteur.setText("Veuillez sélectionner un tuteur valide.");
             isValid = false;
-        } else {
-            int idTuteur = Integer.parseInt(tuteur);
-            if (idTuteur <= 0 || !tuteurExiste(idTuteur)) {
-                errorTuteur.setText("L'ID du tuteur doit être un entier positif existant.");
-                isValid = false;
-            }
         }
+
 
         if (!isValid) return; // Arrêter l'exécution si une erreur est présente
 
         // Création de l'objet Orphelin
-        Orphelin orphelin = new Orphelin(nom, prenom, dateNaissance.toString(), sexe, situationScolaire, Integer.parseInt(tuteur));
+        int idTuteur = tuteursMap.get(tuteur);
+        Orphelin orphelin = new Orphelin(nom, prenom, dateNaissance.toString(), sexe, situationScolaire, idTuteur);
 
         try {
             serviceOrphelin.ajouter(orphelin);
@@ -156,7 +176,7 @@ public class AjouterOrphelinController {
         prenomField.clear();
         dateNaissancePicker.setValue(null);
         sexeComboBox.setValue(null);
-        situationScolaireField.clear();
+        comboSituationScolaire.setValue(null);
         tuteurComboBox.setValue(null);
     }
 

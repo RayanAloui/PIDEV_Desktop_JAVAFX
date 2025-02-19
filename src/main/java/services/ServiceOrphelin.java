@@ -9,6 +9,12 @@ import main.databaseconnection;
 
 public class ServiceOrphelin implements IOrphelinService {
 
+    private Connection connection;
+
+    public ServiceOrphelin() {
+        connection = databaseconnection.getConnection();
+    }
+
     @Override
     public void ajouter(Orphelin orphelin) throws SQLException {
         if (!Pattern.matches("^[a-zA-ZÀ-ÿ\\s]+$", orphelin.getNomO())) {
