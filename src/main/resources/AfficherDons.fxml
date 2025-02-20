@@ -29,6 +29,12 @@
             <Button layoutX="22.0" layoutY="27.0" mnemonicParsing="false" onAction="#AjouterD" prefHeight="38.0" prefWidth="51.0" text="✚" />
             <Button layoutX="608.0" layoutY="626.0" mnemonicParsing="false" onAction="#ModifierD" prefHeight="38.0" prefWidth="74.0" text="Modifier" />
             <Button layoutX="771.0" layoutY="626.0" mnemonicParsing="false" onAction="#supprimerD" prefHeight="38.0" prefWidth="73.0" text="Supprimer" />
+            <Button layoutX="55.0" layoutY="633.0" mnemonicParsing="false" onAction="#pdf" prefHeight="38.0" prefWidth="74.0" text="PDF" />
+            <Button layoutX="776.0" layoutY="34.0" mnemonicParsing="false" onAction="#chart" prefHeight="38.0" prefWidth="62.0" text="📈" textFill="#3021d4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

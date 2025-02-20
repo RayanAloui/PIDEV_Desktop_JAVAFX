@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -32,6 +33,8 @@ public class AfficherDonateurController {
     private TableView<donateur> TableDonateur;
     private TableView<Dons> TableDons;
 
+    @FXML
+    private TextField chercherDonateur;
 
     @FXML
     private TableColumn<donateur, String> adresse;
@@ -60,6 +63,7 @@ public class AfficherDonateurController {
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         telephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+        rechercherDonateur();
 
     }
     @FXML
@@ -153,6 +157,31 @@ public class AfficherDonateurController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    void rechercherDonateur() {
+        DonateurService ds = new DonateurService();
+        ObservableList<donateur> allDonateurs = FXCollections.observableList(ds.getall());
+
+        // Filtrer les résultats selon la saisie de l'utilisateur
+        chercherDonateur.textProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<donateur> filteredList = FXCollections.observableArrayList();
+
+            if (newValue == null || newValue.trim().isEmpty()) {
+                filteredList.addAll(allDonateurs);
+            } else {
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                for (donateur d : allDonateurs) {
+                    if (d.getNom().toLowerCase().contains(lowerCaseFilter) || d.getPrenom().toLowerCase().contains(lowerCaseFilter)) {
+                        filteredList.add(d);
+                    }
+                }
+            }
+
+            TableDonateur.setItems(filteredList);
+        });
     }
 
 

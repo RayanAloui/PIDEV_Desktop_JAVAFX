@@ -1,11 +1,13 @@
 package Donateur.tn.services;
 
+import java.util.HashMap;
 import java.util.List;
 import Donateur.tn.entities.Dons;
 import Donateur.tn.main.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 //import static Donateur.tn.main.DatabaseConnection.instance;
 
@@ -186,5 +188,6 @@ public class DonsService implements Iservice<Dons> {
         System.out.println("Aucun don trouvé avec l'ID spécifié.");
         return null;
     }
+
 }
 

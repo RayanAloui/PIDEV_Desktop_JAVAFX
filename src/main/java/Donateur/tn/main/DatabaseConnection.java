@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
+    //instance : Une variable statique pour stocker l'instance unique de DatabaseConnection.
     private static DatabaseConnection instance;
     private Connection cnx;
     private final String url = "jdbc:mysql://localhost:3306/donateur";

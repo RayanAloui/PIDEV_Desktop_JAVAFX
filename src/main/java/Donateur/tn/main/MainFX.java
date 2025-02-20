@@ -19,6 +19,9 @@ public class MainFX extends Application {
 
     }
     public static void main(String[] args) {
+        //Cette méthode appelle automatiquement start(Stage PrimaryStage)
+        //et lance l'application JavaFX
+
         launch(args);
     }
 

@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../../../../../Downloads/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Donateur.tn.controllers.AfficherDonateurController">
    <children>
-      <TableView fx:id="TableDonateur" layoutX="55.0" layoutY="104.0" prefHeight="492.0" prefWidth="790.0" stylesheets="@../../../../../Downloads/styles.css">
+      <TableView fx:id="TableDonateur" layoutX="55.0" layoutY="122.0" prefHeight="492.0" prefWidth="790.0" stylesheets="@../../../../../Downloads/styles.css">
         <columns>
           <TableColumn fx:id="nom" prefWidth="143.20003509521484" text="Nom" />
             <TableColumn fx:id="prenom" prefWidth="156.0" text="Prenom" />
@@ -18,7 +19,7 @@
             <TableColumn fx:id="adresse" prefWidth="178.4000244140625" text="Adresse" />
         </columns>
       </TableView>
-      <Label layoutX="302.0" layoutY="39.0" text="TABLE DES DONATEURS" underline="true">
+      <Label layoutX="286.0" layoutY="7.0" text="TABLE DES DONATEURS" underline="true">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
@@ -31,5 +32,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <TextField fx:id="chercherDonateur" layoutX="148.0" layoutY="75.0" prefHeight="26.0" prefWidth="275.0" promptText="(nom/prenom)" />
+      <Label layoutX="148.0" layoutY="55.0" text="chercher Donateur :  ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

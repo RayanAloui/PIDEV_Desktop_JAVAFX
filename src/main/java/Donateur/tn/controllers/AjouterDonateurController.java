@@ -53,6 +53,7 @@ public class AjouterDonateurController {
             showAlert("Erreur de saisie", "Le champ 'Adresse' est obligatoire.");
             return;
         }
+        //Crée un objet donateur et lui attribue les valeurs saisies.
         try {
         donateur dt = new donateur();
         dt.setNom(nomD.getText());
@@ -60,7 +61,7 @@ public class AjouterDonateurController {
         dt.setEmail(emailD.getText());
         dt.setTelephone(Integer.parseInt(telD.getText()));
         dt.setAdresse(adresseD.getText());
-
+        //Ajoute le donateur dans la base de données via DonateurService
         DonateurService ds = new DonateurService();
         ds.ajouter(dt);
 

@@ -102,6 +102,15 @@ public class AjouterDonController {
             showError("Une erreur s'est produite : " + e.getMessage());
             e.printStackTrace();
         }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherDons.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) Donateur_id.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
