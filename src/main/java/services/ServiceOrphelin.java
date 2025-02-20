@@ -3,11 +3,17 @@ package services;
 import entities.Orphelin;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import entities.Tuteur;
 import main.databaseconnection;
 
 public class ServiceOrphelin implements IOrphelinService {
+
+    private final ServiceTuteur serviceTuteur = new ServiceTuteur();
 
     private Connection connection;
 
@@ -324,6 +330,27 @@ public class ServiceOrphelin implements IOrphelinService {
         }
         return listeOrphelins;
     }
+
+    public Map<Tuteur, Integer> getOrphelinsParTuteur() throws SQLException {
+        Map<Tuteur, Integer> stats = new HashMap<>();
+
+        String query = "SELECT idTuteur, COUNT(*) AS nombreOrphelins FROM orphelins GROUP BY idTuteur";
+        try (Connection connection = databaseconnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int idTuteur = resultSet.getInt("idTuteur");
+                int nombreOrphelins = resultSet.getInt("nombreOrphelins");
+
+                Tuteur tuteur = serviceTuteur.getTuteurByID(idTuteur); // Récupérer le tuteur
+                stats.put(tuteur, nombreOrphelins);
+            }
+        }
+
+        return stats;
+    }
+
 
 }
 

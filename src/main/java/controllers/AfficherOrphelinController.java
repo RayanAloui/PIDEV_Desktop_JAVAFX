@@ -7,22 +7,30 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import entities.Orphelin;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import services.ServiceOrphelin;
 import services.ServiceTuteur;
-
+import javafx.scene.control.TextField;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.geometry.Insets;
+import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class AfficherOrphelinController {
@@ -41,7 +49,12 @@ public class AfficherOrphelinController {
     private TableColumn<Orphelin, String> colSituation;
     @FXML
     private TableColumn<Orphelin, String> colTuteur;
+    @FXML
+    private TextField searchOrphelin;
+    @FXML
+    private PieChart orphelinsParTuteurChart;
 
+    private ObservableList<Orphelin> observableList = FXCollections.observableArrayList();
     private final ServiceOrphelin serviceOrphelin = new ServiceOrphelin();
     private final ServiceTuteur serviceTuteur = new ServiceTuteur();
 
@@ -49,6 +62,7 @@ public class AfficherOrphelinController {
     public void initialize() {
         try {
             loadOrphelins();
+            setupSearchFilter();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,7 +71,8 @@ public class AfficherOrphelinController {
     @FXML
     public void loadOrphelins() throws SQLException {
         List<Orphelin> orphelins = serviceOrphelin.getAllOrphelins();
-        ObservableList<Orphelin> observableList = FXCollections.observableArrayList(orphelins);
+        //ObservableList<Orphelin> observableList = FXCollections.observableArrayList(orphelins);
+        observableList.setAll(orphelins);
 
         colNom.setCellValueFactory(new PropertyValueFactory<>("nomO"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenomO"));
@@ -80,6 +95,168 @@ public class AfficherOrphelinController {
         tableOrphelins.setItems(observableList);
     }
 
+    @FXML
+    private void afficherStatistiques() {
+        Stage stage = new Stage();
+        stage.setTitle("Statistiques des Orphelins par Tuteur");
+
+        PieChart pieChart = new PieChart();
+
+        try {
+            ServiceOrphelin serviceOrphelin = new ServiceOrphelin();
+            Map<Tuteur, Integer> stats = serviceOrphelin.getOrphelinsParTuteur();
+
+            for (Map.Entry<Tuteur, Integer> entry : stats.entrySet()) {
+                String tuteurNom = entry.getKey().getNomT() + " " + entry.getKey().getPrenomT();
+                int nombreOrphelins = entry.getValue();
+                PieChart.Data slice = new PieChart.Data(tuteurNom + " (" + nombreOrphelins + ")", nombreOrphelins);
+                pieChart.getData().add(slice);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        VBox vbox = new VBox(pieChart);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10));
+
+        Scene scene = new Scene(vbox, 500, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void afficherBarChart() {
+        Stage stage = new Stage();
+        stage.setTitle("Statistiques des Orphelins par Tuteur - BarChart");
+
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Tuteur");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Nombre d'Orphelins");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Orphelins par Tuteur");
+
+        try {
+            ServiceOrphelin serviceOrphelin = new ServiceOrphelin();
+            Map<Tuteur, Integer> stats = serviceOrphelin.getOrphelinsParTuteur();
+
+            int colorIndex = 0;
+            String[] colors = {"#ff5733", "#33ff57", "#3357ff", "#ff33a1", "#ffff33", "#33ffff", "#ff9933"}; // Liste de couleurs
+
+            for (Map.Entry<Tuteur, Integer> entry : stats.entrySet()) {
+                String tuteurNom = entry.getKey().getNomT() + " " + entry.getKey().getPrenomT();
+                int nombreOrphelins = entry.getValue();
+
+                XYChart.Data<String, Number> data = new XYChart.Data<>(tuteurNom, nombreOrphelins);
+                series.getData().add(data);
+
+                // Appliquer une couleur unique pour chaque barre
+                String color = colors[colorIndex % colors.length]; // Sélectionner une couleur cyclique
+                data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+                    if (newNode != null) {
+                        newNode.setStyle("-fx-bar-fill: " + color + ";");
+                    }
+                });
+
+                colorIndex++; // Passer à la couleur suivante
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        barChart.getData().add(series);
+
+        VBox vbox = new VBox(barChart);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10));
+
+        Scene scene = new Scene(vbox, 600, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    @FXML
+    private void afficherLineChart() {
+        Stage stage = new Stage();
+        stage.setTitle("Statistiques des Orphelins par Tuteur - LineChart");
+
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Tuteur");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Nombre d'Orphelins");
+
+        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Orphelins par Tuteur");
+
+        try {
+            ServiceOrphelin serviceOrphelin = new ServiceOrphelin();
+            Map<Tuteur, Integer> stats = serviceOrphelin.getOrphelinsParTuteur();
+
+            for (Map.Entry<Tuteur, Integer> entry : stats.entrySet()) {
+                String tuteurNom = entry.getKey().getNomT() + " " + entry.getKey().getPrenomT();
+                int nombreOrphelins = entry.getValue();
+                series.getData().add(new XYChart.Data<>(tuteurNom, nombreOrphelins));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        lineChart.getData().add(series);
+
+        VBox vbox = new VBox(lineChart);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10));
+
+        Scene scene = new Scene(vbox, 600, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void setupSearchFilter() {
+        FilteredList<Orphelin> filteredList = new FilteredList<>(observableList, p -> true);
+
+        searchOrphelin.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(orphelin -> {
+                if (newValue == null || newValue.trim().isEmpty()) {
+                    return true; // Afficher tout si la recherche est vide
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Vérifier les champs correspondants
+                boolean matchNom = orphelin.getNomO().toLowerCase().contains(lowerCaseFilter);
+                boolean matchPrenom = orphelin.getPrenomO().toLowerCase().contains(lowerCaseFilter);
+                boolean matchDateNaissance = orphelin.getDateNaissance().toLowerCase().contains(lowerCaseFilter);
+
+                // Vérifier le tuteur
+                String nomPrenomTuteur = "Inconnu";
+                try {
+                    Tuteur tuteur = serviceTuteur.getTuteurByID(orphelin.getIdTuteur());
+                    if (tuteur != null) {
+                        nomPrenomTuteur = (tuteur.getNomT() + " " + tuteur.getPrenomT()).toLowerCase();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                boolean matchTuteur = nomPrenomTuteur.contains(lowerCaseFilter);
+
+                return matchNom || matchPrenom || matchDateNaissance || matchTuteur;
+            });
+        });
+
+        SortedList<Orphelin> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(tableOrphelins.comparatorProperty());
+
+        tableOrphelins.setItems(sortedList);
+    }
 
     @FXML
     void ajouterOrphelin(ActionEvent event) {
