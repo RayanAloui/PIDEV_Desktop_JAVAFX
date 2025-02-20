@@ -231,6 +231,64 @@ public class UserService implements Iservice<User> {
         return false; // Return false if no user is found or an error occurs
     }
 
+    public boolean telephoneExists(String phoneNumber) {
+        String query = "SELECT id FROM user WHERE telephone = ?"; // Fetching the ID based on the phone number
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(query)) { // Use existing connection (cnx)
+            pstmt.setString(1, phoneNumber); // Set the phone number to the query
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("id"); // Retrieve the ID of the found user
+                return getone(userId) != null; // Check if the user exists using the getone method
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log error properly in a real application
+        }
+        return false; // Return false if no user is found or an error occurs
+    }
+    public User telephoneExists1(String phoneNumber) {
+        String query = "SELECT id FROM user WHERE telephone = ?"; // Fetching the ID based on the phone number
+
+        try (PreparedStatement pstmt = cnx.prepareStatement(query)) { // Use existing connection (cnx)
+            pstmt.setString(1, phoneNumber); // Set the phone number to the query
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("id"); // Retrieve the ID of the found user
+
+                // Now fetch the full user details based on the user ID
+                String req = "SELECT * FROM user WHERE id=?";
+                try (PreparedStatement stm = cnx.prepareStatement(req)) {
+                    stm.setInt(1, userId);
+                    ResultSet resultSet = stm.executeQuery();
+
+                    if (resultSet.next()) {
+                        return new User(
+                                resultSet.getInt("id"),
+                                resultSet.getString("name"),
+                                resultSet.getString("surname"),
+                                resultSet.getString("telephone"),
+                                resultSet.getString("email"),
+                                resultSet.getString("password"),
+                                resultSet.getString("role"),
+                                resultSet.getInt("isBlocked"),
+                                resultSet.getInt("isConfirmed"),
+                                resultSet.getInt("numberVerification"),
+                                resultSet.getInt("token")
+                        );
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log error properly in a real application
+        }
+        return null; // Return null if no user is found or an error occurs
+    }
+
+
 
 
 

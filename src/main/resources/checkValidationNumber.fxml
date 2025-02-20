@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.CheckValidationNumber">
+
+    <!-- Second TextField for verification code -->
+    <TextField fx:id="verificationCodeField" layoutX="310.0" layoutY="324.0" prefWidth="200.0" promptText="Enter verification code" />
+
+    <!-- Button to trigger verification -->
+    <Button fx:id="verifyButton" layoutX="387.0" layoutY="384.0" onAction="#handleVerifyButton" text="Verify" />
+
+</AnchorPane>

@@ -54,6 +54,20 @@ public class Login {
 
     @FXML
     void GoToForgetPWD(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/forgetPWD.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load the users page");
+            alert.setContentText("An error occurred while trying to navigate back to the user list.");
+            alert.showAndWait();
+        }
 
     }
 
