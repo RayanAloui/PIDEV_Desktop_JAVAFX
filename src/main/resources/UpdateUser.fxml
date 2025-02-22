@@ -58,33 +58,17 @@
                   <ChoiceBox fx:id="role" styleClass="choice-box">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="Client" />
-                           <String fx:value="Tuteur" />
-                           <String fx:value="Donateur" />
-                           <String fx:value="Visiteur" />
+                           <String fx:value="client" />
+                           <String fx:value="tuteur" />
+                           <String fx:value="donateur" />
+                           <String fx:value="visiteur" />
                         </FXCollections>
                      </items>
                   </ChoiceBox>
                   <Label fx:id="roleError" styleClass="error" text="Role is required" visible="false" />
-
-                  <!-- Is Blocked -->
-                  <Label text="Is Blocked (0 or 1)" />
-                  <TextField fx:id="isBlocked" promptText="Enter 0 or 1" styleClass="text-field" />
                   <Label fx:id="isBlockedError" styleClass="error" text="Is Blocked must be 0 or 1" visible="false" />
-
-                  <!-- Is Confirmed -->
-                  <Label text="Is Confirmed (0 or 1)" />
-                  <TextField fx:id="isConfirmed" promptText="Enter 0 or 1" styleClass="text-field" />
                   <Label fx:id="isConfirmedError" styleClass="error" text="Is Confirmed must be 0 or 1" visible="false" />
-
-                  <!-- Number Verification -->
-                  <Label text="Number Verification" />
-                  <TextField fx:id="numberVerification" promptText="Enter Number Verification" styleClass="text-field" />
                   <Label fx:id="numberVerificationError" styleClass="error" text="Number Verification must be a number" visible="false" />
-
-                  <!-- Token -->
-                  <Label text="Token" />
-                  <TextField fx:id="token" promptText="Enter Token" styleClass="text-field" />
                   <Label fx:id="tokenError" styleClass="error" text="Token must be a number" visible="false" />
                </children>
             </VBox>

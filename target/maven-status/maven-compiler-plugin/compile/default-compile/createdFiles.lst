@@ -4,11 +4,11 @@ esprit\tn\controllers\Register.class
 esprit\tn\controllers\INTEGRATION.class
 esprit\tn\controllers\Dashboard.class
 esprit\tn\controllers\ChangePWD.class
+esprit\tn\controllers\AfficherUserController$1.class
 esprit\tn\controllers\UpdateUserController.class
 esprit\tn\entities\MailService.class
 esprit\tn\controllers\AfficherUserController.class
 esprit\tn\controllers\NewPassword.class
-esprit\tn\controllers\Test.class
 esprit\tn\controllers\CheckValidationNumber.class
 esprit\tn\controllers\EditProfile.class
 esprit\tn\controllers\ForgetPWD.class

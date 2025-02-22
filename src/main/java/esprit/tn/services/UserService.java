@@ -288,6 +288,31 @@ public class UserService implements Iservice<User> {
         return null; // Return null if no user is found or an error occurs
     }
 
+    public void BLOCK(int userId) {
+        String query = "UPDATE user SET isBlocked = 1 WHERE id = ?"; // Set isBlocked to 1 for blocking the user
+
+        try {
+            PreparedStatement stm = cnx.prepareStatement(query);
+            stm.setInt(1, userId);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error blocking user", e);
+        }
+    }
+
+    public void active(int userId) {
+        String query = "UPDATE user SET isBlocked = 0 WHERE id = ?"; // Set isBlocked to 0 for activating the user
+
+        try {
+            PreparedStatement stm = cnx.prepareStatement(query);
+            stm.setInt(1, userId);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error activating user", e);
+        }
+    }
+
+
 
 
 

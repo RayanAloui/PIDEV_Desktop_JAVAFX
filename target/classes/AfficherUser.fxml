@@ -11,30 +11,26 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AfficherUserController">
     <children>
-        <TableView fx:id="tableViewUsers" layoutX="54.0" layoutY="200.0" prefHeight="300.0" prefWidth="810.0" styleClass="table-view">
+        <TableView fx:id="tableViewUsers" layoutX="158.0" layoutY="327.0" prefHeight="300.0" prefWidth="555.0" styleClass="table-view">
             <columns>
-                <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
                 <TableColumn fx:id="columnName" prefWidth="80.0" text="Name" />
                 <TableColumn fx:id="columnSurname" prefWidth="100.0" text="Surname" />
                 <TableColumn fx:id="columnTelephone" prefWidth="100.0" text="Phone" />
                 <TableColumn fx:id="columnEmail" prefWidth="120.0" text="Email" />
                 <TableColumn fx:id="columnRole" prefWidth="80.0" text="Role" />
                 <TableColumn fx:id="columnIsBlocked" prefWidth="80.0" text="isBlocked" />
-                <TableColumn fx:id="columnIsConfirmed" prefWidth="100.0" text="isConfirmed" />
-                <TableColumn fx:id="columnNumberVerification" prefWidth="100.0" text="num verif" />
-                <TableColumn fx:id="columnToken" prefWidth="80.0" text="Token" />
             </columns>
         </TableView>
 
         <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Users Table" textAlignment="CENTER" />
 
-        <Button layoutX="64.0" layoutY="141.0" mnemonicParsing="false" onAction="#GoToAddUser" styleClass="button add-button" text="+" />
+        <Button layoutX="74.0" layoutY="245.0" mnemonicParsing="false" onAction="#GoToAddUser" styleClass="button add-button" text="+" />
 
-        <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#DeleteUser" styleClass="button" text="DELETE" />
+        <Button layoutX="316.0" layoutY="245.0" mnemonicParsing="false" onAction="#DeleteUser" styleClass="button" text="DELETE" />
 
-        <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdateUser" styleClass="button" text="UPDATE" />
+        <Button layoutX="195.0" layoutY="245.0" mnemonicParsing="false" onAction="#GoToUpdateUser" styleClass="button" text="UPDATE" />
 
-        <ComboBox fx:id="comboBoxRole" layoutX="613.0" layoutY="143.0" onAction="#filterUsersByRole" prefWidth="150.0" promptText="Role">
+        <ComboBox fx:id="comboBoxRole" layoutX="519.0" layoutY="247.0" onAction="#filterUsersByRole" prefWidth="209.0" promptText="Role">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="" />
@@ -46,7 +42,10 @@
                 </FXCollections>
             </items>
         </ComboBox>
-      <Label layoutX="613.0" layoutY="125.0" text="ROLE :" />
+      <Label layoutX="472.0" layoutY="259.0" text="ROLE :" />
+      <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#GoToDashboard" styleClass="button add-button" text="Back" />
+      <Button layoutX="732.0" layoutY="393.0" mnemonicParsing="false" onAction="#BlockUser" styleClass="button add-button" text="Blocker" />
+      <Button layoutX="732.0" layoutY="445.0" mnemonicParsing="false" onAction="#ActiverUser" styleClass="button add-button"  text="Activer" />
 
     </children>
 </AnchorPane>

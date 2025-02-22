@@ -7,30 +7,54 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.ChangePWD">
+<AnchorPane prefHeight="700.0" prefWidth="882.0" style="-fx-background-color: #faefe0; -fx-padding: 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.ChangePWD">
 
-    <!-- Title -->
-    <Label layoutX="20" layoutY="20" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Change Password" />
+    <!-- HEADER -->
+    <AnchorPane prefHeight="96.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
+        <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="20" spacing="20">
+            <!-- User Info (Left) -->
+            <VBox spacing="5" />
+        </HBox>
 
-    <!-- Form -->
-    <VBox layoutX="20" layoutY="70" spacing="15">
-        <!-- Current Password -->
-        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Current Password:" />
-        <PasswordField fx:id="currentPasswordField" promptText="Enter current password" style="-fx-pref-width: 300px;" />
+        
+    </AnchorPane>
 
-        <!-- New Password -->
-        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="New Password:" />
-        <PasswordField fx:id="newPasswordField" promptText="Enter new password" style="-fx-pref-width: 300px;" />
+    <!-- MAIN CONTENT AREA -->
+    <AnchorPane layoutY="96.0" prefHeight="540.0" prefWidth="900.0" style="-fx-padding: 20px; -fx-background-color: #faefe0;">
+        <!-- Title -->
+        <Label layoutX="20" layoutY="20" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #9b877e;" text="Change Password" />
 
-        <!-- Confirm New Password -->
-        <Label style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Confirm New Password:" />
-        <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" style="-fx-pref-width: 300px;" />
-    </VBox>
+        <!-- Form -->
+        <VBox layoutX="20" layoutY="70" spacing="15">
+            <!-- Current Password -->
+            <VBox spacing="5">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #9b877e;" text="Current Password:" />
+                <PasswordField fx:id="currentPasswordField" promptText="Enter current password" style="-fx-pref-width: 400px; -fx-font-size: 14px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-border-color: #9b877e; -fx-border-radius: 5px;" />
+            </VBox>
 
-    <!-- Buttons -->
-    <HBox alignment="CENTER" layoutX="47.0" layoutY="384.0" spacing="10">
-        <Button onAction="#updatePWD" style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="update" />
-        <Button onAction="#handleCancelButtonClick" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Cancel" />
-    </HBox>
+            <!-- New Password -->
+            <VBox spacing="5">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #9b877e;" text="New Password:" />
+                <PasswordField fx:id="newPasswordField" promptText="Enter new password" style="-fx-pref-width: 400px; -fx-font-size: 14px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-border-color: #9b877e; -fx-border-radius: 5px;" />
+            </VBox>
+
+            <!-- Confirm New Password -->
+            <VBox spacing="5">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #9b877e;" text="Confirm New Password:" />
+                <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" style="-fx-pref-width: 400px; -fx-font-size: 14px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-border-color: #9b877e; -fx-border-radius: 5px;" />
+            </VBox>
+        </VBox>
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" layoutX="20" layoutY="300" spacing="15">
+            <Button onAction="#updatePWD" style="-fx-background-color: #9b877e; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-cursor: hand;" text="Update" />
+            <Button onAction="#handleCancelButtonClick" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-border-radius: 5px; -fx-cursor: hand;" text="Cancel" />
+        </HBox>
+    </AnchorPane>
+
+    <!-- FOOTER -->
+    <AnchorPane layoutY="620" prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
+        <Label layoutX="20" layoutY="30" style="-fx-text-fill: #e6c49a; -fx-font-size: 14px;" text="© 2025 OrphenCare Center. All rights reserved." />
+    </AnchorPane>
 
 </AnchorPane>

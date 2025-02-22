@@ -62,17 +62,7 @@ public class UpdateUserController {
     @FXML
     private Label roleError;
 
-    @FXML
-    private Label isBlockedError;
 
-    @FXML
-    private Label isConfirmedError;
-
-    @FXML
-    private Label numberVerificationError;
-
-    @FXML
-    private Label tokenError;
 
     private User selectedUser;
 
@@ -86,10 +76,7 @@ public class UpdateUserController {
         email.setText(user.getEmail());
         password.setText(user.getPassword());
         role.setValue(user.getRole());
-        isBlocked.setText(String.valueOf(user.getIsBlocked()));
-        isConfirmed.setText(String.valueOf(user.getIsConfirmed()));
-        numberVerification.setText(String.valueOf(user.getNumberVerification()));
-        token.setText(String.valueOf(user.getToken()));
+
     }
 
     @FXML
@@ -120,10 +107,7 @@ public class UpdateUserController {
         emailError.setVisible(false);
         passwordError.setVisible(false);
         roleError.setVisible(false);
-        isBlockedError.setVisible(false);
-        isConfirmedError.setVisible(false);
-        numberVerificationError.setVisible(false);
-        tokenError.setVisible(false);
+
 
         boolean isValid = true;
 
@@ -163,40 +147,6 @@ public class UpdateUserController {
             isValid = false;
         }
 
-        // Validate Role
-        if (role.getValue() == null) {
-            roleError.setText("Role is required");
-            roleError.setVisible(true);
-            isValid = false;
-        }
-
-        // Validate Is Blocked
-        if (isBlocked.getText().trim().isEmpty() || !isBlocked.getText().trim().matches("[01]")) {
-            isBlockedError.setText("Is Blocked must be 0 or 1");
-            isBlockedError.setVisible(true);
-            isValid = false;
-        }
-
-        // Validate Is Confirmed
-        if (isConfirmed.getText().trim().isEmpty() || !isConfirmed.getText().trim().matches("[01]")) {
-            isConfirmedError.setText("Is Confirmed must be 0 or 1");
-            isConfirmedError.setVisible(true);
-            isValid = false;
-        }
-
-        // Validate Number Verification
-        if (numberVerification.getText().trim().isEmpty() || !numberVerification.getText().trim().matches("\\d+")) {
-            numberVerificationError.setText("Number Verification must be a number");
-            numberVerificationError.setVisible(true);
-            isValid = false;
-        }
-
-        // Validate Token
-        if (token.getText().trim().isEmpty() || !token.getText().trim().matches("\\d+")) {
-            tokenError.setText("Token must be a number");
-            tokenError.setVisible(true);
-            isValid = false;
-        }
 
         // If any validation fails, stop the update process
         if (!isValid) {
@@ -211,10 +161,7 @@ public class UpdateUserController {
             selectedUser.setEmail(email.getText());
             selectedUser.setPassword(password.getText());
             selectedUser.setRole(role.getValue());
-            selectedUser.setIsBlocked(Integer.parseInt(isBlocked.getText()));
-            selectedUser.setIsConfirmed(Integer.parseInt(isConfirmed.getText()));
-            selectedUser.setNumberVerification(Integer.parseInt(numberVerification.getText()));
-            selectedUser.setToken(Integer.parseInt(token.getText()));
+
 
             UserService userService = new UserService();
             userService.modifier(selectedUser, selectedUser.getId());
