@@ -295,7 +295,13 @@ public class Main {
         System.out.print("📄 Saisissez l'adresse : ");
         String adresse = scanner.nextLine();
 
-        Tuteur tuteur = new Tuteur(cin, nom, prenom, telephone, adresse);
+        System.out.print("📄 Saisissez la disponibilite : ");
+        String disponibilite = scanner.nextLine();
+
+        System.out.print("📄 Saisissez l'adresse : ");
+        String email = scanner.nextLine();
+
+        Tuteur tuteur = new Tuteur(cin, nom, prenom, telephone, adresse,disponibilite, email);
 
         try {
             serviceTuteur.ajouter(tuteur);
@@ -333,7 +339,8 @@ public class Main {
             System.out.println("🔹 Prénom : " + existingTuteur.getPrenomT());
             System.out.println("🔹 Téléphone : " + existingTuteur.getTelephoneT());
             System.out.println("🔹 Adresse : " + existingTuteur.getAdresseT());
-
+            System.out.println("🔹 Disponiblite : " + existingTuteur.getDisponibilite());
+            System.out.println("🔹 Email : " + existingTuteur.getEmail());
 
             System.out.print("📄 Nouveau CIN (laissez vide pour garder l'ancien) : ");
             String cin = scanner.nextLine();
@@ -355,8 +362,16 @@ public class Main {
             String adresse = scanner.nextLine();
             if (adresse.isEmpty()) adresse = existingTuteur.getAdresseT();
 
+            System.out.print("📄 Nouvelle disponibilite (laissez vide pour garder l'ancienne) : ");
+            String disponibilite = scanner.nextLine();
+            if (disponibilite.isEmpty()) disponibilite = existingTuteur.getDisponibilite();
+
+            System.out.print("📄 Nouveau email (laissez vide pour garder l'ancienne) : ");
+            String email = scanner.nextLine();
+            if (email.isEmpty()) adresse = existingTuteur.getEmail();
+
             // Créer un objet Tuteur avec les nouvelles valeurs
-            Tuteur tuteur = new Tuteur(id, cin, nom, prenom, telephone, adresse);
+            Tuteur tuteur = new Tuteur(id, cin, nom, prenom, telephone, adresse, disponibilite, email);
 
             // Mettre à jour le tuteur
             serviceTuteur.updateTuteur(tuteur);

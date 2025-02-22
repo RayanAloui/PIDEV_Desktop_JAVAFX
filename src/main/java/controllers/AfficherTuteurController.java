@@ -37,13 +37,23 @@ import java.util.List;
 import javafx.stage.FileChooser;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.sql.SQLException;
+import java.util.List;
+
 public class AfficherTuteurController {
 
     @FXML
     private TableView<Tuteur> tableTuteurs;
 
     @FXML
-    private TableColumn<Tuteur, String> colId;
+    private TableColumn<Tuteur, Integer> colId;
 
     @FXML
     private TableColumn<Tuteur, String> colCin;
@@ -61,6 +71,12 @@ public class AfficherTuteurController {
     private TableColumn<Tuteur, String> colAdresse;
 
     @FXML
+    private TableColumn<Tuteur, String> colDisponibilite;
+
+    @FXML
+    private TableColumn<Tuteur, String> colEmail;
+
+    @FXML
     private TextField searchTuteur;
 
     private ObservableList<Tuteur> tuteurList = FXCollections.observableArrayList();
@@ -76,12 +92,9 @@ public class AfficherTuteurController {
             e.printStackTrace();
         }
 
-        // Vérifier que searchField est bien initialisé
         if (searchTuteur != null) {
-            // Création d'une liste filtrée
             filteredTuteurs = new FilteredList<>(tuteurList, tuteur -> true);
 
-            // Ajout d'un listener pour la recherche
             searchTuteur.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredTuteurs.setPredicate(tuteur -> {
                     if (newValue == null || newValue.trim().isEmpty()) {
@@ -92,38 +105,34 @@ public class AfficherTuteurController {
                     return (tuteur.getCinT() != null && tuteur.getCinT().toLowerCase().contains(lowerCaseFilter)) ||
                             (tuteur.getNomT() != null && tuteur.getNomT().toLowerCase().contains(lowerCaseFilter)) ||
                             (tuteur.getPrenomT() != null && tuteur.getPrenomT().toLowerCase().contains(lowerCaseFilter)) ||
-                            (tuteur.getTelephoneT() != null && tuteur.getTelephoneT().toLowerCase().contains(lowerCaseFilter));
+                            (tuteur.getTelephoneT() != null && tuteur.getTelephoneT().toLowerCase().contains(lowerCaseFilter)) ||
+                            (tuteur.getEmail() != null && tuteur.getEmail().toLowerCase().contains(lowerCaseFilter)) ||
+                            (tuteur.getDisponibilite() != null && tuteur.getDisponibilite().toLowerCase().contains(lowerCaseFilter));
                 });
             });
 
-            // Utilisation de SortedList pour conserver le tri des colonnes
             SortedList<Tuteur> sortedTuteurs = new SortedList<>(filteredTuteurs);
             sortedTuteurs.comparatorProperty().bind(tableTuteurs.comparatorProperty());
 
-            // Mise à jour de la TableView avec les résultats filtrés
             tableTuteurs.setItems(sortedTuteurs);
-        } else {
-            System.out.println("Le champ de recherche (searchTuteur) n'est pas initialisé !");
         }
     }
 
     private void loadTuteurs() throws SQLException {
         List<Tuteur> tuteurs = serviceTuteur.getAllTuteurss();
         tuteurList.setAll(tuteurs);
-        //ObservableList<Tuteur> observableList = FXCollections.observableArrayList(tuteurs);
 
-        // Associer les colonnes aux attributs de l'entité Tuteur
         colId.setCellValueFactory(new PropertyValueFactory<>("idT"));
         colCin.setCellValueFactory(new PropertyValueFactory<>("cinT"));
         colNom.setCellValueFactory(new PropertyValueFactory<>("nomT"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenomT"));
         colTelephone.setCellValueFactory(new PropertyValueFactory<>("telephoneT"));
         colAdresse.setCellValueFactory(new PropertyValueFactory<>("adresseT"));
+        colDisponibilite.setCellValueFactory(new PropertyValueFactory<>("disponibilite"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // Remplir la table avec les données
         tableTuteurs.setItems(tuteurList);
     }
-
 
 
     @FXML
@@ -171,11 +180,9 @@ public class AfficherTuteurController {
 
     @FXML
     void deleteT(ActionEvent event) {
-        // Vérifier si un tuteur est sélectionné
         Tuteur selectedTuteur = tableTuteurs.getSelectionModel().getSelectedItem();
 
         if (selectedTuteur == null) {
-            // Afficher une alerte si aucun tuteur n'est sélectionné
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Aucune sélection");
             alert.setHeaderText(null);
@@ -184,23 +191,19 @@ public class AfficherTuteurController {
             return;
         }
 
-        // Boîte de dialogue de confirmation
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Confirmation de suppression");
         confirmation.setHeaderText(null);
         confirmation.setContentText("Êtes-vous sûr de vouloir supprimer ce tuteur ?");
 
-        // Attendre la réponse de l'utilisateur
         Optional<ButtonType> result = confirmation.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                // Supprimer le tuteur de la base de données
                 serviceTuteur.delete(selectedTuteur.getIdT());
 
-                // Supprimer le tuteur de la TableView
-                tableTuteurs.getItems().remove(selectedTuteur);
+                // Mise à jour instantanée de la TableView
+                tuteurList.remove(selectedTuteur);
 
-                // Afficher un message de succès
                 Alert success = new Alert(Alert.AlertType.INFORMATION);
                 success.setTitle("Suppression réussie");
                 success.setHeaderText(null);
@@ -257,49 +260,57 @@ public class AfficherTuteurController {
                 // Charger les tuteurs
                 List<Tuteur> tuteurs = serviceTuteur.getAllTuteurss();
 
-                // Positions pour le tableau
+                // Positions et dimensions pour le tableau
                 float startX = 50;
                 float startY = 720;
                 float rowHeight = 20;
                 float tableWidth = 500;
-                float colWidth = tableWidth / 5; // 5 colonnes
-                float marginBottom = 50; // Marge pour éviter de toucher le bas
+                float colWidth = tableWidth / 8; // 8 parts pour équilibrer
+                float emailColWidth = colWidth * 2; // L'email prend 2 parts
+                float marginBottom = 50;
                 float textY = startY - 15;
 
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 10);
                 float textX = startX + 5;
 
                 // Entêtes du tableau
-                String[] headers = {"CIN", "Nom", "Prénom", "Téléphone", "Adresse"};
-                for (String header : headers) {
+                String[] headers = {"CIN", "Nom", "Prénom", "Téléphone", "Adresse", "Disponibilité", "Email"};
+                float[] colWidths = {colWidth, colWidth, colWidth, colWidth, colWidth, colWidth, emailColWidth};
+
+                for (int i = 0; i < headers.length; i++) {
                     contentStream.beginText();
                     contentStream.newLineAtOffset(textX, textY);
-                    contentStream.showText(header);
+                    contentStream.showText(headers[i]);
                     contentStream.endText();
-                    textX += colWidth;
+                    textX += colWidths[i];
                 }
 
-                // Dessiner les lignes du tableau
+                // Dessiner les lignes horizontales du tableau
                 contentStream.setLineWidth(1f);
                 float yPosition = startY;
-                for (int i = 0; i <= tuteurs.size()+1; i++) {
+                for (int i = 0; i <= tuteurs.size() + 1; i++) {
                     contentStream.moveTo(startX, yPosition);
                     contentStream.lineTo(startX + tableWidth, yPosition);
                     contentStream.stroke();
                     yPosition -= rowHeight;
                 }
 
-                // Colonnes
+                // Colonnes (y compris la fermeture de la colonne email)
                 float xPosition = startX;
-                for (int i = 0; i <= headers.length; i++) {
+                for (float colW : colWidths) {
                     contentStream.moveTo(xPosition, startY);
                     contentStream.lineTo(xPosition, yPosition + rowHeight);
                     contentStream.stroke();
-                    xPosition += colWidth;
+                    xPosition += colW;
                 }
 
-                // Ajouter les données des tuteurs avec gestion de la pagination
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                // Assurer la fermeture de la dernière colonne
+                contentStream.moveTo(startX + tableWidth, startY);
+                contentStream.lineTo(startX + tableWidth, yPosition + rowHeight);
+                contentStream.stroke();
+
+                // Ajouter les données des tuteurs avec pagination
+                contentStream.setFont(PDType1Font.HELVETICA, 10);
                 textY -= rowHeight;
 
                 for (int i = 0; i < tuteurs.size(); i++) {
@@ -317,13 +328,13 @@ public class AfficherTuteurController {
 
                         // Redessiner les en-têtes
                         textX = startX + 5;
-                        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-                        for (String header : headers) {
+                        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 10);
+                        for (int j = 0; j < headers.length; j++) {
                             contentStream.beginText();
                             contentStream.newLineAtOffset(textX, textY);
-                            contentStream.showText(header);
+                            contentStream.showText(headers[j]);
                             contentStream.endText();
-                            textX += colWidth;
+                            textX += colWidths[j];
                         }
                         textY -= rowHeight;
                     }
@@ -334,15 +345,17 @@ public class AfficherTuteurController {
                             tuteur.getNomT(),
                             tuteur.getPrenomT(),
                             tuteur.getTelephoneT(),
-                            tuteur.getAdresseT()
+                            tuteur.getAdresseT(),
+                            tuteur.getDisponibilite(),
+                            tuteur.getEmail()
                     };
 
-                    for (String datum : data) {
+                    for (int j = 0; j < data.length; j++) {
                         contentStream.beginText();
                         contentStream.newLineAtOffset(textX, textY);
-                        contentStream.showText(datum);
+                        contentStream.showText(data[j]);
                         contentStream.endText();
-                        textX += colWidth;
+                        textX += colWidths[j];
                     }
                     textY -= rowHeight;
                 }
@@ -356,11 +369,6 @@ public class AfficherTuteurController {
             }
         }
     }
-
-
-
-
-
 
 }
 

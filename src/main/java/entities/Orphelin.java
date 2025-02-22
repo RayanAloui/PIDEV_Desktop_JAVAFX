@@ -11,6 +11,8 @@ public class Orphelin {
     private String sexe;
     private String situationScolaire;
     private int idTuteur;
+    private Tuteur tuteur;
+
 
     public Orphelin() {}
 
@@ -34,6 +36,15 @@ public class Orphelin {
     }
 
     // Getters et Setters
+    public Tuteur getTuteur() {
+        return tuteur;
+    }
+
+    public void setTuteur(Tuteur tuteur) {
+        this.tuteur = tuteur;
+    }
+
+
     public int getIdO() {
         return idO;
     }

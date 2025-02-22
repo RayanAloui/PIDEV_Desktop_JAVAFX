@@ -19,7 +19,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import entities.Orphelin;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import services.ServiceOrphelin;
 import services.ServiceTuteur;
 import javafx.scene.control.TextField;
@@ -27,6 +33,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.Insets;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -360,5 +367,136 @@ public class AfficherOrphelinController {
             }
         }
     }
+
+    @FXML
+    private void exporterOrphelinsEnPDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF", "*.pdf"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try (PDDocument document = new PDDocument()) {
+                PDPage page = new PDPage(PDRectangle.A4);
+                document.addPage(page);
+                PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+                // Titre
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                contentStream.beginText();
+                contentStream.setLeading(20f);
+                contentStream.newLineAtOffset(50, 750);
+                contentStream.showText("Liste des Orphelins");
+                contentStream.newLine();
+                contentStream.endText();
+
+                // Récupération des orphelins
+                List<Orphelin> orphelins = serviceOrphelin.getAllOrphelinsWithTuteur();
+
+                // Définition du tableau
+                float startX = 50;
+                float startY = 720;
+                float rowHeight = 25;
+                float tableWidth = 510;
+                float[] colWidths = {70, 70, 100, 40, 110, 100};
+                float marginBottom = 50;
+                float yPosition = startY;
+                float textY = startY - 15;
+                float textX;
+
+                // Dessin des en-têtes
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                String[] headers = {"Nom", "Prénom", "Date Naissance", "Sexe", "Situation Scolaire", "Tuteur"};
+                textX = startX + 5;
+
+                for (int i = 0; i < headers.length; i++) {
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(textX, textY);
+                    contentStream.showText(headers[i]);
+                    contentStream.endText();
+                    textX += colWidths[i];
+                }
+
+                // Dessin des lignes du tableau
+                contentStream.setLineWidth(1f);
+                for (int i = 0; i <= orphelins.size() + 1; i++) {
+                    contentStream.moveTo(startX, yPosition);
+                    contentStream.lineTo(startX + tableWidth, yPosition);
+                    contentStream.stroke();
+                    yPosition -= rowHeight;
+                }
+
+                // Dessin des colonnes + correction de la dernière colonne
+                float xPosition = startX;
+                for (float colWidth : colWidths) {
+                    contentStream.moveTo(xPosition, startY);
+                    contentStream.lineTo(xPosition, yPosition + rowHeight);
+                    contentStream.stroke();
+                    xPosition += colWidth;
+                }
+                // Ajout de la dernière ligne verticale pour fermer le tableau
+                contentStream.moveTo(startX + tableWidth, startY);
+                contentStream.lineTo(startX + tableWidth, yPosition + rowHeight);
+                contentStream.stroke();
+
+                // Ajout des données
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                textY -= rowHeight;
+
+                for (int i = 0; i < orphelins.size(); i++) {
+                    Orphelin orphelin = orphelins.get(i);
+
+                    // Vérification du saut de page
+                    if (textY < marginBottom) {
+                        contentStream.close();
+                        page = new PDPage(PDRectangle.A4);
+                        document.addPage(page);
+                        contentStream = new PDPageContentStream(document, page);
+
+                        textY = startY - 15;
+                        textX = startX + 5;
+
+                        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                        for (int j = 0; j < headers.length; j++) {
+                            contentStream.beginText();
+                            contentStream.newLineAtOffset(textX, textY);
+                            contentStream.showText(headers[j]);
+                            contentStream.endText();
+                            textX += colWidths[j];
+                        }
+                        textY -= rowHeight;
+                    }
+
+                    textX = startX + 5;
+                    String[] data = {
+                            orphelin.getNomO(),
+                            orphelin.getPrenomO(),
+                            orphelin.getDateNaissance(),
+                            orphelin.getSexe(),
+                            orphelin.getSituationScolaire(),
+                            orphelin.getTuteur().getNomT() + " " + orphelin.getTuteur().getPrenomT()
+                    };
+
+                    for (int j = 0; j < data.length; j++) {
+                        contentStream.beginText();
+                        contentStream.newLineAtOffset(textX, textY);
+                        contentStream.showText(data[j]);
+                        contentStream.endText();
+                        textX += colWidths[j];
+                    }
+                    textY -= rowHeight;
+                }
+
+                // Fermeture du contentStream
+                contentStream.close();
+                document.save(file);
+                System.out.println("PDF exporté avec succès !");
+            } catch (IOException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
 

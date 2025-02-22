@@ -351,6 +351,34 @@ public class ServiceOrphelin implements IOrphelinService {
         return stats;
     }
 
+    public List<Orphelin> getAllOrphelinsWithTuteur() throws SQLException {
+        List<Orphelin> orphelins = new ArrayList<>();
+        String query = "SELECT o.nomO, o.prenomO, o.dateNaissance, o.sexe, o.situationScolaire, t.nomT, t.prenomT " +
+                "FROM orphelins o " +
+                "JOIN tuteurs t ON o.idTuteur = t.idT";
+
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()) {
+            Tuteur tuteur = new Tuteur();
+            tuteur.setNomT(rs.getString("nomT"));
+            tuteur.setPrenomT(rs.getString("prenomT"));
+
+            Orphelin orphelin = new Orphelin();
+            orphelin.setNomO(rs.getString("nomO"));
+            orphelin.setPrenomO(rs.getString("prenomO"));
+            orphelin.setDateNaissance(rs.getString("dateNaissance"));
+            orphelin.setSexe(rs.getString("sexe"));
+            orphelin.setSituationScolaire(rs.getString("situationScolaire"));
+            orphelin.setTuteur(tuteur);
+
+            orphelins.add(orphelin);
+        }
+        return orphelins;
+    }
+
+
 
 }
 
