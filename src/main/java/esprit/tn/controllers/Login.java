@@ -1,6 +1,8 @@
 package esprit.tn.controllers;
 
+import esprit.tn.entities.Notification;
 import esprit.tn.entities.Session;
+import esprit.tn.services.NotificationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +13,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.prefs.Preferences;
 import  esprit.tn.entities.User;
+
+import java.sql.Date;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import esprit.tn.main.DatabaseConnection;
 
@@ -129,9 +134,34 @@ public class Login {
                         showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, Admin " + user.getName() + "!");
                         navigateToPage(event, "/dashboard.fxml");
                     } else {
-                        showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getName() + "!");
-                        navigateToPage(event, "/home.fxml");
+
+                        try {
+
+                            Notification notification = new Notification();
+
+                            notification.setUsername(user.getName());
+                            notification.setActivite("Logged in ");
+                            String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                            notification.setHeure(formattedTime);
+                            notification.setDate(Date.valueOf(LocalDate.now()));
+
+
+                            NotificationService notificationService = new NotificationService();
+                            notificationService.ajouter(notification);
+
+
+                            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getName() + "!");
+                            navigateToPage(event, "/home.fxml");
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            // You can show an alert here if needed, like a failure to insert notification
+                            showAlert(Alert.AlertType.ERROR, "Error", "Failed to record login activity.");
+                        }
+
                     }
+
+
 
                     // Save credentials if "Remember Me" is checked
                     if (rememberMeCheckBox.isSelected()) {

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0; -fx-padding: 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Dashboard">
+<AnchorPane prefHeight="702.0" prefWidth="886.0" style="-fx-background-color: #faefe0; -fx-padding: 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Dashboard">
 
     <!-- HEADER -->
     <AnchorPane prefHeight="96.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
@@ -38,61 +36,135 @@
                 <!-- Navigation Buttons -->
                 <Button style="-fx-background-color: #eccd09; -fx-text-fill: white; -fx-font-size: 14px;" text="Dashboard" />
                 <Button onAction="#GoToUsers" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Users" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
                 <Button prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Orphelin" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
                 <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Visit" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
-            <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Don" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
-            <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Activite" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
-            <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Reclamation" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Don" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Activite" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Reclamation" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </Button>
                 <Button onAction="#LogOut" prefWidth="100.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;" text="Logout" />
             </children>
         </VBox>
-      <TabPane layoutX="258.0" prefHeight="526.0" prefWidth="594.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Notification">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="463.0" prefWidth="596.0">
-                     <children>
-                        <TableView layoutX="36.0" layoutY="49.0" prefHeight="200.0" prefWidth="470.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="notification" />
-                            <TableColumn prefWidth="75.0" text="date" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Statistique">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <PieChart layoutX="58.0" layoutY="49.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+
+        <!-- Notification Table -->
+        <TableView fx:id="tableViewNotifications" layoutX="272.0" layoutY="61.0" prefHeight="242.0" prefWidth="579.0" style="-fx-border-color: #7e7e7e; -fx-border-width: 2px; -fx-background-color: linear-gradient(to bottom, #d6d6d6, #a6a6a6); -fx-background-radius: 8px; -fx-padding: 10px;">
+            <!-- Table Columns -->
+            <columns>
+                <TableColumn fx:id="columnDate" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Date" />
+                <TableColumn fx:id="columnHeure" prefWidth="100.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Time" />
+                <TableColumn fx:id="columnUsername" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Username" />
+                <TableColumn fx:id="columnActivite" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Activity" />
+            </columns>
+
+            <!-- Custom Styling for the Rows -->
+            <style>
+                .table-view {
+                -fx-background-color: linear-gradient(to bottom, #d6d6d6, #a6a6a6); /* Steel-like gradient */
+                -fx-border-color: #7e7e7e;
+                -fx-border-width: 2px;
+                -fx-background-radius: 8px;
+                -fx-effect: dropshadow(gaussian, #b2b2b2, 5, 0.5, 2, 2); /* Drop shadow effect for 3D look */
+                }
+
+                .table-view .table-row-cell {
+                -fx-border-color: #7e7e7e;
+                -fx-border-width: 0 0 1px 0;
+                -fx-background-color: #e1e1e1; /* Light steel effect */
+                -fx-padding: 5px 10px;
+                -fx-alignment: CENTER_LEFT;
+                -fx-background-radius: 4px; /* Rounded corners for rows */
+                -fx-transition: background-color 0.3s ease-in-out; /* Smooth transition for background color change */
+                }
+
+                .table-view .table-row-cell:hover {
+                -fx-background-color: #c8c8c8; /* Slightly darker on hover */
+                -fx-effect: dropshadow(gaussian, #888888, 5, 0.5, 2, 2); /* Hover shadow effect */
+                }
+
+                .table-view .table-row-cell:odd {
+                -fx-background-color: #f4f4f4; /* Lighter steel effect for odd rows */
+                }
+
+                .table-view .table-row-cell:even {
+                -fx-background-color: #e1e1e1; /* Lighter steel effect for even rows */
+                }
+
+                .table-view .column-header {
+                -fx-background-color: #7e7e7e;
+                -fx-text-fill: #ffffff;
+                -fx-font-weight: bold;
+                -fx-font-size: 16px;
+                -fx-padding: 5px 10px;
+                -fx-border-color: #5c5c5c;
+                -fx-alignment: CENTER;
+                -fx-background-radius: 4px 4px 0 0; /* Rounded top corners for header */
+                -fx-transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+                }
+
+                .table-view .column-header:hover {
+                -fx-background-color: #5c5c5c; /* Darker header color on hover */
+                }
+
+                .table-view .table-column-cell {
+                -fx-font-size: 14px;
+                -fx-font-weight: normal;
+                -fx-text-fill: #333333;
+                -fx-padding: 10px; /* Add some padding to the cells for a cleaner look */
+                }
+
+                .table-view .table-column-cell:focused {
+                -fx-background-color: #c8c8c8; /* Slight highlight when focused */
+                }
+
+                /* Add striped effect for alternating rows */
+                .table-view .table-row-cell:odd {
+                -fx-background-color: #f4f4f4; /* Lighter shade for odd rows */
+                }
+
+                .table-view .table-row-cell:even {
+                -fx-background-color: #e1e1e1; /* Slightly darker for even rows */
+                }
+
+                /* Optional: Add a shadow effect to rows for more depth */
+                .table-view .table-row-cell {
+                -fx-effect: dropshadow(gaussian, #888888, 5, 0.5, 2, 2);
+                }
+
+            </style>
+        </TableView>
+
+
+
+        <Label layoutX="272.0" layoutY="29.0" text="Notification :">
+         <font>
+            <Font name="Consolas" size="25.0" />
+         </font>
+      </Label>
     </AnchorPane>
-   
+
     <!-- FOOTER -->
     <AnchorPane layoutY="620" prefHeight="82.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
         <Label layoutX="20" layoutY="30" style="-fx-text-fill: #e6c49a; -fx-font-size: 14px;" text="© 2025 OrphenCare Center. All rights reserved." />

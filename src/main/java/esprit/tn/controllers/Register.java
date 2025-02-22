@@ -1,6 +1,8 @@
 package esprit.tn.controllers;
 
+import esprit.tn.entities.Notification;
 import esprit.tn.entities.User;
+import esprit.tn.services.NotificationService;
 import esprit.tn.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Register {
@@ -180,6 +186,18 @@ public class Register {
         alert.setTitle("User Added");
         alert.setHeaderText("User added successfully");
         alert.showAndWait();
+
+        Notification notification = new Notification();
+
+        notification.setUsername(user.getName());
+        notification.setActivite("signed in ");
+        String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+        notification.setHeure(formattedTime);
+        notification.setDate(Date.valueOf(LocalDate.now()));
+
+
+        NotificationService notificationService = new NotificationService();
+        notificationService.ajouter(notification);
 
 
         try {

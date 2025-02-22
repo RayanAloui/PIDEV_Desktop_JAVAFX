@@ -1,5 +1,8 @@
 package esprit.tn.controllers;
 
+import esprit.tn.entities.MailService;
+import esprit.tn.entities.Notification;
+import esprit.tn.services.NotificationService;
 import esprit.tn.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +19,12 @@ import esprit.tn.main.DatabaseConnection;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,6 +90,22 @@ public class EditProfile {
 
         UserService userService = new UserService();
         userService.modifier(currentUser, currentUser.getId());
+
+
+
+        //
+        Notification notification = new Notification();
+
+        notification.setUsername(currentUser.getName());
+        notification.setActivite("Edit Profile");
+        String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+        notification.setHeure(formattedTime);
+        notification.setDate(Date.valueOf(LocalDate.now()));
+
+
+        NotificationService notificationService = new NotificationService();
+        notificationService.ajouter(notification);
+        //
 
         showAlert(Alert.AlertType.INFORMATION, "Updated", "Your information has been updated successfully.");
     }
@@ -169,4 +192,19 @@ public class EditProfile {
             e.printStackTrace();
         }
     }
+
+
+    public void SendMail(ActionEvent actionEvent) throws IOException {
+
+
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

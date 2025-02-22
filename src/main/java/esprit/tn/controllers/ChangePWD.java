@@ -1,5 +1,7 @@
 package esprit.tn.controllers;
 
+import esprit.tn.entities.Notification;
+import esprit.tn.services.NotificationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,10 @@ import esprit.tn.entities.User;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
 
 public class ChangePWD {
@@ -84,6 +90,17 @@ public class ChangePWD {
             currentUser.setPassword(newPassword);  // Update the password field of the current user
 
             userService.modifier(currentUser, currentUser.getId());
+            Notification notification = new Notification();
+
+            notification.setUsername(currentUser.getName());
+            notification.setActivite("Changed password ");
+            String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+            notification.setHeure(formattedTime);
+            notification.setDate(Date.valueOf(LocalDate.now()));
+
+
+            NotificationService notificationService = new NotificationService();
+            notificationService.ajouter(notification);
 
             // Show success message
             showAlert(AlertType.INFORMATION, "Success", "Password updated successfully!");

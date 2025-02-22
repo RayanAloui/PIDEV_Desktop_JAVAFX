@@ -84,6 +84,7 @@
         <!-- Change Password Link -->
         <HBox layoutX="20" layoutY="500" spacing="10" />
          <Hyperlink layoutX="592.0" layoutY="206.0" onAction="#handleChangePasswordLinkClick" style="-fx-font-size: 14px; -fx-text-fill: #ec0000;" text="Change Password" />
+      <Button layoutX="424.0" layoutY="471.0" mnemonicParsing="false" onAction="#SendMail" text="Verifier" />
     </AnchorPane>
 
     <!-- FOOTER -->
