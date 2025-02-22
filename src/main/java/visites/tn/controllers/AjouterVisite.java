@@ -1,4 +1,4 @@
-package visites.controllers;
+package visites.tn.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import visites.entities.visites;
-import visites.services.VisitesService;
+import visites.tn.entities.visites;
+import visites.tn.services.VisitesService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -53,6 +53,11 @@ public class AjouterVisite {
                 throw new IllegalArgumentException("Tous les champs doivent être remplis !");
             }
 
+            // Vérification que la date n'est pas antérieure à aujourd'hui
+            if (dateVisite.isBefore(LocalDate.now())) {
+                throw new IllegalArgumentException("La date de visite ne peut pas être antérieure à aujourd'hui !");
+            }
+
             // Vérification que date1 et date2 sont des nombres valides
             if (!heures.matches("\\d{1,2}") || !minutes.matches("\\d{1,2}")) {
                 throw new IllegalArgumentException("L'heure et les minutes doivent être des nombres !");
@@ -88,8 +93,8 @@ public class AjouterVisite {
 
             // Création de l'objet Visite
             visites newVisite = new visites();
-            newVisite.setDate(dateVisite);  // Utilisation de LocalDate
-            newVisite.setHeure(heureFormat);  // Utilisation de LocalTime
+            newVisite.setDate(dateVisite);
+            newVisite.setHeure(heureFormat);
             newVisite.setMotif(motifText);
             newVisite.setStatut(statutText);
             newVisite.setId_visiteur(visiteurId);
@@ -118,6 +123,7 @@ public class AjouterVisite {
             sqlAlert.showAndWait();
         }
     }
+
 
     @FXML
     void retour(ActionEvent event) {

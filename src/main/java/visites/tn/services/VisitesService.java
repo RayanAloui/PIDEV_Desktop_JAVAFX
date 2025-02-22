@@ -1,10 +1,9 @@
-package visites.services;
+package visites.tn.services;
 
-import visites.entities.visites;
-import visites.main.DatabaseConnection;
+import visites.tn.entities.visites;
+import visites.tn.main.DatabaseConnection;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

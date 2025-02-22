@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visites.controllers.ModifierVisiteur">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visites.tn.controllers.ModifierVisiteur">
     <children>
         <Label layoutX="205.0" layoutY="40.0" text="Modifier un visiteur">
             <font>
@@ -28,6 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="218.0" text="Nom" textAlignment="RIGHT">
@@ -75,6 +76,12 @@
                 <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="tel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="adresse" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="cin" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="217.0" text="Cin" textAlignment="CENTER" GridPane.rowIndex="5">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
             </children>
         </GridPane>
         <Button layoutX="510.0" layoutY="360.0" mnemonicParsing="false" onAction="#ModifierV" prefHeight="32.0" prefWidth="82.0" text="Modifier" />

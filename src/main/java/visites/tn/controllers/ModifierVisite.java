@@ -1,4 +1,4 @@
-package visites.controllers;
+package visites.tn.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,8 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import visites.entities.visites;
-import visites.services.VisitesService;
+import visites.tn.entities.visites;
+import visites.tn.services.VisitesService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -59,9 +59,21 @@ public class ModifierVisite {
             String statutValue = statut.getText();
             String visiteurValue = visiteur.getText();
 
-            // Validation des données
-            if (dateValue == null || heure < 0 || heure > 23 || minute < 0 || minute > 59 || motifValue.isEmpty() || statutValue.isEmpty()) {
+            // Vérification que tous les champs sont remplis
+            if (dateValue == null || motifValue.isEmpty() || statutValue.isEmpty() || visiteurValue.isEmpty()) {
                 showError("Tous les champs doivent être remplis correctement.");
+                return;
+            }
+
+            // Vérification que la date n'est pas antérieure à aujourd'hui
+            if (dateValue.isBefore(LocalDate.now())) {
+                showError("La date de visite ne peut pas être antérieure à aujourd'hui !");
+                return;
+            }
+
+            // Vérification des plages horaires valides
+            if (heure < 0 || heure > 23 || minute < 0 || minute > 59) {
+                showError("L'heure doit être entre 0 et 23, et les minutes entre 0 et 59.");
                 return;
             }
 
@@ -93,6 +105,7 @@ public class ModifierVisite {
             showError(e.getMessage());
         }
     }
+
 
     @FXML
     void retour(ActionEvent event) {

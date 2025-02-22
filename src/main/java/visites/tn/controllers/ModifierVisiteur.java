@@ -1,4 +1,4 @@
-package visites.controllers;
+package visites.tn.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,11 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import visites.entities.visiteurs;
-import visites.services.VisiteursService;
+import visites.tn.entities.visiteurs;
+import visites.tn.services.VisiteursService;
 
 import java.io.IOException;
 
@@ -31,6 +30,9 @@ public class ModifierVisiteur {
     @FXML
     private TextField tel;
 
+    @FXML
+    private TextField cin; // 🔹 Correction ici (CIN doit être String)
+
     private visiteurs visiteur;
 
     // Méthode pour initialiser les champs avec les données du visiteur
@@ -41,6 +43,7 @@ public class ModifierVisiteur {
         email.setText(visiteur.getEmail());
         tel.setText(String.valueOf(visiteur.getTel()));
         adresse.setText(visiteur.getAdresse());
+        cin.setText(visiteur.getCin()); // 🔹 Correction ici (CIN est String)
     }
 
     @FXML
@@ -50,20 +53,33 @@ public class ModifierVisiteur {
             String nomValue = nom.getText();
             String prenomValue = prenom.getText();
             String emailValue = email.getText();
-            int telValue = Integer.parseInt(tel.getText());
+            String telValue = tel.getText();
+            String cinValue = cin.getText(); // 🔹 Correction ici (CIN est String)
             String adresseValue = adresse.getText();
 
             // Validation des données
-            if (nomValue.isEmpty() || prenomValue.isEmpty() || emailValue.isEmpty() || adresseValue.isEmpty() || telValue <= 0) {
-                showError("Tous les champs doivent être remplis correctement.");
+            if (nomValue.isEmpty() || prenomValue.isEmpty() || emailValue.isEmpty() ||
+                    adresseValue.isEmpty() || telValue.isEmpty() || cinValue.isEmpty()) {
+                showError("Tous les champs doivent être remplis.");
                 return;
             }
 
-            // Création du visiteur modifié
+            if (!cinValue.matches("\\d{8}")) {
+                showError("Le CIN doit contenir exactement 8 chiffres.");
+                return;
+            }
+
+            if (!telValue.matches("\\d{8}")) {
+                showError("Le numéro de téléphone doit contenir exactement 8 chiffres.");
+                return;
+            }
+
+            // Mise à jour des informations du visiteur
             visiteur.setNom(nomValue);
             visiteur.setPrenom(prenomValue);
             visiteur.setEmail(emailValue);
-            visiteur.setTel(telValue);
+            visiteur.setTel(Integer.parseInt(telValue));
+            visiteur.setCin(cinValue); // 🔹 Correction ici
             visiteur.setAdresse(adresseValue);
 
             // Mise à jour du visiteur dans la base de données
@@ -82,7 +98,6 @@ public class ModifierVisiteur {
         }
     }
 
-
     @FXML
     void retour(ActionEvent event) {
         try {
@@ -98,7 +113,7 @@ public class ModifierVisiteur {
 
     // Méthode pour afficher un message d'erreur
     private void showError(String message) {
-        Alert alert = new Alert(AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
         alert.setContentText(message);
@@ -107,7 +122,7 @@ public class ModifierVisiteur {
 
     // Méthode pour afficher un message d'information
     private void showInfo(String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Succès");
         alert.setHeaderText(null);
         alert.setContentText(message);

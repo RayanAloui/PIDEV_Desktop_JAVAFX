@@ -1,4 +1,4 @@
-package visites.entities;
+package visites.tn.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;

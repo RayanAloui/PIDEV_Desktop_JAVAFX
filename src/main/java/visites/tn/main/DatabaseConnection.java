@@ -1,4 +1,4 @@
-package visites.main;
+package visites.tn.main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
