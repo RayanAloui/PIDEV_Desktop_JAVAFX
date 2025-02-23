@@ -3,10 +3,27 @@ package esprit.tn.services;
 import esprit.tn.entities.User;
 import esprit.tn.main.DatabaseConnection;
 
+import java.io.FileOutputStream;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Phrase;
+import javafx.scene.image.Image;
+import java.util.Date;
+
+
 
 public class UserService implements Iservice<User> {
     Connection cnx;
@@ -323,6 +340,101 @@ public class UserService implements Iservice<User> {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void generatePDF(List<User> users) {
+        String filePath = "users.pdf";
+
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
+
+            // Ajouter un titre
+            Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+            Paragraph title = new Paragraph("Liste des Utilisateurs", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(20);
+            document.add(title);
+
+            // Ajouter la date et l'heure de génération
+            String dateTime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+            Font dateFont = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC);
+            Paragraph dateParagraph = new Paragraph("Généré le : " + dateTime, dateFont);
+            dateParagraph.setAlignment(Element.ALIGN_RIGHT);
+            dateParagraph.setSpacingAfter(10);
+            document.add(dateParagraph);
+
+            // Création du tableau
+            PdfPTable table = new PdfPTable(6);
+            table.setWidthPercentage(100);
+
+            // Ajout des en-têtes de colonnes
+            addTableHeader(table);
+
+            // Ajout des lignes du tableau
+            for (User user : users) {
+                table.addCell(String.valueOf(user.getId()));
+                table.addCell(user.getName());
+                table.addCell(user.getSurname());
+                table.addCell(user.getTelephone());
+                table.addCell(user.getEmail());
+                table.addCell(user.getRole());
+            }
+
+            document.add(table);
+
+            // Ajouter une image en bas (signature)
+            com.itextpdf.text.Image signature = com.itextpdf.text.Image.getInstance("src/main/resources/signature.png");
+            signature.scaleAbsolute(150, 50);  // Utiliser scaleAbsolute au lieu de scaleToFit
+            signature.setAlignment(Element.ALIGN_CENTER);
+            signature.setSpacingBefore(20);
+
+            signature.scaleToFit(150, 50);
+            signature.setAlignment(Element.ALIGN_CENTER);
+            signature.setSpacingBefore(20);
+            document.add(signature);
+
+            document.close();
+            System.out.println("PDF généré avec succès : " + filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+        String[] headers = {"ID", "Nom", "Prénom", "Téléphone", "Email", "Rôle"};
+
+        for (String header : headers) {
+            PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
+        }
+    }
 
 
 

@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -47,7 +48,8 @@ public class AfficherUserController {
     @FXML
     private ComboBox<String> comboBoxRole;
 
-
+    @FXML
+    private PieChart PIE;
 
 
 
@@ -83,7 +85,7 @@ public class AfficherUserController {
 
 
 
-
+        updateUserPieChart(null);
 
     }
     @FXML
@@ -145,6 +147,7 @@ public class AfficherUserController {
             alert.setContentText("Please select a user to delete.");
             alert.showAndWait();
         }
+        initialize();
     }
 
     @FXML
@@ -199,6 +202,8 @@ public class AfficherUserController {
         List<User> users = userService.getall(selectedRole);
         ObservableList<User> userList = FXCollections.observableArrayList(users);
         tableViewUsers.setItems(userList);
+        initialize();
+
     }
 
     public void GoToDashboard(javafx.event.ActionEvent actionEvent) {
@@ -255,6 +260,8 @@ public class AfficherUserController {
             alert.setContentText("Please select a user to block");
             alert.showAndWait();
         }
+        initialize();
+
     }
 
     public void ActiverUser(javafx.event.ActionEvent actionEvent) {
@@ -278,6 +285,8 @@ public class AfficherUserController {
             alert.setContentText("Please select a user to activate");
             alert.showAndWait();
         }
+        initialize();
+
     }
 
     private void refreshUserTable() {
@@ -287,4 +296,72 @@ public class AfficherUserController {
         ObservableList<User> userList = FXCollections.observableArrayList(users);
         tableViewUsers.setItems(userList);
     }
+
+    public void PDF(javafx.event.ActionEvent actionEvent) {
+        UserService userService = new UserService();
+        List<User> users = userService.getall(comboBoxRole.getValue());
+        userService.generatePDF(users);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @FXML
+    private void updateUserPieChart(String filter) {
+        UserService userService = new UserService();
+        List<User> usersX = userService.getall(comboBoxRole.getValue());
+        List<User> users = usersX;
+
+        // Initialize counters for pie chart
+        int activeCount = 0;
+        int blockedCount = 0;
+        int confirmedCount = 0;
+        int unconfirmedCount = 0;
+
+        // Loop through the users and count based on their attributes
+        for (User user : users) {
+            // Count active/blocked users
+            if (user.getIsBlocked() == 1) {
+                blockedCount++;
+            } else {
+                activeCount++;
+            }
+
+            // Count confirmed/unconfirmed users
+            if (user.getIsConfirmed() == 1) {
+                confirmedCount++;
+            } else {
+                unconfirmedCount++;
+            }
+        }
+
+        // Create a PieChart data series
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Active", activeCount),
+                new PieChart.Data("Blocked", blockedCount),
+                new PieChart.Data("Confirmed", confirmedCount),
+                new PieChart.Data("Unconfirmed", unconfirmedCount)
+        );
+
+        // Set the PieChart data
+        PIE.setData(pieChartData);
+    }
+
+
+
+
+
+
+
+
 }
