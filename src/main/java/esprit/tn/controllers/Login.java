@@ -1,5 +1,6 @@
 package esprit.tn.controllers;
 
+import esprit.tn.entities.EmailService;
 import esprit.tn.entities.Notification;
 import esprit.tn.entities.Session;
 import esprit.tn.services.NotificationService;
@@ -44,6 +45,7 @@ public class Login {
 
     @FXML
     private TextField email;
+
     @FXML
     public void initialize() {
         Preferences prefs = Preferences.userNodeForPackage(Login.class);
@@ -129,38 +131,51 @@ public class Login {
                     // Set the user in the session
                     Session session = Session.getInstance();
                     session.setCurrentUser(user);
+
                     // Check the user's role and navigate accordingly
                     if ("admin".equals(user.getRole())) {
                         showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, Admin " + user.getName() + "!");
                         navigateToPage(event, "/dashboard.fxml");
                     } else {
-
-                        try {
-
-                            Notification notification = new Notification();
-
-                            notification.setUsername(user.getName());
-                            notification.setActivite("Logged in ");
-                            String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                            notification.setHeure(formattedTime);
-                            notification.setDate(Date.valueOf(LocalDate.now()));
+                        if (user.isConfirmed() == 1) {
+                            Session session1 = Session.getInstance();
+                            User us = session1.getCurrentUser();
 
 
-                            NotificationService notificationService = new NotificationService();
-                            notificationService.ajouter(notification);
+                            navigateToPage(event, "/auth.fxml");
+                            EmailService mailService = new EmailService();
+                            String to = us.getEmail();
+                            String code = String.valueOf(us.getToken());
+                            mailService.envoyerEmail(to, "Code de Confirmation", code);
 
 
-                            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getName() + "!");
-                            navigateToPage(event, "/home.fxml");
+                        } else {
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            // You can show an alert here if needed, like a failure to insert notification
-                            showAlert(Alert.AlertType.ERROR, "Error", "Failed to record login activity.");
+                            try {
+
+                                Notification notification = new Notification();
+
+                                notification.setUsername(user.getName());
+                                notification.setActivite("Logged in ");
+                                String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                                notification.setHeure(formattedTime);
+                                notification.setDate(Date.valueOf(LocalDate.now()));
+
+
+                                NotificationService notificationService = new NotificationService();
+                                notificationService.ajouter(notification);
+
+
+                                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getName() + "!");
+                                navigateToPage(event, "/home.fxml");
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                // You can show an alert here if needed, like a failure to insert notification
+                                showAlert(Alert.AlertType.ERROR, "Error", "Failed to record login activity.");
+                            }
                         }
-
                     }
-
 
 
                     // Save credentials if "Remember Me" is checked
@@ -216,5 +231,8 @@ public class Login {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+
+
 
 }

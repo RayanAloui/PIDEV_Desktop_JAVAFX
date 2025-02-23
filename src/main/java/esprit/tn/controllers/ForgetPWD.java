@@ -1,7 +1,7 @@
 package esprit.tn.controllers;
 
 import com.google.protobuf.Message;
-import esprit.tn.entities.MailService;
+import esprit.tn.entities.EmailService;
 import esprit.tn.entities.Session;
 import esprit.tn.entities.SmsService;
 import esprit.tn.entities.User;

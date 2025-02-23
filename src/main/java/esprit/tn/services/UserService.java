@@ -311,6 +311,17 @@ public class UserService implements Iservice<User> {
             throw new RuntimeException("Error activating user", e);
         }
     }
+    public void confirm(int userId) {
+        String query = "UPDATE user SET isConfirmed= 1 WHERE id = ?"; // Set isBlocked to 1 for blocking the user
+
+        try {
+            PreparedStatement stm = cnx.prepareStatement(query);
+            stm.setInt(1, userId);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error blocking user", e);
+        }
+    }
 
 
 

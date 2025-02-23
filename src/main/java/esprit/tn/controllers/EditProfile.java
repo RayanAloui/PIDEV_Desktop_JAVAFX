@@ -1,12 +1,13 @@
 package esprit.tn.controllers;
 
-import esprit.tn.entities.MailService;
+import esprit.tn.entities.EmailService;
 import esprit.tn.entities.Notification;
 import esprit.tn.services.NotificationService;
 import esprit.tn.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,6 +26,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -194,8 +196,33 @@ public class EditProfile {
     }
 
 
-    public void SendMail(ActionEvent actionEvent) throws IOException {
+    public void SendMail(ActionEvent actionEvent) {
+        try {
+            EmailService mailService = new EmailService();
+            String to=currentUser.getEmail();
+            String code = String.valueOf(currentUser.getNumberVerification());
+            mailService.envoyerEmail(to, "Code de Confirmation", code);
+            System.out.println("Email sent successfully!");
+        } catch (Exception e) {
+            System.err.println("Error sending email: " + e.getMessage());
+            e.printStackTrace();
+        }
 
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/confirmEmail.fxml")); // Replace with actual path
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Failed to load the user list page");
+            errorAlert.showAndWait();
+        }
 
     }
 

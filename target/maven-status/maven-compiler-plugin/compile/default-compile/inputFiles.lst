@@ -1,8 +1,11 @@
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\addUserController.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\AfficherUserController.java
+C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\Auth.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\ChangePWD.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\CheckValidationNumber.java
+C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\ConfirmEmail.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\Dashboard.java
+C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\doubleAuth.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\EditProfile.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\ForgetPWD.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\Home.java
@@ -12,7 +15,7 @@ C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\NewPassword.j
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\Register.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\Test.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\controllers\UpdateUserController.java
-C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\entities\MailService.java
+C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\entities\EmailService.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\entities\Notification.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\entities\Session.java
 C:\Users\ADMIN\Desktop\jdbca23\src\main\java\esprit\tn\entities\SmsService.java
