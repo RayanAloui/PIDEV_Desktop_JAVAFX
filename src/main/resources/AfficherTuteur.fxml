@@ -31,6 +31,5 @@
         <Button layoutX="748.0" layoutY="600.0" mnemonicParsing="false" onAction="#afficherOrph" text="AfficherOrphelin" />
         <Button layoutX="748.0" layoutY="20.0" onAction="#exporterTuteursEnPDF" text="Exporter en PDF" />
         <Button layoutX="748.0" layoutY="121.0" mnemonicParsing="false" text="List Tuteurs" onAction="#ListTuteurs"/>
-
     </children>
 </AnchorPane>

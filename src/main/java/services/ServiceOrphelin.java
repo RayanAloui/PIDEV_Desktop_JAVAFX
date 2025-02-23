@@ -378,6 +378,26 @@ public class ServiceOrphelin implements IOrphelinService {
         return orphelins;
     }
 
+    public Tuteur getTuteurById(int idTuteur) {
+        try {
+            Connection conn = databaseconnection.getConnection();
+            String query = "SELECT * FROM tuteurs WHERE idT = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, idTuteur);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Tuteur(rs.getInt("idT"), rs.getString("cinT"), rs.getString("nomT"),
+                        rs.getString("prenomT"), rs.getString("telephoneT"), rs.getString("adresseT"),
+                        rs.getString("disponibilite"), rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 
 }

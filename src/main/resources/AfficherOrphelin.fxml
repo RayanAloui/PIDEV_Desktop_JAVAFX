@@ -33,6 +33,7 @@
         <Button fx:id="btnBarChart" layoutX="614.0" layoutY="639.0" onAction="#afficherBarChart" text="BarChart" />
         <Button fx:id="btnLineChart" layoutX="378.0" layoutY="639.0" onAction="#afficherLineChart" text="LineChart" />
         <Button layoutX="748.0" layoutY="20.0" onAction="#exporterOrphelinsEnPDF" text="Exporter en PDF" />
+      <Button layoutX="743.0" layoutY="125.0" mnemonicParsing="false" text="List Orphelins" onAction="#ListOrphelins"/>
 
     </children>
 </AnchorPane>

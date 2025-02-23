@@ -16,6 +16,6 @@
 
     <!-- Conteneur pour afficher les tuteurs -->
     <FlowPane fx:id="tuteursContainer" hgap="10" maxHeight="600" maxWidth="800" style="-fx-padding: 10; -fx-background-color: #f4f4f4; -fx-border-radius: 5; -fx-background-radius: 5;" vgap="10" />
-    <Button mnemonicParsing="false" text="Afficher Tuteurs" onAction="#AfficherTuteurs"/>
+    <Button mnemonicParsing="false" text="Retour" onAction="#AfficherTuteurs"/>
 
 </VBox>

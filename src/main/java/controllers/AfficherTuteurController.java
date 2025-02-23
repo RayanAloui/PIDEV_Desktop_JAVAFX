@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
 
 import java.awt.*;
+import java.awt.Button;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.scene.control.Alert;
@@ -46,6 +47,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.SQLException;
 import java.util.List;
+
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.fxml.FXML;
 
 public class AfficherTuteurController {
 

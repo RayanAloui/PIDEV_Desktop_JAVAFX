@@ -369,6 +369,20 @@ public class AfficherOrphelinController {
     }
 
     @FXML
+    void ListOrphelins(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/OrphelinsList.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Liste des Orphelins");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void exporterOrphelinsEnPDF() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Enregistrer le PDF");
