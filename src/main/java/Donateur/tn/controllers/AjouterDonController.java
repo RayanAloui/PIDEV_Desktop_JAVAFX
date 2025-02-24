@@ -1,9 +1,9 @@
 package Donateur.tn.controllers;
 
 import Donateur.tn.entities.Dons;
-import Donateur.tn.entities.donateur;
 import Donateur.tn.services.DonateurService;
 import Donateur.tn.services.DonsService;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,6 +44,7 @@ public class AjouterDonController {
     public void initialize() {
         chargerDonateurs();
     }
+
     private void chargerDonateurs() {
         List<Integer> listeIds = donateurService.getAllIds();
         System.out.println("IDs des donateurs récupérés : " + listeIds);// Récupérer les IDs des donateurs
@@ -89,6 +89,8 @@ public class AjouterDonController {
             don.setMontant(Double.parseDouble(montant.getText()));
             don.setStatut(statut.getText());
 
+
+
             // Ajout du don
             DonsService ds = new DonsService();
             System.out.println("Ajout du don en cours...");
@@ -103,8 +105,10 @@ public class AjouterDonController {
             e.printStackTrace();
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherDons.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PayementFlouci.fxml"));
             Parent root = loader.load();
+            PayementFlouciController payementController = loader.getController();
+            payementController.setMontant(Double.parseDouble(montant.getText()));
             Stage stage = (Stage) Donateur_id.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

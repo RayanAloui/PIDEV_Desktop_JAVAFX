@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Donateur.tn.controllers.PayementFlouciController">
+ <VBox alignment="CENTER" spacing="10" layoutX="100" layoutY="50">
+  <Label text="Paiement sécurisé avec Flouci" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+  <Label text="Entrez le montant à payer :" style="-fx-font-size: 14px;" />
+  <TextField fx:id="montantField" promptText="Montant en TND" style="-fx-font-size: 16px;"/>
+  <Button text="Payer maintenant" onAction="#handlePaiement" style="-fx-background-color: #0099ff; -fx-text-fill: white; -fx-font-size: 16px;" />
+ </VBox>
+</AnchorPane>
