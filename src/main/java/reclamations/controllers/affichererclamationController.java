@@ -20,73 +20,90 @@ import java.io.IOException;
 import reclamations.services.ReclamationService;
 import reclamations.entities.Reclamation;
 
-public class affichererclamationController {@FXML
-private TableView<Reclamation> tableViewReclamations;
+public class affichererclamationController {
+
+    @FXML
+    private TableView<Reclamation> tableViewReclamations;
 
     @FXML
     private TableColumn<Reclamation, Integer> columnId;
+
     @FXML
     private TableColumn<Reclamation, String> colummail;
+
     @FXML
     private TableColumn<Reclamation, String> columncontenu;
+
     @FXML
     private TableColumn<Reclamation, String> columndate;
+
     @FXML
     private TableColumn<Reclamation, String> columnstatut;
-    @FXML
-    private TableColumn<Reclamation, String> columnrole;
 
     @FXML
     public void initialize() {
-        ReclamationService reclamationService = new ReclamationService();
-
-        ObservableList<Reclamation> reclamations = FXCollections.observableArrayList(reclamationService.getall());
-        tableViewReclamations.setItems(reclamations);
-
+        // Initialize TableColumn bindings
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colummail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         columncontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
         columndate.setCellValueFactory(new PropertyValueFactory<>("date"));
         columnstatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
-        columnrole.setCellValueFactory(new PropertyValueFactory<>("role"));
+
+        // Load data into the TableView
+        loadReclamations();
+    }
+
+    private void loadReclamations() {
+        ReclamationService reclamationService = new ReclamationService();
+        ObservableList<Reclamation> reclamations = FXCollections.observableArrayList(reclamationService.getall());
+        tableViewReclamations.setItems(reclamations);
     }
 
     @FXML
-    public void GoToAddreclamation(ActionEvent actionEvent) {
+    void GoToAddreclamation(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouterReclamation.fxml"));
+            // Load the FXML file for adding a reclamation
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouterreclamations.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
 
+            // Show an error alert if the page fails to load
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Failed to load add reclamation page");
+            alert.setContentText("An error occurred while loading the page: " + e.getMessage());
             alert.showAndWait();
         }
     }
 
     @FXML
-    public void Deletererclamation(ActionEvent actionEvent) {
+    void Deletererclamation(ActionEvent event) {
+        // Get the selected reclamation from the TableView
         Reclamation selectedReclamation = tableViewReclamations.getSelectionModel().getSelectedItem();
 
         if (selectedReclamation != null) {
-            int reclamationId = selectedReclamation.getId();
-
+            // Delete the reclamation using the service
             ReclamationService reclamationService = new ReclamationService();
-            reclamationService.supprimer(reclamationId);
+            reclamationService.supprimer(selectedReclamation.getId());
 
-            tableViewReclamations.getItems().remove(selectedReclamation);
+            // Refresh the TableView
+            loadReclamations();
 
+            // Show a success message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Reclamation deleted successfully");
             alert.showAndWait();
         } else {
+            // Show a warning if no reclamation is selected
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("No reclamation selected");
@@ -96,29 +113,38 @@ private TableView<Reclamation> tableViewReclamations;
     }
 
     @FXML
-    public void GoToUpdatereclamation(ActionEvent actionEvent) {
+    void GoToUpdatereclamation(ActionEvent event) {
+        // Get the selected reclamation from the TableView
         Reclamation selectedReclamation = tableViewReclamations.getSelectionModel().getSelectedItem();
 
         if (selectedReclamation != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateReclamation.fxml"));
+                // Load the FXML file for updating a reclamation
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/updatereclamation.fxml"));
                 Parent root = loader.load();
 
+                // Get the controller and pass the selected reclamation data
                 updaterclamationController controller = loader.getController();
                 controller.setReclamationData(selectedReclamation);
 
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                // Get the current stage
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                // Set the new scene
                 stage.setScene(new Scene(root));
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
 
+                // Show an error alert if the page fails to load
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Failed to load update reclamation page");
+                alert.setContentText("An error occurred while loading the page: " + e.getMessage());
                 alert.showAndWait();
             }
         } else {
+            // Show a warning if no reclamation is selected
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Reclamation Selected");
             alert.setHeaderText("Please select a reclamation to update");
@@ -126,4 +152,3 @@ private TableView<Reclamation> tableViewReclamations;
         }
     }
 }
-

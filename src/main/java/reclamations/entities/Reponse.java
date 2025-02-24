@@ -5,7 +5,13 @@ import java.util.Objects;
 
 public class Reponse {
 
+
+
+
+
+
     private int id;
+
     private String description;
     private Date date;
     private String statut;
@@ -15,6 +21,7 @@ public class Reponse {
 
     // Constructor without id (for creating new entries)
     public Reponse(String description, Date date, String statut) {
+
         this.description = description;
         this.date = date;
         this.statut = statut;
@@ -23,6 +30,7 @@ public class Reponse {
     // Constructor with id (for existing entries)
     public Reponse(int id, String description, Date date, String statut) {
         this.id = id;
+
         this.description = description;
         this.date = date;
         this.statut = statut;
@@ -36,6 +44,8 @@ public class Reponse {
     public void setId(int id) {
         this.id = id;
     }
+
+
 
     public String getDescription() {
         return description;
@@ -66,27 +76,31 @@ public class Reponse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Reponse reponse = (Reponse) o;
-        return id == reponse.id &&
-                Objects.equals(description, reponse.description) &&
-                Objects.equals(date, reponse.date) &&
-                Objects.equals(statut, reponse.statut);
+        Reponse that = (Reponse) o;
+        return id == that.id &&
+
+                Objects.equals(description, that.description) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(statut, that.statut);
     }
 
     // hashCode() method
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, date, statut);
+        return Objects.hash(id,description, date, statut);
     }
 
     // toString() method
     @Override
     public String toString() {
-        return "Reponse{" +
+        return "Reponses{" +
                 "id=" + id +
+
                 ", description='" + description + '\'' +
                 ", date=" + date +
                 ", statut='" + statut + '\'' +
                 '}';
     }
+
+
 }

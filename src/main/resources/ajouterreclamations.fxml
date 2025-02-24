@@ -4,38 +4,34 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" stylesheets="@../../../../../Downloads/PIDEV_Desktop_JAVAFX-user/PIDEV_Desktop_JAVAFX-user/src/main/resources/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.addreclamationController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.addreclamationController">
    <children>
-      <VBox id="date" layoutX="303.0" layoutY="110.0" spacing="10" styleClass="vbox" stylesheets="@../../../../../Downloads/PIDEV_Desktop_JAVAFX-user/PIDEV_Desktop_JAVAFX-user/src/main/resources/styles.css">
+      <VBox layoutX="303.0" layoutY="110.0" spacing="10" styleClass="vbox">
          <children>
-            <Label styleClass="title" text="reclamation" />
-            <TextArea id="descriptionError" prefHeight="200.0" prefWidth="200.0" promptText="descrition" />
-            <Label id="descreptionError" fx:id="descreptionError" styleClass="error" text="descreption is required" visible="false" />
-            <DatePicker />
-            <Label id="dateError" fx:id="dateError" styleClass="error" text="date is required" visible="false" />
-            <TextField id="mail" fx:id="mail" promptText="mail" styleClass="text-field" />
-            <Label id="mailError" fx:id="mailError" styleClass="error" text="Email is required" visible="false" />
-            <Label styleClass="label" text="statut:" />
-            <ChoiceBox id="statut" fx:id="statut" styleClass="choice-box">
+            <Label styleClass="title" text="Reclamation" />
+            <TextArea id="Description" fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
+            <Label fx:id="descriptionError" styleClass="error" text="Description is required" visible="false" />
+            <TextField id="Email" fx:id="mail" promptText="Email" styleClass="text-field" />
+            <Label fx:id="mailError" styleClass="error" text="Email is required" visible="false" />
+            <Label styleClass="label" text="Statut:" />
+            <ChoiceBox fx:id="statut" styleClass="choice-box">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="traitee" />
                      <String fx:value="non traitee" />
-
                   </FXCollections>
                </items>
             </ChoiceBox>
-            <Label id="statutError" fx:id="statutError" styleClass="error" text="statut is required" visible="false" />
+            <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
          </children>
       </VBox>
       <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherReclamations" styleClass="button" text="Back" />
-      <Button layoutX="754.0" layoutY="14.0" onAction="#addReclamation" prefWidth="225.0" styleClass="button" text="Add reclamation " />
+      <Button layoutX="754.0" layoutY="14.0" onAction="#addReclamation" prefWidth="225.0" styleClass="button" text="Add Reclamation" />
    </children>
 </AnchorPane>

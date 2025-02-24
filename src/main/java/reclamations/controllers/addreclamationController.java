@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;  // Import java.sql.Date
+import java.time.LocalDate;
 
 // Import missing classes
 import reclamations.entities.Reclamation;
@@ -24,41 +25,66 @@ import reclamations.services.ReclamationService;
 public class addreclamationController {
 
     @FXML
-    private TextField mail;
-
-    @FXML
     private TextArea description;
-
-    @FXML
-    private TextField date;
-
-    @FXML
-    private ChoiceBox<String> statut;
-
-    @FXML
-    private Label mailError;
 
     @FXML
     private Label descriptionError;
 
     @FXML
-    private Label dateError;
+    private TextField mail;
+
+    @FXML
+    private Label mailError;
+
+    @FXML
+    private ChoiceBox<String> statut;
 
     @FXML
     private Label statutError;
 
     @FXML
     public void initialize() {
-        statut.setItems(FXCollections.observableArrayList("En attente", "Traitée", "Rejetée"));
+        // Initialize error labels to be invisible by default
+        descriptionError.setVisible(false);
+        mailError.setVisible(false);
+        statutError.setVisible(false);
+
+        // Set default text for error labels (optional)
+        descriptionError.setText("Description is required");
+        mailError.setText("Email is required");
+        statutError.setText("Statut is required");
+
+        // Clear any existing text in input fields (optional)
+        description.clear();
+        mail.clear();
+        statut.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    void GoToAfficherReclamations(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreclamtions.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load the reclamation page");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void addReclamation(ActionEvent event) {
+
         boolean isValid = true;
 
+        // Reset error messages
         mailError.setVisible(false);
         descriptionError.setVisible(false);
-        dateError.setVisible(false);
         statutError.setVisible(false);
 
         // Validate email
@@ -76,14 +102,6 @@ public class addreclamationController {
             isValid = false;
         }
 
-        // Validate date format
-        String datePattern = "\\d{4}-\\d{2}-\\d{2}";
-        if (date.getText().trim().isEmpty() || !date.getText().trim().matches(datePattern)) {
-            dateError.setText("Date must be in format YYYY-MM-DD");
-            dateError.setVisible(true);
-            isValid = false;
-        }
-
         // Validate statut
         if (statut.getValue() == null) {
             statutError.setText("Statut is required");
@@ -91,19 +109,8 @@ public class addreclamationController {
             isValid = false;
         }
 
+        // If validation fails, stop further execution
         if (!isValid) {
-            return;
-        }
-
-        // Convert String date to java.sql.Date
-        Date sqlDate = null;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date utilDate = sdf.parse(date.getText());
-            sqlDate = new java.sql.Date(utilDate.getTime());
-        } catch (ParseException e) {
-            dateError.setText("Invalid date format, must be YYYY-MM-DD");
-            dateError.setVisible(true);
             return;
         }
 
@@ -111,8 +118,8 @@ public class addreclamationController {
         Reclamation reclamation = new Reclamation();
         reclamation.setMail(mail.getText());
         reclamation.setDescription(description.getText());
-        reclamation.setDate(sqlDate);  // Set the converted date
         reclamation.setStatut(statut.getValue());
+        reclamation.setDate(Date.valueOf(LocalDate.now()));
 
         // Add reclamation to the database
         ReclamationService reclamationService = new ReclamationService();
@@ -137,24 +144,6 @@ public class addreclamationController {
             errorAlert.setTitle("Error");
             errorAlert.setHeaderText("Failed to load the reclamation list page");
             errorAlert.showAndWait();
-        }
-    }
-
-    @FXML
-    public void GoToAfficherReclamations(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherReclamations.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load the reclamations page");
-            alert.setContentText("An error occurred while trying to navigate back to the reclamation list.");
-            alert.showAndWait();
         }
     }
 }

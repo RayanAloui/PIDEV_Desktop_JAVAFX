@@ -53,7 +53,6 @@ public class updaterclamationController {
         this.selectedReclamation = reclamation;
         description.setText(reclamation.getDescription());
         mail.setText(reclamation.getMail());
-        // Convert java.sql.Date to LocalDate for DatePicker
         date.setValue(reclamation.getDate().toLocalDate());
         statut.setValue(reclamation.getStatut());
     }
@@ -61,7 +60,7 @@ public class updaterclamationController {
     @FXML
     public void GoToAfficherreclamation(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherReclamation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreclamtions.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -114,15 +113,11 @@ public class updaterclamationController {
         if (selectedReclamation != null) {
             selectedReclamation.setDescription(description.getText());
             selectedReclamation.setMail(mail.getText());
-
-            // Convert LocalDate from DatePicker to java.sql.Date
             selectedReclamation.setDate(Date.valueOf(date.getValue()));
-
             selectedReclamation.setStatut(statut.getValue());
 
             ReclamationService reclamationService = new ReclamationService();
-            // Modify the method call to match the expected signature in ReclamationService
-            reclamationService.modifier(selectedReclamation);  // Corrected method call
+            reclamationService.modifier(selectedReclamation);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");

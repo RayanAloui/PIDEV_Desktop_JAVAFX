@@ -1,6 +1,8 @@
 package reclamations.controllers;
 import reclamations.entities.Reponse;
+
 import reclamations.services.ReponseService;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,81 +27,127 @@ public class afficherreponseController {
 
     @FXML
     private TableColumn<Reponse, Integer> columnId;
+
+
+
     @FXML
-    private TableColumn<Reponse, String> columnDescription;
+    private TableColumn<Reponse, String> columncontenu;
+
     @FXML
-    private TableColumn<Reponse, String> columnDate;
+    private TableColumn<Reponse, String> columndate;
+
     @FXML
-    private TableColumn<Reponse, String> columnStatut;
+    private TableColumn<Reponse, String> columnstatut;
 
     @FXML
     public void initialize() {
+        // Initialize TableColumn bindings
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+        columncontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        columndate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        columnstatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
+
+        // Load data into the TableView
+        loadReponses();
+    }
+
+    private void loadReponses() {
         ReponseService reponseService = new ReponseService();
         ObservableList<Reponse> reponses = FXCollections.observableArrayList(reponseService.getall());
         tableViewReponses.setItems(reponses);
-
-        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        columnStatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
     }
 
     @FXML
-    public void GoToAddReponse(ActionEvent actionEvent) {
-        navigateTo(actionEvent, "/ajouterReponse.fxml", "Failed to load add response page");
-    }
-
-    @FXML
-    public void DeleteReponse(ActionEvent actionEvent) {
-        Reponse selectedReponse = tableViewReponses.getSelectionModel().getSelectedItem();
-        if (selectedReponse != null) {
-            ReponseService reponseService = new ReponseService();
-            reponseService.supprimer(selectedReponse.getId());
-            tableViewReponses.getItems().remove(selectedReponse);
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Response deleted successfully");
-        } else {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Please select a response to delete.");
-        }
-    }
-
-    @FXML
-    public void GoToUpdateReponse(ActionEvent actionEvent) {
-        Reponse selectedReponse = tableViewReponses.getSelectionModel().getSelectedItem();
-        if (selectedReponse != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateReponse.fxml"));
-                Parent root = loader.load();
-                updatereponseController controller = loader.getController();  // Corrected class name
-                controller.setReponseData(selectedReponse);
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Error", "Failed to load update response page");
-            }
-        } else {
-            showAlert(Alert.AlertType.WARNING, "Warning", "Please select a response to update");
-        }
-    }
-
-    private void navigateTo(ActionEvent actionEvent, String fxmlPath, String errorMessage) {
+    void GoToAddreponse(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            // Load the FXML file for adding a reponse
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouterreponse.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", errorMessage);
+
+            // Show an error alert if the page fails to load
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load add reponse page");
+            alert.setContentText("An error occurred while loading the page: " + e.getMessage());
+            alert.showAndWait();
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(message);
-        alert.showAndWait();
+    @FXML
+    void Deletereponse(ActionEvent event) {
+        // Get the selected reponse from the TableView
+        Reponse selectedReponse = tableViewReponses.getSelectionModel().getSelectedItem();
+
+        if (selectedReponse != null) {
+            // Delete the reponse using the service
+            ReponseService reponseService = new ReponseService();
+            reponseService.supprimer(selectedReponse.getId());
+
+            // Refresh the TableView
+            loadReponses();
+
+            // Show a success message
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Reponse deleted successfully");
+            alert.showAndWait();
+        } else {
+            // Show a warning if no reponse is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("No reponse selected");
+            alert.setContentText("Please select a reponse to delete.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void GoToUpdatereponse(ActionEvent event) {
+        // Get the selected reponse from the TableView
+        Reponse selectedReponse = tableViewReponses.getSelectionModel().getSelectedItem();
+
+        if (selectedReponse != null) {
+            try {
+                // Load the FXML file for updating a reponse
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/updatereponse.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller and pass the selected reponse data
+                updatereponseController controller = loader.getController();
+                controller.setReponseData(selectedReponse);
+
+                // Get the current stage
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                // Set the new scene
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+                // Show an error alert if the page fails to load
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Failed to load update reponse page");
+                alert.setContentText("An error occurred while loading the page: " + e.getMessage());
+                alert.showAndWait();
+            }
+        } else {
+            // Show a warning if no reponse is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Reponse Selected");
+            alert.setHeaderText("Please select a reponse to update");
+            alert.showAndWait();
+        }
     }
 }

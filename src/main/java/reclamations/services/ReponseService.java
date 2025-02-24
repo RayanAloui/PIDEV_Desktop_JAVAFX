@@ -1,4 +1,5 @@
 package reclamations.services;
+import reclamations.entities.Reclamation;
 import reclamations.entities.Reponse;  // Avec majuscule
 import reclamations.main.DatabaseConnection;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class ReponseService implements Iservices<Reponse> {
 
     private Connection cnx;
-    static ReponseService instance;
+    private static ReponseService instance;
 
     // Constructeur public
     public ReponseService() {
@@ -27,19 +28,13 @@ public class ReponseService implements Iservices<Reponse> {
     @Override
     public void ajouter(Reponse reponse) {
         // Validation des données
-        if (reponse.getDescription() == null || reponse.getDescription().trim().length() < 10 ||
-                reponse.getDate() == null ||
-                reponse.getStatut() == null || (!reponse.getStatut().equals("Pending") &&
-                !reponse.getStatut().equals("Resolved") && !reponse.getStatut().equals("Closed"))) {
 
-            System.out.println("Erreur : Données invalides pour la réponse.");
-            return;
-        }
 
         // Requête SQL pour insérer une réponse
-        String req = "INSERT INTO reponses (description, date, statut) VALUES (?, ?, ?)";
+        String req = "INSERT INTO reponses (description, date, statut) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
+
             stm.setString(1, reponse.getDescription());
             stm.setDate(2, reponse.getDate());
             stm.setString(3, reponse.getStatut());
@@ -48,7 +43,7 @@ public class ReponseService implements Iservices<Reponse> {
             // Récupérer l'ID généré
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    reponse.setId(generatedKeys.getInt(1));  // Met à jour l'id de la réponse avec l'ID généré
+                    reponse.setId(generatedKeys.getInt(1));
                     System.out.println("Réponse ajoutée : " + reponse);
                 }
             }
@@ -60,7 +55,8 @@ public class ReponseService implements Iservices<Reponse> {
     @Override
     public void modifier(Reponse reponse) {
         // Validation des données
-        if (reponse.getDescription() == null || reponse.getDescription().trim().length() < 10 ||
+        if (
+                reponse.getDescription() == null || reponse.getDescription().trim().length() < 10 ||
                 reponse.getDate() == null ||
                 reponse.getStatut() == null || (!reponse.getStatut().equals("Pending") &&
                 !reponse.getStatut().equals("Resolved") && !reponse.getStatut().equals("Closed"))) {
@@ -70,9 +66,10 @@ public class ReponseService implements Iservices<Reponse> {
         }
 
         // Requête SQL pour mettre à jour une réponse
-        String req = "UPDATE reponses SET description = ?, date = ?, statut = ? WHERE id = ?";
+        String req = "UPDATE reponses SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
 
         try (PreparedStatement stm = cnx.prepareStatement(req)) {
+
             stm.setString(1, reponse.getDescription());
             stm.setDate(2, reponse.getDate());
             stm.setString(3, reponse.getStatut());
@@ -99,7 +96,7 @@ public class ReponseService implements Iservices<Reponse> {
     }
 
     @Override
-    public List<Reponse> getall() {  // Method signature corrected to match interface
+    public List<Reponse> getall() {
         List<Reponse> reponsesList = new ArrayList<>();
         // Requête SQL pour récupérer toutes les réponses
         String req = "SELECT * FROM reponses";
@@ -110,6 +107,7 @@ public class ReponseService implements Iservices<Reponse> {
             while (rs.next()) {
                 Reponse r = new Reponse();
                 r.setId(rs.getInt("id"));
+
                 r.setDescription(rs.getString("description"));
                 r.setDate(rs.getDate("date"));
                 r.setStatut(rs.getString("statut"));
@@ -133,6 +131,7 @@ public class ReponseService implements Iservices<Reponse> {
                 if (rs.next()) {
                     r = new Reponse();
                     r.setId(rs.getInt("id"));
+
                     r.setDescription(rs.getString("description"));
                     r.setDate(rs.getDate("date"));
                     r.setStatut(rs.getString("statut"));

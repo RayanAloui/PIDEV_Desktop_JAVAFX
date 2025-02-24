@@ -27,15 +27,7 @@ public class ReclamationService implements Iservices<Reclamation> {
     @Override
     public void ajouter(Reclamation reclamation) {
         // Validation des données
-        if (reclamation.getMail() == null || reclamation.getMail().trim().isEmpty() ||
-                reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 10 ||
-                reclamation.getDate() == null ||
-                reclamation.getStatut() == null || (!reclamation.getStatut().equals("Pending") &&
-                !reclamation.getStatut().equals("Resolved") && !reclamation.getStatut().equals("Closed"))) {
 
-            System.out.println("Erreur : Données invalides pour la réclamation.");
-            return;
-        }
 
         // Requête SQL pour insérer une réclamation
         String req = "INSERT INTO reclamations (mail, description, date, statut) VALUES (?, ?, ?, ?)";

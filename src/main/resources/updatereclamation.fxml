@@ -13,69 +13,34 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.updaterclamationController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@../../../../../Downloads/PIDEV_Desktop_JAVAFX-user/PIDEV_Desktop_JAVAFX-user/src/main/resources/styles.css">
+      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="900.0">
          <children>
-            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
+            <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
                <children>
-                  <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
-                     <children>
-                        <Label styleClass="title" text=" reclamation Update" />
-                        <Label text="description" />
-                        <TextArea id="description" prefHeight="200.0" prefWidth="200.0" promptText="description" />
-                        <Label id="descriptionError" fx:id="descriptionError" styleClass="descriptionError" text="description is required" visible="false" />
-                        <Label text="date" />
-                        <DatePicker />
-                        <Label id="dateError" fx:id="dateError" styleClass="dateError" text="date is required" visible="false" />
-                        <Label text="mail" />
-                        <TextField fx:id="mail" promptText="mail" styleClass="text-field" />
-                        <Label id="mailError" fx:id="mailError" styleClass="mailError" text="Email must be in the format: exemple@exemple.com" visible="false" />
-                        <Label text="statut" />
-                        <ChoiceBox fx:id="role" styleClass="choice-box">
-                           <items>
-                               <FXCollections fx:factory="observableArrayList">
-                                   <String fx:value="traitee" />
-                                   <String fx:value="non traitee" />
-
-                               </FXCollections>
-                           </items>
-                        </ChoiceBox>
-                        <Label id="statutError" fx:id="statutdError" styleClass="error" text="statut is required" visible="false" />
-                     </children>
-                  </VBox>
-                  <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherreclamation" styleClass="button" text="Back" />
-                  <Button layoutX="749.0" layoutY="18.0" onAction="#Updatereclamation" prefWidth="150.0" styleClass="button" text="Update" />
+                  <Label styleClass="title" text="Reclamation Update" />
+                  <Label text="Description" />
+                  <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
+                  <Label fx:id="descriptionError" styleClass="descriptionError" text="Description is required" visible="false" />
+                  <Label text="Date" />
+                  <DatePicker fx:id="date" />
+                  <Label fx:id="dateError" styleClass="dateError" text="Date is required" visible="false" />
+                  <Label text="Mail" />
+                  <TextField fx:id="mail" promptText="Mail" styleClass="text-field" />
+                  <Label fx:id="mailError" styleClass="mailError" text="Email must be in the format: exemple@exemple.com" visible="false" />
+                  <Label text="Statut" />
+                  <ChoiceBox fx:id="statut" styleClass="choice-box">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="traitee" />
+                           <String fx:value="non traitee" />
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
                </children>
-            </AnchorPane>
-            <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
-               <children>
-                  <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
-                     <children>
-                        <Label styleClass="title" text=" reclamation Update" />
-                        <Label text="description" />
-                        <TextArea id="description" prefHeight="200.0" prefWidth="200.0" promptText="description" />
-                        <Label id="descriptionError" fx:id="conetnuError1" styleClass="descriptionError" text="description is required" visible="false" />
-                        <Label text="date" />
-                        <DatePicker />
-                        <Label id="dateError" fx:id="dateError1" styleClass="dateError" text="date is required" visible="false" />
-                        <Label text="mail" />
-                        <TextField fx:id="mail1" promptText="mail" styleClass="text-field" />
-                        <Label id="mailError" fx:id="mailError1" styleClass="mailError" text="Email must be in the format: exemple@exemple.com" visible="false" />
-                        <Label text="statut" />
-                        <ChoiceBox fx:id="role1" styleClass="choice-box">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="traitee" />
-                                 <String fx:value="non traitee" />
-                              </FXCollections>
-                           </items>
-                        </ChoiceBox>
-                        <Label id="statutError" fx:id="statutdError1" styleClass="error" text="statut is required" visible="false" />
-                     </children>
-                  </VBox>
-                  <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherreclamation" styleClass="button" text="Back" />
-                  <Button layoutX="749.0" layoutY="18.0" onAction="#Updatereclamation" prefWidth="150.0" styleClass="button" text="Update" />
-               </children>
-            </AnchorPane>
+            </VBox>
+            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherreclamation" styleClass="button" text="Back" />
+            <Button layoutX="749.0" layoutY="18.0" onAction="#Updatereclamation" prefWidth="150.0" styleClass="button" text="Update" />
          </children>
       </AnchorPane>
    </children>

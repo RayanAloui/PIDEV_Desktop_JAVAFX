@@ -8,18 +8,18 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.affichererclamationController">
    <children>
-      <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@../../../../../Downloads/PIDEV_Desktop_JAVAFX-user/PIDEV_Desktop_JAVAFX-user/src/main/resources/styles.css">
+      <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
          <children>
-            <TableView id="tableViewreclamations" fx:id="tableViewreclamations" layoutX="54.0" layoutY="200.0" prefHeight="300.0" prefWidth="502.0" styleClass="table-view">
+            <TableView fx:id="tableViewReclamations" layoutX="54.0" layoutY="200.0" prefHeight="300.0" prefWidth="502.0" styleClass="table-view">
                <columns>
                   <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
-                  <TableColumn id="contenu" fx:id="columncontenu" prefWidth="100.0" text="contenu" />
-                  <TableColumn id="date" fx:id="columndate" prefWidth="100.0" text="date" />
-                  <TableColumn id="mail" fx:id="colummail" prefWidth="80.0" text="mail" />
-                  <TableColumn id="statut" fx:id="columnstatut" prefWidth="120.0" text="statut" />
+                  <TableColumn fx:id="columncontenu" prefWidth="100.0" text="Contenu" />
+                  <TableColumn fx:id="columndate" prefWidth="100.0" text="Date" />
+                  <TableColumn fx:id="colummail" prefWidth="80.0" text="Mail" />
+                  <TableColumn fx:id="columnstatut" prefWidth="120.0" text="Statut" />
                </columns>
             </TableView>
-            <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="reclamation Table" textAlignment="CENTER" />
+            <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Reclamation Table" textAlignment="CENTER" />
             <Button layoutX="64.0" layoutY="141.0" mnemonicParsing="false" onAction="#GoToAddreclamation" styleClass="button add-button" text="+" />
             <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#Deletererclamation" styleClass="button" text="DELETE" />
             <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdatereclamation" styleClass="button" text="UPDATE" />
