@@ -32,7 +32,7 @@ public class affichererclamationController {
     private TableColumn<Reclamation, String> colummail;
 
     @FXML
-    private TableColumn<Reclamation, String> columncontenu;
+    private TableColumn<Reclamation, String> columndescription;
 
     @FXML
     private TableColumn<Reclamation, String> columndate;
@@ -45,7 +45,7 @@ public class affichererclamationController {
         // Initialize TableColumn bindings
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colummail.setCellValueFactory(new PropertyValueFactory<>("mail"));
-        columncontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        columndescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         columndate.setCellValueFactory(new PropertyValueFactory<>("date"));
         columnstatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
 
