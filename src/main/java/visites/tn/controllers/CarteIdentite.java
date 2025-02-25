@@ -2,6 +2,9 @@ package visites.tn.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
@@ -13,6 +16,7 @@ import visites.tn.entities.visiteurs;
 import visites.tn.services.VisiteursService;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -61,30 +65,43 @@ public class CarteIdentite {
         try {
             // 🔹 Extraction du texte via OCR
             String extractedText = tesseract.doOCR(imageFile);
-            extractedText = new String(extractedText.getBytes(), StandardCharsets.UTF_8);
 
             // 🔹 Détection du CIN (8 chiffres)
             Pattern pattern = Pattern.compile("\\b\\d{8}\\b");
             Matcher matcher = pattern.matcher(extractedText);
 
             if (matcher.find()) {
-                String cinStr = matcher.group(); // 🔹 Extraction du CIN en String
+                String cinStr = matcher.group(); // Extraction du CIN
 
                 VisiteursService vs = new VisiteursService();
-                visiteurs visiteur = vs.rechercherParCIN(cinStr); // ✅ Recherche avec `String cin`
+                visiteurs visiteur = vs.rechercherParCIN(cinStr);
 
                 if (visiteur != null) {
                     showInfo("Connexion réussie", "Bienvenue " + visiteur.getNom() + " " + visiteur.getPrenom() + " !");
+
+                    // 🔹 Ouvrir la page AjouterVisite et passer l'ID du visiteur
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/visite/AjouterVisite.fxml"));
+                    Parent root = loader.load();
+
+                    // Récupérer le contrôleur de la nouvelle page
+                    AjouterVisite controller = loader.getController();
+                    controller.initData(visiteur.getId()); // Passer l'ID du visiteur
+
+                    // Changer la scène
+                    Stage stage = (Stage) nomfichier.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.show();
                 } else {
                     showError("Aucun visiteur trouvé avec ce CIN !");
                 }
             } else {
                 showError("Aucun CIN valide détecté !");
             }
-        } catch (TesseractException e) {
-            showError("Erreur OCR : " + e.getMessage());
+        } catch (TesseractException | IOException e) {
+            showError("Erreur : " + e.getMessage());
         }
     }
+
 
     private void showInfo(String titre, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

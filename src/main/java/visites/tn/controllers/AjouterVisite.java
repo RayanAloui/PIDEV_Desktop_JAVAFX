@@ -37,6 +37,13 @@ public class AjouterVisite {
     @FXML
     private TextField visiteur;
 
+
+
+    public void initData(int visiteurId) {
+        visiteur.setText(String.valueOf(visiteurId)); // 🔹 Remplir le champ avec l'ID du visiteur
+        visiteur.setEditable(false); // 🔹 Désactiver la modification manuelle
+    }
+
     @FXML
     void AjouterV(ActionEvent event) {
         try {
