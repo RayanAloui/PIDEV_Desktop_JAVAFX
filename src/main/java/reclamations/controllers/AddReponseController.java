@@ -26,31 +26,30 @@ public class AddReponseController {
     @FXML
     private Label descriptionError;
 
-
     @FXML
     private ChoiceBox<String> statut;
 
     @FXML
     private Label statutError;
 
+    /**
+     * Initialisation des éléments de l'interface utilisateur
+     * Masquage des messages d'erreur par défaut.
+     */
     @FXML
     public void initialize() {
-        // Initialize error labels to be invisible by default
         descriptionError.setVisible(false);
-
         statutError.setVisible(false);
-
-        // Set default text for error labels (optional)
         descriptionError.setText("Description is required");
-
         statutError.setText("Statut is required");
 
-        // Clear any existing text in input fields (optional)
         description.clear();
-
         statut.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Méthode de navigation vers la page d'affichage des réponses
+     */
     @FXML
     void GoToAfficherReponses(ActionEvent event) {
         try {
@@ -63,61 +62,58 @@ public class AddReponseController {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Could not load the reponse page");
+            alert.setHeaderText("Could not load the response page");
             alert.showAndWait();
         }
     }
 
+    /**
+     * Méthode pour ajouter une réponse à la base de données après validation
+     */
     @FXML
     void addReponse(ActionEvent event) {
-
         boolean isValid = true;
 
-        // Reset error messages
-
+        // Réinitialiser les messages d'erreur
         descriptionError.setVisible(false);
         statutError.setVisible(false);
 
-
-
-
-        // Validate description
+        // Validation de la description
         if (description.getText().trim().isEmpty()) {
             descriptionError.setText("Description is required");
             descriptionError.setVisible(true);
             isValid = false;
         }
 
-        // Validate statut
+        // Validation du statut
         if (statut.getValue() == null) {
             statutError.setText("Statut is required");
             statutError.setVisible(true);
             isValid = false;
         }
 
-        // If validation fails, stop further execution
+        // Si la validation échoue, arrêter l'exécution
         if (!isValid) {
             return;
         }
 
-        // Create a new reponse object
+        // Créer une nouvelle réponse
         Reponse reponse = new Reponse();
-
         reponse.setDescription(description.getText());
         reponse.setStatut(statut.getValue());
         reponse.setDate(Date.valueOf(LocalDate.now()));
 
-        // Add reponse to the database
+        // Ajouter la réponse à la base de données
         ReponseService reponseService = new ReponseService();
         reponseService.ajouter(reponse);
 
-        // Show success alert
+        // Afficher un message de succès
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Reponse Added");
-        alert.setHeaderText("reponse added successfully");
+        alert.setTitle("Response Added");
+        alert.setHeaderText("Response added successfully");
         alert.showAndWait();
 
-        // Redirect to the reponse list page
+        // Rediriger vers la page de la liste des réponses
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherReponse.fxml"));
             Parent root = loader.load();
@@ -128,7 +124,7 @@ public class AddReponseController {
             e.printStackTrace();
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("Failed to load the reponse list page");
+            errorAlert.setHeaderText("Failed to load the response list page");
             errorAlert.showAndWait();
         }
     }
