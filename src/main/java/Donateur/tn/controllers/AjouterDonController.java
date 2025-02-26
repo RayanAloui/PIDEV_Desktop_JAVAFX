@@ -107,7 +107,7 @@ public class AjouterDonController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/PayementFlouci.fxml"));
             Parent root = loader.load();
-            PayementFlouciController payementController = loader.getController();
+            PayementStripeController payementController = loader.getController();
             payementController.setMontant(Double.parseDouble(montant.getText()));
             Stage stage = (Stage) Donateur_id.getScene().getWindow();
             stage.setScene(new Scene(root));
