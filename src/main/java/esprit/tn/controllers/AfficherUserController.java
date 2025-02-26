@@ -319,18 +319,18 @@ public class AfficherUserController {
     @FXML
     private void updateUserPieChart(String filter) {
         UserService userService = new UserService();
-        List<User> usersX = userService.getall(comboBoxRole.getValue());
+        List<User> usersX = userService.getall(null);
         List<User> users = usersX;
 
-        // Initialize counters for pie chart
+
         int activeCount = 0;
         int blockedCount = 0;
         int confirmedCount = 0;
         int unconfirmedCount = 0;
 
-        // Loop through the users and count based on their attributes
+
         for (User user : users) {
-            // Count active/blocked users
+
             if (user.getIsBlocked() == 1) {
                 blockedCount++;
             } else {

@@ -18,7 +18,7 @@ public class NotificationService {
 
     public List<Notification> getAllNotifications() {
         List<Notification> notifications = new ArrayList<>();
-        String query = "SELECT * FROM notification order by date desc";
+        String query = "SELECT * FROM notification ORDER BY date DESC, heure DESC"; 
 
         try (Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery(query)) {
             while (rs.next()) {
@@ -38,6 +38,7 @@ public class NotificationService {
 
         return notifications;
     }
+
 
 
 

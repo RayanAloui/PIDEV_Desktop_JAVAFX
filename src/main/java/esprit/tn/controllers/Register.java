@@ -190,7 +190,7 @@ public class Register {
         Notification notification = new Notification();
 
         notification.setUsername(user.getName());
-        notification.setActivite("signed in ");
+        notification.setActivite("Created account ");
         String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
         notification.setHeure(formattedTime);
         notification.setDate(Date.valueOf(LocalDate.now()));
