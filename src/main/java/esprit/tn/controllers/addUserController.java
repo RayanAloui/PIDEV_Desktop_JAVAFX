@@ -116,7 +116,9 @@ public class addUserController {
         user.setSurname(surname.getText());
         user.setTelephone(telephone.getText());
         user.setEmail(email.getText());
-        user.setPassword(password.getText());
+        UserService X=new UserService();
+        String cryptedPass= X.CRYPTE(password.getText());
+        user.setPassword(cryptedPass);
         user.setRole(selectedRole);
 
         user.setBlocked(0);

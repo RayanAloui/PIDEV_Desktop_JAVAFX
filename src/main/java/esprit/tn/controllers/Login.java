@@ -1,9 +1,9 @@
 package esprit.tn.controllers;
 
-import esprit.tn.entities.EmailService;
-import esprit.tn.entities.Notification;
-import esprit.tn.entities.Session;
+import com.google.api.services.oauth2.model.Userinfo;
+import esprit.tn.entities.*;
 import esprit.tn.services.NotificationService;
+import esprit.tn.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.prefs.Preferences;
-import  esprit.tn.entities.User;
 
 import java.sql.Date;
 import java.time.LocalTime;
@@ -104,7 +103,9 @@ public class Login {
         try {
             PreparedStatement preparedStatement = cnx.prepareStatement(query);
             preparedStatement.setString(1, email.getText());
-            preparedStatement.setString(2, password.getText());
+            UserService X=new UserService();
+            String cryptedPassword = X.CRYPTE(password.getText());
+            preparedStatement.setString(2,cryptedPassword);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -233,6 +234,61 @@ public class Login {
     }
 
 
+    public void GOOGLE(ActionEvent actionEvent) {
+        try {
+            // Authenticate the Google user
+            Userinfo googleUser = GoogleSignInService.authenticateUser();
 
+            // Check or insert user in DB
+            UserService userService = new UserService();
+            User user = userService.addGoogleUser(googleUser.getName(), googleUser.getId());
+
+            if (user != null) {
+                // Set user in session
+                Session session = Session.getInstance();
+                session.setCurrentUser(user);
+
+                Notification notification = new Notification();
+
+                notification.setUsername(user.getName());
+                notification.setActivite("Connected with API google ");
+                String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                notification.setHeure(formattedTime);
+                notification.setDate(Date.valueOf(LocalDate.now()));
+
+
+                NotificationService notificationService = new NotificationService();
+                notificationService.ajouter(notification);
+
+                // Show success message
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION,
+                        "Bienvenue Vous êtes connecté avec Google : " ,
+                        ButtonType.OK);
+                successAlert.setTitle("Connexion réussie");
+                successAlert.setHeaderText(null);
+                successAlert.showAndWait();
+
+                System.out.println("Utilisateur connecté : " + user.getEmail());
+                navigateToPage(actionEvent, "/home.fxml");
+            } else {
+                // Show error message if user is not added successfully
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR,
+                        "Utilisateur non ajouté à la base de données.", ButtonType.OK);
+                errorAlert.setTitle("Erreur");
+                errorAlert.setHeaderText("Échec de l'ajout de l'utilisateur");
+                errorAlert.showAndWait();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            // Show error alert if authentication fails
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR,
+                    "Échec de la connexion avec Google. Veuillez réessayer.", ButtonType.OK);
+            errorAlert.setTitle("Erreur de connexion");
+            errorAlert.setHeaderText("Connexion échouée");
+            errorAlert.showAndWait();
+        }
+    }
 
 }

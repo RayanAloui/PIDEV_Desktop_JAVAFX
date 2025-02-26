@@ -60,8 +60,13 @@ public class NewPassword {
             showAlert("Error", "Passwords do not match!", Alert.AlertType.ERROR);
             return;
         }
-
-        user.setPassword(password);
+        if (password.length() < 7) {
+            showAlert("Error", "Password must be at least 7 characters long!", Alert.AlertType.ERROR);
+            return;
+        }
+            UserService X=new UserService();
+            String cryptedPass=X.CRYPTE(password);
+        user.setPassword(cryptedPass);
         userService.modifier(user, user.getId());
         showAlert("Success", "Password updated successfully!", Alert.AlertType.INFORMATION);
 

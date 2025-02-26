@@ -38,6 +38,7 @@
                 <Hyperlink fx:id="signUpLink" onAction="#GoToRegister" style="-fx-font-size: 14px;" text="Sign Up" />
                 <Hyperlink fx:id="forgotPasswordLink" onAction="#GoToForgetPWD" style="-fx-font-size: 14px;" text="Forgot Password?" />
             </HBox>
+         <Button mnemonicParsing="false" onAction="#GOOGLE" text="Sign up GOOGLE" />
         </VBox>
     </children>
 </AnchorPane>

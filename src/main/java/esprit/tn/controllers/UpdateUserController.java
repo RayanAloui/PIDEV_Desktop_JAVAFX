@@ -74,7 +74,9 @@ public class UpdateUserController {
         surname.setText(user.getSurname());
         telephone.setText(user.getTelephone());
         email.setText(user.getEmail());
-        password.setText(user.getPassword());
+        UserService X=new UserService();
+        String realPass=X.DECRYPTE(user.getPassword());
+        password.setText(realPass);
         role.setValue(user.getRole());
 
     }
@@ -159,7 +161,10 @@ public class UpdateUserController {
             selectedUser.setSurname(surname.getText());
             selectedUser.setTelephone(telephone.getText());
             selectedUser.setEmail(email.getText());
-            selectedUser.setPassword(password.getText());
+            //
+            UserService X=new UserService();
+            String cryptedPass = X.CRYPTE( password.getText());
+            selectedUser.setPassword(cryptedPass);
             selectedUser.setRole(role.getValue());
 
 

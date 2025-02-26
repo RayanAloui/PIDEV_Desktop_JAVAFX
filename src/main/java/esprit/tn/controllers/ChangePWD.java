@@ -55,7 +55,6 @@ public class ChangePWD {
             alert.showAndWait();
         }
     }
-
     @FXML
     void updatePWD(ActionEvent event) {
         // Check if the user is logged in
@@ -64,7 +63,13 @@ public class ChangePWD {
 
             // Validate the current password
             String currentPassword = currentPasswordField.getText();
-            if (!currentPassword.equals(currentUser.getPassword())) {
+
+            // Encrypt the current password before comparison
+            UserService userService = new UserService();
+            String cryptedCurrentPassword = userService.CRYPTE(currentPassword);
+
+            // Check if the entered current password matches the stored password
+            if (!cryptedCurrentPassword.equals(currentUser.getPassword())) {
                 showAlert(AlertType.ERROR, "Incorrect Current Password", "The current password you entered is incorrect.");
                 return;
             }
@@ -85,19 +90,21 @@ public class ChangePWD {
                 return;
             }
 
-            // Proceed to update the password in the UserService
-            UserService userService = new UserService();
-            currentUser.setPassword(newPassword);  // Update the password field of the current user
+            // Encrypt the new password before updating
+            String cryptedNewPassword = userService.CRYPTE(newPassword);  // Encrypt the new password
 
+            currentUser.setPassword(cryptedNewPassword);  // Update the password field of the current user
+
+            // Update the user in the database
             userService.modifier(currentUser, currentUser.getId());
-            Notification notification = new Notification();
 
+            // Create and send a notification
+            Notification notification = new Notification();
             notification.setUsername(currentUser.getName());
-            notification.setActivite("Changed password ");
+            notification.setActivite("Changed password");
             String formattedTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
             notification.setHeure(formattedTime);
             notification.setDate(Date.valueOf(LocalDate.now()));
-
 
             NotificationService notificationService = new NotificationService();
             notificationService.ajouter(notification);
@@ -113,6 +120,7 @@ public class ChangePWD {
             showAlert(AlertType.ERROR, "Session Expired", "You must be logged in to update your password.");
         }
 
+        // Clear session and navigate back to login screen
         Session session = Session.getInstance();
         session.clearSession();
         try {
@@ -129,8 +137,8 @@ public class ChangePWD {
             alert.setContentText("An error occurred while trying to navigate back to the user list.");
             alert.showAndWait();
         }
-
     }
+
 
     // Utility method to show alerts
     private void showAlert(AlertType type, String title, String message) {

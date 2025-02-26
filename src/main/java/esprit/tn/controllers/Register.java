@@ -163,7 +163,16 @@ public class Register {
         user.setSurname(surname.getText());
         user.setTelephone(telephone.getText());
         user.setEmail(email.getText());
-        user.setPassword(password.getText());
+
+        //crypte pass
+        UserService X = new UserService();
+        String passwordCrypte =  X.CRYPTE(password.getText());
+        if(passwordCrypte==null){
+            System.out.println("passwordCrypte is null");
+        }
+        user.setPassword(passwordCrypte);
+        //crypte pass
+
         user.setRole("client");
 
         user.setBlocked(0);

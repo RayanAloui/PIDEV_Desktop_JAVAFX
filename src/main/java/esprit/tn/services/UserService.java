@@ -6,9 +6,8 @@ import esprit.tn.main.DatabaseConnection;
 import java.io.FileOutputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.Date;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -21,8 +20,12 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Phrase;
 import javafx.scene.image.Image;
-import java.util.Date;
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class UserService implements Iservice<User> {
@@ -435,6 +438,139 @@ public class UserService implements Iservice<User> {
             table.addCell(cell);
         }
     }
+
+
+
+
+    public String CRYPTE(String password) {
+        // Set the key to 10
+        int key = 10;
+
+        StringBuilder encryptedPassword = new StringBuilder();
+
+        // Loop through each character and apply the ASCII shift by the key
+        for (int i = 0; i < password.length(); i++) {
+            char ch = password.charAt(i);
+            // Shift the ASCII value of the character by the key
+            encryptedPassword.append((char) (ch + key));
+        }
+
+        // Append the key at the end in the format key and use '\u001F' as separator
+        encryptedPassword.append((char) 0x1F); // Using the Unit Separator ASCII character
+        encryptedPassword.append(key);
+
+        System.out.println("Encrypted Password: " + encryptedPassword.toString());
+        return encryptedPassword.toString();
+    }
+
+    // Method to decrypt the password by reversing the shift using the key
+    public String DECRYPTE(String encryptedPassword) {
+        // Find the separator position (character \u001F)
+        int separatorIndex = encryptedPassword.indexOf((char) 0x1F);
+
+        // If separator is not found, return null
+        if (separatorIndex == -1) {
+            System.out.println("Separator not found.");
+            return null;
+        }
+
+        // Extract the key from the part after the separator
+        int key = Integer.parseInt(encryptedPassword.substring(separatorIndex + 1));
+
+        // Decrypt the password by reversing the ASCII shift by the key
+        StringBuilder decryptedPassword = new StringBuilder();
+        for (int i = 0; i < separatorIndex; i++) {
+            char ch = encryptedPassword.charAt(i);
+            // Reverse the shift by subtracting the key from the character's ASCII value
+            decryptedPassword.append((char) (ch - key));
+        }
+
+        System.out.println("Decrypted Password: " + decryptedPassword.toString());
+        return decryptedPassword.toString();
+    }
+    // Check if the user exists
+    public User getUserByEmail(String email) {
+        String query = "SELECT * FROM user WHERE email = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new User(
+
+                        resultSet.getString("email")
+
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public User addGoogleUser(String nameGU, String emailGU) {
+        if (emailGU == null || emailGU.isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+
+        // Check if the user already exists in the database
+        User existingUser = getUserByEmail(emailGU);
+        if (existingUser != null) {
+            return existingUser; // User already exists, return it
+        }
+
+        // Prepare the SQL query to insert the new user with default values
+        String insertQuery = "INSERT INTO user (name, surname, telephone, email, password, role, isBlocked, isConfirmed, numberVerification, token) "
+                + "VALUES (?, ?, ?, ?, 0, ?, 0, 0, 0, 0)";
+
+        try (PreparedStatement statement = cnx.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            // Set the parameters for the SQL query
+            statement.setString(1, nameGU); // Google user's name
+            statement.setString(2, "GOOGLE"); // Default empty surname
+            statement.setString(3, ""); // Default empty telephone
+            statement.setString(4, emailGU); // Google user's email
+            statement.setString(5, "client"); // Default role
+
+            // Execute the update and get the generated keys
+            statement.executeUpdate();
+
+            // Get the generated user ID (auto-increment value)
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                // Return a new User object with the provided email and default values
+                return new User(
+                        generatedKeys.getInt(1), // Set the generated ID
+                        nameGU, // Google user's name
+                        "", // Default surname
+                        "", // Default telephone
+                        emailGU, // Google user's email
+                        "", // Default password
+                        "user", // Default role
+                        0, // Default isBlocked
+                        0, // Default isConfirmed
+                        0, // Default numberVerification
+                        0  // Default token
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -29,6 +29,10 @@ public class User {
         this.numberVerification = numberVerification;
         this.token=token;
     }
+    public User(String email)
+    {
+        this.email = email;
+    }
 
     public User(int id, String name, String surname, String telephone, String email, String password, String role, int isBlocked, int isConfirmed, int numberVerification,int token) {
         this.id = id;
