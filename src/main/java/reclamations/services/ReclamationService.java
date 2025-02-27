@@ -54,7 +54,6 @@ public class ReclamationService implements Iservices<Reclamation> {
     @Override
 
     public void modifier(Reclamation reclamation) {
-        // Log the reclamation object to check if it's passed correctly
         System.out.println("Modifier method called with reclamation: " + reclamation);
 
         if (cnx == null) {
@@ -63,84 +62,53 @@ public class ReclamationService implements Iservices<Reclamation> {
         }
 
         try {
-            // Disable autocommit before executing the update
             cnx.setAutoCommit(false);
 
-            // Validate the data before proceeding
+            // Validate input
             if (reclamation.getMail() == null || reclamation.getMail().trim().isEmpty() ||
-                    reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 10 ||
+                    reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 1 ||
                     reclamation.getStatut() == null ||
-                    (!reclamation.getStatut().equalsIgnoreCase("Traitee") && !reclamation.getStatut().equalsIgnoreCase("Non Traitee"))) {
+                    (!reclamation.getStatut().equalsIgnoreCase("Traitee") &&
+                            !reclamation.getStatut().equalsIgnoreCase("Non Traitee"))) {
                 System.out.println("Erreur : Données invalides pour la réclamation.");
                 return;
             }
 
-
-            // Log values to check what is being passed into the update
-            System.out.println("Values being passed into update: " +
-                    "Mail: " + reclamation.getMail() + ", " +
-                    "Description: " + reclamation.getDescription() + ", " +
-                    "Date: " + reclamation.getDate() + ", " +
-                    "Statut: " + reclamation.getStatut() + ", " +
-                    "ID: " + reclamation.getId());
+            // Debug: Log description length
+            System.out.println("Description before update: " + reclamation.getDescription());
+            System.out.println("Description length: " + reclamation.getDescription().length());
 
             // SQL query for updating the reclamation
             String query = "UPDATE reclamations SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
 
             try (PreparedStatement pst = cnx.prepareStatement(query)) {
-                // Set the parameters for the SQL query
                 pst.setString(1, reclamation.getMail());
-                pst.setString(2, reclamation.getDescription());
+                pst.setString(2, reclamation.getDescription().trim());  // Trim spaces
                 pst.setDate(3, reclamation.getDate());
                 pst.setString(4, reclamation.getStatut());
                 pst.setInt(5, reclamation.getId());
 
-                // Log the values that are being passed into the SQL query
-                System.out.println("SQL Query: " + query);
-                System.out.println("Values: " +
-                        reclamation.getMail() + ", " +
-                        reclamation.getDescription() + ", " +
-                        reclamation.getDate() + ", " +
-                        reclamation.getStatut() + ", " +
-                        reclamation.getId());
-
-                // Execute the update query
                 int rowsAffected = pst.executeUpdate();
 
-                // Log how many rows were affected by the query
                 System.out.println("Rows affected: " + rowsAffected);
 
-                // Commit the transaction if rows are updated
                 if (rowsAffected > 0) {
-                    cnx.commit();  // Commit the transaction
+                    cnx.commit();
                     System.out.println("Réclamation updated successfully!");
                 } else {
-                    System.out.println("No rows were updated. Please check the ID and values.");
+                    System.out.println("No rows updated! Check if the ID exists.");
                 }
 
             } catch (SQLException e) {
-                // Handle SQL exceptions
-                System.err.println("Error during the update operation: " + e.getMessage());
-                e.printStackTrace(); // Print full stack trace for debugging
-                try {
-                    // Rollback in case of error
-                    cnx.rollback();
-                } catch (SQLException ex) {
-                    System.err.println("Error during rollback: " + ex.getMessage());
-                }
+                System.err.println("SQL Error: " + e.getMessage());
+                cnx.rollback();
             } finally {
-                // Restore autocommit to true after the transaction
-                try {
-                    cnx.setAutoCommit(true);
-                } catch (SQLException ex) {
-                    System.err.println("Error while restoring autocommit: " + ex.getMessage());
-                }
+                cnx.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            System.err.println("Error in setting autocommit: " + e.getMessage());
+            System.err.println("Database error: " + e.getMessage());
         }
     }
-
 
 
 
