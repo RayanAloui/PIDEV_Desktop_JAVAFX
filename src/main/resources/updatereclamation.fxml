@@ -21,10 +21,7 @@
                   <Label text="Description" />
                   <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
                   <Label fx:id="descriptionError" styleClass="descriptionError" text="Description is required" visible="false" />
-                  <Label text="Date" />
-                  <DatePicker fx:id="date" />
-                  <Label fx:id="dateError" styleClass="dateError" text="Date is required" visible="false" />
-                  <Label text="Mail" />
+
                   <TextField fx:id="mail" promptText="Mail" styleClass="text-field" />
                   <Label fx:id="mailError" styleClass="mailError" text="Email must be in the format: exemple@exemple.com" visible="false" />
                   <Label text="Statut" />

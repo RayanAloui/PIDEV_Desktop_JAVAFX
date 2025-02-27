@@ -57,9 +57,9 @@ public class ReponseService implements Iservices<Reponse> {
         // Validation des données
         if (
                 reponse.getDescription() == null || reponse.getDescription().trim().length() < 10 ||
-                reponse.getDate() == null ||
-                reponse.getStatut() == null || (!reponse.getStatut().equals("Pending") &&
-                !reponse.getStatut().equals("Resolved") && !reponse.getStatut().equals("Closed"))) {
+                        reponse.getDate() == null ||
+                        reponse.getStatut() == null || (!reponse.getStatut().equals("Pending") &&
+                        !reponse.getStatut().equals("Resolved") && !reponse.getStatut().equals("Closed"))) {
 
             System.out.println("Erreur : Données invalides pour la réponse.");
             return;

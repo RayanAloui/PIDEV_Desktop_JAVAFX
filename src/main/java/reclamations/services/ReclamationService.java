@@ -53,30 +53,76 @@ public class ReclamationService implements Iservices<Reclamation> {
 
     @Override
     public void modifier(Reclamation reclamation) {
-        // Validation des données
-        if (reclamation.getMail() == null || reclamation.getMail().trim().isEmpty() ||
-                reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 10 ||
-                reclamation.getDate() == null ||
-                reclamation.getStatut() == null || (!reclamation.getStatut().equals("Pending") &&
-                !reclamation.getStatut().equals("Resolved") && !reclamation.getStatut().equals("Closed"))) {
-
-            System.out.println("Erreur : Données invalides pour la réclamation.");
+        // Ensure the database connection is not null and available
+        if (cnx == null) {
+            System.err.println("Database connection is null.");
             return;
         }
 
-        // Requête SQL pour mettre à jour une réclamation
-        String req = "UPDATE reclamations SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
+        try {
+            // Disable autocommit before executing the update
+            cnx.setAutoCommit(false);
 
-        try (PreparedStatement stm = cnx.prepareStatement(req)) {
-            stm.setString(1, reclamation.getMail());
-            stm.setString(2, reclamation.getDescription());
-            stm.setDate(3, reclamation.getDate());
-            stm.setString(4, reclamation.getStatut());
-            stm.setInt(5, reclamation.getId());
-            stm.executeUpdate();
-            System.out.println("Réclamation modifiée : " + reclamation);
+            // Validate the data before proceeding
+            if (reclamation.getMail() == null || reclamation.getMail().trim().isEmpty() ||
+                    reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 10 ||
+                    reclamation.getDate() == null ||
+                    reclamation.getStatut() == null || (!reclamation.getStatut().equals("Pending") &&
+                    !reclamation.getStatut().equals("Resolved") && !reclamation.getStatut().equals("Closed"))) {
+
+                System.out.println("Erreur : Données invalides pour la réclamation.");
+                return;
+            }
+
+            // SQL query for updating the reclamation
+            String query = "UPDATE reclamations SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
+
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                // Set the parameters for the SQL query
+                pst.setString(1, reclamation.getMail());
+                pst.setString(2, reclamation.getDescription());
+                pst.setDate(3, reclamation.getDate());
+                pst.setString(4, reclamation.getStatut());
+                pst.setInt(5, reclamation.getId());
+
+                // Print query and values for debugging
+                System.out.println("SQL Query: " + query);
+                System.out.println("Values: " + reclamation.getMail() + ", " + reclamation.getDescription() + ", " + reclamation.getDate() + ", " + reclamation.getStatut() + ", " + reclamation.getId());
+
+                // Execute the update query
+                int rowsAffected = pst.executeUpdate();
+
+                // Log how many rows were affected by the query
+                System.out.println("Rows affected: " + rowsAffected);
+
+                // Commit the transaction if rows are updated
+                if (rowsAffected > 0) {
+                    cnx.commit();  // Commit the transaction
+                    System.out.println("Réclamation updated successfully!");
+                } else {
+                    System.out.println("No rows were updated. Please check the ID and values.");
+                }
+
+            } catch (SQLException e) {
+                // Handle SQL exceptions
+                System.err.println("Error during the update operation: " + e.getMessage());
+                e.printStackTrace(); // Print full stack trace for debugging
+                try {
+                    // Rollback in case of error
+                    cnx.rollback();
+                } catch (SQLException ex) {
+                    System.err.println("Error during rollback: " + ex.getMessage());
+                }
+            } finally {
+                // Restore autocommit to true after the transaction
+                try {
+                    cnx.setAutoCommit(true);
+                } catch (SQLException ex) {
+                    System.err.println("Error while restoring autocommit: " + ex.getMessage());
+                }
+            }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour de la réclamation : " + e.getMessage());
+            System.err.println("Error in setting autocommit: " + e.getMessage());
         }
     }
 

@@ -26,8 +26,7 @@ public class updaterclamationController {
     @FXML
     private TextArea description;
 
-    @FXML
-    private DatePicker date;
+
 
     @FXML
     private TextField mail;
@@ -38,8 +37,7 @@ public class updaterclamationController {
     @FXML
     private Label descriptionError;
 
-    @FXML
-    private Label dateError;
+
 
     @FXML
     private Label mailError;
@@ -53,7 +51,7 @@ public class updaterclamationController {
         this.selectedReclamation = reclamation;
         description.setText(reclamation.getDescription());
         mail.setText(reclamation.getMail());
-        date.setValue(reclamation.getDate().toLocalDate());
+
         statut.setValue(reclamation.getStatut());
     }
 
@@ -77,7 +75,7 @@ public class updaterclamationController {
     @FXML
     public void Updatereclamation(ActionEvent event) {
         descriptionError.setVisible(false);
-        dateError.setVisible(false);
+
         mailError.setVisible(false);
         statutError.setVisible(false);
 
@@ -89,11 +87,7 @@ public class updaterclamationController {
             descriptionError.setVisible(true);
             isValid = false;
         }
-        if (date.getValue() == null) {
-            dateError.setText("Date is required");
-            dateError.setVisible(true);
-            isValid = false;
-        }
+
         String emailPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         if (mail.getText().trim().isEmpty() || !mail.getText().trim().matches(emailPattern)) {
             mailError.setText("Invalid email format");
@@ -113,7 +107,7 @@ public class updaterclamationController {
         if (selectedReclamation != null) {
             selectedReclamation.setDescription(description.getText());
             selectedReclamation.setMail(mail.getText());
-            selectedReclamation.setDate(Date.valueOf(date.getValue()));
+
             selectedReclamation.setStatut(statut.getValue());
 
             ReclamationService reclamationService = new ReclamationService();
