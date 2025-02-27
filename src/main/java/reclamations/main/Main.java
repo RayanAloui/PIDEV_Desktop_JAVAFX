@@ -8,8 +8,9 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+
         // Test if ReclamationService instance can be retrieved
-        ReclamationService reclamationService = ReclamationService.getInstance();
+       ReclamationService reclamationService = ReclamationService.getInstance();
         if (reclamationService == null) {
             System.err.println("Erreur : Impossible d'obtenir une instance de ReclamationService.");
             return;
@@ -21,7 +22,7 @@ public class Main {
                 "test@example.com",
                 "Test issue",
                 Date.valueOf(LocalDate.now()),
-                "Pending"
+                ""
         );
 
         try {

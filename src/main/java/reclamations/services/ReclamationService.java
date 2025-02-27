@@ -52,8 +52,11 @@ public class ReclamationService implements Iservices<Reclamation> {
     }
 
     @Override
+
     public void modifier(Reclamation reclamation) {
-        // Ensure the database connection is not null and available
+        // Log the reclamation object to check if it's passed correctly
+        System.out.println("Modifier method called with reclamation: " + reclamation);
+
         if (cnx == null) {
             System.err.println("Database connection is null.");
             return;
@@ -66,13 +69,20 @@ public class ReclamationService implements Iservices<Reclamation> {
             // Validate the data before proceeding
             if (reclamation.getMail() == null || reclamation.getMail().trim().isEmpty() ||
                     reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 10 ||
-                    reclamation.getDate() == null ||
-                    reclamation.getStatut() == null || (!reclamation.getStatut().equals("Pending") &&
-                    !reclamation.getStatut().equals("Resolved") && !reclamation.getStatut().equals("Closed"))) {
-
+                    reclamation.getStatut() == null ||
+                    (!reclamation.getStatut().equalsIgnoreCase("Traitee") && !reclamation.getStatut().equalsIgnoreCase("Non Traitee"))) {
                 System.out.println("Erreur : Données invalides pour la réclamation.");
                 return;
             }
+
+
+            // Log values to check what is being passed into the update
+            System.out.println("Values being passed into update: " +
+                    "Mail: " + reclamation.getMail() + ", " +
+                    "Description: " + reclamation.getDescription() + ", " +
+                    "Date: " + reclamation.getDate() + ", " +
+                    "Statut: " + reclamation.getStatut() + ", " +
+                    "ID: " + reclamation.getId());
 
             // SQL query for updating the reclamation
             String query = "UPDATE reclamations SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
@@ -85,9 +95,14 @@ public class ReclamationService implements Iservices<Reclamation> {
                 pst.setString(4, reclamation.getStatut());
                 pst.setInt(5, reclamation.getId());
 
-                // Print query and values for debugging
+                // Log the values that are being passed into the SQL query
                 System.out.println("SQL Query: " + query);
-                System.out.println("Values: " + reclamation.getMail() + ", " + reclamation.getDescription() + ", " + reclamation.getDate() + ", " + reclamation.getStatut() + ", " + reclamation.getId());
+                System.out.println("Values: " +
+                        reclamation.getMail() + ", " +
+                        reclamation.getDescription() + ", " +
+                        reclamation.getDate() + ", " +
+                        reclamation.getStatut() + ", " +
+                        reclamation.getId());
 
                 // Execute the update query
                 int rowsAffected = pst.executeUpdate();
@@ -125,6 +140,9 @@ public class ReclamationService implements Iservices<Reclamation> {
             System.err.println("Error in setting autocommit: " + e.getMessage());
         }
     }
+
+
+
 
     @Override
     public void supprimer(int id) {
