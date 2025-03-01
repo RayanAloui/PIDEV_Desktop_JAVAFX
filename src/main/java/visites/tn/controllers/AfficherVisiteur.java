@@ -43,6 +43,9 @@ public class AfficherVisiteur {
     private TextField recherche;
 
     @FXML
+    private Button pdf;
+
+    @FXML
     void initialize() {
         VisiteursService vs = new VisiteursService();
         ObservableList<visiteurs> observableList = FXCollections.observableList(vs.getall());
@@ -58,7 +61,27 @@ public class AfficherVisiteur {
 
         // Recherche dynamique ✅
         recherche.textProperty().addListener((observable, oldValue, newValue) -> rechercher(null));
+
+        // Activer le tri sur les colonnes nom et prénom
+        nom.setSortable(true);
+        prenom.setSortable(true);
+
+        // Ajouter un écouteur pour gérer le tri dynamique
+        nom.setOnEditStart(event -> toggleSort(nom));
+        prenom.setOnEditStart(event -> toggleSort(prenom));
     }
+
+    private void toggleSort(TableColumn<visiteurs, ?> column) {
+        if (column.getSortType() == TableColumn.SortType.ASCENDING) {
+            column.setSortType(TableColumn.SortType.DESCENDING);
+        } else {
+            column.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        TableView.getSortOrder().clear();
+        TableView.getSortOrder().add(column);
+    }
+
+
 
     @FXML
     void ajout(ActionEvent event) {

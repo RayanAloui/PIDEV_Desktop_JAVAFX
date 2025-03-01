@@ -36,17 +36,39 @@ public class AfficherVisite {
     private TableColumn<visites, String> statut;
 
     @FXML
-    void initialize(){
-        VisitesService vs=new VisitesService();
-        ObservableList<visites> observableList= FXCollections.observableList(vs.getall());
+    void initialize() {
+        VisitesService vs = new VisitesService();
+        ObservableList<visites> observableList = FXCollections.observableList(vs.getall());
         TableView.setItems(observableList);
+
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         heure.setCellValueFactory(new PropertyValueFactory<>("heure"));
         motif.setCellValueFactory(new PropertyValueFactory<>("motif"));
         statut.setCellValueFactory(new PropertyValueFactory<>("statut"));
 
+        // Permettre le tri automatique des colonnes
+        date.setSortable(true);
+        heure.setSortable(true);
 
+        // Ajouter un écouteur d'événements pour trier par date
+        date.setSortType(TableColumn.SortType.ASCENDING);
+        date.setOnEditStart(event -> toggleSort(date));
+
+        // Ajouter un écouteur d'événements pour trier par heure
+        heure.setSortType(TableColumn.SortType.ASCENDING);
+        heure.setOnEditStart(event -> toggleSort(heure));
     }
+
+    private void toggleSort(TableColumn<visites, ?> column) {
+        if (column.getSortType() == TableColumn.SortType.ASCENDING) {
+            column.setSortType(TableColumn.SortType.DESCENDING);
+        } else {
+            column.setSortType(TableColumn.SortType.ASCENDING);
+        }
+        TableView.getSortOrder().clear();
+        TableView.getSortOrder().add(column);
+    }
+
 
     @FXML
     void ajout(ActionEvent event) {

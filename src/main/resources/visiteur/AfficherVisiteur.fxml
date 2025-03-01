@@ -38,5 +38,6 @@
       </Button>
       <Button layoutX="775.0" layoutY="14.0" mnemonicParsing="false" onAction="#visites" text="Afficher les visites" />
       <TextField fx:id="recherche" layoutX="309.0" layoutY="656.0" prefHeight="49.0" promptText="rechercher un visiteur" />
+      <Button layoutX="644.0" layoutY="14.0" mnemonicParsing="false" onAction="#pdf" text="PDF" />
    </children>
 </AnchorPane>
