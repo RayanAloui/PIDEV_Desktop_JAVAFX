@@ -1,0 +1,61 @@
+/* Style général de l'AnchorPane */
+.root {
+    -fx-background-color: #f4f4f4; /* Couleur de fond */
+    -fx-padding: 20px;
+}
+
+/* Style du TextArea (zone de chat) */
+#chatArea {
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-border-color: #cccccc; /* Bordure grise */
+    -fx-border-radius: 5px; /* Coins arrondis */
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #333333; /* Couleur du texte */
+}
+
+/* Style du TextField (champ de saisie) */
+#userInputField {
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-border-color: #cccccc; /* Bordure grise */
+    -fx-border-radius: 5px; /* Coins arrondis */
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #333333; /* Couleur du texte */
+    -fx-prompt-text-fill: #999999; /* Couleur du texte d'invite */
+}
+
+/* Style du bouton Envoyer */
+#sendButton {
+    -fx-background-color: #4CAF50; /* Fond vert */
+    -fx-text-fill: #ffffff; /* Texte blanc */
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-border-radius: 5px; /* Coins arrondis */
+    -fx-padding: 10px 20px; /* Espacement interne */
+    -fx-cursor: hand; /* Curseur en forme de main */
+}
+
+/* Effet de survol pour le bouton Envoyer */
+#sendButton:hover {
+    -fx-background-color: #45a049; /* Fond vert plus foncé */
+}
+
+/* Effet de clic pour le bouton Envoyer */
+#sendButton:pressed {
+    -fx-background-color: #3d8b40; /* Fond vert encore plus foncé */
+}
+
+/* Style du HBox (conteneur du champ de saisie et du bouton) */
+.hbox {
+    -fx-spacing: 10px; /* Espacement entre les éléments */
+    -fx-alignment: center; /* Alignement au centre */
+}
+
+/* Style du VBox (conteneur principal) */
+.vbox {
+    -fx-spacing: 10px; /* Espacement entre les éléments */
+    -fx-alignment: center; /* Alignement au centre */
+}

@@ -160,4 +160,15 @@ public class AjouterDonController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    @FXML
+    void chatbot(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Chatbot.fxml")));
+            statut.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

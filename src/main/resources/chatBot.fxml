@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="Donateur.tn.controllers.ChatBotController">
+    <stylesheets>
+        <URL value="@style.css" /> <!-- Lien vers un fichier CSS externe -->
+    </stylesheets>
+    <children>
+        <VBox alignment="CENTER" spacing="10" layoutX="50" layoutY="50">
+            <TextArea fx:id="chatArea" editable="false" wrapText="true" prefHeight="300" prefWidth="400" style="-fx-font-size: 14px;"/>
+            <HBox spacing="10">
+                <TextField fx:id="userInputField" promptText="Posez une question..." prefWidth="300" style="-fx-font-size: 14px;"/>
+                <Button fx:id="sendButton" text="Envoyer" onAction="#sendMessage" style="-fx-font-size: 14px;"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>
