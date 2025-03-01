@@ -85,6 +85,7 @@
          </children>
       </GridPane>
       <Button layoutX="510.0" layoutY="360.0" mnemonicParsing="false" onAction="#AjouterV" prefHeight="32.0" prefWidth="82.0" text="Ajouter" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#retour" text="Retour à la liste des visiteurs" />
+      <Button layoutX="766.0" layoutY="13.0" mnemonicParsing="false" onAction="#retour" text="Retour à la liste des visiteurs" />
+      <Button layoutX="24.0" layoutY="21.0" mnemonicParsing="false" onAction="#retourmenu" text="Retour au menu" />
    </children>
 </AnchorPane>

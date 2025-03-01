@@ -149,4 +149,15 @@ public class AjouterVisiteur {
             e.printStackTrace();
         }
     }
+    public void retourmenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/visiteur/Menu.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) nom.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
