@@ -28,6 +28,8 @@
             <Button layoutX="64.0" layoutY="141.0" mnemonicParsing="false" onAction="#GoToAddreponse" styleClass="button add-button" text="+" />
             <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#Deletereponse" styleClass="button" text="DELETE" />
             <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdatereponse" styleClass="button" text="UPDATE" />
+            <Button layoutX="748.0" layoutY="600.0" mnemonicParsing="false" onAction="#pdf" prefHeight="38.0" prefWidth="74.0" text="PDF" />
+
          </children>
       </AnchorPane>
    </children>
