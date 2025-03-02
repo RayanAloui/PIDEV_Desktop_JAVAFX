@@ -15,25 +15,29 @@ public class Reclamation {
     private String description;
     private Date date;
     private String statut;
+    private String imagePath;
 
     // Default constructor
     public Reclamation() {}
 
-    // Constructor without id (for creating new entries)
-    public Reclamation(String mail, String description, Date date, String statut) {
-        this.mail = mail;
-        this.description = description;
-        this.date = date;
-        this.statut = statut;
-    }
+
 
     // Constructor with id (for existing entries)
-    public Reclamation(int id, String mail, String description, Date date, String statut) {
+    public Reclamation(int id, String mail, String description, Date date, String statut, String imagePath) {
         this.id = id;
         this.mail = mail;
         this.description = description;
         this.date = date;
         this.statut = statut;
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     // Getters and Setters

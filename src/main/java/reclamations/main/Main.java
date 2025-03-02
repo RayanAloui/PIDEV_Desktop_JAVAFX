@@ -1,71 +1,69 @@
 package reclamations.main;
 
-import reclamations.entities.Reclamation;
-import reclamations.services.ReclamationService;
+import reclamations.entities.Reponse;
+import reclamations.services.ReponseService;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        // Test if ReclamationService instance can be retrieved
-        ReclamationService reclamationService = ReclamationService.getInstance();
-        if (reclamationService == null) {
-            System.err.println("Erreur : Impossible d'obtenir une instance de ReclamationService.");
+        // Test if ReponseService instance can be retrieved
+        ReponseService reponseService = ReponseService.getInstance();
+        if (reponseService == null) {
+            System.err.println("Erreur : Impossible d'obtenir une instance de ReponseService.");
             return;
         }
-        System.out.println("ReclamationService instance retrieved successfully.");
+        System.out.println("ReponseService instance retrieved successfully.");
 
-        // Test adding a reclamation
-        Reclamation reclamationToAdd = new Reclamation(
-                "test@example.com",
-                "Test issue",
-                Date.valueOf(LocalDate.now()),
-                ""
+        // Test adding a response
+        Reponse reponseToAdd = new Reponse(
+                "Test response description", // Description
+                Date.valueOf(LocalDate.now()), // Date
+                "Pending" // Statut
         );
 
         try {
-            // Adding reclamation
-            reclamationService.ajouter(reclamationToAdd);
-            System.out.println("Réclamation ajoutée avec succès.");
+            // Adding response
+            reponseService.ajouter(reponseToAdd);
+            System.out.println("Réponse ajoutée avec succès. ID: " + reponseToAdd.getId());
         } catch (Exception e) {
-            System.err.println("Erreur lors de l'ajout de la réclamation : " + e.getMessage());
+            System.err.println("Erreur lors de l'ajout de la réponse : " + e.getMessage());
             e.printStackTrace();
         }
 
-        // Test retrieving all reclamations after adding
+        // Test retrieving all responses after adding
         try {
-            System.out.println("\nListe des réclamations après ajout :");
-            reclamationService.getall().forEach(System.out::println);
+            System.out.println("\nListe des réponses après ajout :");
+            reponseService.getall().forEach(System.out::println);
         } catch (Exception e) {
-            System.err.println("Erreur lors de la récupération des réclamations : " + e.getMessage());
+            System.err.println("Erreur lors de la récupération des réponses : " + e.getMessage());
             e.printStackTrace();
         }
 
-        // Now, update the reclamation with id 8 (this id can be changed based on what you have in your database)
+        // Test updating the response
         try {
-            // Fetch the reclamation to update (assuming id 8 exists)
-            Reclamation reclamationToUpdate = new Reclamation();
-            reclamationToUpdate.setId(8); // Assuming this id is valid in your database
-            reclamationToUpdate.setMail("updated_email@example.com");
-            reclamationToUpdate.setDescription("Updated issue description");
-            reclamationToUpdate.setDate(Date.valueOf(LocalDate.now()));
-            reclamationToUpdate.setStatut("Resolved");
+            if (reponseToAdd.getId() > 0) { // Ensure ID is valid
+                reponseToAdd.setDescription("Updated response description");
+                reponseToAdd.setStatut("Resolved");
 
-            // Use the 'modifier' method to update the reclamation
-            reclamationService.modifier(reclamationToUpdate);
-            System.out.println("Réclamation mise à jour avec succès.");
+                // Updating the response
+                reponseService.modifier(reponseToAdd);
+                System.out.println("Réponse mise à jour avec succès.");
+            } else {
+                System.out.println("Impossible de mettre à jour : ID invalide.");
+            }
         } catch (Exception e) {
-            System.err.println("Erreur lors de la mise à jour de la réclamation : " + e.getMessage());
+            System.err.println("Erreur lors de la mise à jour de la réponse : " + e.getMessage());
             e.printStackTrace();
         }
 
-        // Test retrieving all reclamations after update
+        // Test retrieving all responses after update
         try {
-            System.out.println("\nListe des réclamations après mise à jour :");
-            reclamationService.getall().forEach(System.out::println);
+            System.out.println("\nListe des réponses après mise à jour :");
+            reponseService.getall().forEach(System.out::println);
         } catch (Exception e) {
-            System.err.println("Erreur lors de la récupération des réclamations : " + e.getMessage());
+            System.err.println("Erreur lors de la récupération des réponses : " + e.getMessage());
             e.printStackTrace();
         }
     }

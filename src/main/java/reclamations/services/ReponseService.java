@@ -1,8 +1,7 @@
 package reclamations.services;
-import reclamations.entities.Reclamation;
-import reclamations.entities.Reponse;  // Avec majuscule
-import reclamations.main.DatabaseConnection;
 
+import reclamations.entities.Reponse;
+import reclamations.main.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +11,10 @@ public class ReponseService implements Iservices<Reponse> {
     private Connection cnx;
     private static ReponseService instance;
 
-    // Constructeur public
     public ReponseService() {
         cnx = DatabaseConnection.getInstance().getCnx();
     }
 
-    // Méthode pour obtenir l'instance unique de ReponseService
     public static ReponseService getInstance() {
         if (instance == null) {
             instance = new ReponseService();
@@ -27,20 +24,14 @@ public class ReponseService implements Iservices<Reponse> {
 
     @Override
     public void ajouter(Reponse reponse) {
-        // Validation des données
-
-
-        // Requête SQL pour insérer une réponse
-        String req = "INSERT INTO reponses (description, date, statut) VALUES (?, ?, ?, ?)";
+        String req = "INSERT INTO reponses (description, date, statut) VALUES (?, ?, ?)";
 
         try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
-
             stm.setString(1, reponse.getDescription());
             stm.setDate(2, reponse.getDate());
             stm.setString(3, reponse.getStatut());
             stm.executeUpdate();
 
-            // Récupérer l'ID généré
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     reponse.setId(generatedKeys.getInt(1));
@@ -54,36 +45,54 @@ public class ReponseService implements Iservices<Reponse> {
 
     @Override
     public void modifier(Reponse reponse) {
-        // Validation des données
-        if (
-                reponse.getDescription() == null || reponse.getDescription().trim().length() < 10 ||
-                        reponse.getDate() == null ||
-                        reponse.getStatut() == null || (!reponse.getStatut().equals("Pending") &&
-                        !reponse.getStatut().equals("Resolved") && !reponse.getStatut().equals("Closed"))) {
+        System.out.println("Modifier method called with reponse: " + reponse);
 
-            System.out.println("Erreur : Données invalides pour la réponse.");
+        if (cnx == null) {
+            System.err.println("Database connection is null.");
             return;
         }
 
-        // Requête SQL pour mettre à jour une réponse
-        String req = "UPDATE reponses SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
+        try {
+            cnx.setAutoCommit(false);
 
-        try (PreparedStatement stm = cnx.prepareStatement(req)) {
+            if (reponse.getDescription() == null || reponse.getDescription().trim().isEmpty() ||
+                    reponse.getStatut() == null ||
+                    (!reponse.getStatut().equalsIgnoreCase("Traitee") &&
+                            !reponse.getStatut().equalsIgnoreCase("Non Traitee"))) {
+                System.out.println("Erreur : Données invalides pour la réponse.");
+                return;
+            }
 
-            stm.setString(1, reponse.getDescription());
-            stm.setDate(2, reponse.getDate());
-            stm.setString(3, reponse.getStatut());
-            stm.setInt(4, reponse.getId());
-            stm.executeUpdate();
-            System.out.println("Réponse modifiée : " + reponse);
+            String query = "UPDATE reponses SET description = ?, date = ?, statut = ? WHERE id = ?";
+
+            try (PreparedStatement pst = cnx.prepareStatement(query)) {
+                pst.setString(1, reponse.getDescription());
+                pst.setDate(2, reponse.getDate());
+                pst.setString(3, reponse.getStatut());
+                pst.setInt(4, reponse.getId());
+
+                int rowsAffected = pst.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    cnx.commit();
+                    System.out.println("Réponse mise à jour avec succès !");
+                } else {
+                    System.out.println("Aucune mise à jour effectuée ! Vérifiez si l'ID existe.");
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Erreur SQL : " + e.getMessage());
+                cnx.rollback();
+            } finally {
+                cnx.setAutoCommit(true);
+            }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour de la réponse : " + e.getMessage());
+            System.err.println("Erreur base de données : " + e.getMessage());
         }
     }
 
     @Override
     public void supprimer(int id) {
-        // Requête SQL pour supprimer une réponse
         String req = "DELETE FROM reponses WHERE id = ?";
 
         try (PreparedStatement stm = cnx.prepareStatement(req)) {
@@ -98,7 +107,6 @@ public class ReponseService implements Iservices<Reponse> {
     @Override
     public List<Reponse> getall() {
         List<Reponse> reponsesList = new ArrayList<>();
-        // Requête SQL pour récupérer toutes les réponses
         String req = "SELECT * FROM reponses";
 
         try (Statement stm = cnx.createStatement();
@@ -107,7 +115,6 @@ public class ReponseService implements Iservices<Reponse> {
             while (rs.next()) {
                 Reponse r = new Reponse();
                 r.setId(rs.getInt("id"));
-
                 r.setDescription(rs.getString("description"));
                 r.setDate(rs.getDate("date"));
                 r.setStatut(rs.getString("statut"));
@@ -122,7 +129,6 @@ public class ReponseService implements Iservices<Reponse> {
     @Override
     public Reponse getone(int id) {
         Reponse r = null;
-        // Requête SQL pour récupérer une réponse par son ID
         String req = "SELECT * FROM reponses WHERE id = ? LIMIT 1";
 
         try (PreparedStatement stm = cnx.prepareStatement(req)) {
@@ -131,7 +137,6 @@ public class ReponseService implements Iservices<Reponse> {
                 if (rs.next()) {
                     r = new Reponse();
                     r.setId(rs.getInt("id"));
-
                     r.setDescription(rs.getString("description"));
                     r.setDate(rs.getDate("date"));
                     r.setStatut(rs.getString("statut"));

@@ -11,22 +11,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.updatereponseController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.updatereponseController"> <!-- Changed controller to updatereponseController -->
    <children>
-      <AnchorPane layoutX="30.0" layoutY="30.0" prefHeight="700.0" prefWidth="900.0">
+      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="900.0">
          <children>
             <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
                <children>
-                  <Label styleClass="title" text="Reclamation Update" />
+                  <Label styleClass="title" text="Response Update" /> <!-- Changed text to "Response Update" -->
                   <Label text="Description" />
                   <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
                   <Label fx:id="descriptionError" styleClass="descriptionError" text="Description is required" visible="false" />
-                  <Label text="Date" />
-                  <DatePicker fx:id="date" />
-                  <Label fx:id="dateError" styleClass="dateError" text="Date is required" visible="false" />
-                  <Label text="Mail" />
-                  <TextField fx:id="mail" promptText="Mail" styleClass="text-field" />
-                  <Label fx:id="mailError" styleClass="mailError" text="Email must be in the format: exemple@exemple.com" visible="false" />
+
+                  <DatePicker fx:id="datePicker" promptText="Date" styleClass="text-field" /> <!-- Changed fx:id to datePicker and promptText to "Date" -->
+                  <Label fx:id="dateError" styleClass="mailError" text="Date is required" visible="false" /> <!-- Changed fx:id to dateError and text to "Date is required" -->
                   <Label text="Statut" />
                   <ChoiceBox fx:id="statut" styleClass="choice-box">
                      <items>
@@ -39,8 +36,8 @@
                   <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
                </children>
             </VBox>
-            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherreponse" styleClass="button" text="Back" />
-            <Button layoutX="749.0" layoutY="18.0" onAction="#Updatereponse" prefWidth="150.0" styleClass="button" text="Update" />
+            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherreponse" styleClass="button" text="Back" /> <!-- Changed onAction to GoToAfficherreponse -->
+            <Button layoutX="749.0" layoutY="18.0" onAction="#Updatereponse" prefWidth="150.0" styleClass="button" text="Update" /> <!-- Changed onAction to Updatereponse -->
          </children>
       </AnchorPane>
    </children>

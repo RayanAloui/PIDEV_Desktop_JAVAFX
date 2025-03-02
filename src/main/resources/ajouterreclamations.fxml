@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.addreclamationController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.addreponseController"> <!-- Changed controller to addreponseController -->
    <children>
       <VBox layoutX="303.0" layoutY="110.0" spacing="10" styleClass="vbox">
          <children>
-            <Label styleClass="title" text="Reclamation" />
+            <Label styleClass="title" text="Response" /> <!-- Changed text to "Response" -->
             <TextArea id="Description" fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
             <Label fx:id="descriptionError" styleClass="error" text="Description is required" visible="false" />
-            <TextField id="Email" fx:id="mail" promptText="Email" styleClass="text-field" />
-            <Label fx:id="mailError" styleClass="error" text="Email is required" visible="false" />
+            <TextField id="Email" fx:id="datePicker" promptText="Date" styleClass="text-field" /> <!-- Changed fx:id to datePicker and promptText to "Date" -->
+            <Label fx:id="dateError" styleClass="error" text="Date is required" visible="false" /> <!-- Changed fx:id to dateError and text to "Date is required" -->
             <Label styleClass="label" text="Statut:" />
             <ChoiceBox fx:id="statut" styleClass="choice-box">
                <items>
@@ -31,7 +31,7 @@
             <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
          </children>
       </VBox>
-      <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherReclamations" styleClass="button" text="Back" />
-      <Button layoutX="754.0" layoutY="14.0" onAction="#addReclamation" prefWidth="225.0" styleClass="button" text="Add Reclamation" />
+      <Button layoutX="10.0" layoutY="10.0" onAction="#Gotoaff" styleClass="button" text="Back" /> <!-- Changed onAction to GoToAfficherReponses -->
+      <Button layoutX="754.0" layoutY="14.0" onAction="#addReponse" prefWidth="225.0" styleClass="button" text="Add Response" /> <!-- Changed onAction to addReponse and text to "Add Response" -->
    </children>
 </AnchorPane>

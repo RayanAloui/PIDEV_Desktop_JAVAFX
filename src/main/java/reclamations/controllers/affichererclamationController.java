@@ -1,4 +1,5 @@
 package reclamations.controllers;
+
 import reclamations.controllers.updaterclamationController;  // Correct import
 
 import javafx.collections.FXCollections;
@@ -8,11 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.Parent;
-
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +41,9 @@ public class affichererclamationController {
 
     @FXML
     private TableColumn<Reclamation, String> columnstatut;
+
+    @FXML
+    private TextField chercherReclamation; // Make sure this TextField exists in your FXML file
 
     @FXML
     public void initialize() {
@@ -151,4 +156,33 @@ public class affichererclamationController {
             alert.showAndWait();
         }
     }
-}
+
+    @FXML
+    void rechercherReclamation() {
+        // Listen for changes in the text field
+        chercherReclamation.textProperty().addListener((observable, oldValue, newValue) -> {
+            ReclamationService rs = new ReclamationService();
+            ObservableList<Reclamation> allReclamations = FXCollections.observableArrayList(rs.getall());  // Fetch all reclamations
+
+            ObservableList<Reclamation> filteredList = FXCollections.observableArrayList();
+
+            if (newValue == null || newValue.trim().isEmpty()) {
+                // If the input is empty, show all reclamations
+                filteredList.addAll(allReclamations);
+            } else {
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                for (Reclamation r : allReclamations) {
+                    // Filter based on the input (mail, description, or statut)
+                    if (r.getMail().toLowerCase().contains(lowerCaseFilter) ||
+                            r.getDescription().toLowerCase().contains(lowerCaseFilter) ||
+                            r.getStatut().toLowerCase().contains(lowerCaseFilter)) {
+                        filteredList.add(r);
+                    }
+                }
+            }
+
+            // Set the filtered items to the table view
+            tableViewReclamations.setItems(filteredList);
+        });}}
+

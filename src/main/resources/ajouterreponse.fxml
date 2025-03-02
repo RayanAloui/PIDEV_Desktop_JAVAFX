@@ -4,19 +4,24 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.AddReponseController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.AddReponseController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;">
          <children>
-            <VBox layoutX="303.0" layoutY="110.0" spacing="10" styleClass="vbox">
+            <VBox layoutX="303.0" layoutY="50.0" spacing="10" styleClass="vbox">
                <children>
                   <Label styleClass="title" text="Reponse" />
-                  <TextArea id="Description" fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
+                  <Label styleClass="label" text="ID Reclamation:" />
+
+                  <TextArea fx:id="description" prefHeight="150.0" prefWidth="300.0" promptText="Description" />
                   <Label fx:id="descriptionError" styleClass="error" text="Description is required" visible="false" />
                   <Label styleClass="label" text="Statut:" />
                   <ChoiceBox fx:id="statut" styleClass="choice-box">
@@ -28,9 +33,14 @@
                      </items>
                   </ChoiceBox>
                   <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
+                  <!-- Date Picker -->
+                  <Label styleClass="label" text="Date:" />
+                  <DatePicker fx:id="datePicker" promptText="Select Date" />
+                  <Label fx:id="dateError" styleClass="error" text="Date is required" visible="false" />
                </children>
             </VBox>
-            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherReponses" styleClass="button" text="Back" />
+            <!-- Navigation Buttons -->
+            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherReponse" styleClass="button" text="Back" />
             <Button layoutX="754.0" layoutY="14.0" onAction="#addReponse" prefWidth="225.0" styleClass="button" text="Add Reponse" />
          </children>
       </AnchorPane>

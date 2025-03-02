@@ -1,57 +1,76 @@
 package reclamations.controllers;
+import java.util.List;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
-import reclamations.entities.Reclamation;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 import reclamations.entities.Reponse;
-import reclamations.services.ReclamationService;
 import reclamations.services.ReponseService;
+
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.time.LocalDate;
 
 public class AddReponseController {
 
     @FXML
-    private TextArea description;
+    private Label descriptionError; // Error label for description
+    @FXML
+    private Label dateError;       // Error label for date
+    @FXML
+    private Label statutError;     // Error label for status
+
 
     @FXML
-    private Label descriptionError;
+    private DatePicker datePicker; // DatePicker for selecting the date
 
     @FXML
-    private ChoiceBox<String> statut;
+    private TextArea description;  // TextArea for entering the description
 
     @FXML
-    private Label statutError;
+    private ChoiceBox<String> statut; // ChoiceBox for selecting the status
 
-    /**
-     * Initialisation des éléments de l'interface utilisateur
-     * Masquage des messages d'erreur par défaut.
-     */
+
+
+    private ReponseService reponseService = new ReponseService();
+
     @FXML
     public void initialize() {
+        // Initialize error labels to be invisible by default
         descriptionError.setVisible(false);
+        dateError.setVisible(false);
         statutError.setVisible(false);
-        descriptionError.setText("Description is required");
-        statutError.setText("Statut is required");
 
+
+        // Set default text for error labels (optional)
+        descriptionError.setText("Description is required");
+        dateError.setText("Date is required");
+        statutError.setText("Status is required");
+
+
+        // Clear any existing text in input fields (optional)
         description.clear();
+        datePicker.setValue(null);
         statut.getSelectionModel().clearSelection();
+
+
+        // Populate the idReclamation ChoiceBox with valid reclamation IDs
+
     }
 
-    /**
-     * Méthode de navigation vers la page d'affichage des réponses
-     */
     @FXML
-    void GoToAfficherReponses(ActionEvent event) {
+    void GoToAfficherReponse(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreponse.fxml"));
             Parent root = loader.load();
@@ -60,72 +79,84 @@ public class AddReponseController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load the response page");
-            alert.showAndWait();
+            showError("Could not load the reponse page: " + e.getMessage());
         }
     }
 
-    /**
-     * Méthode pour ajouter une réponse à la base de données après validation
-     */
     @FXML
     void addReponse(ActionEvent event) {
-        boolean isValid = true;
-
-        // Réinitialiser les messages d'erreur
+        // Reset error messages
         descriptionError.setVisible(false);
+        dateError.setVisible(false);
         statutError.setVisible(false);
 
-        // Validation de la description
+
+        boolean isValid = true;
+
+        // Validate description
         if (description.getText().trim().isEmpty()) {
             descriptionError.setText("Description is required");
             descriptionError.setVisible(true);
             isValid = false;
         }
 
-        // Validation du statut
+        // Validate date
+        if (datePicker.getValue() == null) {
+            dateError.setText("Date is required");
+            dateError.setVisible(true);
+            isValid = false;
+        }
+
+        // Validate status
         if (statut.getValue() == null) {
-            statutError.setText("Statut is required");
+            statutError.setText("Status is required");
             statutError.setVisible(true);
             isValid = false;
         }
 
-        // Si la validation échoue, arrêter l'exécution
+
+
+        // If validation fails, stop further execution
         if (!isValid) {
             return;
         }
 
-        // Créer une nouvelle réponse
+        // Create a new Reponse object
         Reponse reponse = new Reponse();
         reponse.setDescription(description.getText());
+        reponse.setDate(Date.valueOf(datePicker.getValue())); // Convert LocalDate to java.sql.Date
         reponse.setStatut(statut.getValue());
-        reponse.setDate(Date.valueOf(LocalDate.now()));
 
-        // Ajouter la réponse à la base de données
-        ReponseService reponseService = new ReponseService();
-        reponseService.ajouter(reponse);
 
-        // Afficher un message de succès
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Response Added");
-        alert.setHeaderText("Response added successfully");
-        alert.showAndWait();
-
-        // Rediriger vers la page de la liste des réponses
+        // Add response to the database
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherReponse.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("Failed to load the response list page");
-            errorAlert.showAndWait();
+            reponseService.ajouter(reponse);
+
+            // Show success alert
+            showInfo("Response added successfully!");
+
+            // Redirect to the response list page
+            GoToAfficherReponse(event);
+        } catch (Exception e) {
+            showError("Failed to add response: " + e.getMessage());
         }
+    }
+
+    // Utility method to show error alerts
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Utility method to show info alerts
+    private void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

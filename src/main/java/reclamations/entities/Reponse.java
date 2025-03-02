@@ -5,35 +5,30 @@ import java.util.Objects;
 
 public class Reponse {
 
-
-
-
-
-
     private int id;
-
     private String description;
     private Date date;
     private String statut;
+// Foreign key reference to Reclamation
 
     // Default constructor
     public Reponse() {}
 
     // Constructor without id (for creating new entries)
     public Reponse(String description, Date date, String statut) {
-
         this.description = description;
         this.date = date;
         this.statut = statut;
+
     }
 
     // Constructor with id (for existing entries)
-    public Reponse(int id, String description, Date date, String statut) {
+    public Reponse(int id, String description, Date date, String statut ) {
         this.id = id;
-
         this.description = description;
         this.date = date;
         this.statut = statut;
+
     }
 
     // Getters and Setters
@@ -44,8 +39,6 @@ public class Reponse {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public String getDescription() {
         return description;
@@ -71,6 +64,7 @@ public class Reponse {
         this.statut = statut;
     }
 
+
     // equals() method
     @Override
     public boolean equals(Object o) {
@@ -87,20 +81,18 @@ public class Reponse {
     // hashCode() method
     @Override
     public int hashCode() {
-        return Objects.hash(id,description, date, statut);
+        return Objects.hash(id, description, date, statut);
     }
 
     // toString() method
     @Override
     public String toString() {
-        return "Reponses{" +
+        return "Reponse{" +
                 "id=" + id +
-
                 ", description='" + description + '\'' +
                 ", date=" + date +
                 ", statut='" + statut + '\'' +
+
                 '}';
     }
-
-
 }

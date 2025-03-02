@@ -5,24 +5,30 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.afficherreponseController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../../Downloads/rec%20(1)/Pidev-TuniGo-Gestion_reclamation_MoyenTransport/src/main/resources/test/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.afficherreponseController">
    <children>
-      <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
+      <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="700.0" prefWidth="900.0" stylesheets="@../../../../../Downloads/rec%20(1)/Pidev-TuniGo-Gestion_reclamation_MoyenTransport/src/main/resources/test/style.css">
          <children>
-            <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Reponse Table" textAlignment="CENTER" />
+            <TableView fx:id="tableViewReponses" layoutX="54.0" layoutY="200.0" prefHeight="300.0" prefWidth="600.0" styleClass="table-view" stylesheets="@../../../../../Downloads/styles.css">
+               <columns>
+                  <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
+
+                  <TableColumn fx:id="columndescription" prefWidth="100.0" text="Description" />
+                  <TableColumn fx:id="columndate" prefWidth="100.0" text="Date" />
+                  <TableColumn fx:id="columnstatut" prefWidth="120.0" text="Statut" />
+               </columns>
+            </TableView>
+
+            <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Response Table" textAlignment="CENTER" />
+
+
+            <!-- Buttons for adding, updating, and deleting -->
             <Button layoutX="64.0" layoutY="141.0" mnemonicParsing="false" onAction="#GoToAddreponse" styleClass="button add-button" text="+" />
             <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#Deletereponse" styleClass="button" text="DELETE" />
             <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdatereponse" styleClass="button" text="UPDATE" />
          </children>
       </AnchorPane>
-      <TableView id="tableViewReponses" fx:id="tableViewReponses" layoutX="64.0" layoutY="210.0" prefHeight="300.0" prefWidth="400.0" styleClass="table-view">
-         <columns>
-            <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
-            <TableColumn fx:id="columncontenu" prefWidth="100.0" text="Contenu" />
-            <TableColumn fx:id="columndate" prefWidth="100.0" text="Date" />
-            <TableColumn fx:id="columnstatut" prefWidth="120.0" text="Statut" />
-         </columns>
-      </TableView>
    </children>
 </AnchorPane>

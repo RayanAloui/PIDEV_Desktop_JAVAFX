@@ -1,6 +1,6 @@
 package reclamations.controllers;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,25 +18,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-
-import reclamations.entities.Reponse;
-import reclamations.entities.Reponse;
-import reclamations.services.ReponseService;
-import reclamations.services.ReponseService;
+import reclamations.entities.Reponse; // Changed from Reclamation to Reponse
+import reclamations.services.ReponseService; // Changed from ReclamationService to ReponseService
 
 public class updatereponseController {
-
-
-
 
     @FXML
     private TextArea description;
 
     @FXML
-    private DatePicker date;
-
-
-
+    private DatePicker datePicker; // Changed from mail to datePicker
 
     @FXML
     private ChoiceBox<String> statut;
@@ -45,28 +36,24 @@ public class updatereponseController {
     private Label descriptionError;
 
     @FXML
-    private Label dateError;
-
-
-
+    private Label dateError; // Changed from mailError to dateError
 
     @FXML
     private Label statutError;
 
-    private Reponse selectedReponse;
+    private Reponse selectedReponse; // Changed from selectedReclamation to selectedReponse
 
-    public void setReponseData(Reponse reponse) {
-        this.selectedReponse = reponse;
+    public void setReponseData(Reponse reponse) { // Changed from setReclamationData to setReponseData
+        this.selectedReponse = reponse; // Changed from selectedReclamation to selectedReponse
         description.setText(reponse.getDescription());
-
-        date.setValue(reponse.getDate().toLocalDate());
+        datePicker.setValue(reponse.getDate().toLocalDate()); // Changed from mail to datePicker
         statut.setValue(reponse.getStatut());
     }
 
     @FXML
-    public void GoToAfficherreponse(ActionEvent actionEvent) {
+    public void GoToAfficherreponse(ActionEvent actionEvent) { // Changed from GoToAfficherreclamation to GoToAfficherreponse
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreponse.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreponse.fxml")); // Changed from afficherreclamtions.fxml to afficherreponse.fxml
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -75,16 +62,15 @@ public class updatereponseController {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Could not load the reponse page");
+            alert.setHeaderText("Could not load the response page"); // Changed from reclamation to response
             alert.showAndWait();
         }
     }
 
     @FXML
-    public void Updatereponse(ActionEvent event) {
+    public void Updatereponse(ActionEvent event) { // Changed from Updatereclamation to Updatereponse
         descriptionError.setVisible(false);
-        dateError.setVisible(false);
-
+        dateError.setVisible(false); // Changed from mailError to dateError
         statutError.setVisible(false);
 
         boolean isValid = true;
@@ -95,8 +81,9 @@ public class updatereponseController {
             descriptionError.setVisible(true);
             isValid = false;
         }
-        if (date.getValue() == null) {
-            dateError.setText("Date is required");
+
+        if (datePicker.getValue() == null) { // Changed from mail to datePicker
+            dateError.setText("Date is required"); // Changed from mailError to dateError
             dateError.setVisible(true);
             isValid = false;
         }
@@ -111,25 +98,24 @@ public class updatereponseController {
             return;
         }
 
-        if (selectedReponse != null) {
+        if (selectedReponse != null) { // Changed from selectedReclamation to selectedReponse
             selectedReponse.setDescription(description.getText());
-
-            selectedReponse.setDate(Date.valueOf(date.getValue()));
+            selectedReponse.setDate(Date.valueOf(datePicker.getValue())); // Changed from mail to datePicker
             selectedReponse.setStatut(statut.getValue());
 
-            ReponseService reponseService = new ReponseService();
-            reponseService.modifier(selectedReponse);
+            ReponseService reponseService = new ReponseService(); // Changed from ReclamationService to ReponseService
+            reponseService.modifier(selectedReponse); // Changed from selectedReclamation to selectedReponse
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
-            alert.setHeaderText("Reponse updated successfully");
+            alert.setHeaderText("Response updated successfully"); // Changed from Reclamation to Response
             alert.showAndWait();
 
-            GoToAfficherreponse(event);
+            GoToAfficherreponse(event); // Changed from GoToAfficherreclamation to GoToAfficherreponse
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
-            alert.setHeaderText("No reponse selected");
+            alert.setHeaderText("No response selected"); // Changed from reclamation to response
             alert.showAndWait();
         }
     }
