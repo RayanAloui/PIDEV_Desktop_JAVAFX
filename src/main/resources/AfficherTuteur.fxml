@@ -26,10 +26,11 @@
         </TableView>
 
         <Button layoutX="32.0" layoutY="600.0" mnemonicParsing="false" onAction="#ajouterTuteur" prefWidth="169.0" text="Ajouter Tuteur" />
-        <Button layoutX="263.0" layoutY="600.0" mnemonicParsing="false" onAction="#deleteT" text="Supprimer" />
-        <Button layoutX="497.0" layoutY="600.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
+        <Button layoutX="206.0" layoutY="600.0" mnemonicParsing="false" onAction="#deleteT" text="Supprimer" />
+        <Button layoutX="390.0" layoutY="600.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
         <Button layoutX="748.0" layoutY="600.0" mnemonicParsing="false" onAction="#afficherOrph" text="AfficherOrphelin" />
         <Button layoutX="748.0" layoutY="20.0" onAction="#exporterTuteursEnPDF" text="Exporter en PDF" />
-        <Button layoutX="748.0" layoutY="121.0" mnemonicParsing="false" text="List Tuteurs" onAction="#ListTuteurs"/>
+        <Button layoutX="748.0" layoutY="121.0" mnemonicParsing="false" onAction="#ListTuteurs" text="List Tuteurs" />
+      <Button layoutX="571.0" layoutY="600.0" mnemonicParsing="false" onAction="#AfficherCours" text="Afficher Cours" />
     </children>
 </AnchorPane>

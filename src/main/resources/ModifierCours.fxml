@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierCoursController">
+
+    <Label layoutX="374.0" layoutY="85.0" prefHeight="27.0" prefWidth="150.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Modifier Cours" />
+
+    <Label layoutX="301.0" layoutY="177.0" text="Titre :" />
+    <TextField fx:id="txtTitre" layoutX="375.0" layoutY="173.0" prefWidth="237.0" />
+
+    <Label layoutX="290.0" layoutY="261.0" text="Contenu :" />
+    <TextArea fx:id="txtContenu" layoutX="374.0" layoutY="229.0" prefHeight="80" prefWidth="250.0" />
+
+    <Label layoutX="295.0" layoutY="341.0" text="Tuteur :" />
+    <ComboBox fx:id="comboTuteur" layoutX="391.0" layoutY="337.0" prefHeight="26.0" prefWidth="135.0" />
+
+    <Label layoutX="296.0" layoutY="412.0" text="Image :" />
+    <ImageView fx:id="imageView" fitHeight="100" fitWidth="100" layoutX="409.0" layoutY="388.0" />
+    <Button fx:id="btnImage" layoutX="549.0" layoutY="421.0" text="Choisir Image" />
+
+    <Button fx:id="btnModifier" layoutX="340.0" layoutY="548.0" onAction="#modifierCours" text="Modifier" />
+    <Button fx:id="btnAnnuler" layoutX="480.0" layoutY="548.0" onAction="#retournerALaListe" text="Annuler" />
+</AnchorPane>

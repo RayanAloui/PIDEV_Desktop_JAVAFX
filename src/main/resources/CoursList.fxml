@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursListController">
+
+    <TableView fx:id="tableCours" layoutX="150.0" layoutY="74.0" prefWidth="600">
+        <columns>
+            <TableColumn fx:id="colTitre" text="Titre" />
+            <TableColumn fx:id="colContenu" prefWidth="153.60003662109375" text="Contenu" />
+            <TableColumn fx:id="colTuteur" prefWidth="137.59994506835938" text="Tuteur" />
+            <TableColumn fx:id="colImage" prefWidth="204.800048828125" text="Image" />
+        </columns>
+    </TableView>
+
+    <Button fx:id="btnModifierCours" layoutX="390.0" layoutY="521.0" onAction="#ouvrirFenetreModification" text="Modifier" />
+   <Button layoutX="630.0" layoutY="521.0" mnemonicParsing="false" onAction="#supprimerCours" text="Supprimer " />
+   <Button layoutX="150.0" layoutY="521.0" mnemonicParsing="false" onAction="#AjouterCours" text="Ajouter" />
+   <Button layoutX="270.0" layoutY="584.0" mnemonicParsing="false" onAction="#AfficherTuteurs" text="Afficher Tuteurs" />
+   <Button layoutX="510.0" layoutY="584.0" mnemonicParsing="false" onAction="#AfficherOrphelins" text="AfficherOrphelin" />
+
+
+</AnchorPane>

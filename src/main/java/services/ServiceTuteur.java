@@ -238,10 +238,6 @@ public class ServiceTuteur implements ITuteurService {
     }
 
 
-
-
-
-
     @Override
     public void delete(int id) throws SQLException {
         Connection conn = null;
@@ -314,6 +310,30 @@ public class ServiceTuteur implements ITuteurService {
         return tuteurs;
     }
 
+    public List<Tuteur> afficherTuteurs() {
+        List<Tuteur> list = new ArrayList<>();
+        String req = "SELECT * FROM tuteurs";
+        try (Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(req)) {
+            while (rs.next()) {
+                list.add(new Tuteur(
+                        rs.getInt("idT"),
+                        rs.getString("cinT"),
+                        rs.getString("nomT"),
+                        rs.getString("prenomT"),
+                        rs.getString("telephoneT"),
+                        rs.getString("adresseT"),
+                        rs.getString("disponibilite"),
+                        rs.getString("email")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur affichage tuteurs : " + e.getMessage());
+        }
+        return list;
+    }
+
+
     private boolean tuteurExiste(int idTuteur) throws SQLException {
         Connection conn = null;
         PreparedStatement pst = null;
@@ -376,6 +396,28 @@ public class ServiceTuteur implements ITuteurService {
 
         return tuteur;
     }
+
+
+    public Tuteur getTuteurBYID(int idTuteur) {
+        try {
+            Connection conn = databaseconnection.getConnection();
+            String query = "SELECT * FROM tuteurs WHERE idT = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, idTuteur);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Tuteur(
+                        rs.getInt("idT"),
+                        rs.getString("nomT"),
+                        rs.getString("prenomT")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public List<Tuteur> getAllTuteurss() throws SQLException {
         List<Tuteur> tuteurs = new ArrayList<>();
@@ -545,6 +587,45 @@ public class ServiceTuteur implements ITuteurService {
             }
         }
         return numeros;
+    }
+
+    // Récupérer le nom et prénom d'un tuteur par son ID
+    public String getNomPrenomTuteur(int idTuteur) throws SQLException {
+        String query = "SELECT nomT, prenomT FROM tuteurs WHERE idT = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, idTuteur);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("nomT") + " " + rs.getString("prenomT");
+            }
+        }
+        return "Inconnu";
+    }
+
+    // Récupérer l'ID d'un tuteur à partir de son nom complet
+    public int getIdTuteurByName(String nomTuteur) throws SQLException {
+        String query = "SELECT idT FROM tuteurs WHERE CONCAT(nomT, ' ', prenomT) = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, nomTuteur);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("idT");
+            }
+        }
+        return -1; // Retourne -1 si le tuteur n'est pas trouvé
+    }
+
+    // Récupérer la liste des noms et prénoms des tuteurs
+    public List<String> getTuteursNoms() throws SQLException {
+        List<String> tuteurs = new ArrayList<>();
+        String query = "SELECT CONCAT(nomT, ' ', prenomT) AS nomComplet FROM tuteurs";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                tuteurs.add(rs.getString("nomComplet"));
+            }
+        }
+        return tuteurs;
     }
 
 }

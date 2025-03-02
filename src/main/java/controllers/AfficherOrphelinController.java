@@ -226,6 +226,7 @@ public class AfficherOrphelinController {
         stage.show();
     }
 
+
     private void setupSearchFilter() {
         FilteredList<Orphelin> filteredList = new FilteredList<>(observableList, p -> true);
 
@@ -376,6 +377,20 @@ public class AfficherOrphelinController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Liste des Orphelins");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void AfficherCours(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CoursList.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Liste des Cours");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

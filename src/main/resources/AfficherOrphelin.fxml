@@ -27,13 +27,14 @@
       <Button layoutX="743.0" layoutY="588.0" mnemonicParsing="false" onAction="#afficherTut" text="Afficher Tuteurs" />
       <Button layoutX="494.0" layoutY="588.0" mnemonicParsing="false" onAction="#updateO" text="Mettre à jour" />
       <Button layoutX="258.0" layoutY="588.0" mnemonicParsing="false" onAction="#deleteO" text="Supprimer" />
-      <TextField fx:id="searchOrphelin" layoutX="37.0" layoutY="127.0" promptText="Rechercher un orphelin..." />
-        <PieChart fx:id="orphelinsParTuteurChart" prefHeight="300" prefWidth="400" />
-        <Button fx:id="btnStats" layoutX="140.0" layoutY="639.0" onAction="#afficherStatistiques" prefWidth="158.0" text="PieChart" />
-        <Button fx:id="btnBarChart" layoutX="614.0" layoutY="639.0" onAction="#afficherBarChart" text="BarChart" />
-        <Button fx:id="btnLineChart" layoutX="378.0" layoutY="639.0" onAction="#afficherLineChart" text="LineChart" />
-        <Button layoutX="748.0" layoutY="20.0" onAction="#exporterOrphelinsEnPDF" text="Exporter en PDF" />
-      <Button layoutX="743.0" layoutY="125.0" mnemonicParsing="false" text="List Orphelins" onAction="#ListOrphelins"/>
+      <TextField fx:id="searchOrphelin" layoutX="466.0" layoutY="127.0" promptText="Rechercher un orphelin..." />
+        <PieChart fx:id="orphelinsParTuteurChart" prefHeight="77.0" prefWidth="294.0" />
+        <Button fx:id="btnStats" layoutX="37.0" layoutY="639.0" onAction="#afficherStatistiques" prefWidth="158.0" text="PieChart" />
+        <Button fx:id="btnBarChart" layoutX="494.0" layoutY="639.0" onAction="#afficherBarChart" text="BarChart" />
+        <Button fx:id="btnLineChart" layoutX="258.0" layoutY="639.0" onAction="#afficherLineChart" text="LineChart" />
+        <Button layoutX="743.0" layoutY="21.0" onAction="#exporterOrphelinsEnPDF" text="Exporter en PDF" />
+      <Button layoutX="743.0" layoutY="125.0" mnemonicParsing="false" onAction="#ListOrphelins" text="List Orphelins" />
+      <Button layoutX="743.0" layoutY="639.0" mnemonicParsing="false" onAction="#AfficherCours" text="Afficher Cours" />
 
     </children>
 </AnchorPane>
