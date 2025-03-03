@@ -1,7 +1,7 @@
-package Donateur.tn.services;
+package esprit.tn.services;
 
-import Donateur.tn.entities.donateur;
-import Donateur.tn.main.DatabaseConnection;
+import esprit.tn.entities.donateur;
+import esprit.tn.main.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

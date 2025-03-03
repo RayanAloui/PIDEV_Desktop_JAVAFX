@@ -1,10 +1,10 @@
-package Donateur.tn.controllers;
+package esprit.tn.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import Donateur.tn.services.StripeService;
+import esprit.tn.services.StripeService;
 import java.awt.Desktop;
 import java.net.URL;
 
@@ -13,11 +13,20 @@ public class PayementStripeController {
     @FXML
     private TextField montantField;
     @FXML
+    private TextField telephoneField;
+    @FXML
     private Label montantLabel;
 
     public void setMontant(double montant) {
         this.montantField.setText(String.valueOf(montant));
     }
+    @FXML
+    public void initialize() {
+        System.out.println("Controller initialized");
+        System.out.println("telephoneField: " + telephoneField);
+    }
+
+
 
     @FXML
     private void handlePaiement() {
@@ -32,7 +41,14 @@ public class PayementStripeController {
             double montantDouble = Double.parseDouble(montantStr);
             long montant = (long) (montantDouble * 100); // Convertir en cents pour Stripe
 
-            // Appeler le service Stripe pour créer une session de paiement
+            // Récupérer le numéro de téléphone entré
+            String telephone = telephoneField.getText();
+            if (telephone.isEmpty()) {
+                showAlert("Erreur", "Veuillez entrer un numéro de téléphone valide.");
+                return;
+            }
+
+            // 🔹 Appeler Stripe pour créer une session de paiement
             String paymentLink = StripeService.createCheckoutSession(montant);
             if (paymentLink != null && paymentLink.startsWith("http")) {
                 System.out.println("Lien de paiement Stripe : " + paymentLink);
@@ -43,6 +59,10 @@ public class PayementStripeController {
                 } else {
                     showAlert("Lien de paiement", "Ouvrez ce lien pour payer : " + paymentLink);
                 }
+
+                // 🔹 Envoyer un message WhatsApp après le paiement
+                StripeService.sendWhatsAppConfirmation(telephone);
+
             } else {
                 showAlert("Erreur", paymentLink); // Afficher le message d'erreur
             }

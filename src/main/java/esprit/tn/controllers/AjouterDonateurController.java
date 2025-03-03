@@ -1,7 +1,7 @@
-package Donateur.tn.controllers;
+package esprit.tn.controllers;
 
-import Donateur.tn.entities.donateur;
-import Donateur.tn.services.DonateurService;
+import esprit.tn.entities.donateur;
+import esprit.tn.services.DonateurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

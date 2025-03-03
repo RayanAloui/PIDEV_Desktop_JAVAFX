@@ -1,9 +1,15 @@
-package Donateur.tn.services;
+package esprit.tn.services;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class StripeService {
 
@@ -49,4 +55,29 @@ public class StripeService {
             return "Erreur lors de la création de la session de paiement : " + e.getMessage();
         }
     }
+    public static void sendWhatsAppConfirmation(String phoneNumber) {
+        try {
+            String apiKey = "4323731"; // Remplace par ta clé API CallMeBot
+            String message = "Votre paiement a été reçu avec succès. Merci pour votre don !";
+            String encodedMessage = URLEncoder.encode(message, "UTF-8");
+
+            String urlString = "https://api.callmebot.com/whatsapp.php?phone=" + phoneNumber + "&text=" + encodedMessage + "&apikey=" + apiKey;
+
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == 200) {
+                System.out.println("✅ Message WhatsApp envoyé à " + phoneNumber);
+            } else {
+                System.out.println("❌ Échec de l'envoi du message WhatsApp. Code : " + responseCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }

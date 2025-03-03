@@ -1,4 +1,4 @@
-package Donateur.tn.services;
+package esprit.tn.services;
 import java.util.List;
 
 public interface Iservice <T> {

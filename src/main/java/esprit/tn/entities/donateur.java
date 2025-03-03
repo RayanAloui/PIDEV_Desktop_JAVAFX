@@ -1,4 +1,4 @@
-package Donateur.tn.entities;
+package esprit.tn.entities;
 
 import java.util.Objects;
 

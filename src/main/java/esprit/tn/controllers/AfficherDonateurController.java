@@ -1,16 +1,14 @@
-package Donateur.tn.controllers;
+package esprit.tn.controllers;
 
-import Donateur.tn.entities.Dons;
-import Donateur.tn.entities.donateur;
-import Donateur.tn.services.DonateurService;
+import esprit.tn.entities.Dons;
+import esprit.tn.entities.donateur;
+import esprit.tn.services.DonateurService;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,7 +16,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 

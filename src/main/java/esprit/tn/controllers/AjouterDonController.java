@@ -1,8 +1,8 @@
-package Donateur.tn.controllers;
+package esprit.tn.controllers;
 
-import Donateur.tn.entities.Dons;
-import Donateur.tn.services.DonateurService;
-import Donateur.tn.services.DonsService;
+import esprit.tn.entities.Dons;
+import esprit.tn.services.DonateurService;
+import esprit.tn.services.DonsService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,6 +39,9 @@ public class AjouterDonController {
 
     @FXML
     private TextField type_don;
+    @FXML
+    private TextField telephone;
+
     private DonateurService donateurService = new DonateurService();
     @FXML
     public void initialize() {
@@ -171,4 +174,6 @@ public class AjouterDonController {
         }
 
     }
+
+
 }

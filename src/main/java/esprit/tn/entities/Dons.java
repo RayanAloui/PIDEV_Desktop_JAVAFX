@@ -1,7 +1,6 @@
-package Donateur.tn.entities;
+package esprit.tn.entities;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 public class Dons {
@@ -13,6 +12,7 @@ public class Dons {
     private String description;
     private String statut;
 
+
     public Dons(){};
 
     public Dons(int id, int donateur_id, double montant, LocalDate date_don, String type_don, String description, String statut) {
@@ -23,6 +23,7 @@ public class Dons {
         this.type_don = type_don;
         this.description = description;
         this.statut = statut;
+
     }
 
     public Dons(int donateur_id, double montant, LocalDate date_don, String type_don, String description, String statut){

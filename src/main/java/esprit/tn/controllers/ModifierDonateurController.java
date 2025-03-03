@@ -1,8 +1,7 @@
-package Donateur.tn.controllers;
+package esprit.tn.controllers;
 
-import Donateur.tn.entities.donateur;
-import javafx.collections.ObservableList;
-import Donateur.tn.services.DonateurService;
+import esprit.tn.entities.donateur;
+import esprit.tn.services.DonateurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 

@@ -1,6 +1,9 @@
-package Donateur.tn.controllers;
+package esprit.tn.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -9,6 +12,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ChatBotController {
     @FXML
@@ -26,11 +30,22 @@ public class ChatBotController {
 
     public ChatBotController() {
         // Initialiser les questions et réponses personnalisées
-        customResponses.put("vous etes qui ?", "Je suis un chatbot, mon role et de vous repondre a tous vos questions à propos l'orphelinat OrphanCare.");
-        customResponses.put("c'est quoi OrphanCare ?", "OrphanCare est une initiative dédiée au bien-être des orphelins en Tunisie. Notre mission est d'offrir un environnement sûr et chaleureux aux enfants sans famille, en leur fournissant un hébergement, une éducation et un accompagnement pour leur permettre de s'épanouir. Nous facilitons également les dons et le bénévolat afin que chacun puisse contribuer à améliorer leur avenir. Ensemble, nous construisons un avenir meilleur pour ces enfants.");
+        customResponses.put("vous etes qui", "Je suis un chatbot, mon role et de  repondre a tous vos questions à propos notre orphelinat OrphanCare.");
+        customResponses.put("c'est quoi OrphanCare ", "OrphanCare est une initiative dédiée au bien-être des orphelins en Tunisie. Notre mission est d'offrir un environnement sûr et chaleureux aux enfants sans famille, en leur fournissant un hébergement, une éducation et un accompagnement pour leur permettre de s'épanouir. Nous facilitons également les dons et le bénévolat afin que chacun puisse contribuer à améliorer leur avenir. Ensemble, nous construisons un avenir meilleur pour ces enfants.");
         customResponses.put("Qui t'as créé ?", "J'ai été créé par une équipe de développeurs à ESPRIT.");
         // Ajoutez d'autres paires question-réponse ici
     }
+    @FXML
+    void retour(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterDon.fxml")));
+            chatArea.getScene().setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     @FXML
     private void sendMessage() {
@@ -97,4 +112,5 @@ public class ChatBotController {
             }
         });
     }
+
 }

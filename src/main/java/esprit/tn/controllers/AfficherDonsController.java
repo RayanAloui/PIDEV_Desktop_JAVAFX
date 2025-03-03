@@ -1,10 +1,7 @@
-package Donateur.tn.controllers;
-import Donateur.tn.entities.Dons;
-import Donateur.tn.entities.donateur;
-import Donateur.tn.services.DonateurService;
-import Donateur.tn.services.DonsService;
+package esprit.tn.controllers;
+import esprit.tn.entities.Dons;
+import esprit.tn.services.DonsService;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -26,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -38,7 +33,6 @@ import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class AfficherDonsController {
