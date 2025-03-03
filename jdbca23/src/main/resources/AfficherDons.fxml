@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AfficherDonsController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" stylesheets="@../../../../../Downloads/styles.css">
+         <children>
+            <TableView fx:id="TableDons" layoutX="55.0" layoutY="104.0" prefHeight="492.0" prefWidth="790.0">
+               <columns>
+                  <TableColumn fx:id="typeDon" prefWidth="127.19998168945312" text="type" />
+                  <TableColumn fx:id="dateDon" prefWidth="81.60005187988281" text="date " />
+                  <TableColumn fx:id="description" prefWidth="175.99993896484375" text="Description" />
+                  <TableColumn fx:id="statut" prefWidth="148.0" text="Statut" />
+                  <TableColumn fx:id="montant" prefWidth="108.0" text="Montant" />
+                  <TableColumn fx:id="donateurId" prefWidth="150.39996337890625" text="Donateur ID" />
+               </columns>
+            </TableView>
+            <Label layoutX="343.0" layoutY="46.0" text="TABLE DES DONS" underline="true">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Button layoutX="22.0" layoutY="27.0" mnemonicParsing="false" onAction="#AjouterD" prefHeight="38.0" prefWidth="51.0" text="✚" />
+            <Button layoutX="608.0" layoutY="626.0" mnemonicParsing="false" onAction="#ModifierD" prefHeight="38.0" prefWidth="74.0" text="Modifier" />
+            <Button layoutX="771.0" layoutY="626.0" mnemonicParsing="false" onAction="#supprimerD" prefHeight="38.0" prefWidth="73.0" text="Supprimer" />
+            <Button layoutX="55.0" layoutY="633.0" mnemonicParsing="false" onAction="#pdf" prefHeight="38.0" prefWidth="74.0" text="PDF" />
+            <Button layoutX="776.0" layoutY="34.0" mnemonicParsing="false" onAction="#chart" prefHeight="38.0" prefWidth="62.0" text="📈" textFill="#20a445">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="13.0" layoutY="71.0" mnemonicParsing="false" onAction="#back" text="Back TO Dashboard" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

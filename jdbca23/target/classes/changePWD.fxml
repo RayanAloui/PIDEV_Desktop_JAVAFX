@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="882.0" style="-fx-background-color: #f9f4f1; -fx-padding: 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.ChangePWD" stylesheets="@styles.css">
+
+    <!-- HEADER -->
+    <AnchorPane prefHeight="96.0" prefWidth="900.0" styleClass="header-pane">
+        <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="20" spacing="20">
+            <VBox spacing="5" />
+        </HBox>
+    </AnchorPane>
+
+    <!-- MAIN CONTENT AREA -->
+    <AnchorPane layoutY="96.0" prefHeight="540.0" prefWidth="900.0" styleClass="content-pane">
+        <!-- Title -->
+        <Label layoutX="20" layoutY="20" styleClass="title-label" text="Change Password" />
+
+        <!-- Form -->
+        <VBox layoutX="20" layoutY="70" spacing="15">
+            <!-- Current Password -->
+            <VBox spacing="5">
+                <Label styleClass="input-label" text="Current Password:" />
+                <PasswordField fx:id="currentPasswordField" promptText="Enter current password" styleClass="input-field" />
+            </VBox>
+
+            <!-- New Password -->
+            <VBox spacing="5">
+                <Label styleClass="input-label" text="New Password:" />
+                <PasswordField fx:id="newPasswordField" promptText="Enter new password" styleClass="input-field" />
+            </VBox>
+
+            <!-- Confirm New Password -->
+            <VBox spacing="5">
+                <Label styleClass="input-label" text="Confirm New Password:" />
+                <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" styleClass="input-field" />
+            </VBox>
+        </VBox>
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" layoutX="20" layoutY="300" spacing="15">
+            <Button onAction="#updatePWD" styleClass="update-button" text="Update" />
+            <Button onAction="#handleCancelButtonClick" styleClass="cancel-button" text="Cancel" />
+        </HBox>
+    </AnchorPane>
+
+    <!-- FOOTER -->
+    <AnchorPane layoutY="620" prefHeight="80.0" prefWidth="900.0" styleClass="footer-pane">
+        <Label layoutX="20" layoutY="30" styleClass="footer-label" text="© 2025 OrphenCare Center. All rights reserved." />
+    </AnchorPane>
+
+</AnchorPane>

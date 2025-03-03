@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.addUserController">
+    <children>
+        <VBox layoutX="305.0" layoutY="90.0" spacing="10" styleClass="vbox">
+            <children>
+                <Label styleClass="title" text="User Registration" />
+
+                <TextField fx:id="name" promptText="Name" styleClass="text-field" />
+                <Label fx:id="nameError" styleClass="error" text="Name is required" visible="false" />
+
+                <TextField fx:id="surname" promptText="Surname" styleClass="text-field" />
+                <Label fx:id="surnameError" styleClass="error" text="Surname is required" visible="false" />
+
+                <TextField fx:id="telephone" promptText="Phone Number" styleClass="text-field" />
+                <Label fx:id="telephoneError" styleClass="error" text="Phone number is required" visible="false" />
+
+                <TextField fx:id="email" promptText="Email" styleClass="text-field" />
+                <Label fx:id="emailError" styleClass="error" text="Email is required" visible="false" />
+
+                <PasswordField fx:id="password" promptText="Password" styleClass="password-field" />
+                <Label fx:id="passwordError" styleClass="error" text="Password is required" visible="false" />
+
+                <Label styleClass="label" text="Role:" />
+
+                <ChoiceBox fx:id="role" styleClass="choice-box">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="client" />
+                            <String fx:value="tuteur" />
+                            <String fx:value="donateur" />
+                            <String fx:value="visiteur" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+
+                <Label fx:id="roleError" styleClass="error" text="Role is required" visible="false" />
+            </children>
+        </VBox>
+
+        <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherUser" styleClass="button" text="Back" />
+
+        <Button layoutX="766.0" layoutY="14.0" onAction="#adduser" styleClass="button" text="Add User" />
+    </children>
+</AnchorPane>
