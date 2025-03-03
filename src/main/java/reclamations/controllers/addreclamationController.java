@@ -1,4 +1,5 @@
 package reclamations.controllers;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,14 +14,12 @@ import javafx.scene.Parent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;  // Import java.sql.Date
 import java.time.LocalDate;
 
-// Import missing classes
 import reclamations.entities.Reclamation;
 import reclamations.services.ReclamationService;
+import reclamations.services.SmsService;
 
 public class addreclamationController {
 
@@ -123,26 +122,44 @@ public class addreclamationController {
 
         // Add reclamation to the database
         ReclamationService reclamationService = new ReclamationService();
-        reclamationService.ajouter(reclamation);
-
-        // Show success alert
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Reclamation Added");
-        alert.setHeaderText("Reclamation added successfully");
-        alert.showAndWait();
-
-        // Redirect to the reclamation list page
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherReclamations.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
+            reclamationService.ajouter(reclamation);
+
+            // Send SMS after adding reclamation (with the reclamation ID)
+            SmsService envoyerSmsService = new SmsService();
+            String message = "Merci pour votre réclamation. L'ID de votre réclamation est: " + reclamation.getId();
+            // You can pass the email address or a fixed phone number if required.
+            // Assume the phone number is retrieved from the email or user data.
+            String phoneNumber = "+21655732015"; // Replace with the user's phone number
+            envoyerSmsService.envoyerSMS(phoneNumber, message);
+
+            // Show success alert
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Reclamation Added");
+            alert.setHeaderText("Reclamation added successfully");
+            alert.setContentText("ID de votre réclamation: " + reclamation.getId());
+            alert.showAndWait();
+
+            // Redirect to the reclamation list page
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherReclamations.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Failed to load the reclamation list page");
+                errorAlert.showAndWait();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("Failed to load the reclamation list page");
+            errorAlert.setHeaderText("Failed to add reclamation");
+            errorAlert.setContentText(e.getMessage());
             errorAlert.showAndWait();
         }
     }

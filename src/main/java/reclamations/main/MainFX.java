@@ -11,7 +11,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load your FXML file here
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreponse.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreclamtions.fxml"));
         AnchorPane root = loader.load();
 
         // Set the scene

@@ -35,6 +35,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>21.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>9.0.0</version> <!-- Use the latest version -->
+        </dependency>
 
         <!-- Apache PDFBox -->
         <dependency>
