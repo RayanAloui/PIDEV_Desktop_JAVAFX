@@ -13,7 +13,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/AfficherTuteur.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/LoginTuteur.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Gestion des Tuteurs et des Orphelins");

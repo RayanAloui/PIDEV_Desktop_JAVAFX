@@ -398,6 +398,26 @@ public class ServiceOrphelin implements IOrphelinService {
     }
 
 
+    public List<String> getOrphelinsByCours(int idC) {
+        List<String> orphelins = new ArrayList<>();
+        String req = "SELECT nomO, prenomO FROM orphelins WHERE idO IN (SELECT idO FROM cours WHERE idC = ?)";
+
+        try (Connection conn = databaseconnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(req)) {
+
+            ps.setInt(1, idC);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                orphelins.add(rs.getString("nomO") + " " + rs.getString("prenomO"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orphelins;
+    }
+
 
 
 }

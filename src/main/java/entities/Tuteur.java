@@ -20,6 +20,14 @@ public class Tuteur {
         this.prenomT = prenomT;
     }
 
+    public Tuteur(int idT, String nomT, String prenomT, String email , String cinT) {
+        this.idT = idT;
+        this.nomT = nomT;
+        this.prenomT = prenomT;
+        this.email = email;
+        this.cinT = cinT;
+    }
+
     public Tuteur(int idT, String cinT, String nomT, String prenomT, String telephoneT, String adresseT, String disponibilite, String email) {
         this.idT = idT;
         this.cinT = cinT;

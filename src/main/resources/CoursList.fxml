@@ -7,12 +7,13 @@
 
 <AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursListController">
 
-    <TableView fx:id="tableCours" layoutX="150.0" layoutY="74.0" prefWidth="600">
+    <TableView fx:id="tableCours" layoutX="50.0" layoutY="89.0" prefHeight="400.0" prefWidth="800.0">
         <columns>
             <TableColumn fx:id="colTitre" text="Titre" />
-            <TableColumn fx:id="colContenu" prefWidth="153.60003662109375" text="Contenu" />
-            <TableColumn fx:id="colTuteur" prefWidth="137.59994506835938" text="Tuteur" />
-            <TableColumn fx:id="colImage" prefWidth="204.800048828125" text="Image" />
+            <TableColumn fx:id="colContenu" prefWidth="172.79995727539062" text="Contenu" />
+            <TableColumn fx:id="colResume" prefWidth="181.60006713867188" text="Résumé" />
+            <TableColumn fx:id="colTuteur" prefWidth="146.39996337890625" text="Tuteur" />
+            <TableColumn fx:id="colImage" prefWidth="196.79998779296875" text="Image" />
         </columns>
     </TableView>
 

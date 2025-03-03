@@ -9,15 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import services.ServiceCours;
 import services.ServiceTuteur;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,6 +39,8 @@ public class CoursListController implements Initializable {
     private TableColumn<Cours, String> colTuteur;
     @FXML
     private TableColumn<Cours, ImageView> colImage;
+    @FXML
+    private TableColumn<Cours, String> colResume;
 
     private final ServiceCours serviceCours = new ServiceCours();
     private final ServiceTuteur serviceTuteur = new ServiceTuteur();
@@ -50,6 +49,7 @@ public class CoursListController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         colTitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         colContenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        colResume.setCellValueFactory(new PropertyValueFactory<>("resume"));
         colTuteur.setCellValueFactory(cellData -> {
             int idTuteur = cellData.getValue().getIdTuteur();
             Tuteur tuteur = null;
@@ -142,6 +142,7 @@ public class CoursListController implements Initializable {
         }
     }
 
+    @FXML
     public void AjouterCours(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterCours.fxml"));

@@ -6,6 +6,7 @@ public class Cours {
     private String contenu;
     private String imageC;
     private int idTuteur;
+    private String resume;
 
     // Constructeurs
     public Cours() {}
@@ -14,6 +15,15 @@ public class Cours {
         this.idC = idC;
         this.titre = titre;
         this.contenu = contenu;
+        this.imageC = imageC;
+        this.idTuteur = idTuteur;
+    }
+
+    public Cours(int idC, String titre, String contenu,String resume, String imageC, int idTuteur) {
+        this.idC = idC;
+        this.titre = titre;
+        this.contenu = contenu;
+        this.resume = resume;
         this.imageC = imageC;
         this.idTuteur = idTuteur;
     }
@@ -40,4 +50,23 @@ public class Cours {
 
     public int getIdTuteur() { return idTuteur; }
     public void setIdTuteur(int idTuteur) { this.idTuteur = idTuteur; }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    @Override
+    public String toString() {
+        return "Cours{" +
+                "idC=" + idC +
+                ", titre='" + titre + '\'' +
+                ", contenu='" + contenu + '\'' +
+                ", imageC='" + imageC + '\'' +
+                ", idT=" + idTuteur +
+                '}';
+    }
 }
