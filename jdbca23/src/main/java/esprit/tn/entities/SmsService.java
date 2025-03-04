@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 public class SmsService {
 
     private static final String API_URL = "https://e59dyr.api.infobip.com/sms/1/text/single";  // Use Infobip's correct endpoint
-    private static final String API_KEY = "61ab90781bc6d5216218b1d2868e69ac-d7beb233-22e2-4e3e-8070-0c664645d008";  // Your Infobip API key
+    private static final String API_KEY = "bc15d8ded4cc26fc4ee7b87caf926961-f19a6852-7e8a-4cbc-8abe-39bed3ffeef4";  // Your Infobip API key
 
     public static void send(String recipientPhoneNumber, String verificationCode) throws Exception {
         // Prepare the JSON payload

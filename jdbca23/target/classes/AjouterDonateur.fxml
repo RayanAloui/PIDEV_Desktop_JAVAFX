@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AjouterDonateurController">
+<AnchorPane stylesheets="/styles.css" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AjouterDonateurController">
    <children>
       <TextField fx:id="nomD" layoutX="329.0" layoutY="167.0" prefHeight="26.0" prefWidth="186.0" promptText="Nom" />
       <TextField fx:id="prenomD" layoutX="329.0" layoutY="238.0" prefHeight="26.0" prefWidth="186.0" promptText="Prenom" />

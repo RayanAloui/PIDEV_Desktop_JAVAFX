@@ -209,4 +209,81 @@ public class Dashboard {
             alert.showAndWait();
         }
     }
+
+    public void rayen(ActionEvent actionEvent) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherTuteur.fxml"));
+            Parent root = loader.load();
+
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load the users page");
+            alert.setContentText("An error occurred while trying to navigate back to the user list.");
+            alert.showAndWait();
+        }
+
+    }
+
+    public void sarah(ActionEvent actionEvent) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherreclamtions.fxml"));
+            Parent root = loader.load();
+
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load the users page");
+            alert.setContentText("An error occurred while trying to navigate back to the user list.");
+            alert.showAndWait();
+        }
+    }
+    public void riadh(ActionEvent actionEvent) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherParticipant.fxml"));
+            Parent root = loader.load();
+
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+
+            stage.setScene(new Scene(root));
+
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load the users page");
+            alert.setContentText("An error occurred while trying to navigate back to the user list.");
+            alert.showAndWait();
+        }
+    }
+
 }

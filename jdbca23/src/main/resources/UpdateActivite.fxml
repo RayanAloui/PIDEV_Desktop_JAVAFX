@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UpdateActiviteController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="900.0" styleClass="root">
+         <children>
+            <!-- Left VBox for Nom, Catégorie, Durée, Nom du Tuteur -->
+            <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
+               <children>
+                  <Label styleClass="title" text="Modifier une Activité" />
+
+                  <!-- Nom de l'activité -->
+                  <Label text="Nom de l'activité" />
+                  <TextField fx:id="nom" promptText="Entrez le nom" styleClass="text-field" />
+                  <Label fx:id="nomError" styleClass="error" text="Le nom est requis" visible="false" />
+
+                  <!-- Catégorie -->
+                  <Label text="Catégorie" />
+                  <ChoiceBox fx:id="categorie" styleClass="choice-box">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Loisir" />
+                           <String fx:value="Éducation" />
+                           <String fx:value="Sport" />
+                           <String fx:value="Art" />
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label fx:id="categorieError" styleClass="error" text="La catégorie est requise" visible="false" />
+
+                  <!-- Durée -->
+                  <Label text="Durée" />
+                  <TextField fx:id="duree" promptText="Entrez la durée (ex: 2 heures)" styleClass="text-field" />
+                  <Label fx:id="dureeError" styleClass="error" text="La durée est requise" visible="false" />
+
+                  <!-- Nom du tuteur -->
+                  <Label text="Nom du tuteur" />
+                  <TextField fx:id="nomTuteur" promptText="Entrez le nom du tuteur" styleClass="text-field" />
+                  <Label fx:id="nomTuteurError" styleClass="error" text="Le nom du tuteur est requis" visible="false" />
+               </children>
+            </VBox>
+
+            <!-- Back Button -->
+            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherActivite" styleClass="button" text="Retour" />
+
+            <!-- Right VBox for Date, Lieu, Description, Statut -->
+            <VBox layoutX="470.0" layoutY="135.0" prefHeight="390.0" prefWidth="262.0" spacing="10" styleClass="vbox">
+               <children>
+                  <!-- Date de l'activité -->
+                  <Label text="Date de l'activité" />
+                  <TextField fx:id="dateActivite" promptText="Entrez la date (ex: 2023-11-15)" styleClass="text-field" />
+                  <Label fx:id="dateActiviteError" styleClass="error" text="La date est requise" visible="false" />
+
+                  <!-- Lieu -->
+                  <Label text="Lieu" />
+                  <TextField fx:id="lieu" promptText="Entrez le lieu" styleClass="text-field" />
+                  <Label fx:id="lieuError" styleClass="error" text="Le lieu est requis" visible="false" />
+
+                  <!-- Description -->
+                  <Label text="Description" />
+                  <TextArea fx:id="description" promptText="Entrez la description" styleClass="text-area" />
+                  <Label fx:id="descriptionError" styleClass="error" text="La description est requise" visible="false" />
+
+                  <!-- Statut -->
+                  <Label text="Statut" />
+                  <ChoiceBox fx:id="statut" styleClass="choice-box">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="planifiée" />
+                           <String fx:value="en cours" />
+                           <String fx:value="terminée" />
+                           <String fx:value="annulée" />
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label fx:id="statutError" styleClass="error" text="Le statut est requis" visible="false" />
+               </children>
+            </VBox>
+
+            <!-- Update Button -->
+            <Button layoutX="749.0" layoutY="18.0" onAction="#UpdateActivite" prefWidth="150.0" styleClass="button" text="Modifier" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

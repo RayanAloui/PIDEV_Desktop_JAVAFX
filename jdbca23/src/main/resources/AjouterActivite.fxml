@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AddActiviteController">
+    <children>
+        <VBox layoutX="159.0" layoutY="14.0" prefHeight="658.0" prefWidth="523.0" spacing="10" styleClass="vbox">
+            <children>
+                <Label styleClass="title" text="Ajouter une Activité" />
+
+                <!-- Nom de l'activité -->
+                <TextField fx:id="nom" promptText="Nom de l'activité" styleClass="text-field" />
+                <Label fx:id="nomError" styleClass="error" text="Le nom est requis" visible="false" />
+
+                <!-- Catégorie de l'activité -->
+                <Label styleClass="label" text="Catégorie:" />
+                <ChoiceBox fx:id="categorie" styleClass="choice-box">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Loisir" />
+                            <String fx:value="Éducation" />
+                            <String fx:value="Sport" />
+                            <String fx:value="Art" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Label fx:id="categorieError" styleClass="error" text="La catégorie est requise" visible="false" />
+
+                <!-- Durée de l'activité -->
+                <TextField fx:id="duree" promptText="Durée (ex: 2 heures)" styleClass="text-field" />
+                <Label fx:id="dureeError" styleClass="error" text="La durée est requise" visible="false" />
+
+                <!-- Nom du tuteur -->
+                <TextField fx:id="nomTuteur" promptText="Nom du tuteur" styleClass="text-field" />
+                <Label fx:id="nomTuteurError" styleClass="error" text="Le nom du tuteur est requis" visible="false" />
+
+                <!-- Date de l'activité -->
+                <TextField fx:id="dateActivite" promptText="Date (ex: 2023-11-15)" styleClass="text-field" />
+                <Label fx:id="dateActiviteError" styleClass="error" text="La date est requise" visible="false" />
+                <Label fx:id="dateActiviteErrorMessage" styleClass="error" text="La date doit être au format yyyy-MM-dd" visible="false" textFill="red"/>
+
+                <!-- Lieu de l'activité -->
+                <TextField fx:id="lieu" promptText="Lieu" styleClass="text-field" />
+                <Label fx:id="lieuError" styleClass="error" text="Le lieu est requis" visible="false" />
+
+                <!-- Description de l'activité -->
+                <TextArea fx:id="description" prefHeight="19.0" prefWidth="483.0" promptText="Description" styleClass="text-area" />
+                <Label fx:id="descriptionError" styleClass="error" text="La description est requise" visible="false" />
+
+                <!-- Statut de l'activité -->
+                <Label styleClass="label" text="Statut:" />
+                <ChoiceBox fx:id="statut" styleClass="choice-box">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="planifiée" />
+                            <String fx:value="en cours" />
+                            <String fx:value="terminée" />
+                            <String fx:value="annulée" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Label fx:id="statutError" styleClass="error" text="Le statut est requis" visible="false" />
+            </children>
+        </VBox>
+
+        <!-- Bouton pour retourner à la liste des activités -->
+        <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherActivite" styleClass="button" text="Retour" />
+
+        <!-- Bouton pour ajouter une activité -->
+        <Button layoutX="746.0" layoutY="597.0" onAction="#addActivite" styleClass="button" text="Ajouter" />
+    </children>
+</AnchorPane>

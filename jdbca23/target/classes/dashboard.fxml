@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,77 +15,85 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="702.0" prefWidth="886.0" style="-fx-background-color: #faefe0; -fx-padding: 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Dashboard">
-
-    <!-- HEADER -->
-    <AnchorPane prefHeight="96.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
-        <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="20" spacing="20">
-            <!-- User Info (Left) -->
-            <VBox spacing="5">
-                <Label fx:id="name" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #faefe0;" text="ADMIN " />
-            </VBox>
-        </HBox>
-
-        <!-- Profile, Edit Profile, and Logout (Right) -->
-        <HBox alignment="CENTER_RIGHT" layoutX="740.0" layoutY="25.0" spacing="20" />
-    </AnchorPane>
-
-    <!-- MAIN CONTENT AREA (Menu) -->
-    <AnchorPane layoutY="96.0" prefHeight="566.0" prefWidth="900.0" style="-fx-padding: 20px; -fx-background-size: cover; -fx-background-position: center;">
-        <!-- Sidebar -->
-        <VBox prefHeight="526.0" prefWidth="257.0" spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
-            <children>
-                <!-- Dashboard Logo -->
-                <Label style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" text="Admin Panel" />
-
-                <!-- Navigation Buttons -->
-                <Button style="-fx-background-color: #eccd09; -fx-text-fill: white; -fx-font-size: 14px;" text="Dashboard" />
-                <Button onAction="#GoToUsers" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Users" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Orphelin" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button onAction="#goToVisit" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Visit" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button onAction="#gotodon" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Don" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Activite" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Reclamation" textAlignment="CENTER">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                </Button>
-                <Button onAction="#LogOut" prefWidth="100.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;" text="Logout" />
-            </children>
-        </VBox>
-
-        <!-- Notification Table -->
-        <TableView fx:id="tableViewNotifications" layoutX="272.0" layoutY="61.0" prefHeight="242.0" prefWidth="579.0" style="-fx-border-color: #7e7e7e; -fx-border-width: 2px; -fx-background-color: linear-gradient(to bottom, #d6d6d6, #a6a6a6); -fx-background-radius: 8px; -fx-padding: 10px;">
-            <!-- Table Columns -->
-            <columns>
-                <TableColumn fx:id="columnDate" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Date" />
-                <TableColumn fx:id="columnHeure" prefWidth="100.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Time" />
-                <TableColumn fx:id="columnUsername" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Username" />
-                <TableColumn fx:id="columnActivite" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Activity" />
-            </columns>
-
-            <!-- Custom Styling for the Rows -->
-            <style>
+<AnchorPane prefHeight="702.0" prefWidth="886.0" style="-fx-background-color: #faefe0; -fx-padding: 0px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Dashboard">
+   <children>
+   
+       <!-- HEADER -->
+       <AnchorPane prefHeight="96.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
+      <children>
+              <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="20" spacing="20">
+                 <children>
+                     <!-- User Info (Left) -->
+                     <VBox spacing="5">
+                        <children>
+                            <Label fx:id="name" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #faefe0;" text="ADMIN " />
+                        </children>
+                     </VBox>
+                 </children>
+              </HBox>
+      
+              <!-- Profile, Edit Profile, and Logout (Right) -->
+              <HBox alignment="CENTER_RIGHT" layoutX="740.0" layoutY="25.0" spacing="20" />
+      </children>
+       </AnchorPane>
+   
+       <!-- MAIN CONTENT AREA (Menu) -->
+       <AnchorPane layoutY="96.0" prefHeight="566.0" prefWidth="900.0" style="-fx-padding: 20px; -fx-background-size: cover; -fx-background-position: center;">
+      <children>
+              <!-- Sidebar -->
+              <VBox prefHeight="526.0" prefWidth="257.0" spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+                  <children>
+                      <!-- Dashboard Logo -->
+                      <Label style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" text="Admin Panel" />
+      
+                      <!-- Navigation Buttons -->
+                      <Button style="-fx-background-color: #eccd09; -fx-text-fill: white; -fx-font-size: 14px;" text="Dashboard" />
+                      <Button onAction="#GoToUsers" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Users" textAlignment="CENTER">
+                          <VBox.margin>
+                              <Insets top="20.0" />
+                          </VBox.margin>
+                      </Button>
+                      <Button onAction="#rayen" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Orphelin" textAlignment="CENTER">
+                          <VBox.margin>
+                              <Insets top="20.0" />
+                          </VBox.margin>
+                      </Button>
+                      <Button onAction="#goToVisit" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Visit" textAlignment="CENTER">
+                          <VBox.margin>
+                              <Insets top="20.0" />
+                          </VBox.margin>
+                      </Button>
+                      <Button onAction="#gotodon" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Don" textAlignment="CENTER">
+                          <VBox.margin>
+                              <Insets top="20.0" />
+                          </VBox.margin>
+                      </Button>
+                      <Button onAction="#riadh" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Activite" textAlignment="CENTER">
+                          <VBox.margin>
+                              <Insets top="20.0" />
+                          </VBox.margin>
+                      </Button>
+                      <Button onAction="#sarah" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e6c49a; -fx-text-fill: white; -fx-font-size: 14px;" text="Reclamation" textAlignment="CENTER">
+                          <VBox.margin>
+                              <Insets top="20.0" />
+                          </VBox.margin>
+                      </Button>
+                      <Button onAction="#LogOut" prefWidth="100.0" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;" text="Logout" />
+                  </children>
+              </VBox>
+      
+              <!-- Notification Table -->
+              <TableView fx:id="tableViewNotifications" layoutX="272.0" layoutY="61.0" prefHeight="242.0" prefWidth="579.0" style="-fx-border-color: #7e7e7e; -fx-border-width: 2px; -fx-background-color: linear-gradient(to bottom, #d6d6d6, #a6a6a6); -fx-background-radius: 8px; -fx-padding: 10px;">
+                  <!-- Table Columns -->
+                  <columns>
+                      <TableColumn fx:id="columnDate" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Date" />
+                      <TableColumn fx:id="columnHeure" prefWidth="100.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Time" />
+                      <TableColumn fx:id="columnUsername" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Username" />
+                      <TableColumn fx:id="columnActivite" prefWidth="150.0" style="-fx-font-weight: bold; -fx-alignment: CENTER; -fx-font-size: 14px; -fx-text-fill: #333333;" text="Activity" />
+                  </columns>
+      
+                  <!-- Custom Styling for the Rows -->
+                  <style>
                 .table-view {
                 -fx-background-color: linear-gradient(to bottom, #d6d6d6, #a6a6a6); /* Steel-like gradient */
                 -fx-border-color: #7e7e7e;
@@ -154,20 +167,24 @@
                 }
 
             </style>
-        </TableView>
-
-
-
-        <Label layoutX="272.0" layoutY="29.0" text="Notification :">
-         <font>
-            <Font name="Consolas" size="25.0" />
-         </font>
-      </Label>
-    </AnchorPane>
-
-    <!-- FOOTER -->
-    <AnchorPane layoutY="620" prefHeight="82.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
-        <Label layoutX="20" layoutY="30" style="-fx-text-fill: #e6c49a; -fx-font-size: 14px;" text="© 2025 OrphenCare Center. All rights reserved." />
-    </AnchorPane>
+              </TableView>
+      
+      
+      
+              <Label layoutX="272.0" layoutY="29.0" text="Notification :">
+               <font>
+                  <Font name="Consolas" size="25.0" />
+               </font>
+            </Label>
+      </children>
+       </AnchorPane>
+   
+       <!-- FOOTER -->
+       <AnchorPane layoutY="620" prefHeight="82.0" prefWidth="900.0" style="-fx-background-color: #9b877e; -fx-padding: 10px;">
+      <children>
+              <Label layoutX="20" layoutY="30" style="-fx-text-fill: #e6c49a; -fx-font-size: 14px;" text="© 2025 OrphenCare Center. All rights reserved." />
+      </children>
+       </AnchorPane>
+   </children>
 
 </AnchorPane>

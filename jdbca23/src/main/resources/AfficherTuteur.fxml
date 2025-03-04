@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AfficherTuteurController">
+    <children>
+        <Label layoutX="375.0" layoutY="60.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Liste des Tuteurs" />
+        <TextField fx:id="searchTuteur" layoutX="32.0" layoutY="123.0" prefWidth="368.0" promptText="Rechercher un tuteur..." />
+
+        <TableView fx:id="tableTuteurs" layoutX="32.0" layoutY="189.0" prefHeight="374.0" prefWidth="836.0">
+            <columns>
+                <TableColumn fx:id="colId" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
+                <TableColumn fx:id="colCin" prefWidth="93.5999984741211" text="CIN" />
+                <TableColumn fx:id="colNom" prefWidth="96.0" text="Nom" />
+                <TableColumn fx:id="colPrenom" prefWidth="104.00006103515625" text="Prénom" />
+                <TableColumn fx:id="colTelephone" prefWidth="106.4000244140625" text="Téléphone" />
+                <TableColumn fx:id="colAdresse" prefWidth="123.20004272460938" text="Adresse" />
+                <TableColumn fx:id="colDisponibilite" prefWidth="93.5999755859375" text="Disponibilité" />
+                <TableColumn fx:id="colEmail" prefWidth="200.800048828125" text="Email" />
+            </columns>
+        </TableView>
+
+        <Button layoutX="32.0" layoutY="600.0" mnemonicParsing="false" onAction="#ajouterTuteur" prefWidth="169.0" text="Ajouter Tuteur" />
+        <Button layoutX="206.0" layoutY="600.0" mnemonicParsing="false" onAction="#deleteT" text="Supprimer" />
+        <Button layoutX="390.0" layoutY="600.0" mnemonicParsing="false" onAction="#updateT" text="Mettre à jour" />
+        <Button layoutX="748.0" layoutY="600.0" mnemonicParsing="false" onAction="#afficherOrph" text="AfficherOrphelin" />
+        <Button layoutX="748.0" layoutY="20.0" onAction="#exporterTuteursEnPDF" text="Exporter en PDF" />
+        <Button layoutX="748.0" layoutY="121.0" mnemonicParsing="false" onAction="#ListTuteurs" text="List Tuteurs" />
+      <Button layoutX="571.0" layoutY="600.0" mnemonicParsing="false" onAction="#AfficherCours" text="Afficher Cours" />
+      <Button layoutX="39.0" layoutY="25.0" mnemonicParsing="false" onAction="#back" text="Back" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.TuteurDashboardController">
+
+    <VBox alignment="CENTER" layoutX="81.0" layoutY="66.0" prefHeight="567.0" prefWidth="738.0" spacing="20">
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Espace Tuteur" />
+   
+        <TableView fx:id="tableCours">
+            <columns>
+                <TableColumn fx:id="colTitre" prefWidth="278.40001678466797" text="Titre" />
+                <TableColumn fx:id="colImage" prefWidth="437.5999755859375" text="Image">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="imageC" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <Button fx:id="btnAjouter" onAction="#AjouterCours" text="Ajouter" />
+            <Button fx:id="btnModifier" onAction="#modifier" text="Modifier" />
+            <Button fx:id="btnSupprimer" onAction="#supprimer" text="Supprimer" />
+            <Button fx:id="btnDetails" onAction="#afficherDetailsCours" text="Détails" />
+        </HBox>
+
+        <Button fx:id="btnDeconnexion" onAction="#quitter" style="-fx-background-color: red; color: white;" text="Déconnexion" />
+    </VBox>
+</AnchorPane>

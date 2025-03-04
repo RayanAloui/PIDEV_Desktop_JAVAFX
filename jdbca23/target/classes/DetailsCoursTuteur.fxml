@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="700" prefWidth="900" spacing="20" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.DetailsCoursTuteurController">
+
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Détails du Cours" />
+
+    <ImageView fx:id="imgCours" fitHeight="200" fitWidth="300" />
+    <Label prefHeight="22.0" prefWidth="203.0" style="-fx-font-size: 18px;" text="    Contenu du Cours :" />
+    <Label fx:id="lblTitre" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    <TextArea fx:id="txtContenu" editable="false" prefHeight="57.0" prefWidth="900.0" wrapText="true" />
+
+    <Label style="-fx-font-size: 18px;" text="Note moyenne et les Orphelins ayant noté ce cours :" />
+    <VBox>
+        <Label fx:id="lblNoteMoyenne" />
+        <TableView fx:id="tableRatings">
+            <columns>
+                <TableColumn fx:id="colOrphelin" prefWidth="640.800012588501" text="Orphelin" />
+                <TableColumn fx:id="colNote" prefWidth="235.19998168945312" text="Note" />
+            </columns>
+        </TableView>
+    </VBox>
+
+    <Button onAction="#retournerDashboard" text="Retour" />
+</VBox>

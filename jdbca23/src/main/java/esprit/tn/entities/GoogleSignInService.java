@@ -16,7 +16,7 @@ import java.util.Collections;
 public class GoogleSignInService {
 
     // Path to your client_secret.json file
-    private static final String CLIENT_SECRET_FILE = "";
+    private static final String CLIENT_SECRET_FILE = "/client_secret.json";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final String REDIRECT_URI = "http://localhost:8888"; // Local redirect URI
 

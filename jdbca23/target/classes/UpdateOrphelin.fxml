@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700" prefWidth="900" stylesheets="@Style/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.UpdateOrphelinController">
+    <children>
+
+        <Label layoutX="346.0" layoutY="62.0" style="-fx-font-size:18px; -fx-font-weight:bold;" text="Mise à jour de l'orphelin" />
+
+
+        <Label layoutX="269.0" layoutY="139.0" text="Nom :" />
+        <TextField fx:id="txtNom" layoutX="324.0" layoutY="129.0" promptText="Entrez le nom" />
+        <Label fx:id="errorNom" layoutX="324.0" layoutY="160.0" textFill="red" />
+
+
+        <Label layoutX="245.0" layoutY="204.0" prefHeight="16.0" prefWidth="64.0" text="Prénom :" />
+        <TextField fx:id="txtPrenom" layoutX="324.0" layoutY="194.0" promptText="Entrez le prénom" />
+        <Label fx:id="errorPrenom" layoutX="324.0" layoutY="224.0" textFill="red" />
+
+
+        <Label layoutX="180.0" layoutY="272.0" text="Date de naissance :" />
+        <DatePicker fx:id="txtDateNaissance" layoutX="325.0" layoutY="262.0" />
+        <Label fx:id="errorDateNaissance" layoutX="325.0" layoutY="292.0" textFill="red" />
+
+
+        <Label layoutX="271.0" layoutY="342.0" text="Sexe :" />
+        <ComboBox fx:id="comboSexe" layoutX="350.0" layoutY="338.0" prefWidth="200" />
+        <Label fx:id="errorSexe" layoutX="350.0" layoutY="368.0" textFill="red" />
+
+
+        <Label layoutX="187.0" layoutY="408.0" text="Situation scolaire :" />
+        <ComboBox fx:id="comboSituationScolaire" layoutX="350.0" layoutY="404.0" prefHeight="23.0" prefWidth="200.0" promptText="Sélectionner une situation" />
+        <Label fx:id="errorSituation" layoutX="325.0" layoutY="428.0" textFill="red" />
+
+
+        <Label layoutX="225.0" layoutY="470.0" text="ID du tuteur :" />
+        <ComboBox fx:id="comboTuteur" layoutX="350.0" layoutY="466.0" prefWidth="200" />
+        <Label fx:id="errorTuteur" layoutX="350.0" layoutY="496.0" textFill="red" />
+
+
+        <Button fx:id="btnEnregistrer" layoutX="390.0" layoutY="555.0" onAction="#enregistrerModifications" text="Enregistrer" />
+    </children>
+</AnchorPane>

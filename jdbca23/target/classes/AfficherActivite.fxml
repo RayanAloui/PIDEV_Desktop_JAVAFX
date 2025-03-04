@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AfficherActiviteController">
+    <children>
+        <!-- TableView to display activities -->
+        <TableView fx:id="tableViewActivites" layoutX="8.0" layoutY="200.0" prefHeight="300.0" prefWidth="886.0" styleClass="table-view">
+            <columns>
+                <TableColumn fx:id="columnId" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="columnNom" prefWidth="120.0" text="Nom" />
+                <TableColumn fx:id="columnCategorie" prefWidth="100.0" text="Catégorie" />
+                <TableColumn fx:id="columnDuree" prefWidth="80.0" text="Durée" />
+                <TableColumn fx:id="columnNomTuteur" prefWidth="120.0" text="Nom du Tuteur" />
+                <TableColumn fx:id="columnDateActivite" prefWidth="100.0" text="Date" />
+                <TableColumn fx:id="columnLieu" prefWidth="120.0" text="Lieu" />
+                <TableColumn fx:id="columnDescription" prefWidth="150.0" text="Description" />
+                <TableColumn fx:id="columnStatut" prefWidth="100.0" text="Statut" />
+            </columns>
+        </TableView>
+
+        <!-- Title Label -->
+        <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Tableau des Activités" textAlignment="CENTER" />
+
+        <!-- Add Button -->
+        <Button layoutX="433.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToAddActivite" styleClass="button add-button" text="+" />
+
+        <!-- Delete Button -->
+        <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#DeleteActivite" styleClass="button" text="SUPPRIMER" />
+
+        <!-- Update Button -->
+        <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdateActivite" styleClass="button" text="MODIFIER" />
+
+        <!-- Participant Button -->
+        <Button layoutX="741.0" layoutY="33.0" mnemonicParsing="false" onAction="#GoToParticipant" styleClass="button add-button" text="Participant" />
+
+        <!-- Search Field -->
+        <TextField fx:id="searchField" layoutX="8.0" layoutY="150.0" prefWidth="250.0" promptText="Rechercher par nom" />
+
+        <!-- Export to PDF Button -->
+        <Button layoutX="570.0" layoutY="551.0" mnemonicParsing="false" onAction="#generatePdf" styleClass="button" text="Exporter en PDF" />
+
+
+    </children>
+</AnchorPane>
