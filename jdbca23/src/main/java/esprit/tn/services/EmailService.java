@@ -12,8 +12,7 @@ import java.util.List;
 
 public class EmailService {
 
-    private final String API_KEY = ""; // Remplace par ta clé API
-    //String API_KEY = System.getenv("SENDINBLUE_API_KEY");
+ 
 
     public EmailService() {
         // Configurer l'API client avec la clé API
