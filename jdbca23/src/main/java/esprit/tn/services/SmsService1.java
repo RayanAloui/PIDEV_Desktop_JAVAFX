@@ -7,9 +7,7 @@ import java.util.List;
 public class SmsService1 {
 
     // Your Twilio Account SID and Auth Token
-    private static final String ACCOUNT_SID = "ACb79aa58f8f4a07be52f63b1d0e4fa661";
-    private static final String AUTH_TOKEN = "0a4dc08f609b811f2a859ac37e94dc06";
-
+  
     // Twilio phone number
     private static final String TWILIO_PHONE_NUMBER = "+17753827580"; // Twilio number you purchased
 

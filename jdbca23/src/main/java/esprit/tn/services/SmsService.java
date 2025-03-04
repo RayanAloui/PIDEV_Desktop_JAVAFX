@@ -10,10 +10,7 @@ import java.util.List;
 
 public class SmsService {
 
-    private static final String API_URL = "https://2mzrnz.api.infobip.com/sms/2/text/single";  // Use Infobip's correct endpoint
-    private static final String API_KEY = "3b114297230230a96c103fcc040c32b6-b69a4c23-ccf7-4f05-9031-efb8709c99b0";  // Your Infobip API key
-    private static final String SENDER = "OrphanCare"; // Nom de l'expéditeur
-
+  
     public static void envoyerNotificationSMS(List<String> numerosTuteurs, String message) {
         for (String numero : numerosTuteurs) {
             try {
