@@ -12,7 +12,7 @@ import java.util.List;
 
 public class EmailService {
 
-    private final String API_KEY = "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"; // Remplace par ta clé API
+    private final String API_KEY = ""; // Remplace par ta clé API
     //String API_KEY = System.getenv("SENDINBLUE_API_KEY");
 
     public EmailService() {
