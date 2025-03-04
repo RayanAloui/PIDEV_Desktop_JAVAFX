@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Login">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <!-- Background Image -->
+    <children>
+        <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@login.jpg" />
+            </image>
+        </ImageView>
+
+        <!-- Centered Login Box -->
+        <VBox alignment="CENTER" layoutX="275.0" layoutY="150.0" prefWidth="350.0" spacing="15.0" id="login-box">
+            <Label text="Welcome Back" id="login-title" />
+            <TextField fx:id="email" promptText="Email" id="login-input" />
+            <PasswordField fx:id="password" promptText="Password" id="login-input" />
+
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+                <CheckBox fx:id="rememberMeCheckBox" text="Remember Me" id="remember-me" />
+            </HBox>
+
+            <Button fx:id="loginButton" onAction="#login" text="Login" id="login-button" />
+
+            <HBox alignment="CENTER" spacing="10.0">
+                <Hyperlink fx:id="signUpLink" onAction="#GoToRegister" text="Sign Up" id="link" />
+                <Hyperlink fx:id="forgotPasswordLink" onAction="#GoToForgetPWD" text="Forgot Password?" id="link" />
+            </HBox>
+
+            <!-- Google Sign-in -->
+            <Button fx:id="googleButton" onAction="#GOOGLE" text="Sign in with Google" id="google-button">
+                <graphic>
+                    <ImageView fitHeight="16" fitWidth="16">
+                        <image>
+                            <Image url="/google.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="esprit.tn.controllers.ChatBotController">
+    <stylesheets>
+        <URL value="@style.css" /> <!-- Lien vers un fichier CSS externe -->
+    </stylesheets>
+    <children>
+        <VBox alignment="CENTER" layoutX="50" layoutY="50" spacing="10">
+            <TextArea fx:id="chatArea" editable="false" prefHeight="300" prefWidth="400" style="-fx-font-size: 14px;" wrapText="true" />
+            <HBox spacing="10">
+                <TextField fx:id="userInputField" prefWidth="300" promptText="Posez une question..." style="-fx-font-size: 14px;" />
+                <Button fx:id="sendButton" onAction="#sendMessage" style="-fx-font-size: 14px;" text="Envoyer" />
+            </HBox>
+
+        </VBox>
+      <Label layoutX="186.0" layoutY="14.0" text="CHAT BOT">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="399.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+    </children>
+</AnchorPane>

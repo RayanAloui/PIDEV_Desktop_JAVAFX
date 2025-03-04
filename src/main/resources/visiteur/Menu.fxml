@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="900.0" stylesheets="@../style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.Menu">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../sosvillage.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="265.0" layoutX="196.0" layoutY="192.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="509.0" />
+      <Button layoutX="396.0" layoutY="387.0" mnemonicParsing="false" onAction="#manuellement" prefHeight="55.0" prefWidth="291.0" text="Créer un compte visiteur" />
+      <Button layoutX="214.0" layoutY="244.0" mnemonicParsing="false" onAction="#carte" prefHeight="54.0" prefWidth="471.0" text="Se connecter avec la carte d'identitée" />
+      <Label fx:id="manuelle" layoutX="214.0" layoutY="397.0" prefHeight="35.0" prefWidth="182.0" text="Pas de compte?" />
+      <Label layoutX="265.0" layoutY="201.0" text="Connexion avec carte d'identitée" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="54.0" prefWidth="149.0" text="Back" />
+   </children>
+</AnchorPane>

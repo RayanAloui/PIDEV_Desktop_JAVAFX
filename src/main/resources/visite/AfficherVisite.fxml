@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.tn.controllers.AfficherVisite">
+    <children>
+      <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../enfants.png" />
+         </image>
+      </ImageView>
+        <TableView fx:id="TableView" layoutX="14.0" layoutY="70.0" opacity="0.75" prefHeight="542.0" prefWidth="882.0">
+            <columns>
+                <TableColumn fx:id="date" prefWidth="221.60000038146973" text="Date" />
+                <TableColumn fx:id="heure" prefWidth="220.0" text="Heure" />
+                <TableColumn fx:id="motif" prefWidth="226.40005493164062" text="Motif" />
+                <TableColumn fx:id="statut" prefWidth="214.39996337890625" text="Statut" />
+            </columns>
+        </TableView>
+        <Label layoutX="330.0" layoutY="14.0" text="Historique des visites">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+        <Button layoutX="738.0" layoutY="654.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="32.0" prefWidth="155.0" text="Supprimer la visite" textFill="RED">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="1.0" layoutY="654.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="133.0" text="Modifier la visite" textFill="#1eff00">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+      <Button layoutX="1.0" layoutY="4.0" mnemonicParsing="false" onAction="#menu" text="Retour au menu" />
+      <Button layoutX="687.0" layoutY="4.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter une visite" />
+      <Button layoutX="404.0" layoutY="639.0" mnemonicParsing="false" onAction="#PDF" text="PDF" />
+    </children>
+</AnchorPane>
