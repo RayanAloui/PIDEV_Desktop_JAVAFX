@@ -41,6 +41,5 @@
         </Button>
       <Button layoutX="1.0" layoutY="4.0" mnemonicParsing="false" onAction="#menu" text="Retour au menu" />
       <Button layoutX="687.0" layoutY="4.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter une visite" />
-      <Button layoutX="404.0" layoutY="639.0" mnemonicParsing="false" onAction="#PDF" text="PDF" />
     </children>
 </AnchorPane>

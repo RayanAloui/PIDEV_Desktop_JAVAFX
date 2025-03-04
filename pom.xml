@@ -530,12 +530,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itext7-core</artifactId>
-            <version>7.1.15</version> <!-- Ou la dernière version disponible -->
-        </dependency>
-
 
 
 

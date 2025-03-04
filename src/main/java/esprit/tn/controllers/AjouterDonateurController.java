@@ -103,7 +103,7 @@ public class AjouterDonateurController {
     @FXML
     void backList(ActionEvent event)  {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AfficherDonateur.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/home.fxml")));
             nomD.getScene().setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);

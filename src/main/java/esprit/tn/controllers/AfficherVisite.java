@@ -1,13 +1,4 @@
 package esprit.tn.controllers;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.property.UnitValue;
-import esprit.tn.entities.visiteurs;
-import esprit.tn.services.VisiteursService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -202,80 +193,6 @@ public class AfficherVisite {
         }
     }
 
-    @FXML
-    void PDF(ActionEvent event) {
-        // Récupérer les informations du visiteur
-        VisiteursService visiteurService = new VisiteursService();
-        visiteurs visiteur = visiteurService.getone(IDV);  // Assure-toi d'avoir cette méthode
 
-        if (visiteur == null) {
-            showAlert("Erreur", "Impossible de récupérer les informations du visiteur.");
-            return;
-        }
-
-        // Choisir un emplacement pour enregistrer le fichier PDF
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Enregistrer le fichier PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier PDF", "*.pdf"));
-        File file = fileChooser.showSaveDialog(TableView.getScene().getWindow());
-
-        if (file == null) return; // L'utilisateur a annulé l'enregistrement
-
-        try {
-            // Création du document PDF
-            PdfWriter writer = new PdfWriter(new FileOutputStream(file));
-            PdfDocument pdfDocument = new PdfDocument(writer);
-            Document document = new Document(pdfDocument);
-
-            // Titre du document
-            document.add(new Paragraph("Détails du Visiteur").setBold().setFontSize(16));
-
-            // Informations du visiteur
-            document.add(new Paragraph("Nom: " + visiteur.getNom()));
-            document.add(new Paragraph("Prénom: " + visiteur.getPrenom()));
-            document.add(new Paragraph("Email: " + visiteur.getEmail()));
-            document.add(new Paragraph("Téléphone: " + visiteur.getTel()));
-            document.add(new Paragraph("Adresse: " + visiteur.getAdresse()));
-            document.add(new Paragraph("CIN: " + visiteur.getCin()));
-            document.add(new Paragraph("\n")); // Saut de ligne
-
-            // Liste des visites
-            document.add(new Paragraph("Liste des Visites").setBold().setFontSize(14));
-
-            // Création du tableau
-            Table table = new Table(UnitValue.createPercentArray(new float[]{2, 2, 3, 2})).useAllAvailableWidth();
-            table.addHeaderCell(new Cell().add(new Paragraph("Date").setBold()));
-            table.addHeaderCell(new Cell().add(new Paragraph("Heure").setBold()));
-            table.addHeaderCell(new Cell().add(new Paragraph("Motif").setBold()));
-            table.addHeaderCell(new Cell().add(new Paragraph("Statut").setBold()));
-
-            // Récupération des visites
-            VisitesService visitesService = new VisitesService();
-            List<visites> listeVisites = visitesService.getVisitesByVisiteur(IDV);
-
-            for (visites v : listeVisites) {
-                table.addCell(new Cell().add(new Paragraph(v.getDate().toString())));
-                table.addCell(new Cell().add(new Paragraph(v.getHeure().toString())));
-                table.addCell(new Cell().add(new Paragraph(v.getMotif())));
-                table.addCell(new Cell().add(new Paragraph(v.getStatut())));
-            }
-
-            document.add(table);
-            document.close();
-
-            showAlert("Succès", "PDF généré avec succès !");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            showAlert("Erreur", "Impossible de générer le PDF.");
-        }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
 }
