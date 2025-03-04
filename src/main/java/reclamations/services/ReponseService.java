@@ -24,12 +24,13 @@ public class ReponseService implements Iservices<Reponse> {
 
     @Override
     public void ajouter(Reponse reponse) {
-        String req = "INSERT INTO reponses (description, date, statut) VALUES (?, ?, ?)";
+        String req = "INSERT INTO reponses (description, date, statut,indice) VALUES (?, ?, ?,?)";
 
         try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
             stm.setString(1, reponse.getDescription());
             stm.setDate(2, reponse.getDate());
             stm.setString(3, reponse.getStatut());
+            stm.setInt(4, reponse.getIndice());
             stm.executeUpdate();
 
             try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
@@ -118,6 +119,7 @@ public class ReponseService implements Iservices<Reponse> {
                 r.setDescription(rs.getString("description"));
                 r.setDate(rs.getDate("date"));
                 r.setStatut(rs.getString("statut"));
+                r.setIndice(rs.getInt("indice"));
                 reponsesList.add(r);
             }
         } catch (SQLException e) {
@@ -140,6 +142,7 @@ public class ReponseService implements Iservices<Reponse> {
                     r.setDescription(rs.getString("description"));
                     r.setDate(rs.getDate("date"));
                     r.setStatut(rs.getString("statut"));
+                    r.setIndice(rs.getInt("indice"));
                 }
             }
         } catch (SQLException e) {

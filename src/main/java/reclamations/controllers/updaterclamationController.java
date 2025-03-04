@@ -1,6 +1,5 @@
 package reclamations.controllers;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.DatePicker; // Added import for DatePicker
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;  // Added import for TextField
-import javafx.scene.Parent;     // Added import for Parent
+import javafx.scene.Parent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -26,24 +25,26 @@ public class updaterclamationController {
     @FXML
     private TextArea description;
 
-
-
     @FXML
     private TextField mail;
 
     @FXML
-    private ChoiceBox<String> statut;
+    private ChoiceBox<String> typereclamation;
+
+    @FXML
+    private DatePicker datePicker; // Added DatePicker for selecting the date
 
     @FXML
     private Label descriptionError;
-
-
 
     @FXML
     private Label mailError;
 
     @FXML
-    private Label statutError;
+    private Label typereclamationError;
+
+    @FXML
+    private Label dateError; // Added date error label
 
     private Reclamation selectedReclamation;
 
@@ -51,8 +52,10 @@ public class updaterclamationController {
         this.selectedReclamation = reclamation;
         description.setText(reclamation.getDescription());
         mail.setText(reclamation.getMail());
+        typereclamation.setValue(reclamation.getTypereclamation());
 
-        statut.setValue(reclamation.getStatut());
+        // Set the date picker with the reclamation's date
+        datePicker.setValue(reclamation.getDate().toLocalDate());
     }
 
     @FXML
@@ -75,9 +78,9 @@ public class updaterclamationController {
     @FXML
     public void Updatereclamation(ActionEvent event) {
         descriptionError.setVisible(false);
-
         mailError.setVisible(false);
-        statutError.setVisible(false);
+        typereclamationError.setVisible(false);
+        dateError.setVisible(false); // Hide the date error initially
 
         boolean isValid = true;
 
@@ -88,36 +91,52 @@ public class updaterclamationController {
             isValid = false;
         }
 
+        // Validate email format
         String emailPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         if (mail.getText().trim().isEmpty() || !mail.getText().trim().matches(emailPattern)) {
             mailError.setText("Invalid email format");
             mailError.setVisible(true);
             isValid = false;
         }
-        if (statut.getValue() == null) {
-            statutError.setText("Status is required");
-            statutError.setVisible(true);
+
+        // Validate typereclamation
+        if (typereclamation.getValue() == null) {
+            typereclamationError.setText("Status is required");
+            typereclamationError.setVisible(true);
             isValid = false;
         }
 
+        // Validate date
+        if (datePicker.getValue() == null) {
+            dateError.setText("Date is required");
+            dateError.setVisible(true);
+            isValid = false;
+        }
+
+        // If any validation fails, stop further execution
         if (!isValid) {
             return;
         }
 
+        // Update the selected reclamation
         if (selectedReclamation != null) {
             selectedReclamation.setDescription(description.getText());
             selectedReclamation.setMail(mail.getText());
+            selectedReclamation.setTypereclamation(typereclamation.getValue());
 
-            selectedReclamation.setStatut(statut.getValue());
+            // Set the selected date from the DatePicker
+            selectedReclamation.setDate(Date.valueOf(datePicker.getValue())); // Convert LocalDate to java.sql.Date
 
             ReclamationService reclamationService = new ReclamationService();
-            reclamationService.modifier(selectedReclamation);
+            reclamationService.modifier(selectedReclamation); // Call the service to update the reclamation
 
+            // Show success alert
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Reclamation updated successfully");
             alert.showAndWait();
 
+            // Redirect to the reclamation list page
             GoToAfficherreclamation(event);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

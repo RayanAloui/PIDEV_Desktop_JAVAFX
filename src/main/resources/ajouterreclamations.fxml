@@ -4,34 +4,49 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #faefe0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.addreclamationController"> <!-- Changed controller to addreclamationController -->
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #FAF3E0, #E3CBA6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.addreclamationController">
    <children>
-      <VBox layoutX="303.0" layoutY="110.0" spacing="10" styleClass="vbox">
+      <!-- Title -->
+      <Label layoutX="354.0" layoutY="25.0" prefHeight="50.0" prefWidth="250.0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #4E342E;" text="Add Reclamation" textAlignment="CENTER" />
+
+      <!-- Form -->
+      <VBox layoutX="288.0" layoutY="75.0" spacing="15" style="-fx-background-color: #FFF9F0; -fx-padding: 30px; -fx-border-radius: 15px; -fx-border-color: #6D4C41;">
          <children>
-            <Label styleClass="title" text="Add Reclamation" /> <!-- Changed text to "Add Reclamation" -->
-            <TextArea id="Description" fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-            <Label fx:id="descriptionError" styleClass="error" text="Description is required" visible="false" />
-            <TextField id="Mail" fx:id="mail" promptText="Email" styleClass="text-field" /> <!-- Changed fx:id to mail and promptText to "Email" -->
-            <Label fx:id="mailError" styleClass="error" text="Email is required" visible="false" /> <!-- Changed fx:id to mailError and text to "Email is required" -->
-            <Label styleClass="label" text="Statut:" />
-            <ChoiceBox fx:id="statut" styleClass="choice-box">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" text="Description" />
+            <TextArea fx:id="description" prefHeight="120.0" prefWidth="320.0" promptText="Enter description..." style="-fx-border-color: #A1887F; -fx-border-radius: 8px; -fx-padding: 5px;" />
+            <Label fx:id="descriptionError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="Description is required" visible="false" />
+
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" text="Email" />
+            <TextField fx:id="mail" promptText="Enter your email..." style="-fx-border-color: #A1887F; -fx-border-radius: 8px; -fx-padding: 5px;" />
+            <Label fx:id="mailError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="Email is required" visible="false" />
+            <DatePicker fx:id="datePicker" promptText="Select a date" style="-fx-border-color: #8D6E63; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" />
+            <Label fx:id="dateError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="Date is required" visible="false" />
+
+
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" text="typereclamation" />
+            <ChoiceBox fx:id="typereclamation" style="-fx-border-color: #A1887F; -fx-border-radius: 5px;">
                <items>
                   <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="traitee" />
-                     <String fx:value="non traitee" />
+                     <String fx:value="Bien-être et droits des enfants" />
+                     <String fx:value="Gestion et administration" />
+                     <String fx:value="Conditions de vie" />
                   </FXCollections>
                </items>
             </ChoiceBox>
-            <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
+            <Label fx:id="typereclamationError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="typereclamation is required" visible="false" />
+      
+            <Button onAction="#addReclamation" style="-fx-background-color: #4E342E; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 12px 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 2, 2);" text="Submit Reclamation" />
          </children>
       </VBox>
-      <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherReclamations" styleClass="button" text="Back" /> <!-- Changed onAction to GoToAfficherReclamations -->
-      <Button layoutX="754.0" layoutY="14.0" onAction="#addReclamation" prefWidth="225.0" styleClass="button" text="Add Reclamation" /> <!-- Changed onAction to addReclamation and text to "Add Reclamation" -->
+
+      <!-- Buttons -->
+      <Button layoutX="30.0" layoutY="30.0" onAction="#GoToAfficherReclamations" style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 10px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 2, 2);" text="Back" />
    </children>
 </AnchorPane>

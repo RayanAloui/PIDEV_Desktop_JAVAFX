@@ -7,38 +7,46 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.updatereponseController"> <!-- Changed controller to updatereponseController -->
-   <children>
-      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="900.0">
-         <children>
-            <VBox layoutX="192.0" layoutY="74.0" prefHeight="478.0" prefWidth="262.0" spacing="10" styleClass="vbox">
-               <children>
-                  <Label styleClass="title" text="Response Update" /> <!-- Changed text to "Response Update" -->
-                  <Label text="Description" />
-                  <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
-                  <Label fx:id="descriptionError" styleClass="descriptionError" text="Description is required" visible="false" />
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #FAF3E0, #E3CBA6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.updatereponseController">
 
-                  <DatePicker fx:id="datePicker" promptText="Date" styleClass="text-field" /> <!-- Changed fx:id to datePicker and promptText to "Date" -->
-                  <Label fx:id="dateError" styleClass="mailError" text="Date is required" visible="false" /> <!-- Changed fx:id to dateError and text to "Date is required" -->
-                  <Label text="Statut" />
-                  <ChoiceBox fx:id="statut" styleClass="choice-box">
-                     <items>
-                        <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="traitee" />
-                           <String fx:value="non traitee" />
-                        </FXCollections>
-                     </items>
-                  </ChoiceBox>
-                  <Label fx:id="statutError" styleClass="error" text="Statut is required" visible="false" />
-               </children>
-            </VBox>
-            <Button layoutX="10.0" layoutY="10.0" onAction="#GoToAfficherreponse" styleClass="button" text="Back" /> <!-- Changed onAction to GoToAfficherreponse -->
-            <Button layoutX="749.0" layoutY="18.0" onAction="#Updatereponse" prefWidth="150.0" styleClass="button" text="Update" /> <!-- Changed onAction to Updatereponse -->
+   <children>
+      <!-- Title -->
+      <Label layoutX="364.0" layoutY="36.0" prefHeight="50.0" prefWidth="250.0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #3E2723;                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 2, 2);" text="Response Update" textAlignment="CENTER" />
+
+      <!-- Form -->
+      <VBox layoutX="192.0" layoutY="115.0" prefHeight="478.0" prefWidth="262.0" spacing="15" style="-fx-background-color: #FFF9F0; -fx-padding: 25px; -fx-border-radius: 15px;                    -fx-border-color: #6D4C41; -fx-border-width: 2px;                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 2, 2);">
+         <children>
+            <!-- Description Field -->
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" text="Description" />
+            <TextArea fx:id="description" prefHeight="100.0" prefWidth="200.0" promptText="Enter description..." style="-fx-border-color: #8D6E63; -fx-border-radius: 8px; -fx-padding: 8px; -fx-font-size: 14px;" />
+            <Label fx:id="descriptionError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="Description is required" visible="false" />
+
+            <!-- Date Field -->
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" text="Date" />
+            <DatePicker fx:id="datePicker" promptText="Select a date" style="-fx-border-color: #8D6E63; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" />
+            <Label fx:id="dateError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="Date is required" visible="false" />
+
+            <!-- Status Field -->
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" text="Statut" />
+            <ChoiceBox fx:id="statut" style="-fx-border-color: #8D6E63; -fx-border-radius: 5px; -fx-padding: 5px;">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="traitee" />
+                     <String fx:value="non traitee" />
+                  </FXCollections>
+               </items>
+            </ChoiceBox>
+            <Label fx:id="statutError" style="-fx-text-fill: red; -fx-font-size: 12px;" text="Statut is required" visible="false" />
+      
+            <!-- Update Button -->
+            <Button onAction="#Updatereponse" prefWidth="150.0" style="-fx-background-color: #4E342E; -fx-text-fill: white; -fx-font-size: 14px;                      -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px;                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 2, 2);" text="Update" />
          </children>
-      </AnchorPane>
+      </VBox>
+
+      <!-- Back Button -->
+      <Button layoutX="20.0" layoutY="20.0" onAction="#GoToAfficherreponse" style="-fx-background-color: #8D6E63; -fx-text-fill: white; -fx-font-size: 14px;                      -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px;                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 2, 2);" text="Back" />
    </children>
 </AnchorPane>

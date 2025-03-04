@@ -1,5 +1,15 @@
 package reclamations.controllers;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import reclamations.entities.Reclamation;
+import reclamations.services.ReclamationService;
 import reclamations.services.ReponseService;
 import reclamations.entities.Reponse;
 
@@ -30,6 +40,9 @@ import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
 
 import java.io.IOException;
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class afficherreponseController {
 
@@ -47,6 +60,10 @@ public class afficherreponseController {
 
     @FXML
     private TableColumn<Reponse, String> columnstatut;
+    @FXML
+    private TableColumn<Reponse, Integer> columnindice;
+    @FXML
+    private TextField chercherReponse;
 
     @FXML
     public void initialize() {
@@ -54,6 +71,8 @@ public class afficherreponseController {
         columndescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         columndate.setCellValueFactory(new PropertyValueFactory<>("date"));
         columnstatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
+        columnindice.setCellValueFactory(new PropertyValueFactory<>("indice"));
+
 
         loadReponses();
     }
@@ -224,7 +243,78 @@ public class afficherreponseController {
             showErrorAlert("Could not create PDF file", e.getMessage());
         }
     }
+    @FXML
+    void rechercherReponse() {
+        chercherReponse.textProperty().addListener((observable, oldValue, newValue) -> {
+            ReponseService rs = new ReponseService();
+            ObservableList<Reponse> allReponses = FXCollections.observableArrayList(rs.getall());
+            ObservableList<Reponse> filteredList = FXCollections.observableArrayList();
 
+            if (newValue == null || newValue.trim().isEmpty()) {
+                filteredList.addAll(allReponses);
+            } else {
+                String lowerCaseFilter = newValue.toLowerCase();
+                for (Reponse r : allReponses) {
+                    if (r.getDescription().toLowerCase().contains(lowerCaseFilter) ||
+                            r.getStatut().toLowerCase().contains(lowerCaseFilter) ||
+                            r.getDate().toString().toLowerCase().contains(lowerCaseFilter)) {
+                        filteredList.add(r);
+                    }
+                }
+            }
+            tableViewReponses.setItems(filteredList);
+        });
+    }
+    @FXML
+    void chart(ActionEvent event) {
+        Stage stage = new Stage();
+        stage.setTitle("Statistiques des Réponses - BarChart");
+
+        // Define the axes
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Statut de Réponse");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Nombre de Réponses");
+
+        // Create the BarChart
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Réponses par Statut");
+
+        try {
+            ReponseService reponseService = new ReponseService();
+            List<Reponse> listeReponses = reponseService.getall();
+
+            // Map to count responses based on their statut
+            Map<String, Integer> reponseCount = new HashMap<>();
+
+            // Count responses by statut ("traitee" vs "non traitee")
+            for (Reponse reponse : listeReponses) {
+                String statut = reponse.getStatut(); // "traitee" or "non traitee"
+                reponseCount.put(statut, reponseCount.getOrDefault(statut, 0) + 1);
+            }
+
+            // Adding data for "Traitee" and "Non Traitee"
+            for (Map.Entry<String, Integer> entry : reponseCount.entrySet()) {
+                XYChart.Data<String, Number> data = new XYChart.Data<>(entry.getKey(), entry.getValue());
+                series.getData().add(data);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        barChart.getData().add(series);
+
+        VBox vbox = new VBox(barChart);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(10));
+
+        Scene scene = new Scene(vbox, 600, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     private void showErrorAlert(String headerText, String contentText) {
         Alert error = new Alert(Alert.AlertType.ERROR);

@@ -8,18 +8,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Parent;
 import javafx.scene.Node;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.input.KeyCode;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Date;  // Import java.sql.Date
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
@@ -28,7 +27,7 @@ import reclamations.entities.Reclamation;
 import reclamations.services.ReclamationService;
 import reclamations.services.SmsService;
 
-public class addreclamationController {
+public class Userreclamtionpage {
 
     @FXML
     private TextArea description;
@@ -53,9 +52,6 @@ public class addreclamationController {
 
     @FXML
     private Label dateError;
-
-    @FXML
-    private Button addButton;
 
     @FXML
     public void initialize() {

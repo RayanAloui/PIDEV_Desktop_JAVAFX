@@ -14,7 +14,7 @@ public class Reclamation {
     private String mail;
     private String description;
     private Date date;
-    private String statut;
+    private String typereclamation;
     private String imagePath;
 
     // Default constructor
@@ -23,12 +23,12 @@ public class Reclamation {
 
 
     // Constructor with id (for existing entries)
-    public Reclamation(int id, String mail, String description, Date date, String statut, String imagePath) {
+    public Reclamation(int id, String mail, String description, Date date, String typereclamation, String imagePath) {
         this.id = id;
         this.mail = mail;
         this.description = description;
         this.date = date;
-        this.statut = statut;
+        this.typereclamation = typereclamation;
         this.imagePath = imagePath;
     }
 
@@ -73,12 +73,12 @@ public class Reclamation {
         this.date = date;
     }
 
-    public String getStatut() {
-        return statut;
+    public String getTypereclamation() {
+        return typereclamation;
     }
 
-    public void setStatut(String statut) {
-        this.statut = statut;
+    public void setTypereclamation(String typereclamation) {
+        this.typereclamation = typereclamation;
     }
 
     // equals() method
@@ -91,13 +91,13 @@ public class Reclamation {
                 Objects.equals(mail, that.mail) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(statut, that.statut);
+                Objects.equals(typereclamation, that.typereclamation);
     }
 
     // hashCode() method
     @Override
     public int hashCode() {
-        return Objects.hash(id, mail, description, date, statut);
+        return Objects.hash(id, mail, description, date, typereclamation);
     }
 
     // toString() method
@@ -108,7 +108,7 @@ public class Reclamation {
                 ", mail='" + mail + '\'' +
                 ", description='" + description + '\'' +
                 ", date=" + date +
-                ", statut='" + statut + '\'' +
+                ", typereclamation='" + typereclamation + '\'' +
                 '}';
     }
 

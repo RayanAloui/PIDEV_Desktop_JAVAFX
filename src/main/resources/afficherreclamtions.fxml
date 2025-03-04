@@ -4,38 +4,42 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../../Downloads/rec%20(1)/Pidev-TuniGo-Gestion_reclamation_MoyenTransport/src/main/resources/test/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.affichererclamationController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #FAF3E0, #E3CBA6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reclamations.controllers.affichererclamationController">
    <children>
-      <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="700.0" prefWidth="900.0" stylesheets="@../../../../../Downloads/rec%20(1)/Pidev-TuniGo-Gestion_reclamation_MoyenTransport/src/main/resources/test/style.css">
-         <children>
-            <TableView fx:id="tableViewReclamations" layoutX="54.0" layoutY="200.0" prefHeight="300.0" prefWidth="502.0" styleClass="table-view" stylesheets="@../../../../../Downloads/styles.css">
-               <columns>
-                  <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
-                  <TableColumn id="description" fx:id="columndescription" prefWidth="100.0" text="Description" />
-                  <TableColumn fx:id="columndate" prefWidth="100.0" text="Date" />
-                  <TableColumn fx:id="colummail" prefWidth="80.0" text="Mail" />
-                  <TableColumn fx:id="columnstatut" prefWidth="120.0" text="Statut" />
-               </columns>
-            </TableView>
+      <!-- Title -->
+      <Label layoutX="280.0" layoutY="30.0" prefHeight="50.0" prefWidth="341.0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #4E342E;" text="Reclamation Table" textAlignment="CENTER" />
 
-            <Label layoutX="301.0" layoutY="26.0" prefHeight="26.0" prefWidth="341.0" styleClass="title" text="Reclamation Table" textAlignment="CENTER" />
+      <!-- Search Section -->
+      <Label layoutX="50.0" layoutY="80.0" style="-fx-font-size: 14px; -fx-text-fill: #4E342E;" text="Chercher reclamation:" />
+      <TextField fx:id="chercherReclamation" layoutX="180.0" layoutY="75.0" prefHeight="35.0" prefWidth="320.0" promptText="Search" style="-fx-background-color: #FFFFFF; -fx-border-color: #6D4C41; -fx-border-radius: 8px; -fx-padding: 5px;" />
+      <Button layoutX="520.0" layoutY="75.0" mnemonicParsing="false" onAction="#rechercherReclamation" style="-fx-background-color: #6D4C41; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 8px 15px;" text="Chercher" />
 
-            <!-- Search Section -->
-            <TextField fx:id="chercherReclamation" layoutX="148.0" layoutY="75.0" prefHeight="26.0" prefWidth="275.0" promptText="Search" />
+      <!-- Table -->
+      <TableView fx:id="tableViewReclamations" layoutX="50.0" layoutY="140.0" prefHeight="400.0" prefWidth="800.0" style="-fx-border-color: #6D4C41; -fx-border-radius: 10px; -fx-background-color: #FFF9F0;">
+         <columns>
+            <TableColumn fx:id="columnId" prefWidth="80.0" text="ID" />
+            <TableColumn fx:id="columndescription" prefWidth="200.0" text="Description" />
+            <TableColumn fx:id="columndate" prefWidth="150.0" text="Date" />
+            <TableColumn fx:id="colummail" prefWidth="200.0" text="Mail" />
+            <TableColumn fx:id="columntypereclamation" prefWidth="150.0" text="typereclamation" />
 
-            <Label layoutX="148.0" layoutY="55.0" text="Chercher reclamation : "/>
+         </columns>
+      </TableView>
 
-            <!-- Chercher Button -->
-            <Button layoutX="430.0" layoutY="75.0" mnemonicParsing="false" onAction="#rechercherReclamation" styleClass="button" text="Chercher" />
+      <!-- Buttons -->
+      <Button layoutX="50.0" layoutY="580.0" mnemonicParsing="false" onAction="#GoToAddreclamation" style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-border-radius: 50px; -fx-min-width: 45px; -fx-min-height: 45px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 2, 2);" text="+" />
 
-            <!-- Buttons for adding, updating, and deleting -->
-            <Button layoutX="64.0" layoutY="141.0" mnemonicParsing="false" onAction="#GoToAddreclamation" styleClass="button add-button" text="+" />
-            <Button layoutX="757.0" layoutY="611.0" mnemonicParsing="false" onAction="#Deletererclamation" styleClass="button" text="DELETE" />
-            <Button layoutX="600.0" layoutY="611.0" mnemonicParsing="false" onAction="#GoToUpdatereclamation" styleClass="button" text="UPDATE" />
-         </children>
-      </AnchorPane>
+      <Button layoutX="631.0" layoutY="583.0" mnemonicParsing="false" onAction="#GoToUpdatereclamation" style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);" text="UPDATE" />
+
+      <Button layoutX="761.0" layoutY="583.0" mnemonicParsing="false" onAction="#Deletererclamation" style="-fx-background-color: #4E342E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);" text="DELETE" />
+      <Button layoutX="492.0" layoutY="583.0" mnemonicParsing="false" onAction="#GoToajouterreponse" style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);" text="REPONSE" />
+      <Button layoutX="321.0" layoutY="583.0" mnemonicParsing="false" onAction="#chart" style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);" text="📊" />
+      <Button layoutX="398.0" layoutY="583.0" mnemonicParsing="false" onAction="#pdf" style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-border-radius: 10px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);" text="PDF" />
+
+
+
    </children>
 </AnchorPane>

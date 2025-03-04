@@ -1,7 +1,4 @@
 package reclamations.controllers;
-import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +14,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import reclamations.entities.Reponse;
 import reclamations.services.ReponseService;
+import reclamations.services.EmailService;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -31,7 +29,7 @@ public class AddReponseController {
     @FXML
     private Label statutError;     // Error label for status
 
-
+    private int reclamtionid;
     @FXML
     private DatePicker datePicker; // DatePicker for selecting the date
 
@@ -41,9 +39,12 @@ public class AddReponseController {
     @FXML
     private ChoiceBox<String> statut; // ChoiceBox for selecting the status
 
-
-
     private ReponseService reponseService = new ReponseService();
+
+    public void getreclamationid(int id ){
+        System.out.println(id);
+        reclamtionid = id;
+    }
 
     @FXML
     public void initialize() {
@@ -52,21 +53,15 @@ public class AddReponseController {
         dateError.setVisible(false);
         statutError.setVisible(false);
 
-
         // Set default text for error labels (optional)
         descriptionError.setText("Description is required");
         dateError.setText("Date is required");
         statutError.setText("Status is required");
 
-
         // Clear any existing text in input fields (optional)
         description.clear();
         datePicker.setValue(null);
         statut.getSelectionModel().clearSelection();
-
-
-        // Populate the idReclamation ChoiceBox with valid reclamation IDs
-
     }
 
     @FXML
@@ -79,7 +74,7 @@ public class AddReponseController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showError("Could not load the reponse page: " + e.getMessage());
+            showError("Could not load the response page: " + e.getMessage());
         }
     }
 
@@ -89,7 +84,6 @@ public class AddReponseController {
         descriptionError.setVisible(false);
         dateError.setVisible(false);
         statutError.setVisible(false);
-
 
         boolean isValid = true;
 
@@ -114,8 +108,6 @@ public class AddReponseController {
             isValid = false;
         }
 
-
-
         // If validation fails, stop further execution
         if (!isValid) {
             return;
@@ -126,7 +118,7 @@ public class AddReponseController {
         reponse.setDescription(description.getText());
         reponse.setDate(Date.valueOf(datePicker.getValue())); // Convert LocalDate to java.sql.Date
         reponse.setStatut(statut.getValue());
-
+        reponse.setIndice(reclamtionid);
 
         // Add response to the database
         try {
@@ -135,11 +127,43 @@ public class AddReponseController {
             // Show success alert
             showInfo("Response added successfully!");
 
+            // Send email notification
+            sendResponseAddedEmail(reclamtionid);
+
             // Redirect to the response list page
             GoToAfficherReponse(event);
         } catch (Exception e) {
             showError("Failed to add response: " + e.getMessage());
         }
+    }
+
+    // Utility method to send an email after a response is added
+    private void sendResponseAddedEmail(int reclamationId) {
+        // Assuming you have a method to fetch the user email based on the reclamation ID
+        String userEmail = getUserEmailByReclamationId(reclamationId);
+
+        if (userEmail != null && !userEmail.isEmpty()) {
+            // Set up the email details
+            String subject = "New Response Added to Your Reclamation";
+            String content = "Dear User,\n\n"
+                    + "A new response has been added to your reclamation (ID: " + reclamationId + ").\n"
+                    + "Response Description: " + description.getText() + "\n"
+                    + "Response Status: " + statut.getValue() + "\n"
+                    + "Response Date: " + datePicker.getValue() + "\n\n"
+                    + "Thank you for using our service.\n\n"
+                    + "Best regards,\nOrphenCare";
+
+            // Send the email
+            EmailService emailService = new EmailService();
+            emailService.envoyerEmail(userEmail, subject, content);  // Send email to the user
+        }
+    }
+
+    // Dummy method to fetch user email by reclamation ID (you should implement this logic)
+    private String getUserEmailByReclamationId(int reclamationId) {
+        // Fetch user email based on reclamation ID (implement database logic or fetch the email dynamically)
+        // For now, return a placeholder email
+        return "sarahbelhadej19@gmail.com";  // Placeholder email
     }
 
     // Utility method to show error alerts

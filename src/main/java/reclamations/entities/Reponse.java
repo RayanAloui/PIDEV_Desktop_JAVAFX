@@ -9,25 +9,29 @@ public class Reponse {
     private String description;
     private Date date;
     private String statut;
+    private int indice;
 // Foreign key reference to Reclamation
 
     // Default constructor
     public Reponse() {}
 
     // Constructor without id (for creating new entries)
-    public Reponse(String description, Date date, String statut) {
+    public Reponse(String description, Date date, String statut , int indice) {
         this.description = description;
         this.date = date;
         this.statut = statut;
+        this.indice = indice;
 
     }
 
     // Constructor with id (for existing entries)
-    public Reponse(int id, String description, Date date, String statut ) {
+    public Reponse(int id, String description, Date date, String statut , int indice ) {
         this.id = id;
         this.description = description;
         this.date = date;
         this.statut = statut;
+        this.indice = indice;
+
 
     }
 
@@ -63,6 +67,8 @@ public class Reponse {
     public void setStatut(String statut) {
         this.statut = statut;
     }
+    public int getIndice() {  return indice;  }
+    public void setIndice(int indice) {this.indice = indice;  }
 
 
     // equals() method

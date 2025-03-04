@@ -30,13 +30,13 @@ public class ReclamationService implements Iservices<Reclamation> {
 
 
         // Requête SQL pour insérer une réclamation
-        String req = "INSERT INTO reclamations (mail, description, date, statut) VALUES (?, ?, ?, ?)";
+        String req = "INSERT INTO reclamations (mail, description, date, typereclamation) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement stm = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS)) {
             stm.setString(1, reclamation.getMail());
             stm.setString(2, reclamation.getDescription());
             stm.setDate(3, reclamation.getDate());
-            stm.setString(4, reclamation.getStatut());
+            stm.setString(4, reclamation.getTypereclamation());
             stm.executeUpdate();
 
             // Récupérer l'ID généré
@@ -66,26 +66,29 @@ public class ReclamationService implements Iservices<Reclamation> {
 
             // Validate input
             if (reclamation.getMail() == null || reclamation.getMail().trim().isEmpty() ||
-                    reclamation.getDescription() == null || reclamation.getDescription().trim().length() < 1 ||
-                    reclamation.getStatut() == null ||
-                    (!reclamation.getStatut().equalsIgnoreCase("Traitee") &&
-                            !reclamation.getStatut().equalsIgnoreCase("Non Traitee"))) {
+                    reclamation.getDescription() == null || reclamation.getDescription().trim().isEmpty() ||
+                    reclamation.getTypereclamation() == null ||
+                    !(reclamation.getTypereclamation().equalsIgnoreCase("Bien-être et droits des enfants") ||
+                            reclamation.getTypereclamation().equalsIgnoreCase("Gestion et administration") ||
+                            reclamation.getTypereclamation().equalsIgnoreCase("Conditions de vie"))) {
                 System.out.println("Erreur : Données invalides pour la réclamation.");
                 return;
             }
+
+
 
             // Debug: Log description length
             System.out.println("Description before update: " + reclamation.getDescription());
             System.out.println("Description length: " + reclamation.getDescription().length());
 
             // SQL query for updating the reclamation
-            String query = "UPDATE reclamations SET mail = ?, description = ?, date = ?, statut = ? WHERE id = ?";
+            String query = "UPDATE reclamations SET mail = ?, description = ?, date = ?, typereclamation = ? WHERE id = ?";
 
             try (PreparedStatement pst = cnx.prepareStatement(query)) {
                 pst.setString(1, reclamation.getMail());
                 pst.setString(2, reclamation.getDescription().trim());  // Trim spaces
                 pst.setDate(3, reclamation.getDate());
-                pst.setString(4, reclamation.getStatut());
+                pst.setString(4, reclamation.getTypereclamation());
                 pst.setInt(5, reclamation.getId());
 
                 int rowsAffected = pst.executeUpdate();
@@ -141,7 +144,7 @@ public class ReclamationService implements Iservices<Reclamation> {
                 r.setMail(rs.getString("mail"));
                 r.setDescription(rs.getString("description"));
                 r.setDate(rs.getDate("date"));
-                r.setStatut(rs.getString("statut"));
+                r.setTypereclamation(rs.getString("typereclamation"));
                 reclamationsList.add(r);
             }
         } catch (SQLException e) {
@@ -165,7 +168,7 @@ public class ReclamationService implements Iservices<Reclamation> {
                     r.setMail(rs.getString("mail"));
                     r.setDescription(rs.getString("description"));
                     r.setDate(rs.getDate("date"));
-                    r.setStatut(rs.getString("statut"));
+                    r.setTypereclamation(rs.getString("typereclamation"));
                 }
             }
         } catch (SQLException e) {
