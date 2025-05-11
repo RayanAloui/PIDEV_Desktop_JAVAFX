@@ -34,7 +34,7 @@
 1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/RayanAloui/PIDEV_Desktop_JAVAFX
+git clone https://github.com/RayanAloui/PIDEV_Desktop_JAVAFX.git
 ````
 2. Importez le projet dans IntelliJ IDEA (ou tout autre IDE compatible Java).
 
