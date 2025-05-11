@@ -59,9 +59,9 @@ OrphanCare/
 └── README.md
 
 🤝 Contributeurs
-Aloui Ahmed Rayen
-Louay El Amari
-Ben Abdelkader Sami
-Gasmi Riadh
-Malki Youssef
-Belhadej Salah Sarra
+- Aloui Ahmed Rayen
+- Louay El Amari
+- Ben Abdelkader Sami
+- Gasmi Riadh
+- Malki Youssef
+- Belhadej Salah Sarra
