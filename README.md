@@ -44,19 +44,7 @@ git clone https://github.com/RayanAloui/PIDEV_Desktop_JAVAFX.git
 
 📁 Structure du projet
 
- OrphanCare/
- ├── src/
- │   ├── main/
- │   │   ├── java/
- │   │   │   ├── controllers/
- │   │   │   ├── entites/
- │   │   │   ├── services/
- │   │   │   └── Main.java
- │   │   ├── resources/
- │   │   │   └── view/
- │   └── test/
- ├── pom.xml
- └── README.md
+ <pre> ``` OrphanCare/ ├── src/ │ ├── main/ │ │ ├── java/ │ │ │ ├── controllers/ │ │ │ ├── entites/ │ │ │ ├── services/ │ │ │ └── Main.java │ │ ├── resources/ │ │ │ └── view/ │ └── test/ ├── pom.xml └── README.md ``` </pre>
 
 🤝 Contributeurs
 - Aloui Ahmed Rayen
